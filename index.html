@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Microsoft Copilot Acceleration Team</title>
+  <meta name="description"
+    content="CAT is dedicated to empowering organizations to achieve digital transformation at scale with Microsoft Power Platform and Microsoft Copilot Studio."
+    property="og:description">
+  <meta content="Microsoft CAT" property="og:title">
+  <meta name="image" property="og:image" content="https://microsoft.github.io/powercat/images/og-image.png">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+
+  <!-- Prevent flash of wrong theme -->
+  <script>
+    (function () {
+      var t = localStorage.getItem('cat-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <!-- Fluent UI Web Components -->
+  <script type="module" src="https://unpkg.com/@fluentui/web-components/dist/web-components.min.js"></script>
+
+  <!-- Segoe UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/fluent.css">
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#home" class="nav-brand">
+        <span class="nav-brand-ms">Microsoft</span>
+        <div class="nav-divider"></div>
+        <span class="nav-brand-name">Copilot Acceleration Team</span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#tools">Resources &amp; Tools</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#guidance">Guidance</a></li>
+          <li><a href="#stories">Stories</a></li>
+        </ul>
+
+        <!-- Dark mode toggle -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="Switch color theme">
+          <!-- Moon: shown in light mode, click to go dark -->
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <!-- Sun: shown in dark mode, click to go light -->
+          <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1"  x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22"   x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3"  y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78"  x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64"  x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
+    <a href="#tools"     onclick="closeMobileNav()">Resources &amp; Tools</a>
+    <a href="#programs"  onclick="closeMobileNav()">Programs</a>
+    <a href="#guidance"  onclick="closeMobileNav()">Guidance</a>
+    <a href="#stories"   onclick="closeMobileNav()">Stories</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section id="home" class="hero" aria-labelledby="hero-heading">
+    <div class="hero-inner">
+      <div class="hero-content">
+        
+        <h1 class="hero-title" id="hero-heading">
+          Microsoft 
+         Copilot<br>
+          <span class="hero-accent">Acceleration Team</span>
+        </h1>
+        <p class="hero-subtitle">
+          We are the Copilot Acceleration Team (CAT), part of the Copilot
+          Studio engineering team at Microsoft.<br/> Our mission is to accelerate the adoption and success of Microsoft 365 Copilot and Copilot Studio.
+        </p>
+        <!-- <div class="hero-actions">
+          <a href="#tools"    class="btn btn-white    btn-lg">Explore Tools</a>
+          <a href="#programs" class="btn btn-ghost-white btn-lg">View Programs</a>
+        </div> -->
+        <!-- <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-value">5+</span>
+            <span class="stat-label">Open-source tools</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="hero-stat">
+            <span class="stat-value">6</span>
+            <span class="stat-label">Training programs</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="hero-stat">
+            <span class="stat-value">Global</span>
+            <span class="stat-label">Enterprise reach</span>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="hero-visual">
+        <img src="images/header.png" alt="Copilot Acceleration Team" id="headerimg">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       RESOURCES & TOOLS
+  ═══════════════════════════════════════ -->
+  <section id="tools" class="section section-tinted" aria-labelledby="tools-heading">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-eyebrow">Resources &amp; Tools</span>
+        <h2 class="section-title" id="tools-heading">Build better, faster</h2>
+        <p class="section-desc">Accelerate and enable successful adoption with resources and tools developed and curated by CAT, based on real-world customer experience.</p>
+      </header>
+
+      <div class="bento-grid reveal">
+        <a href="https://aka.ms/copilotstudiokit" target="_blank" rel="noopener" class="bento-featured">
+          <div class="bento-content">
+            <h3 class="bento-featured-title">Copilot Studio Kit</h3>
+            <p class="bento-featured-desc">Develop and test custom agents, validate AI-generated content with large language models, optimize prompts, and track aggregated key performance indicators.</p>
+            <span class="btn btn-white">Learn more</span>
+          </div>
+          <div class="bento-visual">
+            <div class="bento-chips">
+              <div class="bento-chip">
+                <strong>Agent Testing</strong>
+                Validate and evaluate agent responses
+              </div>
+              <div class="bento-chip">
+                <strong>Prompt Optimization</strong>
+                Fine-tune prompts with AI assistance
+              </div>
+              <div class="bento-chip">
+                <strong>KPI Tracking</strong>
+                Aggregated performance dashboards
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="card-grid reveal-stagger" style="margin-top: var(--space-6)">
+
+        <a href="https://aka.ms/CopilotStudio/Resources" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Copilot Studio Resources</div>
+          <p class="card-desc">Resources to help you on your Copilot Studio journey, curated by CAT and updated regularly.</p>
+          <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
+        </a>
+
+        <a href="https://microsoft.github.io/mcscatblog/" target="_blank" rel="noopener" class="card">
+          <div class="card-title">The Custom Engine Blog</div>
+          <p class="card-desc">Insights, patterns, and best practices from the CAT team on building custom engine agents and extending Microsoft Copilot.</p>
+          <div class="card-cta"><span class="btn btn-outline">Read more</span></div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PROGRAMS
+  ═══════════════════════════════════════ -->
+  <section id="programs" class="section" aria-labelledby="programs-heading">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-eyebrow">Programs</span>
+        <h2 class="section-title" id="programs-heading">Grow your skills</h2>
+        <p class="section-desc">Gain skills and knowledge to successfully adopt and deploy impactful solutions using Power Platform and Copilot Studio with programs from CAT and our partner teams.</p>
+      </header>
+
+      <div class="card-grid-4 reveal-stagger">
+
+        <a href="https://aka.ms/powerup" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Power Up</div>
+          <p class="card-desc">Training for individuals and enterprise organizations to develop talent in low-code and AI with a comprehensive curriculum.</p>
+          <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
+        </a>
+
+        <a href="https://aka.ms/agiad" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Agent In A Day</div>
+          <p class="card-desc">Hands-on, step-by-step exercises led by an instructor to build agents using Microsoft Copilot Studio.</p>
+          <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
+        </a>
+
+        <a href="../programs/ai-webinar.html" target="_blank" rel="noopener" class="card">
+          <div class="card-title">AI Webinars</div>
+          <p class="card-desc">Gain the knowledge and skills needed to thrive with Copilot Studio agents in this series of interactive virtual sessions.</p>
+          <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
+        </a>
+
+        <a href="programs/agent-hackathon.html" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Agent Build-A-Thon</div>
+          <p class="card-desc">Monthly hackathons hosted by CAT to accelerate your understanding and adoption of agentic AI.</p>
+          <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
+        </a>
+
+        <a href="programs/architecture-bootcamp.html" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Architecture Bootcamp</div>
+          <p class="card-desc">An intensive 3-day training program to upskill architects in implementing scalable solutions with Copilot Studio.</p>
+          <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
+        </a>
+
+        <a href="https://aka.ms/KickstarterEvent" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Kickstarter</div>
+          <p class="card-desc">Facilitated workshops to guide the foundations of your low-code and AI transformation journeys.</p>
+          <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       GUIDANCE
+  ═══════════════════════════════════════ -->
+  <section id="guidance" class="section section-dark" aria-labelledby="guidance-heading">
+    <div class="container" style="position:relative;z-index:1">
+      <header class="section-header reveal">
+        <span class="section-eyebrow">Guidance</span>
+        <h2 class="section-title" id="guidance-heading">Implement with confidence</h2>
+        <p class="section-desc">Ensure successful implementation of your Power Platform and Copilot Studio workloads with comprehensive guidance and best practices.</p>
+      </header>
+
+      <div class="card-grid-4 reveal-stagger">
+
+        <a href="https://aka.ms/powerarchitecture" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Architecture Center</div>
+          <p class="card-desc">Design solutions using established patterns and practices on Power Platform and Copilot Studio.</p>
+          <div class="card-cta"><span class="btn btn-dark-outline">Learn more</span></div>
+        </a>
+
+        <a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/architecture/" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Architect Agent Solutions</div>
+          <p class="card-desc">Principles and patterns for architecting agents — covering fit for purpose, operability, trust, search and tool use, and multi-agent patterns.</p>
+          <div class="card-cta"><span class="btn btn-dark-outline">Learn more</span></div>
+        </a>
+
+        <a href="https://aka.ms/copilotstudioguidance" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Copilot Studio Guidance</div>
+          <p class="card-desc">Create and implement the business and technology strategies for successful adoption of Copilot Studio.</p>
+          <div class="card-cta"><span class="btn btn-dark-outline">Learn more</span></div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       STORIES
+  ═══════════════════════════════════════ -->
+  <section id="stories" class="section" aria-labelledby="stories-heading">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-eyebrow">Customer Stories</span>
+        <h2 class="section-title" id="stories-heading">Real-world impact</h2>
+        <p class="section-desc">Hear compelling customer stories that highlight the diverse and creative ways Power Platform and Copilot Studio transform organizations.</p>
+      </header>
+
+      <div class="stories-grid reveal-stagger">
+
+        <a href="https://aka.ms/PowerPlatformStories" target="_blank" rel="noopener" class="story-featured">
+          <div class="card-title">Power Platform &amp; Copilot Studio Stories</div>
+          <p class="card-desc">Customer stories that showcase the ingenuity of individuals and organizations that have adopted Power Platform and Copilot Studio.</p>
+          <span class="btn btn-brand" style="margin-top: auto; align-self: flex-start">Explore Stories</span>
+        </a>
+
+        <div class="stories-secondary">
+          <a href="https://aka.ms/PowerPlatformVideos" target="_blank" rel="noopener" class="card">
+            <div class="card-title">Customer Story Videos</div>
+            <p class="card-desc">Videos showcasing how Power Platform and Copilot Studio are transforming businesses, careers and lives.</p>
+            <div class="card-cta"><span class="btn btn-outline">Watch Now</span></div>
+          </a>
+
+          <a href="https://aka.ms/CXGStoryNomination" target="_blank" rel="noopener" class="card">
+            <div class="card-title">Share Your Story</div>
+            <p class="card-desc">Share your story to showcase within Microsoft, among our customers, and across the broader community.</p>
+            <div class="card-cta"><span class="btn btn-outline">Submit Story</span></div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        
+        <span class="footer-brand-text">Microsoft Copilot Acceleration Team</span>
+      </div>
+      <p class="footer-copy">© 2026 Microsoft Corporation. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const html      = document.documentElement;
+    const nav       = document.getElementById('nav');
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileNav = document.getElementById('nav-mobile');
+    const toggle    = document.getElementById('theme-toggle');
+
+    // ── Nav: transparent → glassmorphism on scroll ──────────────
+    const updateNav = () => nav.classList.toggle('nav--scrolled', window.scrollY > 16);
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+
+    // ── Mobile nav ───────────────────────────────────────────────
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    function closeMobileNav() {
+      mobileNav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) closeMobileNav();
+    });
+
+    // ── Theme toggle ─────────────────────────────────────────────
+    toggle.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+
+      // Smooth transition
+      document.body.classList.add('theme-transitioning');
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('cat-theme', next);
+      setTimeout(() => document.body.classList.remove('theme-transitioning'), 280);
+    });
+
+    // ── Scroll reveal ────────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
