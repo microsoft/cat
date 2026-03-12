@@ -1,0 +1,136 @@
+@startuml
+' Agent Platform Advisor — Decision Flow
+' Uses new activity diagram syntax (PlantUML v1.2020+)
+' Tested with plantuml.com online renderer
+
+skinparam ActivityBackgroundColor #f0f4ff
+skinparam ActivityBorderColor #4466cc
+skinparam ArrowColor #4466cc
+skinparam NoteBackgroundColor #fffde7
+skinparam NoteBorderColor #f0c040
+
+start
+
+' ── Pre-check gate ────────────────────────────────────────────
+:Do the pre-built agents in\nMicrosoft 365 Copilot meet your needs?;
+
+if (Pre-built agents cover your needs?) then (Yes)
+  #90EE90:Recommend: Microsoft 365 Copilot;
+  stop
+else (No)
+
+  ' ── Q1: Primary Purpose ─────────────────────────────────────
+  :What is your primary purpose\nfor the AI agent?;
+
+  if (Primary Purpose?) then (Organizational knowledge\nand simple tasks)
+    ' indicates: agentbuilder (level 2)
+    ' weights: agentbuilder +3, m365 +1, copilotstudio +1
+
+    ' ── Q2a: Complexity (direct, no branch) ───────────────────
+    :What level of complexity does\nyour use case require?;
+
+  elseif (Primary Purpose?) then (Custom business\nprocess automation)
+    ' indicates: copilotstudio (level 3)
+    ' weights: copilotstudio +3, agentbuilder +1, azureai +1
+
+    ' ── Branch A: Deployment Scope ────────────────────────────
+    :Who will use this agent\nand where?;
+    note right
+      show_if: needs_process_automation
+    end note
+
+    if (Deployment Scope?) then (Internal employees\nonly, within M365)
+      ' indicates: copilotstudio (level 3)
+      ' weights: agentbuilder +2, copilotstudio +2
+    elseif (Deployment Scope?) then (Both internal staff\nand external users)
+      ' indicates: copilotstudio (level 3)
+      ' weights: copilotstudio +3, azureai +1, agentbuilder -1
+    else (Primarily external-facing\ncustomers/partners/public)
+      ' indicates: copilotstudio (level 3)
+      ' weights: copilotstudio +3, azureai +2, agentbuilder -2
+    endif
+
+    ' ── Q2b: Complexity (rejoins here) ────────────────────────
+    :What level of complexity does\nyour use case require?;
+
+  else (Enterprise AI/ML\nplatform capabilities)
+    ' indicates: azureai (level 4)
+    ' weights: azureai +4, copilotstudio +1, m365 -1, agentbuilder -1
+
+    ' ── Branch B: Technical Background ───────────────────────
+    :What best describes your\ntechnical background?;
+    note right
+      show_if: needs_enterprise_ai
+    end note
+
+    if (Technical Background?) then (Low-code maker or\nPower Platform developer)
+      ' indicates: copilotstudio (level 3 — pulls back)
+      ' weights: copilotstudio +3, azureai -1
+    elseif (Technical Background?) then (Professional\nsoftware developer)
+      ' indicates: azureai (level 4)
+      ' weights: azureai +3, copilotstudio +1
+    else (Data scientist\nor ML engineer)
+      ' indicates: azureai (level 4)
+      ' weights: azureai +4
+    endif
+
+    ' ── Q2c: Complexity (rejoins here) ────────────────────────
+    :What level of complexity does\nyour use case require?;
+
+  endif
+
+  ' ── All paths converge from Q2 onward ───────────────────────
+
+  if (Complexity?) then (Low — Configure\nwith your content)
+    ' indicates: agentbuilder (level 2)
+    ' weights: agentbuilder +3, m365 +2, copilotstudio +1, azureai -1
+  elseif (Complexity?) then (Moderate — Custom\nworkflows and logic)
+    ' indicates: copilotstudio (level 3)
+    ' weights: copilotstudio +3, agentbuilder +1, azureai +1
+  else (Highest — Full\nsoftware development)
+    ' indicates: azureai (level 4)
+    ' weights: azureai +4, copilotstudio +1, agentbuilder -1, m365 -2
+  endif
+
+  ' ── Q3: Integration Scope ───────────────────────────────────
+  :What are your\nintegration requirements?;
+
+  if (Integration Scope?) then (Extended Microsoft\necosystem)
+    ' indicates: agentbuilder (level 2)
+    ' weights: agentbuilder +3, m365 +2, copilotstudio +1
+  elseif (Integration Scope?) then (Extended integrations with\nenterprise systems)
+    ' indicates: copilotstudio (level 3)
+    ' weights: copilotstudio +4, agentbuilder +1, azureai +1
+  else (Unlimited\nintegration freedom)
+    ' indicates: azureai (level 4)
+    ' weights: azureai +4, copilotstudio +1, agentbuilder -1, m365 -2
+  endif
+
+  ' ── Q4: Deployment Options ──────────────────────────────────
+  :Where and how do you want users\nto access your AI agent?;
+
+  if (Deployment?) then (Within Microsoft 365\nCopilot and apps only)
+    ' indicates: agentbuilder (level 2)
+    ' weights: agentbuilder +3, m365 +2, copilotstudio +1
+  elseif (Deployment?) then (Wide range of internal\nand external channels)
+    ' indicates: copilotstudio (level 3)
+    ' weights: copilotstudio +4, agentbuilder +1, azureai +1
+  else (Custom applications\nand anywhere access)
+    ' indicates: azureai (level 4)
+    ' weights: azureai +4, copilotstudio +2, agentbuilder -1, m365 -2
+  endif
+
+  ' ── Scoring engine runs, produces recommendation ────────────
+  :Score all platforms;\
+  note right
+    Primary = highest indicated level
+    Runner-up = highest weighted score
+    (excluding primary)
+  end note
+
+  #90EE90:Show Recommendation\n+ Runner-up;
+
+endif
+
+stop
+@enduml
