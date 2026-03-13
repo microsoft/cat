@@ -49,9 +49,9 @@
 
   /* Foreground */
   --fg-1:             #111827;
-  --fg-2:             #374151;
-  --fg-3:             #6B7280;
-  --fg-4:             #9CA3AF;
+  --fg-2:             #2D3748;
+  --fg-3:             #4A5568;
+  --fg-4:             #718096;
   --fg-on-brand:      #FFFFFF;
   --fg-on-dark:       rgba(255,255,255,.92);
 
@@ -117,9 +117,9 @@
   --bg-overlay:       #222D3C;
 
   --fg-1:             #F0F2F5;
-  --fg-2:             #A8B4C4;
-  --fg-3:             #68788A;
-  --fg-4:             #445060;
+  --fg-2:             #C4CDD8;
+  --fg-3:             #8D9DB0;
+  --fg-4:             #5E7085;
   --fg-on-brand:      #FFFFFF;
   --fg-on-dark:       rgba(255,255,255,.92);
 
