@@ -1202,6 +1202,7 @@
       let apa = null; // populated from YAML
       let answers = {}; // { q1: 'q1a', q2: 'q2b', ... }
       let fastTrack = false;
+      let currentQuestionIndex = 0;
 
       // === UTILITIES ===
       function showSection(id) {
@@ -1280,7 +1281,6 @@
       // Stubs — implemented in later tasks
       function renderRecommendation() {}
       function renderQuestion() {}
-      let currentQuestionIndex = 0;
 
       document.addEventListener('DOMContentLoaded', boot);
     </script>
