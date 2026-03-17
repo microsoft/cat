@@ -1068,6 +1068,7 @@
         gap: 8px;
         font-size: 13px;
       }
+      /* Progress bar steps — overrides the v1 .progress-step rule above */
       .progress-step {
         display: flex;
         align-items: center;
@@ -1178,6 +1179,7 @@
         }[sectionId] ?? 0;
 
         const bar = document.getElementById('progress-bar');
+        if (!bar) return;
         bar.className = 'progress-bar';
         bar.innerHTML = steps.map((label, i) => {
           const cls = i < activeIndex ? 'complete' : i === activeIndex ? 'active' : '';
