@@ -1099,6 +1099,90 @@
         height: 2px;
         background: hsl(var(--border));
       }
+
+      /* Recommendation Screen */
+      .rec-card {
+        border: 2px solid hsl(var(--border));
+        border-radius: var(--radius);
+        padding: 28px;
+        margin-bottom: 16px;
+        background: hsl(var(--card));
+      }
+      .rec-card.primary {
+        border-color: hsl(var(--primary));
+      }
+      .rec-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+      .rec-platform-icon {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+      }
+      .rec-platform-name {
+        font-size: 22px;
+        font-weight: 700;
+        color: hsl(var(--foreground));
+      }
+      .rec-badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: 8px;
+      }
+      .badge-strong   { background: #dcfce7; color: #15803d; }
+      .badge-good     { background: #dbeafe; color: #1d4ed8; }
+      .badge-possible { background: #fef9c3; color: #a16207; }
+      .badge-not      { background: #f1f5f9; color: #64748b; }
+      .rec-summary {
+        color: hsl(var(--muted-foreground));
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+      .rec-section-title {
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: hsl(var(--muted-foreground));
+        margin-bottom: 8px;
+      }
+      .rec-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+      .rec-list li::before { content: "• "; color: hsl(var(--primary)); }
+      .rec-list li { font-size: 14px; color: hsl(var(--foreground)); }
+      .pair-banner {
+        background: hsl(var(--accent));
+        border: 1px solid hsl(var(--border));
+        border-radius: var(--radius);
+        padding: 14px 20px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        color: hsl(var(--accent-foreground));
+        text-align: center;
+      }
+      .second-label {
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: hsl(var(--muted-foreground));
+        margin-bottom: 8px;
+      }
+      .rec-card.secondary {
+        opacity: 0.85;
+      }
+      .rec-card.secondary .rec-platform-name { font-size: 18px; }
     </style>
   </head>
   <body>
@@ -1199,7 +1283,25 @@
     </div>
   </div>
 </div></div>
-        <div id="recommendation-section" class="fade-in hidden"><!-- results --></div>
+        <div id="recommendation-section" class="fade-in hidden">
+          <div id="rec-primary-card"></div>
+          <div id="rec-pair-banner" class="pair-banner hidden"></div>
+          <div id="rec-second-label" class="second-label hidden"></div>
+          <div id="rec-second-card"></div>
+          <div id="rec-fasttrack-prompt" class="hidden" style="margin-top:16px; text-align:center;">
+            <p style="color:hsl(var(--muted-foreground)); margin-bottom:12px;">
+              If you need more customization, try the full assessment
+            </p>
+            <button class="btn btn-secondary" onclick="startFullAssessment()">
+              Take the Full Assessment
+            </button>
+          </div>
+          <div class="center" style="margin-top:24px;">
+            <button class="btn btn-ghost" onclick="restart()">
+              ↩ Start Over
+            </button>
+          </div>
+        </div>
       </div>
     </main>
 
@@ -1379,6 +1481,54 @@
         return factors.slice(0, 3);
       }
 
+      const PLATFORM_ICONS = {
+        agent_builder:  '../images/copilot.png',
+        m365_copilot:   '../images/m365-copilot-logo.png',
+        copilot_studio: '../images/copilot-studio.png',
+        foundry:        '../images/ai-foundry.png',
+      };
+
+      function badgeClass(label) {
+        if (label.startsWith('Strong'))   return 'badge-strong';
+        if (label.startsWith('Good'))     return 'badge-good';
+        if (label.startsWith('Possible')) return 'badge-possible';
+        return 'badge-not';
+      }
+
+      function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge) {
+        const rec = apa.recommendations[platformId];
+        const rankEntry = ranked.find(r => r.id === platformId);
+        const factors = isPrimary && !fastTrack ? getKeyFactors(platformId, answersMap) : [];
+        const icon = PLATFORM_ICONS[platformId] || '';
+
+        const badgeHtml = showBadge && rankEntry
+          ? `<span class="rec-badge ${badgeClass(rankEntry.label)}">${rankEntry.label}</span>`
+          : '';
+
+        const factorsHtml = factors.length > 0 ? `
+          <div class="rec-section-title">Why this was recommended</div>
+          <ul class="rec-list">${factors.map(f => `<li>${f}</li>`).join('')}</ul>` : '';
+
+        const bestFor = (rec.best_for || []).map(f => `<li>${f}</li>`).join('');
+        const watchOut = (rec.watch_out_for || []).map(f => `<li>${f}</li>`).join('');
+
+        return `
+          <div class="rec-card ${isPrimary ? 'primary' : 'secondary'}">
+            <div class="rec-header">
+              <img class="rec-platform-icon" src="${icon}" alt="${rec.headline}">
+              <div>
+                <div class="rec-platform-name">${rec.headline}${badgeHtml}</div>
+              </div>
+            </div>
+            <p class="rec-summary">${rec.summary}</p>
+            ${factorsHtml}
+            <div class="rec-section-title">Best for</div>
+            <ul class="rec-list">${bestFor}</ul>
+            <div class="rec-section-title">Watch out for</div>
+            <ul class="rec-list">${watchOut}</ul>
+          </div>`;
+      }
+
       // === BOOT ===
       async function boot() {
         showSection('loading-section');
@@ -1480,8 +1630,65 @@
         }
       }
 
-      // Stub — implemented in later tasks
-      function renderRecommendation() {}
+      function renderRecommendation() {
+        if (fastTrack) {
+          document.getElementById('rec-primary-card').innerHTML =
+            buildPlatformCard('m365_copilot', [], {}, true, false);
+          document.getElementById('rec-pair-banner').classList.add('hidden');
+          document.getElementById('rec-second-label').classList.add('hidden');
+          document.getElementById('rec-second-card').innerHTML = '';
+          document.getElementById('rec-fasttrack-prompt').classList.remove('hidden');
+          return;
+        }
+
+        document.getElementById('rec-fasttrack-prompt').classList.add('hidden');
+
+        const ranked = rankPlatforms(answers);
+        const top = ranked[0];
+        const second = ranked[1];
+
+        document.getElementById('rec-primary-card').innerHTML =
+          buildPlatformCard(top.id, ranked, answers, true, true);
+
+        const scoreDiff = top.score - second.score;
+        const isPair = scoreDiff <= apa.scoring.tie_handling.threshold_points;
+        const pairEntry = isPair
+          ? (apa.scoring.tie_handling.valid_pairs || []).find(p =>
+              p.platforms.includes(top.id) && p.platforms.includes(second.id))
+          : null;
+
+        const pairBanner = document.getElementById('rec-pair-banner');
+        const secondLabel = document.getElementById('rec-second-label');
+
+        if (pairEntry) {
+          pairBanner.textContent = `💡 ${pairEntry.rationale}`;
+          pairBanner.classList.remove('hidden');
+          secondLabel.textContent = 'Complementary platform:';
+          secondLabel.classList.remove('hidden');
+        } else {
+          pairBanner.classList.add('hidden');
+          secondLabel.textContent = 'Also consider:';
+          secondLabel.classList.remove('hidden');
+        }
+
+        document.getElementById('rec-second-card').innerHTML =
+          buildPlatformCard(second.id, ranked, answers, false, false);
+      }
+
+      function restart() {
+        answers = {};
+        fastTrack = false;
+        currentQuestionIndex = 0;
+        showSection('welcome-section');
+      }
+
+      function startFullAssessment() {
+        fastTrack = false;
+        answers = {};
+        currentQuestionIndex = 0;
+        renderQuestion();
+        showSection('assessment-section');
+      }
 
       document.addEventListener('DOMContentLoaded', boot);
     </script>
