@@ -1497,8 +1497,10 @@
 
       function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge) {
         const rec = apa.recommendations[platformId];
+        if (!rec) return `<div class="rec-card"><p>Platform data unavailable.</p></div>`;
         const rankEntry = ranked.find(r => r.id === platformId);
-        const factors = isPrimary && !fastTrack ? getKeyFactors(platformId, answersMap) : [];
+        // showBadge is true only for scored primary cards; key factors are only meaningful in that same context
+        const factors = isPrimary && showBadge ? getKeyFactors(platformId, answersMap) : [];
         const icon = PLATFORM_ICONS[platformId] || '';
 
         const badgeHtml = showBadge && rankEntry
@@ -1646,6 +1648,12 @@
         const ranked = rankPlatforms(answers);
         const top = ranked[0];
         const second = ranked[1];
+
+        if (!top || !second) {
+          document.getElementById('rec-primary-card').innerHTML =
+            '<div class="rec-card"><p>Unable to generate a recommendation. Please contact the CAT team.</p></div>';
+          return;
+        }
 
         document.getElementById('rec-primary-card').innerHTML =
           buildPlatformCard(top.id, ranked, answers, true, true);
