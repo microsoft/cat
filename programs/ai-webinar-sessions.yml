@@ -281,6 +281,12 @@ sessions:
     description: "A practical, architecture - level walkthrough of how Microsoft 365 Copilot is built, extended, and secured within the Microsoft 365 platform. "
     register_link: "https://aka.ms/aiwebinars/CopilotArchitecture"
 
+  - date: "2026-03-25"
+    time: "8:30 PM PT"
+    title: "Building Trustworthy AI Agents with Copilot Studio Evaluation"
+    description: "In this session, we’ll introduce the Agent Evaluation capabilities in Copilot Studio and show how makers and teams can systematically measure, test, and improve agent quality throughout the development lifecycle."
+    register_link: "https://aka.ms/aiwebinars/CPSEvaluation"
+
   - date: "2026-04-08"
     time: "9:00 AM PT"
     title: "Choosing between Orchestrative and/or Deterministic in Copilot Studio"
