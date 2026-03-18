@@ -1340,6 +1340,50 @@
           .sort((a, b) => b.score - a.score);
       }
 
+      const HARD_RULE_LABELS = {
+        q4d: 'Complex agent orchestration — this is a hard requirement for Foundry',
+        q5d: 'Full infrastructure control selected — Foundry is the only viable platform',
+        q6c: 'Strict compliance (sovereign cloud / regulatory) — Foundry required',
+        q8b: 'External user audience — Agent Builder and M365 Copilot cannot publish externally',
+        q8c: 'Mixed audience (internal + external) — Agent Builder and M365 Copilot cannot publish externally',
+      };
+
+      // Returns array of up to 3 bullet strings explaining why platformId ranked well
+      function getKeyFactors(platformId, answersMap) {
+        const factors = [];
+
+        // 1. Hard rules that affected this platform
+        Object.entries(answersMap).forEach(([, optionId]) => {
+          const rule = HARD_RULES[optionId];
+          if (rule && rule.zero.includes(platformId)) {
+            // This platform was zeroed by a hard rule — surface it as a caution
+            factors.push(`⚠️ ${HARD_RULE_LABELS[optionId]}`);
+          } else if (HARD_RULES[optionId] && !HARD_RULES[optionId].zero.includes(platformId)) {
+            // A hard rule fired that didn't zero this platform — still worth noting
+            factors.push(`✅ ${HARD_RULE_LABELS[optionId]}`);
+          }
+        });
+
+        // 2. Top-scoring questions for this platform (highest contribution first)
+        const contributions = [];
+        apa.questions.forEach(q => {
+          const optionId = answersMap[q.id];
+          if (!optionId) return;
+          const option = q.options.find(o => o.id === optionId);
+          if (!option) return;
+          const score = option.scores[platformId] ?? 0;
+          if (score >= 2) { // only surface strong signals
+            contributions.push({ questionLabel: q.label, optionLabel: option.label, score });
+          }
+        });
+        contributions.sort((a, b) => b.score - a.score);
+        contributions.slice(0, 3 - factors.length).forEach(c => {
+          factors.push(`${c.questionLabel}: ${c.optionLabel}`);
+        });
+
+        return factors.slice(0, 3);
+      }
+
       // === BOOT ===
       async function boot() {
         showSection('loading-section');
