@@ -1322,6 +1322,7 @@
       let answers = {}; // { q1: 'q1a', q2: 'q2b', ... }
       let fastTrack = false;
       let currentQuestionIndex = 0;
+      let listenersReady = false;
 
       // === UTILITIES ===
       function showSection(id) {
@@ -1549,6 +1550,8 @@
       }
 
       function setupListeners() {
+        if (listenersReady) return;
+        listenersReady = true;
         document.getElementById('start-btn').addEventListener('click', () => {
           showSection('prescreen-section');
         });
