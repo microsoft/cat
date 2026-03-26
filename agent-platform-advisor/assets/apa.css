@@ -108,7 +108,7 @@ body {
   border-radius: var(--radius);
   font-size: 14px;
   font-weight: 500;
-  transition: all 0.2s;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
   cursor: pointer;
   border: 1px solid transparent;
   text-decoration: none;
@@ -422,7 +422,7 @@ body {
   border-radius: var(--radius);
   padding: 16px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 0.2s, background-color 0.2s, transform 0.2s, box-shadow 0.2s;
   display: flex;
   align-items: flex-start;
   gap: 12px;
