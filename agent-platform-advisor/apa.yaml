@@ -1,5 +1,5 @@
 ################################################################################
-# Microsoft Agent Platform Advisor — Scoring Matrix
+# Microsoft Agent Platform Advisor - Scoring Matrix
 # Platforms: Agent Builder (agent_builder), M365 Copilot (m365_copilot),
 #            Copilot Studio (copilot_studio), Microsoft Foundry (foundry)
 #
@@ -33,7 +33,7 @@ questions:
     prompt: Some platforms require a developer, while others are designed for business users with no coding experience.
     options:
       - id: q1a
-        label: Business user or subject matter expert — no coding experience
+        label: Business user or subject matter expert - no coding experience
         scores:
           agent_builder: 3
           m365_copilot: 2
@@ -41,7 +41,7 @@ questions:
           foundry: 0
 
       - id: q1b
-        label: IT professional or Power Platform user — comfortable with drag-and-drop tools and configuration
+        label: IT professional or Power Platform user - comfortable with drag-and-drop tools and configuration
         scores:
           agent_builder: 1
           m365_copilot: 1
@@ -49,7 +49,7 @@ questions:
           foundry: 1
 
       - id: q1c
-        label: Professional developer — writes code and builds software
+        label: Professional developer - writes code and builds software
         scores:
           agent_builder: 0
           m365_copilot: 1
@@ -57,7 +57,7 @@ questions:
           foundry: 3
 
       - id: q1d
-        label: Data scientist or AI/ML engineer — works with AI models and data infrastructure
+        label: Data scientist or AI/ML engineer - works with AI models and data infrastructure
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -70,7 +70,7 @@ questions:
     prompt: Think about where users will actually open and interact with the agent day-to-day.
     options:
       - id: q2a
-        label: Inside Microsoft 365 apps — Teams, Copilot, SharePoint, or Outlook
+        label: Inside Microsoft 365 apps - Teams, Copilot, SharePoint, or Outlook
         scores:
           agent_builder: 3
           m365_copilot: 3
@@ -78,7 +78,7 @@ questions:
           foundry: 0
 
       - id: q2b
-        label: In a custom app — a website or mobile app your team builds
+        label: In a custom app - a website or mobile app your team builds
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -86,7 +86,7 @@ questions:
           foundry: 3
 
       - id: q2c
-        label: Running automatically in the background — triggered by events, not by a person chatting with it
+        label: Running automatically in the background - triggered by events, not by a person chatting with it
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -107,7 +107,7 @@ questions:
     prompt: What information does the agent need to do its job? Pick the option closest to where that information lives today.
     options:
       - id: q3a
-        label: Content already in Microsoft 365 — SharePoint, OneDrive, Teams, or Outlook
+        label: Content already in Microsoft 365 - SharePoint, OneDrive, Teams, or Outlook
         scores:
           agent_builder: 3
           m365_copilot: 3
@@ -115,7 +115,7 @@ questions:
           foundry: 0
 
       - id: q3b
-        label: Other business systems — like Salesforce, SAP, ServiceNow, or your own databases
+        label: Other business systems - like Salesforce, SAP, ServiceNow, or your own databases
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -123,7 +123,7 @@ questions:
           foundry: 2
 
       - id: q3c
-        label: Specialized or private data sources — large-scale data storage, AI search indexes, or data warehouses your team manages
+        label: Specialized or private data sources - large-scale data storage, AI search indexes, or data warehouses your team manages
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -131,7 +131,7 @@ questions:
           foundry: 3
 
       - id: q3d
-        label: A mix — some data in Microsoft 365, some in other systems
+        label: A mix - some data in Microsoft 365, some in other systems
         scores:
           agent_builder: 0
           m365_copilot: 1
@@ -149,7 +149,7 @@ questions:
           regardless of other answers.
     options:
       - id: q4a
-        label: Answers questions in a single exchange — Q&A, lookups, or summaries
+        label: Answers questions in a single exchange - Q&A, lookups, or summaries
         scores:
           agent_builder: 3
           m365_copilot: 3
@@ -165,7 +165,7 @@ questions:
           foundry: 1
 
       - id: q4c
-        label: Completes multi-step tasks — follows a process, checks multiple systems, or takes actions like submitting forms or updating records
+        label: Completes multi-step tasks - follows a process, checks multiple systems, or takes actions like submitting forms or updating records
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -173,7 +173,7 @@ questions:
           foundry: 2
 
       - id: q4d
-        label: Manages complex work — coordinates multiple agents, handles processes that run over hours or days, or needs a custom AI approach
+        label: Manages complex work - coordinates multiple agents, handles processes that run over hours or days, or needs a custom AI approach
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -192,7 +192,7 @@ questions:
           Surface a direct Foundry recommendation and skip remaining questions.
     options:
       - id: q5a
-        label: None — configured through a visual UI, no code required
+        label: None - configured through a visual UI, no code required
         scores:
           agent_builder: 3
           m365_copilot: 2
@@ -200,7 +200,7 @@ questions:
           foundry: 0
 
       - id: q5b
-        label: Some — connecting to other apps or adding automated steps using built-in tools
+        label: Some - connecting to other apps or adding automated steps using built-in tools
         scores:
           agent_builder: 0
           m365_copilot: 1
@@ -208,7 +208,7 @@ questions:
           foundry: 1
 
       - id: q5c
-        label: Significant — writing code to add custom logic or connect to systems that don't have built-in connectors
+        label: Significant - writing code to add custom logic or connect to systems that don't have built-in connectors
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -216,7 +216,7 @@ questions:
           foundry: 3
 
       - id: q5d
-        label: Full control — bringing your own AI model, managing cloud infrastructure, or designing the entire system from scratch
+        label: Full control - bringing your own AI model, managing cloud infrastructure, or designing the entire system from scratch
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -236,7 +236,7 @@ questions:
           M365 Copilot is tenant-scoped only.
     options:
       - id: q8a
-        label: Internal employees only — people inside our organization
+        label: Internal employees only - people inside our organization
         scores:
           agent_builder: 3
           m365_copilot: 3
@@ -244,7 +244,7 @@ questions:
           foundry: 1
 
       - id: q8b
-        label: External users — customers, partners, or the public
+        label: External users - customers, partners, or the public
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -253,7 +253,7 @@ questions:
         hard_rule_trigger: true
 
       - id: q8c
-        label: Both — internal employees and external users
+        label: Both - internal employees and external users
         scores:
           agent_builder: 0
           m365_copilot: 1
@@ -275,15 +275,15 @@ questions:
 
 scoring:
 
-  # Step 1 — Hard rules are evaluated before summing.
+  # Step 1 - Hard rules are evaluated before summing.
   # They cap or zero out platforms regardless of cumulative scores.
   # Hard rules represent real platform limitations, not preferences.
   hard_rule_evaluation: pre_sum
 
-  # Step 2 — Sum raw scores across all answered questions.
+  # Step 2 - Sum raw scores across all answered questions.
   raw_score_max: 18  # 6 questions × max score of 3
 
-  # Step 3 — Map raw scores to recommendation strength.
+  # Step 3 - Map raw scores to recommendation strength.
   recommendation_thresholds:
     - min: 18
       max: 24
@@ -295,14 +295,14 @@ scoring:
       description: This platform meets most of your requirements with minor tradeoffs.
     - min: 6
       max: 11
-      label: Possible fit — review tradeoffs
+      label: Possible fit - review tradeoffs
       description: This platform can address your scenario but may require workarounds.
     - min: 0
       max: 5
       label: Not recommended
       description: This platform is unlikely to meet your requirements in this scenario.
 
-  # Step 5 — Tie handling: surface both as a complementary pair.
+  # Step 5 - Tie handling: surface both as a complementary pair.
   tie_handling:
     threshold_points: 1
     present_as: complementary_pair
@@ -338,7 +338,7 @@ recommendations:
         description: Personalized career development plans, skill gap analysis, and actionable advice
         url: https://learn.microsoft.com/microsoft-365/copilot/extensibility/agent-template-career-coach
       - label: Corporate Communications Crafter
-        description: On-brand internal and external communications — announcements, newsletters, exec updates
+        description: On-brand internal and external communications - announcements, newsletters, exec updates
         url: https://learn.microsoft.com/microsoft-365/copilot/extensibility/agent-template-corporate-communications
       - label: Customer Insight Assistant
         description: Detailed customer profiles including industry, priorities, leadership, and competitors
@@ -384,7 +384,7 @@ recommendations:
       - Scenarios grounded in M365 content
       - IT pros and makers comfortable with Microsoft 365 admin
     watch_out_for:
-      - Only available to people inside your organization — can't be shared externally
+      - Only available to people inside your organization - can't be shared externally
       - Limited customization compared to Copilot Studio
       - Not suited for complex multi-step workflows
     first_party_agents:
@@ -428,7 +428,7 @@ recommendations:
   copilot_studio:
     headline: Copilot Studio
     summary: >
-      The most flexible option for building agents without heavy coding —
+      The most flexible option for building agents without heavy coding -
       connect to outside systems, deploy to websites or Teams, and automate
       business processes.
     best_for:
@@ -443,7 +443,7 @@ recommendations:
   foundry:
     headline: Microsoft Foundry
     summary: >
-      The right choice when your team needs full technical control — bring your
+      The right choice when your team needs full technical control - bring your
       own AI models, manage complex multi-agent systems, or meet strict
       regulatory requirements.
     best_for:

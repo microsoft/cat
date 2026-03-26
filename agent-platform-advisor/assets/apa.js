@@ -59,7 +59,7 @@ function getZeroedPlatforms(answersMap) {
       HARD_RULES[optionId].zero.forEach(p => { zeroed[p] = true; });
     }
   });
-  // Prescreen "No — I need a custom agent" excludes M365 Copilot from the full assessment.
+  // Prescreen "No - I need a custom agent" excludes M365 Copilot from the full assessment.
   // M365 Copilot is only appropriate when the user explicitly wants a built-in experience.
   if (!fastTrack) zeroed['m365_copilot'] = true;
   return zeroed;
@@ -106,11 +106,11 @@ function rankPlatforms(answersMap) {
 }
 
 const HARD_RULE_LABELS = {
-  q4d: 'Complex agent orchestration — this is a hard requirement for Foundry',
-  q5d: 'Full infrastructure control selected — Foundry is the only viable platform',
-  q6c: 'Strict compliance (sovereign cloud / regulatory) — Foundry required',
-  q8b: 'External user audience — Agent Builder and M365 Copilot cannot publish externally',
-  q8c: 'Mixed audience (internal + external) — Agent Builder and M365 Copilot cannot publish externally',
+  q4d: 'Complex agent orchestration - this is a hard requirement for Foundry',
+  q5d: 'Full infrastructure control selected - Foundry is the only viable platform',
+  q6c: 'Strict compliance (sovereign cloud / regulatory) - Foundry required',
+  q8b: 'External user audience - Agent Builder and M365 Copilot cannot publish externally',
+  q8c: 'Mixed audience (internal + external) - Agent Builder and M365 Copilot cannot publish externally',
 };
 
 // Returns up to 3 bullet strings summarising key scoring factors (or disqualifying rules) for the given platform
@@ -182,7 +182,7 @@ function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge)
       const label = a.url
         ? `<a href="${a.url}" target="_blank" rel="noopener noreferrer">${a.label}</a>`
         : a.label;
-      return `<li><strong>${label}</strong> — ${a.description}</li>`;
+      return `<li><strong>${label}</strong> - ${a.description}</li>`;
     }).join('')}</ul>` : '';
 
   const templatesHtml = (rec.templates || []).length > 0 ? `
@@ -191,7 +191,7 @@ function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge)
       const label = t.url
         ? `<a href="${t.url}" target="_blank" rel="noopener noreferrer">${t.label}</a>`
         : t.label;
-      return `<li><strong>${label}</strong> — ${t.description}</li>`;
+      return `<li><strong>${label}</strong> - ${t.description}</li>`;
     }).join('')}</ul>` : '';
 
   return `
