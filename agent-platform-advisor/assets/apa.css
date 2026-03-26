@@ -1212,6 +1212,7 @@ body {
   margin-bottom: 8px;
 }
 .rec-card.secondary {
-  opacity: 0.85;
+  border-color: var(--border-subtle);
+  background: var(--muted);
 }
 .rec-card.secondary .rec-platform-name { font-size: 18px; }
