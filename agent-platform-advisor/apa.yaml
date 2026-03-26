@@ -41,7 +41,7 @@ questions:
           foundry: 0
 
       - id: q1b
-        label: Power Platform maker or IT pro — comfortable with low-code tools
+        label: IT professional or Power Platform user — comfortable with drag-and-drop tools and configuration
         scores:
           agent_builder: 1
           m365_copilot: 1
@@ -49,7 +49,7 @@ questions:
           foundry: 1
 
       - id: q1c
-        label: Professional developer — comfortable with code, APIs, and SDKs
+        label: Professional developer — writes code and builds software
         scores:
           agent_builder: 0
           m365_copilot: 1
@@ -57,7 +57,7 @@ questions:
           foundry: 3
 
       - id: q1d
-        label: Data or ML engineer — working with models, pipelines, or infrastructure
+        label: Data scientist or AI/ML engineer — works with AI models and data infrastructure
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -78,7 +78,7 @@ questions:
           foundry: 0
 
       - id: q2b
-        label: In a custom web or mobile application your team builds or hosts
+        label: In a custom app — a website or mobile app your team builds
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -86,7 +86,7 @@ questions:
           foundry: 3
 
       - id: q2c
-        label: Triggered by a business process or automated workflow — not directly by a user
+        label: Running automatically in the background — triggered by events, not by a person chatting with it
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -94,7 +94,7 @@ questions:
           foundry: 2
 
       - id: q2d
-        label: Multiple surfaces, or not decided yet
+        label: Multiple places, or not decided yet
         scores:
           agent_builder: 1
           m365_copilot: 1
@@ -104,7 +104,7 @@ questions:
   - id: q3
     label: What data does the agent need to access?
     purpose: Grounding requirements narrow the field fast
-    prompt: Where does the agent's knowledge and context come from? Choose the best fit for your primary data source.
+    prompt: What information does the agent need to do its job? Pick the option closest to where that information lives today.
     options:
       - id: q3a
         label: Content already in Microsoft 365 — SharePoint, OneDrive, Teams, or Outlook
@@ -115,7 +115,7 @@ questions:
           foundry: 0
 
       - id: q3b
-        label: External business systems or APIs — CRM, ERP, ticketing, or databases
+        label: Other business systems — like Salesforce, SAP, ServiceNow, or your own databases
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -123,7 +123,7 @@ questions:
           foundry: 2
 
       - id: q3c
-        label: Custom or proprietary data — data lakes, vector stores, or private warehouses
+        label: Specialized or private data sources — large-scale data storage, AI search indexes, or data warehouses your team manages
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -131,7 +131,7 @@ questions:
           foundry: 3
 
       - id: q3d
-        label: A combination of M365 content and external systems
+        label: A mix — some data in Microsoft 365, some in other systems
         scores:
           agent_builder: 0
           m365_copilot: 1
@@ -141,7 +141,7 @@ questions:
   - id: q4
     label: What does this agent actually do?
     purpose: Single strongest discriminator between Copilot Studio and Foundry
-    prompt: Think about the interactions users will have with the agent and the complexity of tasks it needs to complete.
+    prompt: What kind of work should the agent handle? Pick the option closest to your scenario.
     hard_rules:
       - condition: option == q4d
         effect: >
@@ -165,7 +165,7 @@ questions:
           foundry: 1
 
       - id: q4c
-        label: Completes multi-step tasks — branching decisions, calling multiple systems, or taking actions on behalf of the user
+        label: Completes multi-step tasks — follows a process, checks multiple systems, or takes actions like submitting forms or updating records
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -173,7 +173,7 @@ questions:
           foundry: 2
 
       - id: q4d
-        label: Coordinates multiple agents, manages long-running workflows, or requires a fully custom reasoning approach
+        label: Manages complex work — coordinates multiple agents, handles processes that run over hours or days, or needs a custom AI approach
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -184,7 +184,7 @@ questions:
   - id: q5
     label: How much technical customization will this need?
     purpose: Distinguishes no-code → low-code → pro-code ceiling
-    prompt: Consider the integrations, business logic, and controls your agent will need beyond a standard chat interface.
+    prompt: How much technical setup will be needed beyond a basic chat experience?
     hard_rules:
       - condition: option == q5d
         effect: >
@@ -200,7 +200,7 @@ questions:
           foundry: 0
 
       - id: q5b
-        label: Some — custom connectors, plugins, or Power Automate flows
+        label: Some — connecting to other apps or adding automated steps using built-in tools
         scores:
           agent_builder: 0
           m365_copilot: 1
@@ -208,7 +208,7 @@ questions:
           foundry: 1
 
       - id: q5c
-        label: Significant — custom APIs, business logic in code, or SDK-level control
+        label: Significant — writing code to add custom logic or connect to systems that don't have built-in connectors
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -216,7 +216,7 @@ questions:
           foundry: 3
 
       - id: q5d
-        label: Full control — custom model, custom orchestration, or raw cloud infrastructure
+        label: Full control — bringing your own AI model, managing cloud infrastructure, or designing the entire system from scratch
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -227,7 +227,7 @@ questions:
   - id: q8
     label: Who will use this agent?
     purpose: External-facing is a hard constraint that affects platform eligibility
-    prompt: Some platforms only work within your Microsoft 365 tenant. If external users need to interact with the agent, that narrows your options significantly.
+    prompt: Will only people inside your organization use this agent, or do people outside your company (customers, partners) need access too?
     hard_rules:
       - condition: option in [q8b, q8c]
         effect: >
@@ -236,7 +236,7 @@ questions:
           M365 Copilot is tenant-scoped only.
     options:
       - id: q8a
-        label: Internal employees only — everyone is within our Microsoft 365 tenant
+        label: Internal employees only — people inside our organization
         scores:
           agent_builder: 3
           m365_copilot: 3
@@ -330,8 +330,8 @@ recommendations:
       - Internal-only agents grounded in SharePoint or OneDrive
       - Simple Q&A, summarization, or lookup scenarios
     watch_out_for:
-      - No external user publishing path
-      - Limited to M365 grounding sources
+      - Can't be shared with people outside your organization
+      - Can only use data stored in Microsoft 365 (SharePoint, OneDrive, etc.)
       - Not suitable for custom logic or external system integration
     templates:
       - label: Career Coach
@@ -377,14 +377,14 @@ recommendations:
   m365_copilot:
     headline: M365 Copilot
     summary: >
-      Best for extending the native Copilot experience inside Microsoft 365
-      apps through plugins, connectors, and declarative agents.
+      Best when the built-in Copilot features in Microsoft 365 already do most
+      of what you need, with some customization.
     best_for:
       - Extending Copilot within Teams, Outlook, and SharePoint
       - Scenarios grounded in M365 content
       - IT pros and makers comfortable with Microsoft 365 admin
     watch_out_for:
-      - Tenant-scoped — no external user access
+      - Only available to people inside your organization — can't be shared externally
       - Limited customization compared to Copilot Studio
       - Not suited for complex multi-step workflows
     first_party_agents:
@@ -428,9 +428,9 @@ recommendations:
   copilot_studio:
     headline: Copilot Studio
     summary: >
-      The most flexible low-code platform for building production-grade agents
-      that connect to external systems, publish to multiple surfaces, and
-      integrate with Power Platform.
+      The most flexible option for building agents without heavy coding —
+      connect to outside systems, deploy to websites or Teams, and automate
+      business processes.
     best_for:
       - Low-code makers and IT pros
       - Agents connecting to external APIs, CRM, ERP, or databases
@@ -443,13 +443,14 @@ recommendations:
   foundry:
     headline: Microsoft Foundry
     summary: >
-      The right choice when you need full engineering control — custom models,
-      complex orchestration, sovereign cloud, or infrastructure-level integration.
+      The right choice when your team needs full technical control — bring your
+      own AI models, manage complex multi-agent systems, or meet strict
+      regulatory requirements.
     best_for:
       - Professional developers and ML engineers
-      - Custom model deployment (BYOM) or fine-tuning
-      - Multi-agent topologies with complex state management
-      - Strict compliance requirements (HIPAA, FedRAMP, sovereign cloud)
+      - Using your own AI models or fine-tuning existing ones
+      - Systems where multiple agents work together and need to track shared progress
+      - Strict compliance requirements (e.g., healthcare, government, or data-residency regulations)
       - Agents embedded in custom-built applications
     watch_out_for:
       - Higher implementation complexity and time-to-value
