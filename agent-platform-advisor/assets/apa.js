@@ -388,15 +388,23 @@ function renderRecommendation() {
   document.getElementById('rec-primary-card').innerHTML =
     buildPlatformCard(top.id, ranked, answers, true, true);
 
+  const pairBanner = document.getElementById('rec-pair-banner');
+  const secondLabel = document.getElementById('rec-second-label');
+
+  // Hide secondary card when second platform is "Not recommended" (score 0-5)
+  if (second.label === 'Not recommended') {
+    pairBanner.classList.add('hidden');
+    secondLabel.classList.add('hidden');
+    document.getElementById('rec-second-card').innerHTML = '';
+    return;
+  }
+
   const scoreDiff = top.score - second.score;
   const isPair = scoreDiff <= apa.scoring.tie_handling.threshold_points;
   const pairEntry = isPair
     ? (apa.scoring.tie_handling.valid_pairs || []).find(p =>
         p.platforms.includes(top.id) && p.platforms.includes(second.id))
     : null;
-
-  const pairBanner = document.getElementById('rec-pair-banner');
-  const secondLabel = document.getElementById('rec-second-label');
 
   if (pairEntry) {
     pairBanner.textContent = `💡 ${pairEntry.rationale}`;
