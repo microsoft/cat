@@ -289,8 +289,9 @@ function handlePrescreenYes() {
 
 function handlePrescreenNo() {
   fastTrack = false;
-  answers = {};
-  currentQuestionIndex = 0;
+  if (Object.keys(answers).length === 0) {
+    currentQuestionIndex = 0;
+  }
   renderQuestion();
   showSection('assessment-section');
 }
