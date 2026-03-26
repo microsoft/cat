@@ -1074,6 +1074,23 @@ body {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+  }
+
+  .option-card:hover {
+    transform: none;
+  }
+
+  .btn,
+  .option-card,
+  .option-radio-outer,
+  .step-circle {
+    transition: none;
+  }
+}
+
 /* Progress Bar */
 .progress-bar {
   display: flex;
