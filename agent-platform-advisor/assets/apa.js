@@ -16,6 +16,27 @@ function showSection(id) {
   updateProgressBar(id);
 }
 
+// === HISTORY NAVIGATION ===
+function pushState(section, questionIndex) {
+  const state = { section, questionIndex: questionIndex ?? null };
+  history.pushState(state, '', '');
+}
+
+window.addEventListener('popstate', (e) => {
+  const state = e.state;
+  if (!state) {
+    showSection('welcome-section');
+    return;
+  }
+  if (state.section === 'assessment-section' && state.questionIndex != null) {
+    currentQuestionIndex = state.questionIndex;
+    renderQuestion();
+  } else if (state.section === 'recommendation-section') {
+    renderRecommendation();
+  }
+  showSection(state.section);
+});
+
 function updateProgressBar(sectionId) {
   const steps = ['Welcome', 'Assessment', 'Recommendation'];
   const activeIndex = {
@@ -158,6 +179,29 @@ function badgeClass(label) {
   return 'badge-not';
 }
 
+function buildMaturityGuidance(recommendedPlatformId) {
+  const mg = apa.maturity_guidance;
+  if (!mg) return '';
+  const platformLabels = Object.fromEntries(apa.meta.platforms.map(p => [p.id, p.label]));
+  const stagesHtml = mg.stages.map(stage => {
+    const isActive = stage.platforms.includes(recommendedPlatformId);
+    const platformNames = stage.platforms.map(id => platformLabels[id] || id).join(', ');
+    return `
+      <div class="maturity-stage${isActive ? ' active' : ''}">
+        <div class="maturity-stage-label">${stage.label}</div>
+        <p>${stage.description}</p>
+        <div class="maturity-stage-platforms">${platformNames}</div>
+      </div>`;
+  }).join('');
+
+  return `
+    <div class="maturity-guidance">
+      <h3>${mg.heading}</h3>
+      <p>${mg.description}</p>
+      <div class="maturity-stages">${stagesHtml}</div>
+    </div>`;
+}
+
 function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge) {
   const rec = apa.recommendations[platformId];
   if (!rec) return `<div class="rec-card"><p>Platform data unavailable.</p></div>`;
@@ -262,6 +306,7 @@ async function boot() {
     const text = await res.text();
     apa = jsyaml.load(text);
     showSection('welcome-section');
+    history.replaceState({ section: 'welcome-section' }, '', '');
     setupListeners();
   } catch (err) {
     document.getElementById('error-message').textContent =
@@ -275,6 +320,7 @@ function setupListeners() {
   listenersReady = true;
   document.getElementById('start-btn').addEventListener('click', () => {
     showSection('prescreen-section');
+    pushState('prescreen-section');
   });
   document.getElementById('next-btn').addEventListener('click', handleNext);
   document.getElementById('prev-btn').addEventListener('click', handlePrev);
@@ -285,6 +331,7 @@ function handlePrescreenYes() {
   answers = {};
   renderRecommendation();
   showSection('recommendation-section');
+  pushState('recommendation-section');
 }
 
 function handlePrescreenNo() {
@@ -294,6 +341,7 @@ function handlePrescreenNo() {
   }
   renderQuestion();
   showSection('assessment-section');
+  pushState('assessment-section', currentQuestionIndex);
 }
 
 function renderQuestion() {
@@ -340,15 +388,29 @@ function handleNext() {
   if (answers[question.id] === 'q5d') {
     renderRecommendation();
     showSection('recommendation-section');
+    pushState('recommendation-section');
     return;
+  }
+
+  // Early exit: if first 6 questions answered and Agent Builder leads, skip eval & memory questions
+  if (currentQuestionIndex === 5) {
+    const ranked = rankPlatforms(answers);
+    if (ranked[0] && ranked[0].id === 'agent_builder') {
+      renderRecommendation();
+      showSection('recommendation-section');
+      pushState('recommendation-section');
+      return;
+    }
   }
 
   if (currentQuestionIndex < apa.questions.length - 1) {
     currentQuestionIndex++;
     renderQuestion();
+    pushState('assessment-section', currentQuestionIndex);
   } else {
     renderRecommendation();
     showSection('recommendation-section');
+    pushState('recommendation-section');
   }
 }
 
@@ -356,8 +418,10 @@ function handlePrev() {
   if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
     renderQuestion();
+    pushState('assessment-section', currentQuestionIndex);
   } else {
     showSection('prescreen-section');
+    pushState('prescreen-section');
   }
 }
 
@@ -370,6 +434,9 @@ function renderRecommendation() {
     document.getElementById('rec-second-label').classList.add('hidden');
     document.getElementById('rec-second-card').innerHTML = '';
     document.getElementById('rec-fasttrack-prompt').classList.remove('hidden');
+    const mgEl = document.getElementById('rec-maturity-guidance');
+    mgEl.innerHTML = buildMaturityGuidance('m365_copilot');
+    mgEl.classList.remove('hidden');
     return;
   }
 
@@ -397,6 +464,9 @@ function renderRecommendation() {
     pairBanner.classList.add('hidden');
     secondLabel.classList.add('hidden');
     document.getElementById('rec-second-card').innerHTML = '';
+    const mgEl = document.getElementById('rec-maturity-guidance');
+    mgEl.innerHTML = buildMaturityGuidance(top.id);
+    mgEl.classList.remove('hidden');
     return;
   }
 
@@ -420,6 +490,10 @@ function renderRecommendation() {
 
   document.getElementById('rec-second-card').innerHTML =
     buildPlatformCard(second.id, ranked, answers, false, false);
+
+  const mgEl = document.getElementById('rec-maturity-guidance');
+  mgEl.innerHTML = buildMaturityGuidance(top.id);
+  mgEl.classList.remove('hidden');
 }
 
 function restart() {
@@ -428,6 +502,7 @@ function restart() {
   currentQuestionIndex = 0;
   recommendedPlatformId = null;
   showSection('welcome-section');
+  pushState('welcome-section');
 }
 
 function startFullAssessment() {
@@ -436,6 +511,7 @@ function startFullAssessment() {
   currentQuestionIndex = 0;
   renderQuestion();
   showSection('assessment-section');
+  pushState('assessment-section', 0);
 }
 
 document.addEventListener('DOMContentLoaded', boot);

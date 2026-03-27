@@ -5,13 +5,28 @@ All notable changes to the Agent Platform Advisor are documented here.
 ## [Unreleased] — apa-v2 branch
 
 ### Added
+- **Two new assessment questions** — "How important is testing and evaluation?" (Q6) and "Does the agent need to remember users over time?" (Q7), bringing the total to 8 scored questions
+- **Maturity guidance panel** on the results page — shows a four-stage progression (Individual → Team → Division → External) with the recommended platform's stages highlighted; content driven by new `maturity_guidance` section in `apa.yaml`
+- **Browser history navigation** — each wizard step pushes a history entry so the browser Back/Forward buttons move between questions instead of leaving the site
+- **Agent Builder early exit** — if the first 6 questions point to Agent Builder, the wizard skips the evaluation and memory questions (which don't apply) and goes straight to the recommendation
+
+### Changed
+- **Question order revised** for a more natural decision flow: Who is building → Who will use it → What does it do → Where → What data → How much customization → Evaluation → Memory
+- **Recommendation copy enriched** from transcript analysis:
+  - Copilot Studio: added 1,400+ connectors, MCP server support, agent-to-agent orchestration, built-in evaluation test sets; added watch-outs for limited model selection and no per-user memory
+  - Microsoft Foundry: added memory as a service, full evaluation suite (auto/human/red teaming), lifecycle management (git/CI/CD/native versioning), OpenTelemetry + App Insights observability, cross-platform orchestration, AI gateway for cost control
+  - Agent Builder: added watch-outs for no evaluation tools, no lifecycle management, minimal observability
+- Scoring engine recalibrated — thresholds adjusted for 8 questions (max raw score 24)
+- YAML version bumped to 1.1
+
+### Added (continued from v1)
 - **Implementation Guide** (step 5 of wizard) — per-platform pre-development and post-development checklists loaded from `apa.yaml`
 - **Agent Structure Planning** (step 4 of wizard) — interactive component cards with checkboxes and notes fields; structure data defined in `apa.yaml`
 - SVG icon system using Lucide stroke icons (`getIcon()` helper); replaces all emoji icons in structure data
 - `structures` and `implementation` sections in `apa.yaml` for all four platforms
 - Platform-specific structure titles rendered dynamically from YAML
 
-### Changed
+### Changed (continued from v1)
 - "AI Foundry" renamed to "Microsoft Foundry" throughout
 - M365 Copilot excluded from custom agent path recommendations (prescreen fast-track now routes correctly)
 - Progress bar updated to 5 steps: Welcome → Assessment → Recommendation → Structure → Implementation
@@ -28,7 +43,7 @@ All notable changes to the Agent Platform Advisor are documented here.
 
 ---
 
-## v1 — Initial Release (March 2026)
+## v2 — Redesign and substantial updates (March 2026)
 
 - YAML-driven 8-question assessment with weighted scoring engine
 - Hard rules and tiebreaker logic for platform selection
@@ -36,3 +51,34 @@ All notable changes to the Agent Platform Advisor are documented here.
 - Pre-screen fast-track for M365 Copilot built-in experiences
 - Refactored to external `assets/apa.css` and `assets/apa.js`
 - OG meta tags, Clarity analytics, favicon
+
+## v1 — Initial release and iterative updates
+
+### Added
+- **Initial release** of the Agent Platform Advisor as a single-page HTML app with an interactive questionnaire, platform recommendation engine, agent structure planning, and implementation checklists
+- **Deployment options question** — new 5th assessment question: "Where and how do you want users to access your AI agent?" with four deployment channel options and corresponding scoring logic
+- **Pre-built agents section** — informational screen about Microsoft 365 Copilot pre-built agents with "Ask yourself" guidance prompts; added before the custom agent questionnaire flow
+- **Back navigation from questionnaire** — pressing Back on the first question returns to the pre-built agents section instead of being disabled
+- **OG meta tags** for social sharing (image, title, description, URL, author, publish date)
+- **Templates mention** added to Copilot Studio Lite (Agent Builder) benefits: "Templates with design guidelines and best practices"
+- **Favicon** added
+- **Footer issue link** — "If you encounter a problem, please create an issue" with link to GitHub repo
+- **"Assessment" → "Questionnaire"** label rename throughout progress bar and UI
+- **Title shortened** from "Microsoft Agent Platform Advisor" to "Agent Platform Advisor"
+- **Welcome copy revised** — heading changed to "Find the Right Microsoft Agent Platform for You"
+- **Question and option text refined** — deployment descriptions, audience labels, and scoring reasons improved
+- **Recommendation reasons expanded** — added business process automation reasoning for Azure AI Foundry suggestions
+- **Checklist styling reworked** — switched from checkboxes to disc list items; removed interactive checkbox inputs
+- **Removed Copilot Studio structure cards** for Fallback Handling and Entity Extraction
+- **"Microsoft 365 Copilot Chat" → "Microsoft 365 Copilot"** platform name
+- **Link added** to Microsoft 365 pre-built agents adoption page
+- **Major code reformat** — full HTML/CSS/JS reformatted and restructured for consistency
+- **Footer credit** linked to LinkedIn profile
+- **Image paths switched** from absolute GitHub Pages URLs to relative paths
+- **Product names updated** throughout (part of broader rename effort)
+- **AI Foundry deployment description** updated — added on-premises options, fixed double-comma typo
+- **Low customization option** copy updated to mention templates
+- **Meta description** moved from empty to full descriptive text
+- **"Copilot Studio full experience" → "Copilot Studio"** simplified name in platform cards and structure titles
+- **Foundry icon updated**
+- **Typo fix** — "development nad" → "development and" in target audience description

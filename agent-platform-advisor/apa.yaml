@@ -8,9 +8,9 @@
 ################################################################################
 
 meta:
-  version: "1.0"
+  version: "1.1"
   scale_max: 3
-  questions_count: 6
+  questions_count: 8
   platforms:
     - id: agent_builder
       label: Agent Builder
@@ -63,6 +63,94 @@ questions:
           m365_copilot: 0
           copilot_studio: 1
           foundry: 3
+
+  - id: q8
+    label: Who will use this agent?
+    purpose: External-facing is a hard constraint that affects platform eligibility
+    prompt: Will only people inside your organization use this agent, or do people outside your company (customers, partners) need access too?
+    hard_rules:
+      - condition: option in [q8b, q8c]
+        effect: >
+          Set agent_builder = 0 and m365_copilot = 0.
+          Agent Builder has no external publishing path.
+          M365 Copilot is tenant-scoped only.
+    options:
+      - id: q8a
+        label: Internal employees only — people inside our organization
+        scores:
+          agent_builder: 3
+          m365_copilot: 3
+          copilot_studio: 2
+          foundry: 1
+
+      - id: q8b
+        label: External users — customers, partners, or the public
+        scores:
+          agent_builder: 0
+          m365_copilot: 0
+          copilot_studio: 3
+          foundry: 3
+        hard_rule_trigger: true
+
+      - id: q8c
+        label: Both — internal employees and external users
+        scores:
+          agent_builder: 0
+          m365_copilot: 1
+          copilot_studio: 3
+          foundry: 2
+        hard_rule_trigger: true
+
+      - id: q8d
+        label: Not decided yet
+        scores:
+          agent_builder: 2
+          m365_copilot: 2
+          copilot_studio: 2
+          foundry: 1
+
+  - id: q4
+    label: What does this agent actually do?
+    purpose: Single strongest discriminator between Copilot Studio and Foundry
+    prompt: What kind of work should the agent handle? Pick the option closest to your scenario.
+    hard_rules:
+      - condition: option == q4d
+        effect: >
+          Set foundry = 3. Cap agent_builder and m365_copilot at 0
+          regardless of other answers.
+    options:
+      - id: q4a
+        label: Answers questions in a single exchange — Q&A, lookups, or summaries
+        scores:
+          agent_builder: 3
+          m365_copilot: 3
+          copilot_studio: 2
+          foundry: 0
+
+      - id: q4b
+        label: Holds a back-and-forth conversation and remembers context throughout
+        scores:
+          agent_builder: 1
+          m365_copilot: 2
+          copilot_studio: 3
+          foundry: 1
+
+      - id: q4c
+        label: Completes multi-step tasks — follows a process, checks multiple systems, or takes actions like submitting forms or updating records
+        scores:
+          agent_builder: 0
+          m365_copilot: 0
+          copilot_studio: 3
+          foundry: 2
+
+      - id: q4d
+        label: Manages complex work — coordinates multiple agents, handles processes that run over hours or days, or needs a custom AI approach
+        scores:
+          agent_builder: 0
+          m365_copilot: 0
+          copilot_studio: 1
+          foundry: 3
+        hard_rule_trigger: true
 
   - id: q2
     label: Where will people use this agent?
@@ -138,49 +226,6 @@ questions:
           copilot_studio: 3
           foundry: 2
 
-  - id: q4
-    label: What does this agent actually do?
-    purpose: Single strongest discriminator between Copilot Studio and Foundry
-    prompt: What kind of work should the agent handle? Pick the option closest to your scenario.
-    hard_rules:
-      - condition: option == q4d
-        effect: >
-          Set foundry = 3. Cap agent_builder and m365_copilot at 0
-          regardless of other answers.
-    options:
-      - id: q4a
-        label: Answers questions in a single exchange — Q&A, lookups, or summaries
-        scores:
-          agent_builder: 3
-          m365_copilot: 3
-          copilot_studio: 2
-          foundry: 0
-
-      - id: q4b
-        label: Holds a back-and-forth conversation and remembers context throughout
-        scores:
-          agent_builder: 1
-          m365_copilot: 2
-          copilot_studio: 3
-          foundry: 1
-
-      - id: q4c
-        label: Completes multi-step tasks — follows a process, checks multiple systems, or takes actions like submitting forms or updating records
-        scores:
-          agent_builder: 0
-          m365_copilot: 0
-          copilot_studio: 3
-          foundry: 2
-
-      - id: q4d
-        label: Manages complex work — coordinates multiple agents, handles processes that run over hours or days, or needs a custom AI approach
-        scores:
-          agent_builder: 0
-          m365_copilot: 0
-          copilot_studio: 1
-          foundry: 3
-        hard_rule_trigger: true
-
   - id: q5
     label: How much technical customization will this need?
     purpose: Distinguishes no-code → low-code → pro-code ceiling
@@ -224,50 +269,71 @@ questions:
           foundry: 3
         hard_rule_trigger: true
 
-  - id: q8
-    label: Who will use this agent?
-    purpose: External-facing is a hard constraint that affects platform eligibility
-    prompt: Will only people inside your organization use this agent, or do people outside your company (customers, partners) need access too?
-    hard_rules:
-      - condition: option in [q8b, q8c]
-        effect: >
-          Set agent_builder = 0 and m365_copilot = 0.
-          Agent Builder has no external publishing path.
-          M365 Copilot is tenant-scoped only.
+  - id: q6
+    label: How important is testing and evaluation?
+    purpose: Evaluation maturity varies dramatically across platforms
+    prompt: Will you need to formally test, evaluate, or red-team the agent before and after deployment?
     options:
-      - id: q8a
-        label: Internal employees only — people inside our organization
+      - id: q6a
+        label: Not needed — the agent is simple enough that manual spot-checking is fine
         scores:
           agent_builder: 3
-          m365_copilot: 3
-          copilot_studio: 2
+          m365_copilot: 2
+          copilot_studio: 1
+          foundry: 0
+
+      - id: q6b
+        label: Basic testing — run a set of sample questions and check the answers are good enough
+        scores:
+          agent_builder: 1
+          m365_copilot: 1
+          copilot_studio: 3
           foundry: 1
 
-      - id: q8b
-        label: External users — customers, partners, or the public
+      - id: q6c
+        label: Rigorous evaluation — automated quality scoring, groundedness checks, or regression testing on every update
         scores:
           agent_builder: 0
           m365_copilot: 0
-          copilot_studio: 3
+          copilot_studio: 2
           foundry: 3
-        hard_rule_trigger: true
 
-      - id: q8c
-        label: Both — internal employees and external users
+      - id: q6d
+        label: Advanced — adversarial red teaming, custom evaluation metrics, or continuous production monitoring
         scores:
           agent_builder: 0
-          m365_copilot: 1
-          copilot_studio: 3
-          foundry: 2
-        hard_rule_trigger: true
+          m365_copilot: 0
+          copilot_studio: 0
+          foundry: 3
 
-      - id: q8d
-        label: Not decided yet
+  - id: q7
+    label: Does the agent need to remember users over time?
+    purpose: Long-term memory is a unique Foundry capability today
+    prompt: Should the agent build up knowledge about each user across conversations — remembering preferences, past interactions, and context?
+    options:
+      - id: q7a
+        label: No — each conversation starts fresh, no need to remember anything
         scores:
-          agent_builder: 2
+          agent_builder: 3
           m365_copilot: 2
           copilot_studio: 2
+          foundry: 0
+
+      - id: q7b
+        label: Within a session — the agent should remember context during a single conversation, but can forget afterward
+        scores:
+          agent_builder: 1
+          m365_copilot: 2
+          copilot_studio: 3
           foundry: 1
+
+      - id: q7c
+        label: Across sessions — the agent should remember each user's preferences, history, and context over time
+        scores:
+          agent_builder: 0
+          m365_copilot: 0
+          copilot_studio: 1
+          foundry: 3
 
 ################################################################################
 # SCORING ENGINE
@@ -281,24 +347,24 @@ scoring:
   hard_rule_evaluation: pre_sum
 
   # Step 2 — Sum raw scores across all answered questions.
-  raw_score_max: 18  # 6 questions × max score of 3
+  raw_score_max: 24  # 8 questions × max score of 3
 
   # Step 3 — Map raw scores to recommendation strength.
   recommendation_thresholds:
-    - min: 18
+    - min: 19
       max: 24
       label: Strong fit
       description: This platform is well-aligned with your requirements across all dimensions.
-    - min: 12
-      max: 17
+    - min: 13
+      max: 18
       label: Good fit
       description: This platform meets most of your requirements with minor tradeoffs.
-    - min: 6
-      max: 11
+    - min: 7
+      max: 12
       label: Possible fit — review tradeoffs
       description: This platform can address your scenario but may require workarounds.
     - min: 0
-      max: 5
+      max: 6
       label: Not recommended
       description: This platform is unlikely to meet your requirements in this scenario.
 
@@ -333,6 +399,9 @@ recommendations:
       - Can't be shared with people outside your organization
       - Can only use data stored in Microsoft 365 (SharePoint, OneDrive, etc.)
       - Not suitable for custom logic or external system integration
+      - No evaluation or testing tools — quality assurance is manual
+      - No lifecycle management — no versioning, environments, or CI/CD
+      - Minimal observability — limited visibility into agent behavior and usage
     templates:
       - label: Career Coach
         description: Personalized career development plans, skill gap analysis, and actionable advice
@@ -433,12 +502,16 @@ recommendations:
       business processes.
     best_for:
       - Low-code makers and IT pros
-      - Agents connecting to external APIs, CRM, ERP, or databases
+      - Agents connecting to external APIs, CRM, ERP, or databases — over 1,400 pre-built connectors plus MCP server support
+      - Agent-to-agent orchestration — an agent can call other agents as tools
       - Multi-turn conversational experiences
       - Internal and external-facing deployment
+      - Built-in evaluation test sets with quality scoring and groundedness detection
     watch_out_for:
       - Complex ML pipelines or custom model training require Foundry
       - Long-running multi-agent orchestration is better served by Foundry
+      - Model selection is limited to a curated list — no bring-your-own model
+      - No per-user long-term memory or personalization
 
   foundry:
     headline: Microsoft Foundry
@@ -449,6 +522,12 @@ recommendations:
     best_for:
       - Professional developers and ML engineers
       - Using your own AI models or fine-tuning existing ones
+      - Memory as a service — per-user long-term personalization with configurable scope (user, team, or org level)
+      - Full evaluation suite — automatic eval, human eval, and adversarial red teaming
+      - Full lifecycle management — git integration, CI/CD pipelines, and native versioning as a first-class primitive
+      - OpenTelemetry and App Insights integration for end-to-end observability
+      - Agent framework that can orchestrate across both Copilot Studio and Foundry agents
+      - AI gateway for granular cost control, rate limiting, and usage policies
       - Systems where multiple agents work together and need to track shared progress
       - Strict compliance requirements (e.g., healthcare, government, or data-residency regulations)
       - Agents embedded in custom-built applications
@@ -457,3 +536,25 @@ recommendations:
       - Requires Azure expertise and development resources
       - Overkill for standard M365-native or low-code scenarios
 
+################################################################################
+# MATURITY GUIDANCE
+################################################################################
+
+maturity_guidance:
+  heading: Your platform choice will evolve
+  description: >
+    Most organizations follow a natural progression as they build confidence with AI agents.
+    The platform you start with today may not be the one you use at scale — and that's expected.
+  stages:
+    - label: Individual
+      description: Build agents for yourself to learn and improve personal productivity
+      platforms: [agent_builder]
+    - label: Team
+      description: Share agents with your immediate team to solve common problems
+      platforms: [agent_builder, m365_copilot]
+    - label: Division / Organization
+      description: Deploy agents across departments with governance, evaluation, and integration requirements
+      platforms: [copilot_studio, foundry]
+    - label: External / B2C
+      description: Expose agents to customers, partners, or the public — requires mature safety, evaluation, and operations
+      platforms: [copilot_studio, foundry]
