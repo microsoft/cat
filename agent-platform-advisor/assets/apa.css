@@ -212,7 +212,7 @@ body {
 }
 
 .step-circle.completed {
-  background-color: hsl(142, 71%, 45%);
+  background-color: #107C10;
   color: white;
 }
 
@@ -436,7 +436,7 @@ body {
 
 .option-card.selected {
   border-color: var(--primary);
-  background-color: hsl(210, 100%, 97%);
+  background-color: var(--primary-xlight);
 }
 
 .option-card:focus-visible {
@@ -588,7 +588,7 @@ body {
 }
 
 .check-icon {
-  color: #22c55e;
+  color: #107C10;
   font-size: 16px;
   margin-top: 2px;
   flex-shrink: 0;
@@ -635,15 +635,15 @@ body {
 }
 
 .next-steps-card {
-  background-color: hsl(219, 95%, 95%);
-  border: 1px solid hsl(219, 95%, 80%);
+  background-color: var(--primary-xlight);
+  border: 1px solid var(--primary-light);
   border-radius: var(--radius);
   padding: 16px;
 }
 
 .next-steps-title {
   font-weight: 600;
-  color: hsl(219, 95%, 20%);
+  color: var(--foreground);
   margin-bottom: 8px;
   display: flex;
   align-items: center;
@@ -652,7 +652,7 @@ body {
 
 .next-steps-text {
   font-size: 14px;
-  color: hsl(219, 95%, 30%);
+  color: var(--muted-foreground);
 }
 
 /* Implementation Checklist */
