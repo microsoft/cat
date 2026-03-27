@@ -67,61 +67,61 @@
     </header>
 
     <main>
-      <div class="container" style="padding-top: 32px; padding-bottom: 32px;">
+      <div class="container main-container">
         <div id="loading-section"  class="fade-in">
-          <div style="text-align:center; padding: 80px 0;">
-            <div style="font-size:48px; margin-bottom:16px;">⏳</div>
-            <p style="color: var(--muted-foreground);">Loading advisor data…</p>
+          <div class="status-section">
+            <div class="status-icon">⏳</div>
+            <p class="status-text">Loading advisor data…</p>
           </div>
         </div>
         <div id="error-section"    class="fade-in hidden">
           <div class="card">
-            <div class="card-content" style="text-align:center; padding: 48px;">
-              <div style="font-size:48px; margin-bottom:16px;">⚠️</div>
-              <h2 style="margin-bottom:12px;">Unable to load advisor</h2>
-              <p id="error-message" style="color:var(--muted-foreground); margin-bottom:24px;"></p>
+            <div class="card-content error-content">
+              <div class="status-icon">⚠️</div>
+              <h2 class="error-heading">Unable to load advisor</h2>
+              <p id="error-message" class="error-message"></p>
               <button class="btn btn-primary" onclick="boot()">Try Again</button>
             </div>
           </div>
         </div>
         <div id="welcome-section"  class="fade-in hidden"><div class="card">
-  <div class="card-content" style="text-align:center; padding: 48px 32px;">
-    <div style="width:72px;height:72px;background:var(--primary-xlight);border:1.5px solid var(--primary-light);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
+  <div class="card-content card-content--centered">
+    <div class="welcome-icon-wrapper">
       <svg width="36" height="36" viewBox="0 0 24 24" fill="var(--primary)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M12 1.5a.75.75 0 0 1 .75.75 8.25 8.25 0 0 0 8.25 8.25.75.75 0 0 1 0 1.5 8.25 8.25 0 0 0-8.25 8.25.75.75 0 0 1-1.5 0 8.25 8.25 0 0 0-8.25-8.25.75.75 0 0 1 0-1.5 8.25 8.25 0 0 0 8.25-8.25A.75.75 0 0 1 12 1.5zM5.625 15a.375.375 0 0 1 .375.375 3.375 3.375 0 0 0 3.375 3.375.375.375 0 0 1 0 .75A3.375 3.375 0 0 0 6 22.875a.375.375 0 0 1-.75 0A3.375 3.375 0 0 0 1.875 19.5a.375.375 0 0 1 0-.75A3.375 3.375 0 0 0 5.25 15.375.375.375 0 0 1 5.625 15z"/>
       </svg>
     </div>
-    <h1 style="font-size:32px; font-weight:700; margin-bottom:16px;">
+    <h1 class="welcome-heading">
       Agent Platform Advisor
     </h1>
-    <p style="color:var(--muted-foreground); font-size:16px; max-width:560px; margin: 0 auto 32px;">
+    <p class="welcome-description">
       Answer a few questions about what you're trying to build, and we'll recommend the best Microsoft platform to build it on.
     </p>
-    <div class="platform-grid" style="margin-bottom:32px; text-align:left;">
+    <div class="platform-grid">
       <div class="platform-preview">
         <div class="platform-preview-icon">
-          <img src="../images/m365-copilot-logo.png" alt="Microsoft 365 Copilot" style="width:32px;height:32px;">
+          <img src="../images/m365-copilot-logo.png" alt="Microsoft 365 Copilot" class="platform-preview-img">
         </div>
         <h3 class="platform-preview-title">Microsoft 365 Copilot</h3>
         <p class="platform-preview-desc">AI assistants already built into Microsoft 365 apps like Teams, Outlook, and SharePoint — ready to use today</p>
       </div>
       <div class="platform-preview">
         <div class="platform-preview-icon">
-          <img src="../images/copilot.png" alt="Agent Builder" style="width:32px;height:32px;">
+          <img src="../images/copilot.png" alt="Agent Builder" class="platform-preview-img">
         </div>
         <h3 class="platform-preview-title">Agent Builder</h3>
         <p class="platform-preview-desc">Create simple agents in minutes without writing code, using your existing Microsoft 365 files and data</p>
       </div>
       <div class="platform-preview">
         <div class="platform-preview-icon">
-          <img src="../images/copilot-studio.png" alt="Copilot Studio" style="width:32px;height:32px;">
+          <img src="../images/copilot-studio.png" alt="Copilot Studio" class="platform-preview-img">
         </div>
         <h3 class="platform-preview-title">Copilot Studio</h3>
         <p class="platform-preview-desc">Build agents that connect to other business systems, automate processes, and work across websites, Teams, and more</p>
       </div>
       <div class="platform-preview">
         <div class="platform-preview-icon">
-          <img src="../images/foundry.svg" alt="Microsoft Foundry" style="width:32px;height:32px;">
+          <img src="../images/foundry.svg" alt="Microsoft Foundry" class="platform-preview-img">
         </div>
         <h3 class="platform-preview-title">Microsoft Foundry</h3>
         <p class="platform-preview-desc">A developer platform for building highly customized agents with your own AI models and full control over the technology stack</p>
@@ -133,11 +133,11 @@
   </div>
 </div></div>
         <div id="prescreen-section" class="fade-in hidden"><div class="card">
-  <div class="card-content" style="padding: 48px 32px;">
-    <h2 style="font-size:24px; font-weight:600; margin-bottom:8px;">
+  <div class="card-content card-content--centered">
+    <h2 class="prescreen-heading">
       Where do you want to start?
     </h2>
-    <p style="color:var(--muted-foreground); margin-bottom:32px;">
+    <p class="prescreen-description">
       This helps us tailor the recommendation for you.
     </p>
     <div class="options-list">
@@ -168,10 +168,9 @@
   <div class="card-content">
     <div id="question-counter" class="question-counter"></div>
     <h2 class="question-title" id="question-title"></h2>
-    <p class="question-subtitle" id="question-subtitle" style="color:var(--muted-foreground);
-       margin-bottom:24px;"></p>
+    <p class="question-subtitle" id="question-subtitle"></p>
     <div class="options-list" id="options-list"></div>
-    <div class="center" style="margin-top:32px; gap:12px;">
+    <div class="center assessment-nav">
       <button class="btn btn-ghost" id="prev-btn">
         <span class="icon icon-chevron-left"></span> Back
       </button>
@@ -187,15 +186,15 @@
           <div id="rec-second-label" class="second-label hidden"></div>
           <div id="rec-second-card"></div>
           <div id="rec-maturity-guidance" class="hidden"></div>
-          <div id="rec-fasttrack-prompt" class="hidden" style="margin-top:16px; text-align:center;">
-            <p style="color:var(--muted-foreground); margin-bottom:12px;">
+          <div id="rec-fasttrack-prompt" class="hidden fasttrack-prompt">
+            <p class="fasttrack-text">
               If you need more customization, try the full assessment
             </p>
             <button class="btn btn-secondary" onclick="startFullAssessment()">
               Take the Full Assessment
             </button>
           </div>
-          <div class="center" style="margin-top:24px; gap:12px;">
+          <div class="center rec-actions">
             <button class="btn btn-ghost" onclick="restart()">
               ↩ Start Over
             </button>

@@ -181,6 +181,116 @@ body {
   padding: 32px;
 }
 
+.card-content--centered {
+  text-align: center;
+  padding: 48px 32px;
+}
+
+/* Main container spacing */
+.main-container {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+/* Loading / Error states */
+.status-section {
+  text-align: center;
+  padding: 80px 0;
+}
+
+.status-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.status-text {
+  color: var(--muted-foreground);
+}
+
+.error-content {
+  text-align: center;
+  padding: 48px;
+}
+
+.error-heading {
+  margin-bottom: 12px;
+}
+
+.error-message {
+  color: var(--muted-foreground);
+  margin-bottom: 24px;
+}
+
+/* Welcome hero */
+.welcome-icon-wrapper {
+  width: 72px;
+  height: 72px;
+  background: var(--primary-xlight);
+  border: 1.5px solid var(--primary-light);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.welcome-heading {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.welcome-description {
+  color: var(--muted-foreground);
+  font-size: 16px;
+  max-width: 560px;
+  margin: 0 auto 32px;
+}
+
+.platform-preview-img {
+  width: 32px;
+  height: 32px;
+}
+
+/* Prescreen */
+.prescreen-heading {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.prescreen-description {
+  color: var(--muted-foreground);
+  margin-bottom: 32px;
+}
+
+/* Assessment navigation */
+.question-subtitle {
+  color: var(--muted-foreground);
+  margin-bottom: 24px;
+}
+
+.assessment-nav {
+  margin-top: 32px;
+  gap: 12px;
+}
+
+/* Recommendation actions */
+.rec-actions {
+  margin-top: 24px;
+  gap: 12px;
+}
+
+.fasttrack-prompt {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.fasttrack-text {
+  color: var(--muted-foreground);
+  margin-bottom: 12px;
+}
+
 .fade-in {
   animation: fadeIn 0.3s ease-out;
 }
@@ -201,6 +311,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
   margin-bottom: 32px;
+  text-align: left;
 }
 
 .platform-preview {
