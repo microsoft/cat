@@ -299,6 +299,7 @@ body {
 }
 
 .platform-preview-title {
+  font-size: 16px;
   font-weight: 600;
   color: var(--accent-foreground);
   margin-bottom: 4px;
