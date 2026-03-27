@@ -1,6 +1,6 @@
 ################################################################################
 # Microsoft Agent Platform Advisor — Scoring Matrix
-# Platforms: Agent Builder (agent_builder), M365 Copilot (m365_copilot),
+# Platforms: Agent Builder (agent_builder), Microsoft 365 Copilot (m365_copilot),
 #            Copilot Studio (copilot_studio), Microsoft Foundry (foundry)
 #
 # Score scale: 0 = not a fit · 1 = weak signal · 2 = moderate · 3 = strong
@@ -15,7 +15,7 @@ meta:
     - id: agent_builder
       label: Agent Builder
     - id: m365_copilot
-      label: M365 Copilot
+      label: Microsoft 365 Copilot
     - id: copilot_studio
       label: Copilot Studio
     - id: foundry
@@ -73,7 +73,7 @@ questions:
         effect: >
           Set agent_builder = 0 and m365_copilot = 0.
           Agent Builder has no external publishing path.
-          M365 Copilot is tenant-scoped only.
+          Microsoft 365 Copilot is tenant-scoped only.
     options:
       - id: q8a
         label: Internal employees only — people inside our organization
@@ -376,9 +376,9 @@ scoring:
       - platforms: [copilot_studio, foundry]
         rationale: Build in Copilot Studio, extend with custom code in Foundry.
       - platforms: [m365_copilot, copilot_studio]
-        rationale: M365 Copilot for end users, Copilot Studio for customization and extension.
+        rationale: Microsoft 365 Copilot for end users, Copilot Studio for customization and extension.
       - platforms: [agent_builder, m365_copilot]
-        rationale: Agent Builder for M365-native agents, M365 Copilot for broader extensibility.
+        rationale: Agent Builder for Microsoft 365-native agents, Microsoft 365 Copilot for broader extensibility.
 
 ################################################################################
 # RECOMMENDATION COPY
@@ -392,7 +392,7 @@ recommendations:
       The right starting point for business users who want to build
       agents directly inside Microsoft 365 without writing code.
     best_for:
-      - No-code creators working within M365
+      - No-code creators working within Microsoft 365
       - Internal-only agents grounded in SharePoint or OneDrive
       - Simple Q&A, summarization, or lookup scenarios
     watch_out_for:
@@ -444,13 +444,13 @@ recommendations:
         url: https://learn.microsoft.com/microsoft-365/copilot/extensibility/agent-template-writing-coach
 
   m365_copilot:
-    headline: M365 Copilot
+    headline: Microsoft 365 Copilot
     summary: >
       Best when the built-in Copilot features in Microsoft 365 already do most
       of what you need, with some customization.
     best_for:
       - Extending Copilot within Teams, Outlook, and SharePoint
-      - Scenarios grounded in M365 content
+      - Scenarios grounded in Microsoft 365 content
       - IT pros and makers comfortable with Microsoft 365 admin
     watch_out_for:
       - Only available to people inside your organization — can't be shared externally
@@ -476,7 +476,7 @@ recommendations:
         description: Meeting facilitation, real-time notes, and action items in Teams
         url: https://learn.microsoft.com/microsoftteams/facilitator-teams
       - label: Researcher Agent
-        description: Synthesizes information from the web and M365 to produce in-depth research and content
+        description: Synthesizes information from the web and Microsoft 365 to produce in-depth research and content
         url: https://techcommunity.microsoft.com/blog/microsoft365copilotblog/researcher-agent-in-microsoft-365-copilot/4397186
       - label: Analyst Agent
         description: Transforms complex data into clear insights, charts, and visualizations using Python
@@ -534,7 +534,7 @@ recommendations:
     watch_out_for:
       - Higher implementation complexity and time-to-value
       - Requires Azure expertise and development resources
-      - Overkill for standard M365-native or low-code scenarios
+      - Overkill for standard Microsoft 365-native or low-code scenarios
 
 ################################################################################
 # MATURITY GUIDANCE
