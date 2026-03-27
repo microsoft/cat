@@ -350,7 +350,7 @@ body {
 }
 
 .question-prompt h3 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--foreground);
   margin-bottom: 12px;
@@ -508,7 +508,7 @@ body {
 }
 
 .question-counter {
-  font-size: 13px;
+  font-size: 12px;
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   color: var(--muted-foreground);
@@ -664,7 +664,7 @@ body {
 
 /* Implementation Checklist */
 .checklist-title {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 24px;
   color: var(--foreground);
@@ -729,7 +729,7 @@ body {
 
 /* Agent Structure */
 .structure-title {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 24px;
   color: var(--foreground);
@@ -811,7 +811,7 @@ body {
 }
 
 .component-checkbox label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--foreground);
   cursor: pointer;
@@ -1077,7 +1077,7 @@ body {
 
   .checklist-title,
   .structure-title {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .platform-grid {
@@ -1123,7 +1123,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
+  font-size: 12px;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -1182,7 +1182,7 @@ body {
   object-fit: contain;
 }
 .rec-platform-name {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--foreground);
 }
@@ -1231,7 +1231,7 @@ body {
   text-align: center;
 }
 .second-label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1242,7 +1242,7 @@ body {
   border-color: var(--border-subtle);
   background: var(--muted);
 }
-.rec-card.secondary .rec-platform-name { font-size: 18px; }
+.rec-card.secondary .rec-platform-name { font-size: 20px; }
 
 /* ── Maturity guidance ── */
 .maturity-guidance {
@@ -1289,7 +1289,7 @@ body {
   margin-bottom: 8px;
 }
 .maturity-stage p {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--foreground);
   margin: 0 0 8px 0;
   line-height: 1.4;
