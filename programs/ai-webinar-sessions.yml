@@ -318,3 +318,9 @@ sessions:
     title: "Building Enterprise‑Grade Agents with Cloud PC Pools in Copilot Studio"
     description: "In this session, we will explore how Cloud PC Pools, powered by Windows 365 for Agents, unlock secure, enterprise - ready UI automation inside Microsoft Copilot Studio." 
     register_link: "https://aka.ms/AIWebinars/CloudPCPools"
+  - date: "2026-04-29"
+    time: "9:00 AM PT"
+    title: "AI Agents in Action: Extending Microsoft 365 Copilot with SAP & Adobe"
+    description: "Discover how 3P Copilot AI agents are transforming the way you work in Microsoft 365. Join us to see SAP Joule and Adobe Marketing Agent for Microsoft 365 Copilot in action, bringing enterprise business insights, marketing intelligence, and automated workflows directly into the tools you use every day"
+    register_link: "https://aka.ms/AIWebinars/3PAgents"    
+  
