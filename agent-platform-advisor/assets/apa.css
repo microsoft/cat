@@ -181,70 +181,6 @@ body {
   padding: 32px;
 }
 
-/* Progress Indicator */
-.progress-indicator {
-  margin-bottom: 32px;
-  text-align: center;
-}
-
-.progress-steps {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-.progress-step {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.step-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  transition: all 0.3s;
-}
-
-.step-circle.active {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-}
-
-.step-circle.completed {
-  background-color: #107C10;
-  color: white;
-}
-
-.step-circle.pending {
-  background-color: var(--muted);
-  color: var(--muted-foreground);
-}
-
-.step-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--muted-foreground);
-}
-
-.step-connector {
-  width: 64px;
-  height: 2px;
-  background-color: var(--border);
-}
-
-/* Main Content */
-.main-content {
-  padding: 32px 0;
-}
-
 .fade-in {
   animation: fadeIn 0.3s ease-out;
 }
@@ -258,31 +194,6 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Welcome Section */
-.welcome-section {
-  text-align: center;
-}
-
-.welcome-icon {
-  font-size: 64px;
-  color: var(--primary);
-  margin-bottom: 16px;
-}
-
-.welcome-title {
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 16px;
-  color: var(--foreground);
-}
-
-.welcome-subtitle {
-  font-size: 18px;
-  color: var(--muted-foreground);
-  max-width: 768px;
-  margin: 0 auto 32px auto;
 }
 
 .platform-grid {
@@ -317,94 +228,7 @@ body {
   color: var(--muted-foreground);
 }
 
-/* Pre-built Agents Section */
-.prebuilt-agents-content {
-  max-width: 768px;
-  margin: 0 auto;
-}
-
-.section-title {
-  font-size: 32px;
-  font-weight: bold;
-  color: var(--foreground);
-  margin-bottom: 24px;
-  text-align: center;
-}
-
-.prebuilt-agents-text {
-  text-align: left;
-  line-height: 1.6;
-  margin-bottom: 32px;
-}
-
-.prebuilt-agents-text p {
-  margin-bottom: 16px;
-  color: var(--foreground);
-}
-
-.question-prompt {
-  background-color: var(--muted);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin: 24px 0;
-}
-
-.question-prompt h3 {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--foreground);
-  margin-bottom: 12px;
-}
-
-.question-list {
-  margin: 0;
-  padding-left: 24px;
-  list-style-type: disc;
-}
-
-.question-list li {
-  margin-bottom: 8px;
-  color: var(--foreground);
-  line-height: 1.4;
-}
-
-.prebuilt-agents-navigation {
-  text-align: center;
-  margin-top: 32px;
-}
-
-.nav-question {
-  margin-bottom: 24px;
-}
-
-.nav-question h3 {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--foreground);
-}
-
-.nav-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-@media (min-width: 640px) {
-  .nav-buttons {
-    flex-direction: row;
-    justify-content: center;
-    max-width: none;
-  }
-}
-
 /* Question Styles */
-.question-card {
-  margin-bottom: 24px;
-}
-
 .question-title {
   font-size: 32px;
   font-weight: bold;
@@ -500,72 +324,12 @@ body {
   color: var(--muted-foreground);
 }
 
-/* Navigation */
-.question-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .question-counter {
   font-size: 12px;
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   color: var(--muted-foreground);
   margin-bottom: 8px;
-}
-
-/* Recommendation Styles */
-.recommendation-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.recommendation-icon {
-  font-size: 64px;
-  color: #eab308;
-  margin-bottom: 16px;
-}
-
-.recommendation-title {
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 16px;
-  color: var(--foreground);
-}
-
-.platform-card-large {
-  background-color: var(--accent);
-  border-radius: var(--radius);
-  padding: 24px;
-  margin-bottom: 24px;
-  text-align: center;
-}
-
-.platform-icon-large {
-  width: 64px;
-  height: 64px;
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 24px;
-  margin: 0 auto 16px auto;
-}
-
-.platform-name {
-  font-size: 32px;
-  font-weight: bold;
-  color: var(--foreground);
-  margin-bottom: 8px;
-}
-
-.platform-description {
-  color: var(--muted-foreground);
-  margin-bottom: 24px;
 }
 
 .benefits-card {
@@ -966,71 +730,11 @@ body {
   font-style: normal;
 }
 
-.icon-bot::before {
-  content: "🤖";
-}
-.icon-lightbulb::before {
-  content: "💡";
-}
-.icon-check::before {
-  content: "✅";
-}
 .icon-chevron-right::before {
   content: "▶";
 }
 .icon-chevron-left::before {
   content: "◀";
-}
-.icon-trending-up::before {
-  content: "📈";
-}
-.icon-info::before {
-  content: "ℹ️";
-}
-.icon-checklist::before {
-  content: "✅";
-}
-.icon-rocket::before {
-  content: "🚀";
-}
-.icon-network::before {
-  content: "🔗";
-}
-.icon-settings::before {
-  content: "⚙️";
-}
-.icon-file::before {
-  content: "📄";
-}
-.icon-database::before {
-  content: "💾";
-}
-.icon-wrench::before {
-  content: "🔧";
-}
-.icon-branch::before {
-  content: "🌿";
-}
-.icon-link::before {
-  content: "🔗";
-}
-.icon-message::before {
-  content: "💬";
-}
-.icon-bell::before {
-  content: "🔔";
-}
-.icon-users::before {
-  content: "👥";
-}
-.icon-cog::before {
-  content: "⚙️";
-}
-.icon-download::before {
-  content: "⬇️";
-}
-.icon-restart::before {
-  content: "🔄";
 }
 
 /* Responsive Design */
@@ -1057,21 +761,7 @@ body {
     width: 16px;
   }
 
-  .progress-steps {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .step-connector {
-    display: none;
-  }
-
-  .welcome-title {
-    font-size: 32px;
-  }
-
-  .question-title,
-  .recommendation-title {
+  .question-title {
     font-size: 24px;
   }
 
@@ -1112,8 +802,7 @@ body {
 
   .btn,
   .option-card,
-  .option-radio-outer,
-  .step-circle {
+  .option-radio-outer {
     transition: none;
   }
 }
