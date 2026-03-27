@@ -358,7 +358,10 @@ function renderQuestion() {
   question.options.forEach(opt => {
     const div = document.createElement('div');
     div.className = 'option-card' + (answers[question.id] === opt.id ? ' selected' : '');
+    div.setAttribute('role', 'button');
+    div.setAttribute('tabindex', '0');
     const isSelected = answers[question.id] === opt.id;
+    div.setAttribute('aria-pressed', String(isSelected));
     div.innerHTML = `
       <div class="option-radio-indicator" aria-hidden="true">
         <div class="option-radio-outer">${isSelected ? '<div class="option-radio-inner"></div>' : ''}</div>
@@ -366,9 +369,13 @@ function renderQuestion() {
       <div class="option-content">
         <div class="option-label">${opt.label}</div>
       </div>`;
-    div.addEventListener('click', () => {
+    const select = () => {
       answers[question.id] = opt.id;
-      renderQuestion(); // re-render to show selection
+      renderQuestion();
+    };
+    div.addEventListener('click', select);
+    div.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
     });
     optionsList.appendChild(div);
   });
