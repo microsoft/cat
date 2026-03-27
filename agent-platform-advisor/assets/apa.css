@@ -918,6 +918,53 @@ body {
   }
 }
 
+/* Accordion (details/summary) */
+.rec-accordion {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+}
+.rec-accordion[open] {
+  border-color: var(--border);
+}
+.rec-accordion-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.rec-accordion-trigger::-webkit-details-marker {
+  display: none;
+}
+.rec-accordion-trigger .rec-section-title {
+  margin-bottom: 0;
+}
+.rec-accordion-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-xlight);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+.rec-accordion-chevron {
+  margin-left: auto;
+  color: var(--muted-foreground);
+  transition: transform 0.2s ease-out;
+  flex-shrink: 0;
+}
+.rec-accordion[open] .rec-accordion-chevron {
+  transform: rotate(180deg);
+}
+.rec-accordion .rec-list {
+  padding: 0 16px 16px;
+  margin-bottom: 0;
+}
+
 /* Progress Bar */
 .progress-bar {
   display: flex;

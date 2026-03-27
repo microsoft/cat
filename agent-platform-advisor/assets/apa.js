@@ -230,13 +230,19 @@ function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge)
     }).join('')}</ul>` : '';
 
   const templatesHtml = (rec.templates || []).length > 0 ? `
-    <div class="rec-section-title">Available Templates</div>
-    <ul class="rec-list">${rec.templates.map(t => {
+    <details class="rec-accordion">
+      <summary class="rec-accordion-trigger">
+        <span class="rec-section-title">Available Templates</span>
+        <span class="rec-accordion-count">${rec.templates.length}</span>
+        <svg class="rec-accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </summary>
+      <ul class="rec-list">${rec.templates.map(t => {
       const label = t.url
         ? `<a href="${t.url}" target="_blank" rel="noopener noreferrer">${t.label}</a>`
         : t.label;
       return `<li><strong>${label}</strong> — ${t.description}</li>`;
-    }).join('')}</ul>` : '';
+    }).join('')}</ul>
+    </details>` : '';
 
   return `
     <div class="rec-card ${isPrimary ? 'primary' : 'secondary'}">
