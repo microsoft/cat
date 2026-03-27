@@ -4,6 +4,26 @@ All notable changes to the Agent Platform Advisor are documented here.
 
 ## [Unreleased] — apa-v2 branch
 
+### Fixed (design review — round 2)
+- **Question counter uses Geist Mono** — CSS class selector (`.question-counter`) didn't match the HTML `id` attribute; added class and moved inline styles to stylesheet (FINDING-001)
+- **Option cards keyboard-accessible** — prescreen and assessment option cards now have `role="button"`, `tabindex="0"`, and Enter/Space keyboard handlers; assessment options also expose `aria-pressed` (FINDING-002)
+- **Mobile header no longer cramped** — logo text shrinks to 16px at 375px, progress bar gets smaller font and shorter connectors to prevent wrapping to 3 lines (FINDING-003)
+- **Platform preview titles explicit** — H3 titles set to 16px (body-lg token) instead of relying on browser default 18.72px (FINDING-004)
+- **Color system unified** — replaced 4 raw `hsl()` / Tailwind color values with design system tokens: step-completed green → `#107C10`, selected option bg → `var(--primary-xlight)`, check icon → `#107C10`, next-steps card → `var(--primary-xlight/light)` (FINDING-005)
+- **Fade-in easing corrected** — changed from `ease-in` (sluggish entry) to `ease-out` per DESIGN.md enter animation spec (FINDING-006)
+- **Card shadow matches spec** — updated from Tailwind's `shadow-sm` to DESIGN.md's `shadow-md` (`0 2px 8px`) (FINDING-007)
+- **Border radius 4-tier system** — expanded single `--radius: 8px` to `--radius-sm` (4px), `--radius` (8px), `--radius-lg` (12px), `--radius-full` (9999px) per DESIGN.md; cards use lg, buttons/inputs use sm, badges use full (D-005)
+- **Badge colors use semantic tokens** — replaced Tailwind hex values with new `--success`, `--success-bg`, `--warning`, `--warning-bg` CSS variables mapped to DESIGN.md semantic palette (D-004)
+- **Recommendation spacing on 4px grid** — snapped 6 off-grid values (6px → 8px, 14px → 16px, 28px → 32px) to the 4px base unit (D-003)
+- **Type scale normalized** — snapped all font sizes to the 7-token scale: 13px → 12px (caption), 18px → 20px (subhead), 22px → 24px (heading), 28px → 24px (heading) (D-002)
+- **DESIGN.md type scale updated** — question titles intentionally use display (32px) not subhead; spec updated to match implementation (D-001)
+
+### Removed
+- **313 lines of dead v1 CSS** — 38 unused class definitions including v1 welcome section, v1 progress indicator (step-circle/label/connector), v1 recommendation styles, pre-built agents section, 18 unused icon classes, and their dead responsive/motion overrides (D-006)
+
+### Changed
+- **Zero inline styles** — migrated all 20+ `style=` attributes from `index.html` to named CSS classes (`main-container`, `status-section`, `welcome-icon-wrapper`, `welcome-heading`, `prescreen-heading`, `assessment-nav`, `rec-actions`, etc.); HTML now has 0 inline styles (D-007)
+
 ### Added
 - **Two new assessment questions** — "How important is testing and evaluation?" (Q6) and "Does the agent need to remember users over time?" (Q7), bringing the total to 8 scored questions
 - **Maturity guidance panel** on the results page — shows a four-stage progression (Individual → Team → Division → External) with the recommended platform's stages highlighted; content driven by new `maturity_guidance` section in `apa.yaml`
