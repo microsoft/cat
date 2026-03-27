@@ -1131,7 +1131,7 @@ body {
 .progress-step {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   color: var(--muted-foreground);
   font-weight: 500;
 }
@@ -1163,7 +1163,7 @@ body {
 .rec-card {
   border: 2px solid var(--border);
   border-radius: var(--radius);
-  padding: 28px;
+  padding: 32px;
   margin-bottom: 16px;
   background: var(--card);
 }
@@ -1215,7 +1215,7 @@ body {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   margin-bottom: 16px;
 }
 .rec-list li::before { content: "• "; color: var(--primary); }
@@ -1224,7 +1224,7 @@ body {
   background: var(--accent);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 14px 20px;
+  padding: 16px 20px;
   margin-bottom: 16px;
   font-size: 14px;
   color: var(--accent-foreground);
@@ -1270,7 +1270,7 @@ body {
   gap: 12px;
 }
 .maturity-stage {
-  padding: 14px;
+  padding: 16px;
   background: var(--muted);
   border-radius: var(--radius);
   border: 1px solid var(--border-subtle);
@@ -1286,7 +1286,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--primary);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .maturity-stage p {
   font-size: 13px;
