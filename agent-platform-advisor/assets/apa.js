@@ -221,13 +221,19 @@ function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge)
   const bestFor = (rec.best_for || []).map(f => `<li>${f}</li>`).join('');
   const watchOut = (rec.watch_out_for || []).map(f => `<li>${f}</li>`).join('');
   const firstPartyHtml = (rec.first_party_agents || []).length > 0 ? `
-    <div class="rec-section-title">Available 1st Party Copilot Agents</div>
-    <ul class="rec-list">${rec.first_party_agents.map(a => {
+    <details class="rec-accordion">
+      <summary class="rec-accordion-trigger">
+        <span class="rec-section-title">Available 1st Party Copilot Agents</span>
+        <span class="rec-accordion-count">${rec.first_party_agents.length}</span>
+        <svg class="rec-accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </summary>
+      <ul class="rec-list">${rec.first_party_agents.map(a => {
       const label = a.url
         ? `<a href="${a.url}" target="_blank" rel="noopener noreferrer">${a.label}</a>`
         : a.label;
       return `<li><strong>${label}</strong> — ${a.description}</li>`;
-    }).join('')}</ul>` : '';
+    }).join('')}</ul>
+    </details>` : '';
 
   const templatesHtml = (rec.templates || []).length > 0 ? `
     <details class="rec-accordion">
