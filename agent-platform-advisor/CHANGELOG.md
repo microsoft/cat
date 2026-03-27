@@ -55,6 +55,7 @@ All notable changes to the Agent Platform Advisor are documented here.
 ## v1 — Initial release and iterative updates
 
 ### Added
+
 - **Initial release** of the Agent Platform Advisor as a single-page HTML app with an interactive questionnaire, platform recommendation engine, agent structure planning, and implementation checklists
 - **Deployment options question** — new 5th assessment question: "Where and how do you want users to access your AI agent?" with four deployment channel options and corresponding scoring logic
 - **Pre-built agents section** — informational screen about Microsoft 365 Copilot pre-built agents with "Ask yourself" guidance prompts; added before the custom agent questionnaire flow
