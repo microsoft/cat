@@ -28,9 +28,9 @@
 
 | Token    | Size  | Weight | Use                                  |
 |----------|-------|--------|--------------------------------------|
-| display  | 32px  | 700    | Welcome screen hero heading          |
+| display  | 32px  | 700    | Welcome hero heading, question text  |
 | heading  | 24px  | 600/700| Results heading, section titles      |
-| subhead  | 20px  | 600    | Question text                        |
+| subhead  | 20px  | 600    | Subsection headings                  |
 | body-lg  | 16px  | 400    | Welcome description, important body  |
 | body     | 14px  | 400    | Standard body, option descriptions   |
 | caption  | 12px  | 400    | Metadata, hints, secondary info      |
