@@ -28,6 +28,10 @@
   /* Semantic */
   --destructive: #A4262C;
   --destructive-foreground: #FFFFFF;
+  --success: #107C10;
+  --success-bg: #DFF6DD;
+  --warning: #C19C00;
+  --warning-bg: #FFF4CE;
 
   /* UI */
   --border: #D1D1D1;
@@ -1190,10 +1194,10 @@ body {
   font-weight: 600;
   margin-left: 8px;
 }
-.badge-strong   { background: #dcfce7; color: #15803d; }
-.badge-good     { background: #dbeafe; color: #1d4ed8; }
-.badge-possible { background: #fef9c3; color: #a16207; }
-.badge-not      { background: #f1f5f9; color: #64748b; }
+.badge-strong   { background: var(--success-bg); color: var(--success); }
+.badge-good     { background: var(--primary-xlight); color: var(--primary); }
+.badge-possible { background: var(--warning-bg); color: var(--warning); }
+.badge-not      { background: var(--muted); color: var(--muted-foreground); }
 .rec-summary {
   color: var(--muted-foreground);
   margin-bottom: 20px;
