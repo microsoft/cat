@@ -4,6 +4,9 @@ All notable changes to the Agent Platform Advisor are documented here.
 
 ## [Unreleased] — apa-v2 branch
 
+### Added
+- **Platform resource links** — each recommendation card now links to the corresponding page on microsoft.github.io/agent-resources (Copilot Studio, Foundry, M365 Copilot, Agent Builder). URLs are driven by `resources_url` in apa.yaml.
+
 ### Fixed (design review — round 2)
 - **Question counter uses Geist Mono** — CSS class selector (`.question-counter`) didn't match the HTML `id` attribute; added class and moved inline styles to stylesheet (FINDING-001)
 - **Option cards keyboard-accessible** — prescreen and assessment option cards now have `role="button"`, `tabindex="0"`, and Enter/Space keyboard handlers; assessment options also expose `aria-pressed` (FINDING-002)

@@ -1050,6 +1050,20 @@ body {
   margin-bottom: 20px;
   line-height: 1.6;
 }
+.rec-resources-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+.rec-resources-link:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
 .rec-section-title {
   font-size: 14px;
   font-weight: 600;

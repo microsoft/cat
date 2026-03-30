@@ -218,6 +218,11 @@ function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge)
     <div class="rec-section-title">Why this was recommended</div>
     <ul class="rec-list">${factors.map(f => `<li>${f}</li>`).join('')}</ul>` : '';
 
+  const resourcesHtml = rec.resources_url
+    ? `<a class="rec-resources-link" href="${rec.resources_url}" target="_blank" rel="noopener noreferrer">
+        Explore ${rec.headline} resources →</a>`
+    : '';
+
   const bestFor = (rec.best_for || []).map(f => `<li>${f}</li>`).join('');
   const watchOut = (rec.watch_out_for || []).map(f => `<li>${f}</li>`).join('');
   const firstPartyHtml = (rec.first_party_agents || []).length > 0 ? `
@@ -259,6 +264,7 @@ function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge)
         </div>
       </div>
       <p class="rec-summary">${rec.summary}</p>
+      ${resourcesHtml}
       ${factorsHtml}
       <div class="rec-section-title">Best for</div>
       <ul class="rec-list">${bestFor}</ul>

@@ -388,6 +388,7 @@ recommendations:
 
   agent_builder:
     headline: Agent Builder
+    resources_url: https://microsoft.github.io/agent-resources/m365-copilot/
     summary: >
       The right starting point for business users who want to build
       agents directly inside Microsoft 365 without writing code.
@@ -445,6 +446,7 @@ recommendations:
 
   m365_copilot:
     headline: Microsoft 365 Copilot
+    resources_url: https://microsoft.github.io/agent-resources/m365-copilot/
     summary: >
       Best when the built-in Copilot features in Microsoft 365 already do most
       of what you need, with some customization.
@@ -496,6 +498,7 @@ recommendations:
 
   copilot_studio:
     headline: Copilot Studio
+    resources_url: https://microsoft.github.io/agent-resources/copilot-studio/
     summary: >
       The most flexible option for building agents without heavy coding —
       connect to outside systems, deploy to websites or Teams, and automate
@@ -515,6 +518,7 @@ recommendations:
 
   foundry:
     headline: Microsoft Foundry
+    resources_url: https://microsoft.github.io/agent-resources/microsoft-foundry/
     summary: >
       The right choice when your team needs full technical control — bring your
       own AI models, manage complex multi-agent systems, or meet strict
