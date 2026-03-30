@@ -100,6 +100,43 @@ questions:
           copilot_studio: 2
           foundry: 1
 
+  - id: q2
+    label: Where will people use this agent?
+    purpose: Deployment surface is often a hard constraint
+    prompt: Think about where users will actually open and interact with the agent day-to-day.
+    options:
+      - id: q2a
+        label: Inside Microsoft 365 apps — Teams, Copilot, SharePoint, or Outlook
+        scores:
+          agent_builder: 3
+          m365_copilot: 3
+          copilot_studio: 2
+          foundry: 0
+
+      - id: q2b
+        label: In a custom app — a website or mobile app your team builds
+        scores:
+          agent_builder: 0
+          m365_copilot: 0
+          copilot_studio: 3
+          foundry: 2
+
+      - id: q2c
+        label: Running automatically in the background — triggered by events, not by a person chatting with it
+        scores:
+          agent_builder: 0
+          m365_copilot: 0
+          copilot_studio: 2
+          foundry: 3
+
+      - id: q2d
+        label: Multiple places, or not decided yet
+        scores:
+          agent_builder: 1
+          m365_copilot: 1
+          copilot_studio: 3
+          foundry: 2
+
   - id: q4
     label: What does this agent actually do?
     purpose: Single strongest discriminator between Copilot Studio and Foundry
@@ -142,43 +179,6 @@ questions:
           copilot_studio: 1
           foundry: 3
         hard_rule_trigger: true
-
-  - id: q2
-    label: Where will people use this agent?
-    purpose: Deployment surface is often a hard constraint
-    prompt: Think about where users will actually open and interact with the agent day-to-day.
-    options:
-      - id: q2a
-        label: Inside Microsoft 365 apps — Teams, Copilot, SharePoint, or Outlook
-        scores:
-          agent_builder: 3
-          m365_copilot: 3
-          copilot_studio: 2
-          foundry: 0
-
-      - id: q2b
-        label: In a custom app — a website or mobile app your team builds
-        scores:
-          agent_builder: 0
-          m365_copilot: 0
-          copilot_studio: 3
-          foundry: 2
-
-      - id: q2c
-        label: Running automatically in the background — triggered by events, not by a person chatting with it
-        scores:
-          agent_builder: 0
-          m365_copilot: 0
-          copilot_studio: 2
-          foundry: 3
-
-      - id: q2d
-        label: Multiple places, or not decided yet
-        scores:
-          agent_builder: 1
-          m365_copilot: 1
-          copilot_studio: 3
-          foundry: 2
 
   - id: q3
     label: What data does the agent need to access?
