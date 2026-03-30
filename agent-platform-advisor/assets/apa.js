@@ -69,7 +69,6 @@ const HARD_RULES = {
   q5d: { zero: ['agent_builder', 'm365_copilot', 'copilot_studio'] },
   q6c: { zero: ['agent_builder', 'm365_copilot'] },
   q8b: { zero: ['agent_builder', 'm365_copilot'] },
-  q8c: { zero: ['agent_builder', 'm365_copilot'] },
 };
 
 // Returns { platformId: true } for each platform that must be zeroed
@@ -131,7 +130,6 @@ const HARD_RULE_LABELS = {
   q5d: 'Full infrastructure control selected — Foundry is the only viable platform',
   q6c: 'Strict compliance (sovereign cloud / regulatory) — Foundry required',
   q8b: 'External user audience — Agent Builder and M365 Copilot cannot publish externally',
-  q8c: 'Mixed audience (internal + external) — Agent Builder and M365 Copilot cannot publish externally',
 };
 
 // Returns up to 3 bullet strings summarising key scoring factors (or disqualifying rules) for the given platform

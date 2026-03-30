@@ -92,15 +92,6 @@ questions:
           foundry: 3
         hard_rule_trigger: true
 
-      - id: q8c
-        label: Both — internal employees and external users
-        scores:
-          agent_builder: 0
-          m365_copilot: 1
-          copilot_studio: 3
-          foundry: 2
-        hard_rule_trigger: true
-
       - id: q8d
         label: Not decided yet
         scores:
