@@ -10,7 +10,7 @@
 meta:
   version: "1.1"
   scale_max: 3
-  questions_count: 8
+  questions_count: 5
   platforms:
     - id: agent_builder
       label: Agent Builder
@@ -80,7 +80,7 @@ questions:
         scores:
           agent_builder: 3
           m365_copilot: 3
-          copilot_studio: 2
+          copilot_studio: 3
           foundry: 1
 
       - id: q8b
@@ -110,7 +110,7 @@ questions:
         scores:
           agent_builder: 3
           m365_copilot: 3
-          copilot_studio: 2
+          copilot_studio: 3
           foundry: 0
 
       - id: q2b
@@ -151,8 +151,8 @@ questions:
         label: Answers questions in a single exchange — Q&A, lookups, or summaries
         scores:
           agent_builder: 3
-          m365_copilot: 3
-          copilot_studio: 2
+          m365_copilot: 0
+          copilot_studio: 3
           foundry: 0
 
       - id: q4b
@@ -217,115 +217,6 @@ questions:
           copilot_studio: 3
           foundry: 2
 
-  - id: q5
-    label: How much technical customization will this need?
-    purpose: Distinguishes no-code → low-code → pro-code ceiling
-    prompt: How much technical setup will be needed beyond a basic chat experience?
-    hard_rules:
-      - condition: option == q5d
-        effect: >
-          Set foundry = 3. Set agent_builder, m365_copilot, and copilot_studio to 0.
-          Surface a direct Foundry recommendation and skip remaining questions.
-    options:
-      - id: q5a
-        label: None — configured through a visual UI, no code required
-        scores:
-          agent_builder: 3
-          m365_copilot: 2
-          copilot_studio: 1
-          foundry: 0
-
-      - id: q5b
-        label: Some — connecting to other apps or adding automated steps using built-in tools
-        scores:
-          agent_builder: 0
-          m365_copilot: 1
-          copilot_studio: 3
-          foundry: 1
-
-      - id: q5c
-        label: Significant — writing code to add custom logic or connect to systems that don't have built-in connectors
-        scores:
-          agent_builder: 0
-          m365_copilot: 0
-          copilot_studio: 2
-          foundry: 3
-
-      - id: q5d
-        label: Full control — bringing your own AI model, managing cloud infrastructure, or designing the entire system from scratch
-        scores:
-          agent_builder: 0
-          m365_copilot: 0
-          copilot_studio: 0
-          foundry: 3
-        hard_rule_trigger: true
-
-  - id: q6
-    label: How important is testing and evaluation?
-    purpose: Evaluation maturity varies dramatically across platforms
-    prompt: Will you need to formally test, evaluate, or red-team the agent before and after deployment?
-    options:
-      - id: q6a
-        label: Not needed — the agent is simple enough that manual spot-checking is fine
-        scores:
-          agent_builder: 3
-          m365_copilot: 2
-          copilot_studio: 1
-          foundry: 0
-
-      - id: q6b
-        label: Basic testing — run a set of sample questions and check the answers are good enough
-        scores:
-          agent_builder: 1
-          m365_copilot: 1
-          copilot_studio: 3
-          foundry: 1
-
-      - id: q6c
-        label: Rigorous evaluation — automated quality scoring, groundedness checks, or regression testing on every update
-        scores:
-          agent_builder: 0
-          m365_copilot: 0
-          copilot_studio: 2
-          foundry: 3
-
-      - id: q6d
-        label: Advanced — adversarial red teaming, custom evaluation metrics, or continuous production monitoring
-        scores:
-          agent_builder: 0
-          m365_copilot: 0
-          copilot_studio: 0
-          foundry: 3
-
-  - id: q7
-    label: Does the agent need to remember users over time?
-    purpose: Long-term memory is a unique Foundry capability today
-    prompt: Should the agent build up knowledge about each user across conversations — remembering preferences, past interactions, and context?
-    options:
-      - id: q7a
-        label: No — each conversation starts fresh, no need to remember anything
-        scores:
-          agent_builder: 3
-          m365_copilot: 2
-          copilot_studio: 2
-          foundry: 0
-
-      - id: q7b
-        label: Within a session — the agent should remember context during a single conversation, but can forget afterward
-        scores:
-          agent_builder: 1
-          m365_copilot: 2
-          copilot_studio: 3
-          foundry: 1
-
-      - id: q7c
-        label: Across sessions — the agent should remember each user's preferences, history, and context over time
-        scores:
-          agent_builder: 0
-          m365_copilot: 0
-          copilot_studio: 1
-          foundry: 3
-
 ################################################################################
 # SCORING ENGINE
 ################################################################################
@@ -338,24 +229,24 @@ scoring:
   hard_rule_evaluation: pre_sum
 
   # Step 2 — Sum raw scores across all answered questions.
-  raw_score_max: 24  # 8 questions × max score of 3
+  raw_score_max: 15  # 5 questions × max score of 3
 
   # Step 3 — Map raw scores to recommendation strength.
   recommendation_thresholds:
-    - min: 19
-      max: 24
+    - min: 12
+      max: 15
       label: Strong fit
       description: This platform is well-aligned with your requirements across all dimensions.
-    - min: 13
-      max: 18
+    - min: 8
+      max: 11
       label: Good fit
       description: This platform meets most of your requirements with minor tradeoffs.
-    - min: 7
-      max: 12
+    - min: 4
+      max: 7
       label: Possible fit — review tradeoffs
       description: This platform can address your scenario but may require workarounds.
     - min: 0
-      max: 6
+      max: 3
       label: Not recommended
       description: This platform is unlikely to meet your requirements in this scenario.
 

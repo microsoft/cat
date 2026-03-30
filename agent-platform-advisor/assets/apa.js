@@ -66,8 +66,6 @@ function updateProgressBar(sectionId) {
 // === SCORING ENGINE ===
 const HARD_RULES = {
   q4d: { zero: ['agent_builder', 'm365_copilot'] },
-  q5d: { zero: ['agent_builder', 'm365_copilot', 'copilot_studio'] },
-  q6c: { zero: ['agent_builder', 'm365_copilot'] },
   q8b: { zero: ['agent_builder', 'm365_copilot'] },
 };
 
@@ -127,8 +125,6 @@ function rankPlatforms(answersMap) {
 
 const HARD_RULE_LABELS = {
   q4d: 'Complex agent orchestration — this is a hard requirement for Foundry',
-  q5d: 'Full infrastructure control selected — Foundry is the only viable platform',
-  q6c: 'Strict compliance (sovereign cloud / regulatory) — Foundry required',
   q8b: 'External user audience — Agent Builder and M365 Copilot cannot publish externally',
 };
 
@@ -406,25 +402,6 @@ function renderQuestion() {
 
 function handleNext() {
   const question = apa.questions[currentQuestionIndex];
-
-  // Early exit: q5d skips remaining questions
-  if (answers[question.id] === 'q5d') {
-    renderRecommendation();
-    showSection('recommendation-section');
-    pushState('recommendation-section');
-    return;
-  }
-
-  // Early exit: if first 6 questions answered and Agent Builder leads, skip eval & memory questions
-  if (currentQuestionIndex === 5) {
-    const ranked = rankPlatforms(answers);
-    if (ranked[0] && ranked[0].id === 'agent_builder') {
-      renderRecommendation();
-      showSection('recommendation-section');
-      pushState('recommendation-section');
-      return;
-    }
-  }
 
   if (currentQuestionIndex < apa.questions.length - 1) {
     currentQuestionIndex++;
