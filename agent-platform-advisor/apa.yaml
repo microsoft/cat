@@ -161,16 +161,16 @@ questions:
         scores:
           agent_builder: 0
           m365_copilot: 0
-          copilot_studio: 2
-          foundry: 3
+          copilot_studio: 3
+          foundry: 2
 
       - id: q2c
         label: Running automatically in the background — triggered by events, not by a person chatting with it
         scores:
           agent_builder: 0
           m365_copilot: 0
-          copilot_studio: 3
-          foundry: 2
+          copilot_studio: 2
+          foundry: 3
 
       - id: q2d
         label: Multiple places, or not decided yet
