@@ -4,16 +4,16 @@ All notable changes to the Agent Platform Advisor are documented here.
 
 ## [Unreleased] — apa-v2 branch
 
-### Added
+### Added — Mar 27–30
 - **Platform resource links** — each recommendation card now links to the corresponding page on microsoft.github.io/agent-resources (Copilot Studio, Foundry, M365 Copilot, Agent Builder). URLs are driven by `resources_url` in apa.yaml.
 - **Score comparison panel** — "See how we scored this" toggle reveals animated score bars, fit badges, and a per-platform explanation of why it scored how it did. Shows Agent Builder, Copilot Studio, and Foundry (M365 Copilot excluded since it's only available via the shortcut path). Hidden on M365 fast-track path.
 - **Accordion controls** — 1st Party Copilot Agents and Available Templates lists are now wrapped in collapsible `<details>` accordions with item counts, keeping recommendation cards compact by default.
 
-### Changed
+### Changed — Mar 27–30
 - **"M365" → "Microsoft 365"** — all user-facing references updated to the full product name.
 - **index.html rename** — previous v1 index moved to `index-old.html`; v2 is now the default `index.html`.
 
-### Fixed (design review — round 2)
+### Fixed (design review — round 2) — Mar 27
 - **Question counter uses Geist Mono** — CSS class selector (`.question-counter`) didn't match the HTML `id` attribute; added class and moved inline styles to stylesheet (FINDING-001)
 - **Option cards keyboard-accessible** — prescreen and assessment option cards now have `role="button"`, `tabindex="0"`, and Enter/Space keyboard handlers; assessment options also expose `aria-pressed` (FINDING-002)
 - **Mobile header no longer cramped** — logo text shrinks to 16px at 375px, progress bar gets smaller font and shorter connectors to prevent wrapping to 3 lines (FINDING-003)
@@ -27,19 +27,19 @@ All notable changes to the Agent Platform Advisor are documented here.
 - **Type scale normalized** — snapped all font sizes to the 7-token scale: 13px → 12px (caption), 18px → 20px (subhead), 22px → 24px (heading), 28px → 24px (heading) (D-002)
 - **DESIGN.md type scale updated** — question titles intentionally use display (32px) not subhead; spec updated to match implementation (D-001)
 
-### Removed
+### Removed — Mar 27
 - **313 lines of dead v1 CSS** — 38 unused class definitions including v1 welcome section, v1 progress indicator (step-circle/label/connector), v1 recommendation styles, pre-built agents section, 18 unused icon classes, and their dead responsive/motion overrides (D-006)
 
-### Changed
+### Changed — Mar 27
 - **Zero inline styles** — migrated all 20+ `style=` attributes from `index.html` to named CSS classes (`main-container`, `status-section`, `welcome-icon-wrapper`, `welcome-heading`, `prescreen-heading`, `assessment-nav`, `rec-actions`, etc.); HTML now has 0 inline styles (D-007)
 
-### Added
+### Added — Mar 24–27
 - **Two new assessment questions** — "How important is testing and evaluation?" (Q6) and "Does the agent need to remember users over time?" (Q7), bringing the total to 8 scored questions
 - **Maturity guidance panel** on the results page — shows a four-stage progression (Individual → Team → Division → External) with the recommended platform's stages highlighted; content driven by new `maturity_guidance` section in `apa.yaml`
 - **Browser history navigation** — each wizard step pushes a history entry so the browser Back/Forward buttons move between questions instead of leaving the site
 - **Agent Builder early exit** — if the first 6 questions point to Agent Builder, the wizard skips the evaluation and memory questions (which don't apply) and goes straight to the recommendation
 
-### Changed
+### Changed — Mar 24–27
 - **Question order revised** for a more natural decision flow: Who is building → Who will use it → What does it do → Where → What data → How much customization → Evaluation → Memory
 - **Recommendation copy enriched** from transcript analysis:
   - Copilot Studio: added 1,400+ connectors, MCP server support, agent-to-agent orchestration, built-in evaluation test sets; added watch-outs for limited model selection and no per-user memory
@@ -48,19 +48,19 @@ All notable changes to the Agent Platform Advisor are documented here.
 - Scoring engine recalibrated — thresholds adjusted for 8 questions (max raw score 24)
 - YAML version bumped to 1.1
 
-### Added (continued from v1)
+### Added — Mar 24
 - **Implementation Guide** (step 5 of wizard) — per-platform pre-development and post-development checklists loaded from `apa.yaml`
 - **Agent Structure Planning** (step 4 of wizard) — interactive component cards with checkboxes and notes fields; structure data defined in `apa.yaml`
 - SVG icon system using Lucide stroke icons (`getIcon()` helper); replaces all emoji icons in structure data
 - `structures` and `implementation` sections in `apa.yaml` for all four platforms
 - Platform-specific structure titles rendered dynamically from YAML
 
-### Changed (continued from v1)
+### Changed — Mar 20–24
 - "AI Foundry" renamed to "Microsoft Foundry" throughout
 - M365 Copilot excluded from custom agent path recommendations (prescreen fast-track now routes correctly)
 - Progress bar updated to 5 steps: Welcome → Assessment → Recommendation → Structure → Implementation
 
-### Fixed (design review)
+### Fixed (design review — round 1) — Mar 20–24
 - `.center` changed from `display:block` to `display:flex` — button `gap` spacing now renders correctly (FINDING-001)
 - Progress bar gained `flex-wrap:wrap` to prevent overflow on mobile viewports (FINDING-002)
 - Implementation checklist `list-style:disc` removed — eliminates double bullets when checkboxes are present (FINDING-003)
