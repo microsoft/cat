@@ -490,7 +490,9 @@ function getScoreReason(platformId, ranked, answersMap) {
 
 function buildScoreComparison(ranked, answersMap) {
   const maxScore = apa.scoring.raw_score_max || 24;
-  const rows = apa.meta.platforms.map(p => {
+  const rows = apa.meta.platforms
+    .filter(p => p.id !== 'm365_copilot')
+    .map(p => {
     const rankEntry = ranked.find(r => r.id === p.id);
     const score = rankEntry ? rankEntry.score : 0;
     const label = rankEntry ? rankEntry.label : 'Not recommended';
