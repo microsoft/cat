@@ -1108,7 +1108,7 @@ body {
 /* ── Score comparison panel ── */
 .score-toggle {
   margin: 16px auto;
-  font-size: 14px;
+  font-size: 16px;
   gap: 6px;
 }
 .score-toggle-chevron {
