@@ -6,6 +6,7 @@ All notable changes to the Agent Platform Advisor are documented here.
 
 ### Added
 - **Platform resource links** — each recommendation card now links to the corresponding page on microsoft.github.io/agent-resources (Copilot Studio, Foundry, M365 Copilot, Agent Builder). URLs are driven by `resources_url` in apa.yaml.
+- **Score comparison panel** — "See how we scored this" toggle reveals all 4 platforms with animated score bars, fit badges, and a per-platform explanation of why it scored how it did. Uses scoring data from the user's actual answers. Hidden on M365 fast-track path.
 
 ### Fixed (design review — round 2)
 - **Question counter uses Geist Mono** — CSS class selector (`.question-counter`) didn't match the HTML `id` attribute; added class and moved inline styles to stylesheet (FINDING-001)

@@ -1105,6 +1105,117 @@ body {
 }
 .rec-card.secondary .rec-platform-name { font-size: 20px; }
 
+/* ── Score comparison panel ── */
+.score-toggle {
+  margin: 16px auto;
+  font-size: 14px;
+  gap: 6px;
+}
+.score-toggle-chevron {
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+.score-comparison {
+  margin-bottom: 8px;
+}
+.sc-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.06);
+}
+.sc-heading {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted-foreground);
+  margin-bottom: 20px;
+}
+.sc-row {
+  margin-bottom: 20px;
+}
+.sc-row:last-child {
+  margin-bottom: 0;
+}
+.sc-platform {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.sc-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+.sc-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--foreground);
+}
+.sc-bar-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.sc-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--muted);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.sc-bar-fill {
+  height: 100%;
+  width: 0;
+  background: var(--primary);
+  border-radius: 9999px;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sc-bar-fill.animate {
+  width: var(--bar-pct);
+}
+.sc-score {
+  font-family: 'Geist Mono', 'Cascadia Code', 'Consolas', monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--foreground);
+  white-space: nowrap;
+  min-width: 42px;
+}
+.sc-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+.sc-reason {
+  font-size: 13px;
+  color: var(--muted-foreground);
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .sc-panel {
+    padding: 16px;
+  }
+  .sc-bar-area {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .sc-bar-track {
+    flex-basis: 100%;
+    order: 3;
+  }
+  .sc-badge {
+    font-size: 10px;
+  }
+}
+
 /* ── Maturity guidance ── */
 .maturity-guidance {
   margin-top: 32px;

@@ -450,6 +450,95 @@ function handlePrev() {
   }
 }
 
+// === SCORE COMPARISON ===
+function getScoreReason(platformId, ranked, answersMap) {
+  const rec = apa.recommendations[platformId];
+  const rankEntry = ranked.find(r => r.id === platformId);
+  if (!rankEntry || rankEntry.score === 0) {
+    // Check for hard-rule disqualification
+    const zeroed = getZeroedPlatforms(answersMap);
+    if (zeroed[platformId]) {
+      const ruleKeys = Object.entries(answersMap)
+        .filter(([, optId]) => HARD_RULES[optId] && HARD_RULES[optId].zero.includes(platformId))
+        .map(([, optId]) => optId);
+      if (ruleKeys.length > 0 && HARD_RULE_LABELS[ruleKeys[0]]) {
+        return HARD_RULE_LABELS[ruleKeys[0]];
+      }
+    }
+    if (platformId === 'm365_copilot' && !fastTrack) {
+      return 'Only available via the Microsoft 365 Copilot path — excluded from custom agent assessment.';
+    }
+    return rec ? rec.scoring_summary : 'Not applicable for this scenario.';
+  }
+  // Dynamic: find the top contributing question
+  const contributions = [];
+  apa.questions.forEach(q => {
+    const optionId = answersMap[q.id];
+    if (!optionId) return;
+    const option = q.options.find(o => o.id === optionId);
+    if (!option) return;
+    const score = option.scores[platformId] ?? 0;
+    if (score > 0) contributions.push({ qLabel: q.label, oLabel: option.label, score });
+  });
+  contributions.sort((a, b) => b.score - a.score);
+  if (contributions.length > 0) {
+    const top = contributions[0];
+    return `Top factor: ${top.qLabel} — ${top.oLabel}`;
+  }
+  return rec ? rec.scoring_summary : '';
+}
+
+function buildScoreComparison(ranked, answersMap) {
+  const maxScore = apa.scoring.raw_score_max || 24;
+  const rows = apa.meta.platforms.map(p => {
+    const rankEntry = ranked.find(r => r.id === p.id);
+    const score = rankEntry ? rankEntry.score : 0;
+    const label = rankEntry ? rankEntry.label : 'Not recommended';
+    const pct = Math.round((score / maxScore) * 100);
+    const icon = PLATFORM_ICONS[p.id] || '';
+    const reason = getScoreReason(p.id, ranked, answersMap);
+    const badge = `<span class="rec-badge sc-badge ${badgeClass(label)}">${label}</span>`;
+
+    return `
+      <div class="sc-row">
+        <div class="sc-platform">
+          <img class="sc-icon" src="${icon}" alt="${p.label}">
+          <span class="sc-name">${p.label}</span>
+        </div>
+        <div class="sc-bar-area">
+          <div class="sc-bar-track">
+            <div class="sc-bar-fill" style="--bar-pct: ${pct}%"></div>
+          </div>
+          <span class="sc-score">${score}/${maxScore}</span>
+          ${badge}
+        </div>
+        <p class="sc-reason">${reason}</p>
+      </div>`;
+  }).join('');
+
+  return `
+    <div class="sc-panel">
+      <div class="sc-heading">Score Breakdown</div>
+      ${rows}
+    </div>`;
+}
+
+function toggleScoreComparison() {
+  const panel = document.getElementById('rec-score-comparison');
+  const btn = document.getElementById('rec-score-toggle');
+  const chevron = btn.querySelector('.score-toggle-chevron');
+  const isHidden = panel.classList.toggle('hidden');
+  chevron.textContent = isHidden ? '▾' : '▴';
+  if (!isHidden) {
+    // Trigger bar animation after reveal
+    requestAnimationFrame(() => {
+      panel.querySelectorAll('.sc-bar-fill').forEach(bar => bar.classList.add('animate'));
+    });
+  } else {
+    panel.querySelectorAll('.sc-bar-fill').forEach(bar => bar.classList.remove('animate'));
+  }
+}
+
 function renderRecommendation() {
   if (fastTrack) {
     recommendedPlatformId = 'm365_copilot';
@@ -459,6 +548,8 @@ function renderRecommendation() {
     document.getElementById('rec-second-label').classList.add('hidden');
     document.getElementById('rec-second-card').innerHTML = '';
     document.getElementById('rec-fasttrack-prompt').classList.remove('hidden');
+    document.getElementById('rec-score-toggle').classList.add('hidden');
+    document.getElementById('rec-score-comparison').classList.add('hidden');
     const mgEl = document.getElementById('rec-maturity-guidance');
     mgEl.innerHTML = buildMaturityGuidance('m365_copilot');
     mgEl.classList.remove('hidden');
@@ -489,6 +580,10 @@ function renderRecommendation() {
     pairBanner.classList.add('hidden');
     secondLabel.classList.add('hidden');
     document.getElementById('rec-second-card').innerHTML = '';
+    document.getElementById('rec-score-comparison').innerHTML = buildScoreComparison(ranked, answers);
+    document.getElementById('rec-score-comparison').classList.add('hidden');
+    document.getElementById('rec-score-toggle').classList.remove('hidden');
+    document.getElementById('rec-score-toggle').querySelector('.score-toggle-chevron').textContent = '▾';
     const mgEl = document.getElementById('rec-maturity-guidance');
     mgEl.innerHTML = buildMaturityGuidance(top.id);
     mgEl.classList.remove('hidden');
@@ -515,6 +610,11 @@ function renderRecommendation() {
 
   document.getElementById('rec-second-card').innerHTML =
     buildPlatformCard(second.id, ranked, answers, false, false);
+
+  document.getElementById('rec-score-comparison').innerHTML = buildScoreComparison(ranked, answers);
+  document.getElementById('rec-score-comparison').classList.add('hidden');
+  document.getElementById('rec-score-toggle').classList.remove('hidden');
+  document.getElementById('rec-score-toggle').querySelector('.score-toggle-chevron').textContent = '▾';
 
   const mgEl = document.getElementById('rec-maturity-guidance');
   mgEl.innerHTML = buildMaturityGuidance(top.id);
