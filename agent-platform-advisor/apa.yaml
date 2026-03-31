@@ -46,14 +46,14 @@ questions:
           agent_builder: 1
           m365_copilot: 1
           copilot_studio: 3
-          foundry: 1
+          foundry: 0
 
       - id: q1c
         label: Professional developer — writes code and builds software
         scores:
           agent_builder: 0
-          m365_copilot: 1
-          copilot_studio: 2
+          m365_copilot: 0
+          copilot_studio: 0
           foundry: 3
 
       - id: q1d
@@ -61,7 +61,7 @@ questions:
         scores:
           agent_builder: 0
           m365_copilot: 0
-          copilot_studio: 1
+          copilot_studio: 0
           foundry: 3
 
   - id: q8
@@ -169,7 +169,7 @@ questions:
           agent_builder: 0
           m365_copilot: 0
           copilot_studio: 3
-          foundry: 2
+          foundry: 3
 
       - id: q4d
         label: Manage complex workflows — coordinate multiple agents or handle long-running processes
