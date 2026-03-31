@@ -1,7 +1,7 @@
 # Design System — Agent Platform Advisor
 
 ## Product Context
-- **What this is:** A YAML-driven 8-question scoring wizard that recommends the right Microsoft agent platform for a given scenario
+- **What this is:** A YAML-driven scoring wizard that recommends the right Microsoft agent platform for a given scenario
 - **Who it's for:** Microsoft enterprise customers — business users, IT pros, professional developers, and data/ML engineers evaluating Microsoft agent platforms
 - **Space/industry:** Microsoft productivity & AI tooling, enterprise decision-support tools
 - **Project type:** Single-page web app (multi-step wizard with scored results)

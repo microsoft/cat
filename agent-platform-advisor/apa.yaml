@@ -4,7 +4,7 @@
 #            Copilot Studio (copilot_studio), Microsoft Foundry (foundry)
 #
 # Score scale: 0 = not a fit · 1 = weak signal · 2 = moderate · 3 = strong
-# Max raw score per platform: 24 (8 questions × max 3)
+# Max raw score per platform: 15 (5 questions × max 3)
 ################################################################################
 
 meta:
