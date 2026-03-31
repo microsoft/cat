@@ -332,14 +332,14 @@ recommendations:
     resources_url: https://microsoft.github.io/agent-resources/m365-copilot/
     scoring_summary: Fits scenarios where built-in Copilot features in Microsoft 365 cover most of the need.
     summary: >
-      Best when the built-in Copilot features in Microsoft 365 already do most
+      Best when the built-in Microsoft 365 Copilot capabilities already meet most
       of what you need, with some customization.
     best_for:
-      - Extending Copilot within Teams, Outlook, and SharePoint
-      - Scenarios grounded in Microsoft 365 content
+      - Extending Copilot within Teams, Outlook, SharePoint and other Microsoft 365 Apps
+      - Scenarios grounded in Microsoft 365 data and content
       - IT pros and makers comfortable with Microsoft 365 admin
     watch_out_for:
-      - Only available to people inside your organization — can't be shared externally
+      -	Available only within your organization — can't be shared externally 
       - Limited customization compared to Copilot Studio
       - Not suited for complex multi-step workflows
     first_party_agents:
@@ -366,7 +366,7 @@ recommendations:
         url: https://techcommunity.microsoft.com/blog/microsoft365copilotblog/researcher-agent-in-microsoft-365-copilot/4397186
       - label: Analyst Agent
         description: Transforms complex data into clear insights, charts, and visualizations using Python
-        url: https://www.microsoft.com/microsoft-365/blog/2025/03/25/introducing-researcher-and-analyst-in-microsoft-365-copilot/
+        url: https://techcommunity.microsoft.com/blog/microsoft365copilotblog/analyst-agent-in-microsoft-365-copilot/4397191
       - label: Interpreter Agent
         description: Real-time speech-to-speech interpretation in Teams meetings across nine languages
         url: https://learn.microsoft.com/microsoftteams/interpreter-agent-teams
@@ -437,14 +437,14 @@ maturity_guidance:
     The platform you start with today may not be the one you use at scale — and that's expected.
   stages:
     - label: Individual
-      description: Build agents for yourself to learn and improve personal productivity
+      description: Build agents for yourself to learn, experiment, and improve personal productivity
       platforms: [agent_builder]
     - label: Team
-      description: Share agents with your immediate team to solve common problems
+      description: Share agents with your immediate team to solve common business challenges
       platforms: [agent_builder, m365_copilot]
     - label: Division / Organization
-      description: Deploy agents across departments with governance, evaluation, and integration requirements
+      description: Deploy agents across departments with governance controls, evaluation, and integration requirements
       platforms: [copilot_studio, foundry]
     - label: External / B2C
-      description: Expose agents to customers, partners, or the public — requires mature safety, evaluation, and operations
+      description: Expose agents to customers, partners, or the public — with the right safety, evaluation, and operational readiness
       platforms: [copilot_studio, foundry]
