@@ -12,6 +12,12 @@ All notable changes to the Agent Platform Advisor are documented here.
   - q4: label changed to "What should this agent do?"; prompt updated to direct users to select the most advanced task; all 4 option labels shifted to imperative tense
   - q3: label changed to "What information does this agent need to access?"; prompt reworded; q3a and q3c option labels updated ("Content in Microsoft 365", "Advanced or private data sources")
 
+### Changed — Mar 30
+- **Assessment reduced from 8 to 5 questions** — removed q5 (technical customization), q6 (testing/evaluation), and q7 (memory/personalization); scoring thresholds recalibrated for new max score of 15 (5 × 3); removed q5d/q6c hard rules and early-exit logic from apa.js
+- **Question order swapped** — "Where will users interact?" (q2) now appears before "What should this agent do?" (q4)
+- **Scoring weights corrected** — adjusted platform weights across several questions for accuracy
+- **"Both — internal and external" audience option removed from q8** — users needing both audiences should select "External users" since that's the binding constraint (Agent Builder and M365 Copilot can't publish externally regardless)
+
 ### Added — Mar 27–30
 - **Platform resource links** — each recommendation card now links to the corresponding page on microsoft.github.io/agent-resources (Copilot Studio, Foundry, M365 Copilot, Agent Builder). URLs are driven by `resources_url` in apa.yaml.
 - **Score comparison panel** — "See how we scored this" toggle reveals animated score bars, fit badges, and a per-platform explanation of why it scored how it did. Shows Agent Builder, Copilot Studio, and Foundry (M365 Copilot excluded since it's only available via the shortcut path). Hidden on M365 fast-track path.
