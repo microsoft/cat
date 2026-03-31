@@ -30,7 +30,7 @@ questions:
   - id: q1
     label: Who is building this agent?
     purpose: Sets persona weight for interpreting later answers
-    prompt: Some platforms require a developer, while others are designed for business users with no coding experience.
+    prompt: Some platforms are designed for makers using low-code tools, while others require professional development skills.
     options:
       - id: q1a
         label: Business user or subject matter expert — no coding experience
@@ -41,7 +41,7 @@ questions:
           foundry: 0
 
       - id: q1b
-        label: IT professional or Power Platform user — comfortable with drag-and-drop tools and configuration
+        label: Low-code maker or IT professional — comfortable with drag-and-drop tools and configuration
         scores:
           agent_builder: 1
           m365_copilot: 1
@@ -67,7 +67,7 @@ questions:
   - id: q8
     label: Who will use this agent?
     purpose: External-facing is a hard constraint that affects platform eligibility
-    prompt: Will only people inside your organization use this agent, or do people outside your company (customers, partners) need access too?
+    prompt: Will this agent be used by people within your organization, or by external users such as customers or partners?
     hard_rules:
       - condition: option in [q8b, q8c]
         effect: >
@@ -101,9 +101,9 @@ questions:
           foundry: 1
 
   - id: q2
-    label: Where will people use this agent?
+    label: Where will users interact with this agent?
     purpose: Deployment surface is often a hard constraint
-    prompt: Think about where users will actually open and interact with the agent day-to-day.
+    prompt: Think about where people will access or use the agent in their day-to-day work.
     options:
       - id: q2a
         label: Inside Microsoft 365 apps — Teams, Copilot, SharePoint, or Outlook
@@ -138,9 +138,9 @@ questions:
           foundry: 2
 
   - id: q4
-    label: What does this agent actually do?
+    label: What should this agent do?
     purpose: Single strongest discriminator between Copilot Studio and Foundry
-    prompt: What kind of work should the agent handle? Pick the option closest to your scenario.
+    prompt: What type of work do you want this agent to handle? Choose the option that best represents the most advanced task you expect it to perform.
     hard_rules:
       - condition: option == q4d
         effect: >
@@ -148,7 +148,7 @@ questions:
           regardless of other answers.
     options:
       - id: q4a
-        label: Answers questions in a single exchange — Q&A, lookups, or summaries
+        label: Answer questions in a single exchange — Q&A, lookups, or summaries
         scores:
           agent_builder: 3
           m365_copilot: 0
@@ -156,7 +156,7 @@ questions:
           foundry: 0
 
       - id: q4b
-        label: Holds a back-and-forth conversation and remembers context throughout
+        label: Have a back-and-forth conversation and remember context
         scores:
           agent_builder: 1
           m365_copilot: 2
@@ -164,7 +164,7 @@ questions:
           foundry: 1
 
       - id: q4c
-        label: Completes multi-step tasks — follows a process, checks multiple systems, or takes actions like submitting forms or updating records
+        label: Complete multi-step tasks — follow a process, check multiple systems, or take actions like submitting forms or updating records
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -172,7 +172,7 @@ questions:
           foundry: 2
 
       - id: q4d
-        label: Manages complex work — coordinates multiple agents, handles processes that run over hours or days, or needs a custom AI approach
+        label: Manage complex workflows — coordinate multiple agents or handle long-running processes
         scores:
           agent_builder: 0
           m365_copilot: 0
@@ -181,12 +181,12 @@ questions:
         hard_rule_trigger: true
 
   - id: q3
-    label: What data does the agent need to access?
+    label: What information does this agent need to access?
     purpose: Grounding requirements narrow the field fast
-    prompt: What information does the agent need to do its job? Pick the option closest to where that information lives today.
+    prompt: Where does the information this agent needs currently live? Pick an option closest to where the information lives today.
     options:
       - id: q3a
-        label: Content already in Microsoft 365 — SharePoint, OneDrive, Teams, or Outlook
+        label: Content in Microsoft 365 — like SharePoint, OneDrive, Teams, or Outlook
         scores:
           agent_builder: 3
           m365_copilot: 3
@@ -202,7 +202,7 @@ questions:
           foundry: 2
 
       - id: q3c
-        label: Specialized or private data sources — large-scale data storage, AI search indexes, or data warehouses your team manages
+        label: Advanced or private data sources — like data warehouses, large data storage, or AI search tools managed by your team
         scores:
           agent_builder: 0
           m365_copilot: 0

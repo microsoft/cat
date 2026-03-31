@@ -4,6 +4,14 @@ All notable changes to the Agent Platform Advisor are documented here.
 
 ## [Unreleased] — apa-v2 branch
 
+### Changed — Mar 31
+- **Question wording updates** — all 5 question labels, prompts, and several option labels updated to match apa.md wireframes:
+  - q1: prompt reworded; option q1b renamed from "IT professional or Power Platform user" to "Low-code maker or IT professional"
+  - q8: prompt reworded for clarity
+  - q2: label changed to "Where will users interact with this agent?"; prompt reworded
+  - q4: label changed to "What should this agent do?"; prompt updated to direct users to select the most advanced task; all 4 option labels shifted to imperative tense
+  - q3: label changed to "What information does this agent need to access?"; prompt reworded; q3a and q3c option labels updated ("Content in Microsoft 365", "Advanced or private data sources")
+
 ### Added — Mar 27–30
 - **Platform resource links** — each recommendation card now links to the corresponding page on microsoft.github.io/agent-resources (Copilot Studio, Foundry, M365 Copilot, Agent Builder). URLs are driven by `resources_url` in apa.yaml.
 - **Score comparison panel** — "See how we scored this" toggle reveals animated score bars, fit badges, and a per-platform explanation of why it scored how it did. Shows Agent Builder, Copilot Studio, and Foundry (M365 Copilot excluded since it's only available via the shortcut path). Hidden on M365 fast-track path.
