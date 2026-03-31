@@ -270,7 +270,7 @@ recommendations:
 
   agent_builder:
     headline: Agent Builder
-    resources_url: https://microsoft.github.io/agent-resources/m365-copilot/
+    resources_url: https://microsoft.github.io/agent-resources/m365-copilot/#agent-builder
     scoring_summary: Best suited for no-code scenarios entirely within Microsoft 365.
     summary: >
       The right starting point for business users who want to build
