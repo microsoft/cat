@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="image" property="og:image" content="https://microsoft.github.io/cat/images/bootcamp-og.png" />
+  <meta name="image" property="og:image:width" content="1200" />
+  <meta name="image" property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Microsoft Copilot Studio Architecture Bootcamp" />
+  <meta name="title" property="og:title" content="Microsoft Copilot Studio Architecture Bootcamp" />
+  <meta name="description" property="og:description" content="A fast-paced 3-day intermediate-to-advanced program aligned to the Microsoft Copilot Studio Implementation Guidance, focused on proven patterns, de-risking complex projects, and under-the-hood architecture decisions." />
+  <meta name="url" property="og:url" content="https://microsoft.github.io/cat/programs/architecture-bootcamp.html" />
+  <meta name="type" property="og:type" content="article" />
+  <meta name="site_name" property="og:site_name" content="Microsoft Copilot Acceleration Team - Architecture Bootcamp" />
+  <meta name="locale" property="og:locale" content="en_US" />
+  <meta name="author" property="og:author" content="Microsoft Copilot Acceleration Team" />
   <title>Microsoft Copilot Studio Architecture Bootcamp</title>
   <style>
     :root {
@@ -16,7 +27,7 @@
       --panel-tint: #eef2ff;
       --accent-soft: #eef4ff;
       --disabled: #8a8886;
-      --focus-ring: 0 0 0 3px rgba(0, 120, 212, .35);
+      --focus-ring: 0 0 0 3px rgba(0,120,212,.35);
       --max: 1180px;
     }
 
@@ -28,9 +39,9 @@
       font-family: "Segoe UI", Arial, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 10% 10%, rgba(107, 76, 211, .18), transparent 40%),
-        radial-gradient(circle at 85% 20%, rgba(0, 120, 212, .15), transparent 45%),
-        radial-gradient(circle at 50% 100%, rgba(124, 77, 255, .12), transparent 50%),
+        radial-gradient(circle at 10% 10%, rgba(107,76,211,.18), transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(0,120,212,.15), transparent 45%),
+        radial-gradient(circle at 50% 100%, rgba(124,77,255,.12), transparent 50%),
         linear-gradient(180deg, #f6f8ff 0%, #ffffff 30%, #ffffff 100%);
       line-height: 1.5;
     }
@@ -81,8 +92,8 @@
       top: 0;
       z-index: 20;
       backdrop-filter: blur(14px);
-      background: rgba(255, 255, 255, .95);
-      border-bottom: 1px solid rgba(225, 223, 221, .95);
+      background: rgba(255,255,255,.95);
+      border-bottom: 1px solid rgba(225,223,221,.95);
     }
 
     .nav-container,
@@ -140,7 +151,7 @@
       padding: 0 14px;
       border-radius: 999px;
       color: #323130;
-      background: rgba(255, 255, 255, .92);
+      background: rgba(255,255,255,.92);
       border: 1px solid var(--line);
       font-size: 14px;
       font-weight: 600;
@@ -148,14 +159,12 @@
 
     .nav-links a:hover {
       text-decoration: none;
-      border-color: rgba(0, 120, 212, .35);
+      border-color: rgba(0,120,212,.35);
       color: var(--ms-blue-dark);
       background: #fff;
     }
 
-    .main-container {
-      padding: 28px 0 60px;
-    }
+    .main-container { padding: 28px 0 60px; }
 
     .hero {
       display: grid;
@@ -181,7 +190,7 @@
       position: relative;
       overflow: hidden;
       min-height: 420px;
-      background: url("../images/MCS-bootcamp-banner.png") center/cover no-repeat;
+      background: linear-gradient(135deg, rgba(0,120,212,.9), rgba(124,77,255,.85));
       display: flex;
       align-items: flex-end;
     }
@@ -190,13 +199,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, .72) 0%,
-        rgba(0, 0, 0, .48) 38%,
-        rgba(0, 0, 0, .18) 68%,
-        rgba(0, 0, 0, 0) 100%
-      );
+      background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.48) 38%, rgba(0,0,0,.18) 68%, rgba(0,0,0,0) 100%);
     }
 
     .hero-panel {
@@ -208,7 +211,7 @@
     }
 
     h1 {
-      font-size: clamp(34px, 4vw, 44px);
+      font-size: clamp(34px,4vw,44px);
       line-height: 1.15;
       margin: 6px 0 14px;
       letter-spacing: -.4px;
@@ -257,7 +260,7 @@
       background: linear-gradient(135deg, var(--ms-blue-dark), var(--ms-blue));
       color: #fff;
       border-color: transparent;
-      box-shadow: 0 6px 16px rgba(0, 90, 158, .22);
+      box-shadow: 0 6px 16px rgba(0,90,158,.22);
     }
 
     .btn-secondary {
@@ -276,19 +279,19 @@
       background: linear-gradient(135deg, var(--ms-blue-dark), var(--ms-blue));
       color: #ffffff;
       border-color: transparent;
-      box-shadow: 0 6px 16px rgba(0, 90, 158, .22);
+      box-shadow: 0 6px 16px rgba(0,90,158,.22);
     }
 
     .register-btn.primary:hover {
       text-decoration: none;
       transform: translateY(-1px);
-      box-shadow: 0 8px 18px rgba(0, 90, 158, .24);
+      box-shadow: 0 8px 18px rgba(0,90,158,.24);
     }
 
     .register-btn.primary .mode-dot.inperson {
       background: #ffffff;
       border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, .92);
+      border: 2px solid rgba(255,255,255,.92);
       box-shadow: none;
     }
 
@@ -301,21 +304,19 @@
 
     .register-btn.secondary:hover {
       text-decoration: none;
-      border-color: rgba(124, 77, 255, .30);
-      box-shadow: 0 4px 12px rgba(31, 41, 55, .06);
+      border-color: rgba(124,77,255,.30);
+      box-shadow: 0 4px 12px rgba(31,41,55,.06);
       transform: translateY(-1px);
     }
 
     .hero-meta,
     .about-section,
-    .agenda-section {
-      padding: 24px;
-    }
+    .agenda-section { padding: 24px; }
 
     .hero-meta {
       background: linear-gradient(180deg, #ffffff, var(--panel-soft));
       border: 1px solid var(--line);
-      box-shadow: 0 12px 30px rgba(31, 41, 55, .06);
+      box-shadow: 0 12px 30px rgba(31,41,55,.06);
     }
 
     .meta-header {
@@ -326,12 +327,7 @@
       margin-bottom: 18px;
     }
 
-    .meta-title {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.2;
-      color: #252423;
-    }
+    .meta-title { margin: 0; font-size: 18px; line-height: 1.2; color: #252423; }
 
     .meta-kicker {
       display: inline-flex;
@@ -360,7 +356,7 @@
       padding: 16px 18px;
       background: linear-gradient(180deg, #ffffff, var(--panel-soft));
       border: 1px solid var(--line);
-      box-shadow: 0 6px 18px rgba(31, 41, 55, .05);
+      box-shadow: 0 6px 18px rgba(31,41,55,.05);
       overflow: hidden;
     }
 
@@ -424,28 +420,11 @@
       gap: 8px;
     }
 
-    .content-grid {
-      display: block;
-      margin-top: 18px;
-    }
+    .content-grid { display: block; margin-top: 18px; }
 
-    h2.section-title {
-      font-size: 26px;
-      margin: 4px 0 12px;
-      line-height: 1.25;
-    }
-
-    .about-text,
-    .agenda-intro {
-      margin: 10px 0 14px;
-      font-size: 15.5px;
-      line-height: 1.65;
-      color: #3a3a3a;
-    }
-
-    .agenda-intro {
-      max-width: 78ch;
-    }
+    h2.section-title { font-size: 26px; margin: 4px 0 12px; line-height: 1.25; }
+    .about-text, .agenda-intro { margin: 10px 0 14px; font-size: 15.5px; line-height: 1.65; color: #3a3a3a; }
+    .agenda-intro { max-width: 78ch; }
 
     .fit-grid {
       display: grid;
@@ -454,25 +433,9 @@
       margin: 12px 0 8px;
     }
 
-    .fit-panel {
-      padding: 20px;
-    }
-
-    .fit-heading {
-      margin: 0 0 10px;
-      font-size: 16px;
-      line-height: 1.3;
-      color: #252423;
-    }
-
-    .fit-list,
-    .agenda-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 10px;
-    }
+    .fit-panel { padding: 20px; }
+    .fit-heading { margin: 0 0 10px; font-size: 16px; line-height: 1.3; color: #252423; }
+    .fit-list, .agenda-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 
     .fit-item {
       position: relative;
@@ -495,7 +458,7 @@
       border-radius: 50%;
       transform: translateY(-50%);
       background: linear-gradient(180deg, var(--ms-blue-dark), #58b6ff);
-      box-shadow: 0 0 0 6px rgba(0, 120, 212, .14);
+      box-shadow: 0 0 0 6px rgba(0,120,212,.14);
     }
 
     .session-header {
@@ -507,11 +470,7 @@
       flex-wrap: wrap;
     }
 
-    .session-header p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
+    .session-header p { margin: 0; color: var(--muted); font-size: 15px; }
 
     .legend {
       display: flex;
@@ -534,11 +493,7 @@
       border: 1px solid var(--line);
     }
 
-    .session-list {
-      display: grid;
-      gap: 14px;
-      margin-top: 8px;
-    }
+    .session-list { display: grid; gap: 14px; margin-top: 8px; }
 
     .session-box {
       position: relative;
@@ -565,12 +520,7 @@
       margin-bottom: 12px;
     }
 
-    .session-name {
-      margin: 0;
-      font-size: 21px;
-      line-height: 1.15;
-      color: #252423;
-    }
+    .session-name { margin: 0; font-size: 21px; line-height: 1.15; color: #252423; }
 
     .session-badge {
       display: inline-flex;
@@ -579,7 +529,7 @@
       padding: 0 10px;
       border-radius: 999px;
       background: var(--panel-tint);
-      border: 1px solid rgba(0, 120, 212, .16);
+      border: 1px solid rgba(0,120,212,.16);
       color: var(--ms-blue-dark);
       font-size: 12px;
       font-weight: 700;
@@ -588,32 +538,10 @@
       white-space: nowrap;
     }
 
-    .session-meta {
-      display: grid;
-      gap: 6px;
-      color: #484644;
-      font-size: 15px;
-      margin-bottom: 16px;
-    }
-
-    .session-meta-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .meta-icon {
-      width: 22px;
-      text-align: center;
-      opacity: .85;
-    }
-
-    .btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+    .session-meta { display: grid; gap: 6px; color: #484644; font-size: 15px; margin-bottom: 16px; }
+    .session-meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .meta-icon { width: 22px; text-align: center; opacity: .85; }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 10px; }
 
     .register-btn[aria-disabled="true"],
     .register-btn.is-disabled {
@@ -628,7 +556,7 @@
     .register-btn[aria-disabled="true"] .mode-dot.inperson {
       background: var(--ms-blue-dark);
       border: none;
-      box-shadow: 0 0 0 4px rgba(0, 120, 212, .10);
+      box-shadow: 0 0 0 4px rgba(0,120,212,.10);
       opacity: .55;
     }
 
@@ -636,60 +564,23 @@
     .register-btn[aria-disabled="true"] .mode-dot.virtual {
       background: var(--copilot-violet);
       border: none;
-      box-shadow: 0 0 0 4px rgba(124, 77, 255, .12);
+      box-shadow: 0 0 0 4px rgba(124,77,255,.12);
       opacity: .55;
     }
 
     .register-btn.is-disabled .mode-dot.closed,
     .register-btn[aria-disabled="true"] .mode-dot.closed {
       background: var(--disabled);
-      box-shadow: 0 0 0 4px rgba(138, 136, 134, .12);
+      box-shadow: 0 0 0 4px rgba(138,136,134,.12);
     }
 
-    .mode-dot {
-      width: 12px;
-      height: 12px;
-      display: inline-block;
-      flex: 0 0 12px;
-    }
-
-    .mode-dot.inperson {
-      background: var(--ms-blue-dark);
-      border-radius: 50%;
-      border: none;
-      box-shadow: 0 0 0 4px rgba(0, 120, 212, .12);
-    }
-
-    .register-btn.secondary .mode-dot.inperson {
-      background: var(--ms-blue-dark);
-      border: none;
-      box-shadow: 0 0 0 4px rgba(0, 120, 212, .10);
-    }
-
-    .mode-dot.virtual {
-      background: var(--copilot-violet);
-      border-radius: 50%;
-      border: none;
-      box-shadow: 0 0 0 4px rgba(124, 77, 255, .14);
-    }
-
-    .mode-dot.closed {
-      background: var(--disabled);
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px rgba(138, 136, 134, .12);
-    }
-
-    .legend .mode-dot.inperson {
-      background: var(--ms-blue-dark);
-      border: none;
-      box-shadow: 0 0 0 4px rgba(0, 120, 212, .12);
-    }
-
-    .legend .mode-dot.virtual {
-      background: var(--copilot-violet);
-      border: none;
-      box-shadow: 0 0 0 4px rgba(124, 77, 255, .14);
-    }
+    .mode-dot { width: 12px; height: 12px; display: inline-block; flex: 0 0 12px; }
+    .mode-dot.inperson { background: var(--ms-blue-dark); border-radius: 50%; border: none; box-shadow: 0 0 0 4px rgba(0,120,212,.12); }
+    .register-btn.secondary .mode-dot.inperson { background: var(--ms-blue-dark); border: none; box-shadow: 0 0 0 4px rgba(0,120,212,.10); }
+    .mode-dot.virtual { background: var(--copilot-violet); border-radius: 50%; border: none; box-shadow: 0 0 0 4px rgba(124,77,255,.14); }
+    .mode-dot.closed { background: var(--disabled); border-radius: 50%; box-shadow: 0 0 0 4px rgba(138,136,134,.12); }
+    .legend .mode-dot.inperson { background: var(--ms-blue-dark); border: none; box-shadow: 0 0 0 4px rgba(0,120,212,.12); }
+    .legend .mode-dot.virtual { background: var(--copilot-violet); border: none; box-shadow: 0 0 0 4px rgba(124,77,255,.14); }
 
     .subtle-note {
       margin-top: 18px;
@@ -708,7 +599,7 @@
       border-radius: 16px;
       background: linear-gradient(180deg, #ffffff, var(--panel-soft));
       border: 1px solid var(--line);
-      box-shadow: 0 6px 18px rgba(31, 41, 55, .05);
+      box-shadow: 0 6px 18px rgba(31,41,55,.05);
     }
 
     .outcome-title {
@@ -748,42 +639,32 @@
       border-radius: 50%;
       transform: translateY(-50%);
       background: linear-gradient(180deg, var(--copilot-violet), var(--ms-blue-dark));
-      box-shadow: 0 0 0 6px rgba(124, 77, 255, .10);
+      box-shadow: 0 0 0 6px rgba(124,77,255,.10);
     }
 
-    .agenda-accordion {
-      display: grid;
-      gap: 14px;
-      margin-top: 16px;
-    }
+    .agenda-accordion { display: grid; gap: 14px; margin-top: 16px; }
 
     .agenda-details {
       border: 1px solid var(--line);
       border-radius: 18px;
       overflow: hidden;
       background: linear-gradient(180deg, #ffffff, var(--panel-soft));
-      box-shadow: 0 6px 18px rgba(31, 41, 55, .05);
+      box-shadow: 0 6px 18px rgba(31,41,55,.05);
     }
 
     .agenda-summary {
       list-style: none;
       cursor: pointer;
       padding: 16px 18px;
-      background: linear-gradient(135deg, rgba(0, 120, 212, .08), rgba(124, 77, 255, .10));
+      background: linear-gradient(135deg, rgba(0,120,212,.08), rgba(124,77,255,.10));
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
     }
 
-    .agenda-summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .agenda-summary-left {
-      display: grid;
-      gap: 6px;
-    }
+    .agenda-summary::-webkit-details-marker { display: none; }
+    .agenda-summary-left { display: grid; gap: 6px; }
 
     .agenda-day-label {
       display: inline-flex;
@@ -801,12 +682,7 @@
       width: fit-content;
     }
 
-    .agenda-day-title {
-      margin: 0;
-      font-size: 20px;
-      line-height: 1.2;
-      color: #1e2430;
-    }
+    .agenda-day-title { margin: 0; font-size: 20px; line-height: 1.2; color: #1e2430; }
 
     .agenda-chevron {
       width: 18px;
@@ -819,14 +695,8 @@
       flex: 0 0 18px;
     }
 
-    .agenda-details[open] .agenda-chevron {
-      transform: rotate(225deg);
-      margin-top: 8px;
-    }
-
-    .agenda-list {
-      padding: 10px 0;
-    }
+    .agenda-details[open] .agenda-chevron { transform: rotate(225deg); margin-top: 8px; }
+    .agenda-list { padding: 10px 0; }
 
     .agenda-item {
       display: grid;
@@ -836,38 +706,14 @@
       align-items: start;
     }
 
-    .agenda-item + .agenda-item {
-      border-top: 1px solid #edf1f8;
-    }
-
-    .agenda-time {
-      font-size: 12px;
-      line-height: 1.35;
-      font-weight: 700;
-      color: var(--ms-blue-dark);
-      letter-spacing: .2px;
-    }
-
-    .agenda-title {
-      font-size: 14px;
-      line-height: 1.45;
-      color: #252423;
-      font-weight: 600;
-    }
-
+    .agenda-item + .agenda-item { border-top: 1px solid #edf1f8; }
+    .agenda-time { font-size: 12px; line-height: 1.35; font-weight: 700; color: var(--ms-blue-dark); letter-spacing: .2px; }
+    .agenda-title { font-size: 14px; line-height: 1.45; color: #252423; font-weight: 600; }
     .agenda-title.module { color: #1f3b68; }
     .agenda-title.lab { color: #5b3cc4; }
     .agenda-title.break { color: #605e5c; }
     .agenda-title.interactive { color: #0f6c52; }
-
-    .agenda-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      flex: 0 0 10px;
-    }
-
+    .agenda-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: 0 0 10px; }
     .agenda-dot.module { background: #1f5fbf; }
     .agenda-dot.lab { background: #7c4dff; }
     .agenda-dot.break { background: #8a8886; }
@@ -888,99 +734,34 @@
       padding: 18px 0;
     }
 
-    .footer-copyright {
-      font-size: 13px;
-      color: var(--muted);
-    }
+    .footer-copyright { font-size: 13px; color: var(--muted); }
 
     @media (max-width: 900px) {
-      .fit-grid {
-        grid-template-columns: 1fr;
-      }
+      .fit-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 720px) {
-      .meta-header {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .nav-container {
-        padding: 12px 0;
-        align-items: start;
-        flex-direction: column;
-      }
-
-      .nav-links {
-        width: 100%;
-      }
-
-      .nav-links a {
-        min-height: 38px;
-      }
-
-      .quick-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .legend {
-        width: 100%;
-      }
-
+      .meta-header { align-items: flex-start; flex-direction: column; }
+      .nav-container { padding: 12px 0; align-items: start; flex-direction: column; }
+      .nav-links { width: 100%; }
+      .nav-links a { min-height: 38px; }
+      .quick-grid { grid-template-columns: 1fr; }
+      .legend { width: 100%; }
       .hero-card,
       .hero-meta,
       .about-section,
       .session-box,
       .fit-panel,
-      .agenda-section {
-        padding: 20px;
-        border-radius: 18px;
-      }
-
-      .hero-card {
-        min-height: 420px;
-        background-position: center top;
-      }
-
-      .hero-panel {
-        padding: 22px;
-      }
-
-      .hero-cta {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .btn,
-      .register-btn,
-      .text-link-chip {
-        width: 100%;
-      }
-
-      .session-top,
-      .session-header,
-      .footer-container {
-        align-items: start;
-      }
-
-      h1 {
-        font-size: 30px;
-        letter-spacing: -.5px;
-      }
-
-      .about-text,
-      .agenda-intro {
-        font-size: 15px;
-      }
-
-      .agenda-summary {
-        align-items: start;
-      }
-
-      .agenda-item {
-        grid-template-columns: 1fr;
-        gap: 4px;
-      }
+      .agenda-section { padding: 20px; border-radius: 18px; }
+      .hero-card { min-height: 420px; background-position: center top; }
+      .hero-panel { padding: 22px; }
+      .hero-cta { flex-direction: column; align-items: stretch; }
+      .btn, .register-btn, .text-link-chip { width: 100%; }
+      .session-top, .session-header, .footer-container { align-items: start; }
+      h1 { font-size: 30px; letter-spacing: -.5px; }
+      .about-text, .agenda-intro { font-size: 15px; }
+      .agenda-summary { align-items: start; }
+      .agenda-item { grid-template-columns: 1fr; gap: 4px; }
     }
   </style>
 </head>
@@ -1154,30 +935,30 @@
 
           <article class="session-box">
             <div class="session-top">
-              <h3 class="session-name">🇸🇬 Singapore</h3>
+              <h3 class="session-name">🇨🇦 Toronto, Ontario</h3>
               <span class="session-badge">Registration open</span>
             </div>
             <div class="session-meta">
-              <div class="session-meta-row"><span class="meta-icon">📅</span> Apr 27–29, 2026</div>
-              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM Singapore Standard Time</div>
+              <div class="session-meta-row"><span class="meta-icon">📅</span> Apr 28–30, 2026</div>
+              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM Eastern Daylight Time</div>
             </div>
-            <div class="btn-group" aria-label="Singapore registration options">
-              <a class="register-btn primary" href="https://msevents.microsoft.com/event?id=827309318"><span class="mode-dot inperson"></span>Register in-person</a>
+            <div class="btn-group" aria-label="Toronto registration options">
+              <a class="register-btn primary" href="https://msevents.microsoft.com/event?id=1758945306"><span class="mode-dot inperson"></span>Register in-person</a>
               <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot virtual"></span>Virtual</a>
             </div>
           </article>
 
           <article class="session-box">
             <div class="session-top">
-              <h3 class="session-name">🇨🇦 Toronto, Ontario</h3>
+              <h3 class="session-name">🇸🇬 Singapore</h3>
               <span class="session-badge">Registration open</span>
             </div>
             <div class="session-meta">
-              <div class="session-meta-row"><span class="meta-icon">📅</span> May 12–15, 2026</div>
-              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM Eastern Daylight Time</div>
+              <div class="session-meta-row"><span class="meta-icon">📅</span> May 12–14, 2026</div>
+              <div class="session-meta-row"><span class="meta-icon">🕘</span> 9:00 AM–4:30 PM Singapore Standard Time</div>
             </div>
-            <div class="btn-group" aria-label="Toronto registration options">
-              <a class="register-btn primary" href="https://msevents.microsoft.com/event?id=1758945306"><span class="mode-dot inperson"></span>Register in-person</a>
+            <div class="btn-group" aria-label="Singapore registration options">
+              <a class="register-btn primary" href="https://msevents.microsoft.com/event?id=827309318"><span class="mode-dot inperson"></span>Register in-person</a>
               <a class="register-btn is-disabled" aria-disabled="true" role="link"><span class="mode-dot virtual"></span>Virtual</a>
             </div>
           </article>
@@ -1291,51 +1072,4 @@
               <li class="agenda-item"><div class="agenda-time">10:45–11:00</div><div class="agenda-title module">Module 12 · SDK demo</div></li>
               <li class="agenda-item"><div class="agenda-time">11:00–11:30</div><div class="agenda-title module">Module 13 · Multi-agent architecture</div></li>
               <li class="agenda-item"><div class="agenda-time">11:30–12:00</div><div class="agenda-title lab">Lab 9 · Multi-agent</div></li>
-              <li class="agenda-item"><div class="agenda-time">12:00–13:00</div><div class="agenda-title break">Lunch break</div></li>
-              <li class="agenda-item"><div class="agenda-time">13:00–13:15</div><div class="agenda-title interactive">Review</div></li>
-              <li class="agenda-item"><div class="agenda-time">13:15–13:45</div><div class="agenda-title module">Module 14 · Autonomous agents</div></li>
-              <li class="agenda-item"><div class="agenda-time">13:45–14:15</div><div class="agenda-title lab">Lab 10 · Autonomous agents</div></li>
-              <li class="agenda-item"><div class="agenda-time">14:15–14:45</div><div class="agenda-title module">Module 15 · Azure integration demo</div></li>
-              <li class="agenda-item"><div class="agenda-time">14:45–15:00</div><div class="agenda-title break">Coffee break</div></li>
-              <li class="agenda-item"><div class="agenda-time">15:00–15:30</div><div class="agenda-title module">Module 16 · Agent 365 demo</div></li>
-              <li class="agenda-item"><div class="agenda-time">15:30–16:00</div><div class="agenda-title interactive">Final review</div></li>
-            </ol>
-          </details>
-        </div>
-
-        <div class="agenda-key" aria-label="Agenda legend">
-          <span class="agenda-key-item"><span class="agenda-dot module"></span> Module</span>
-          <span class="agenda-key-item"><span class="agenda-dot lab"></span> Lab</span>
-          <span class="agenda-key-item"><span class="agenda-dot interactive"></span> Review</span>
-          <span class="agenda-key-item"><span class="agenda-dot break"></span> Break</span>
-        </div>
-      </section>
-
-      <section class="about-section" id="cancellation">
-        <div class="section-kicker">Before you register</div>
-        <h2 class="section-title">Cancellation note</h2>
-        <p>
-          Microsoft may, in its discretion, cancel, modify, or suspend the event. Participants will be notified in writing prior to cancellation.
-        </p>
-        <p>
-          Please review the Microsoft Legal Terms and Privacy Statement.
-        </p>
-        <div class="foot-links">
-          <a class="text-link-chip" href="https://www.microsoft.com/en-us/legal/terms-of-use">Microsoft Legal Terms</a>
-          <a class="text-link-chip" href="https://privacy.microsoft.com/en-us/privacystatement">Privacy Statement</a>
-        </div>
-      </section>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-logo">
-        <div class="footer-logo-line"></div>
-        <div class="footer-logo-text">Microsoft CAT</div>
-      </div>
-      <div class="footer-copyright">© 2026 Microsoft Corporation. All rights reserved.</div>
-    </div>
-  </footer>
-</body>
-</html>
+              <li class="agenda-item"><div class="agenda-time">12:00–13:00</div><div class="agenda-title break">Lunch break</div><
