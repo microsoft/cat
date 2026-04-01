@@ -239,7 +239,7 @@ function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge)
         </div>
       </div>
       <p class="rec-summary">${rec.summary}</p>
-      ${platformId === 'copilot_studio' && (answersMap.q1 === 'q1c' || answersMap.q1 === 'q1d')
+      ${platformId === 'copilot_studio' && answersMap.q1 === 'q1c'
         ? `<div class="rec-dev-note">
             <strong>🛠️ Developer tip:</strong> You can build Copilot Studio agents in YAML using the
             <a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-overview" target="_blank" rel="noopener noreferrer">Copilot Studio extension for VS Code</a>
