@@ -517,6 +517,15 @@ function toggleScoreComparison() {
   }
 }
 
+function showRecNav(hasSecondary) {
+  const nav = document.getElementById('rec-nav');
+  const alsoLink = document.getElementById('rec-nav-also');
+  const alsoSep = document.getElementById('rec-nav-also-sep');
+  nav.style.display = '';
+  alsoLink.style.display = hasSecondary ? '' : 'none';
+  alsoSep.style.display = hasSecondary ? '' : 'none';
+}
+
 function renderRecommendation() {
   if (fastTrack) {
     recommendedPlatformId = 'm365_copilot';
@@ -528,6 +537,8 @@ function renderRecommendation() {
     document.getElementById('rec-fasttrack-prompt').classList.remove('hidden');
     document.getElementById('rec-score-toggle').classList.add('hidden');
     document.getElementById('rec-score-comparison').classList.add('hidden');
+    // Hide nav for fast-track (no scores, no secondary)
+    document.getElementById('rec-nav').style.display = 'none';
     renderDecisionCard();
     return;
   }
@@ -562,6 +573,9 @@ function renderRecommendation() {
     requestAnimationFrame(() => {
       document.getElementById('rec-score-comparison').querySelectorAll('.sc-bar-fill').forEach(bar => bar.classList.add('animate'));
     });
+    // Show nav without "Also Consider"
+    showRecNav(false);
+    renderDecisionCard();
     return;
   }
 
@@ -593,6 +607,8 @@ function renderRecommendation() {
     document.getElementById('rec-score-comparison').querySelectorAll('.sc-bar-fill').forEach(bar => bar.classList.add('animate'));
   });
 
+  // Show nav with "Also Consider"
+  showRecNav(true);
   renderDecisionCard();
 }
 

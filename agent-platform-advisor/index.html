@@ -181,6 +181,13 @@
   </div>
 </div></div>
         <div id="recommendation-section" class="fade-in hidden">
+          <nav id="rec-nav" class="rec-nav" style="display:none">
+            <a href="javascript:void(0)" onclick="document.getElementById('rec-primary-card').scrollIntoView({behavior:'smooth',block:'start'})">Recommendation</a>
+            <span class="rec-nav-sep">·</span>
+            <a href="javascript:void(0)" id="rec-nav-also" style="display:none" onclick="document.getElementById('rec-second-card').scrollIntoView({behavior:'smooth',block:'start'})">Also Consider</a>
+            <span class="rec-nav-sep" id="rec-nav-also-sep" style="display:none">·</span>
+            <a href="javascript:void(0)" id="rec-nav-scores" onclick="document.getElementById('rec-score-comparison').scrollIntoView({behavior:'smooth',block:'start'})">Score Breakdown</a>
+          </nav>
           <div id="rec-primary-card"></div>
           <div id="rec-share-anchor" class="rec-share-anchor" style="display:none">
             <a href="javascript:void(0)" onclick="document.getElementById('decision-card').scrollIntoView({behavior:'smooth',block:'start'})">📋 Share this recommendation</a>
@@ -201,11 +208,6 @@
             </p>
             <button class="btn btn-secondary" onclick="startFullAssessment()">
               Take the Full Assessment
-            </button>
-          </div>
-          <div class="center rec-actions">
-            <button class="btn btn-ghost" onclick="restart()">
-              ↩ Start Over
             </button>
           </div>
           <div class="decision-card-divider" id="decision-card-divider" style="display:none"></div>
@@ -242,6 +244,11 @@
                 <a href="javascript:void(0)" onclick="restart()" class="decision-card-link">Retake assessment</a>
               </span>
             </div>
+          </div>
+          <div class="center rec-actions">
+            <button class="btn btn-ghost" onclick="restart()">
+              ↩ Start Over
+            </button>
           </div>
         </div>
       </div>

@@ -1218,6 +1218,29 @@ body {
 
 /* ── Maturity guidance ── */
 
+/* Recommendation section navigation */
+.rec-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.rec-nav a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+}
+.rec-nav a:hover {
+  text-decoration: underline;
+}
+.rec-nav-sep {
+  font-size: 13px;
+  color: var(--border);
+}
+
 /* Decision card share anchor (top of recommendation) */
 .rec-share-anchor {
   text-align: right;
