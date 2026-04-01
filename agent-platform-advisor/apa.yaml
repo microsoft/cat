@@ -403,8 +403,7 @@ recommendations:
     persona_tips:
       q1c: >
         🛠️ <strong>Developer tip:</strong> You can build Copilot Studio agents in YAML using the
-        <a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-overview" target="_blank" rel="noopener noreferrer">Copilot Studio extension for VS Code</a>
-        — no low-code canvas required.
+        <a href="https://learn.microsoft.com/microsoft-copilot-studio/authoring-overview" target="_blank" rel="noopener noreferrer">Copilot Studio extension for VS Code</a>
 
   foundry:
     headline: Microsoft Foundry
