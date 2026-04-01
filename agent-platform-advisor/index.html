@@ -161,6 +161,28 @@
           </div>
         </div>
       </div>
+      <div class="option-card" id="prescreen-explore" role="button" tabindex="0" onclick="handlePrescreenExplore()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();handlePrescreenExplore()}">
+        <div class="option-content">
+          <div class="option-label">
+            I'm exploring what's possible with agents
+          </div>
+          <div class="option-description">
+            Browse all four platforms and learn which scenarios each one is designed for
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+        <div id="exploration-section" class="fade-in hidden"><div class="card">
+  <div class="card-content card-content--centered">
+    <a href="#" class="exploration-back" onclick="showSection('prescreen-section');pushState('prescreen-section');return false">← Back to options</a>
+    <h2 class="welcome-heading" style="font-size:32px">Explore Microsoft Agent Platforms</h2>
+    <p class="welcome-description">See what each platform offers before deciding which fits your scenario.</p>
+    <div class="exploration-grid" id="exploration-grid"></div>
+    <div class="exploration-cta">
+      <h3 class="exploration-cta-heading">Not sure which fits? Let the assessment guide you</h3>
+      <button class="btn btn-primary btn-lg" onclick="handlePrescreenNo()">Start the Assessment →</button>
     </div>
   </div>
 </div></div>

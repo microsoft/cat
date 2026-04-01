@@ -257,7 +257,7 @@ scoring:
 
   # Step 5 — Tie handling: surface both as a complementary pair.
   tie_handling:
-    threshold_points: 1
+    threshold_points: 2
     present_as: complementary_pair
     valid_pairs:
       - platforms: [copilot_studio, foundry]
@@ -277,6 +277,11 @@ recommendations:
     headline: Agent Builder
     resources_url: https://microsoft.github.io/agent-resources/m365-copilot/#agent-builder
     scoring_summary: Best suited for no-code scenarios entirely within Microsoft 365.
+    exploration_best_for: No-code agents within Microsoft 365
+    exploration_summary: >
+      Choose Agent Builder when you want to create agents without writing any code,
+      using data already in SharePoint or OneDrive. Ideal for business users who need
+      simple Q&A, summarization, or lookup agents for their team.
     summary: >
       The right starting point for business users who want to build
       agents directly inside Microsoft 365 without writing code.
@@ -336,6 +341,11 @@ recommendations:
     headline: Microsoft 365 Copilot
     resources_url: https://microsoft.github.io/agent-resources/m365-copilot/
     scoring_summary: Fits scenarios where built-in Copilot features in Microsoft 365 cover most of the need.
+    exploration_best_for: Extending built-in Copilot in Microsoft 365
+    exploration_summary: >
+      Choose Microsoft 365 Copilot when the built-in AI capabilities across Teams,
+      Outlook, and SharePoint already cover most of your needs. First-party agents
+      like Researcher, Analyst, and Facilitator handle common scenarios out of the box.
     summary: >
       Best when the built-in Microsoft 365 Copilot capabilities already meet most
       of what you need, with some customization.
@@ -389,6 +399,11 @@ recommendations:
     headline: Copilot Studio
     resources_url: https://microsoft.github.io/agent-resources/copilot-studio/
     scoring_summary: The most flexible low-code option for agents that connect to external systems.
+    exploration_best_for: Low-code agents connecting to external systems
+    exploration_summary: >
+      Choose Copilot Studio when you need agents that go beyond Microsoft 365 —
+      connecting to CRMs, databases, or external APIs with 1,400+ pre-built connectors.
+      Great for IT pros and makers building multi-turn conversational experiences.
     summary: >
       The most flexible option for building agents without heavy coding —
       connect to outside systems, deploy to websites or Teams, and automate
@@ -414,6 +429,11 @@ recommendations:
     headline: Microsoft Foundry
     resources_url: https://microsoft.github.io/agent-resources/microsoft-foundry/
     scoring_summary: The right choice when full technical control, custom models, or strict compliance is required.
+    exploration_best_for: Full-code agents with custom AI models
+    exploration_summary: >
+      Choose Microsoft Foundry when your team needs full technical control — bring
+      your own AI models, manage complex multi-agent systems, or meet strict
+      regulatory requirements. Built for professional developers and ML engineers.
     summary: >
       The right choice when your team needs full technical control — bring your
       own AI models, manage complex multi-agent systems, or meet strict

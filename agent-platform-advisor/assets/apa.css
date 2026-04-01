@@ -535,6 +535,91 @@ body {
   color: var(--muted-foreground);
 }
 
+/* Guided Exploration */
+.exploration-back {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  margin-bottom: 24px;
+  padding: 4px 0;
+}
+
+.exploration-back:hover {
+  color: var(--primary);
+}
+
+.exploration-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.exploration-card {
+  background: var(--card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: left;
+  box-shadow: var(--shadow-md);
+}
+
+.exploration-card-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.exploration-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0 0 12px;
+}
+
+.exploration-card-summary {
+  font-size: 14px;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.exploration-card-link {
+  font-size: 14px;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.exploration-card-link:hover {
+  text-decoration: underline;
+}
+
+.exploration-cta {
+  text-align: center;
+  padding-top: 8px;
+}
+
+.exploration-cta-heading {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0 0 16px;
+}
+
+/* Why not? explainer */
+.why-not-sentence {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  max-width: 480px;
+  margin: 8px auto 0;
+  text-align: center;
+}
+
 .footer {
   text-align: center;
   padding: 16px 0;
@@ -635,25 +720,16 @@ body {
     font-size: 24px;
   }
 
-  .checklist-title,
-  .structure-title {
-    font-size: 20px;
-  }
-
   .platform-grid {
     grid-template-columns: 1fr 1fr;
   }
 
-  .checklist-grid {
+  .exploration-grid {
     grid-template-columns: 1fr;
   }
 
-  .component-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .agent-types-grid {
-    grid-template-columns: 1fr;
+  .exploration-card-title {
+    font-size: 20px;
   }
 
   .card-content {
@@ -972,6 +1048,12 @@ body {
   }
   .sc-badge {
     font-size: 10px;
+  }
+  .exploration-cta .btn {
+    width: 100%;
+  }
+  .why-not-sentence {
+    max-width: none;
   }
 }
 

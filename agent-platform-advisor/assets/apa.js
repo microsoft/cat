@@ -12,7 +12,7 @@ let originalDate = null; // from &d= URL param
 // === UTILITIES ===
 function showSection(id) {
   ['loading-section','error-section','welcome-section','prescreen-section',
-   'assessment-section','recommendation-section'].forEach(s => {
+   'exploration-section','assessment-section','recommendation-section'].forEach(s => {
     const el = document.getElementById(s);
     if (el) el.classList.toggle('hidden', s !== id);
   });
@@ -36,6 +36,8 @@ window.addEventListener('popstate', (e) => {
     renderQuestion();
   } else if (state.section === 'recommendation-section') {
     renderRecommendation();
+  } else if (state.section === 'exploration-section') {
+    renderExploration();
   }
   showSection(state.section);
 });
@@ -313,6 +315,7 @@ async function boot() {
       } else {
         // mode=card (default): skip wizard, render card directly
         isURLLoaded = true;
+        if (typeof clarity === 'function') clarity('set', 'card_url_loaded', 'true');
         renderRecommendation();
         showSection('recommendation-section');
         // Don't push history state for URL-loaded cards (eng review decision 3A)
@@ -353,6 +356,7 @@ function setupListeners() {
 function handlePrescreenYes() {
   fastTrack = true;
   answers = {};
+  if (typeof clarity === 'function') clarity('set', 'fast_track', 'true');
   renderRecommendation();
   showSection('recommendation-section');
   pushState('recommendation-section');
@@ -366,6 +370,32 @@ function handlePrescreenNo() {
   renderQuestion();
   showSection('assessment-section');
   pushState('assessment-section', currentQuestionIndex);
+}
+
+function handlePrescreenExplore() {
+  renderExploration();
+  showSection('exploration-section');
+  pushState('exploration-section');
+}
+
+function renderExploration() {
+  const grid = document.getElementById('exploration-grid');
+  if (!grid) return;
+  const platformOrder = ['m365_copilot', 'agent_builder', 'copilot_studio', 'foundry'];
+  grid.innerHTML = platformOrder.map(pid => {
+    const rec = apa.recommendations[pid];
+    if (!rec) return '';
+    const bestFor = rec.exploration_best_for || rec.scoring_summary;
+    const summary = (rec.exploration_summary || rec.summary || '').trim();
+    const url = rec.resources_url || '#';
+    return `
+      <div class="exploration-card">
+        <div class="exploration-card-label">${bestFor}</div>
+        <h3 class="exploration-card-title">${rec.headline}</h3>
+        <p class="exploration-card-summary">${summary}</p>
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="exploration-card-link">Explore resources →</a>
+      </div>`;
+  }).join('');
 }
 
 function renderQuestion() {
@@ -543,6 +573,7 @@ function renderRecommendation() {
     // Hide nav for fast-track (no scores, no secondary)
     document.getElementById('rec-nav').style.display = 'none';
     updateTabTitle();
+    if (typeof clarity === 'function') clarity('set', 'platform', recommendedPlatformId);
     renderDecisionCard();
     return;
   }
@@ -580,6 +611,10 @@ function renderRecommendation() {
     // Show nav without "Also Consider"
     showRecNav(false);
     updateTabTitle();
+    if (typeof clarity === 'function') {
+      clarity('set', 'wizard_completed', 'true');
+      if (recommendedPlatformId) clarity('set', 'platform', recommendedPlatformId);
+    }
     renderDecisionCard();
     return;
   }
@@ -592,9 +627,24 @@ function renderRecommendation() {
     : null;
 
   if (pairEntry) {
-    pairBanner.textContent = `💡 ${pairEntry.rationale}`;
+    let bannerHtml = `💡 ${pairEntry.rationale}`;
+    // "Why not?" explainer for close scores
+    const whyNot = computeWhyNot(top, second, answers);
+    if (whyNot) bannerHtml += `<p class="why-not-sentence">${whyNot}</p>`;
+    pairBanner.innerHTML = bannerHtml;
     pairBanner.classList.remove('hidden');
     secondLabel.textContent = 'Complementary platform:';
+    secondLabel.classList.remove('hidden');
+  } else if (isPair) {
+    // Close scores but not a valid pair — still show "Why not?"
+    const whyNot = computeWhyNot(top, second, answers);
+    if (whyNot) {
+      pairBanner.innerHTML = `<p class="why-not-sentence">${whyNot}</p>`;
+      pairBanner.classList.remove('hidden');
+    } else {
+      pairBanner.classList.add('hidden');
+    }
+    secondLabel.textContent = 'Also consider:';
     secondLabel.classList.remove('hidden');
   } else {
     pairBanner.classList.add('hidden');
@@ -615,6 +665,11 @@ function renderRecommendation() {
   // Show nav with "Also Consider"
   showRecNav(true);
   updateTabTitle();
+  // Clarity analytics
+  if (typeof clarity === 'function') {
+    clarity('set', 'wizard_completed', 'true');
+    if (recommendedPlatformId) clarity('set', 'platform', recommendedPlatformId);
+  }
   renderDecisionCard();
 }
 
@@ -767,6 +822,32 @@ function computeDecisionKeyFactors() {
   return deltas.slice(0, 3).filter(d => d.delta > 0);
 }
 
+// "Why not?" explainer: explains what tipped the balance in close scores
+function computeWhyNot(winner, runner, answersMap) {
+  if (!winner || !runner) return null;
+  const winnerMeta = (apa.meta.platforms || []).find(p => p.id === winner.id);
+  const runnerMeta = (apa.meta.platforms || []).find(p => p.id === runner.id);
+  if (!winnerMeta || !runnerMeta) return null;
+
+  // Find the question where the winner most outscored the runner-up
+  let bestDelta = null;
+  apa.questions.forEach(q => {
+    const optionId = answersMap[q.id];
+    if (!optionId) return;
+    const option = q.options.find(o => o.id === optionId);
+    if (!option) return;
+    const wScore = option.scores[winner.id] ?? 0;
+    const rScore = option.scores[runner.id] ?? 0;
+    const delta = wScore - rScore;
+    if (!bestDelta || delta > bestDelta.delta) {
+      bestDelta = { questionLabel: q.label, optionLabel: option.label, delta };
+    }
+  });
+
+  if (!bestDelta || bestDelta.delta <= 0) return null;
+  return `${winnerMeta.label} edged out ${runnerMeta.label} because ${bestDelta.questionLabel} — ${bestDelta.optionLabel}.`;
+}
+
 function renderDecisionCard() {
   const card = document.getElementById('decision-card');
   const divider = document.getElementById('decision-card-divider');
@@ -815,6 +896,7 @@ function renderDecisionCard() {
     const dateStr = originalDate ? formatDateDisplay(originalDate) : 'a previous visit';
     bannerEl.innerHTML = `Your recommendation has changed since ${dateStr}. The platform landscape has been updated. <a href="javascript:void(0)" onclick="restart()">Retake assessment →</a>`;
     bannerEl.style.display = '';
+    if (typeof clarity === 'function') clarity('set', 'temporal_change', 'true');
   } else {
     bannerEl.style.display = 'none';
   }
@@ -860,6 +942,7 @@ function copyShareLink() {
   const originalText = btn.textContent;
 
   function showSuccess() {
+    if (typeof clarity === 'function') clarity('set', 'card_shared', 'true');
     btn.textContent = '✓ Copied!';
     btn.classList.add('btn-decision-copied');
     setTimeout(() => {
