@@ -67,17 +67,31 @@ function updateProgressBar(sectionId) {
 }
 
 // === SCORING ENGINE ===
-const HARD_RULES = {
-  q4d: { zero: ['agent_builder', 'm365_copilot'] },
-  q8b: { zero: ['agent_builder', 'm365_copilot'] },
-};
+
+// Returns positive-score contributions for a platform, sorted descending
+function getContributions(platformId, answersMap) {
+  const contributions = [];
+  apa.questions.forEach(q => {
+    const optionId = answersMap[q.id];
+    if (!optionId) return;
+    const option = q.options.find(o => o.id === optionId);
+    if (!option) return;
+    const score = option.scores[platformId] ?? 0;
+    if (score > 0) {
+      contributions.push({ questionLabel: q.label, optionLabel: option.label, score });
+    }
+  });
+  contributions.sort((a, b) => b.score - a.score);
+  return contributions;
+}
 
 // Returns { platformId: true } for each platform that must be zeroed
 function getZeroedPlatforms(answersMap) {
   const zeroed = {};
+  const hardRules = apa.scoring.hard_rules || {};
   Object.values(answersMap).forEach(optionId => {
-    if (HARD_RULES[optionId]) {
-      HARD_RULES[optionId].zero.forEach(p => { zeroed[p] = true; });
+    if (hardRules[optionId]) {
+      hardRules[optionId].zero.forEach(p => { zeroed[p] = true; });
     }
   });
   // Prescreen "No — I need a custom agent" excludes M365 Copilot from the full assessment.
@@ -126,38 +140,24 @@ function rankPlatforms(answersMap) {
     .sort((a, b) => b.score - a.score);
 }
 
-const HARD_RULE_LABELS = {
-  q4d: 'Complex agent orchestration — this is a hard requirement for Foundry',
-  q8b: 'External user audience — Agent Builder and M365 Copilot cannot publish externally',
-};
-
 // Returns up to 3 bullet strings summarising key scoring factors (or disqualifying rules) for the given platform
 function getKeyFactors(platformId, answersMap) {
   const factors = [];
+  const hardRules = apa.scoring.hard_rules || {};
 
   // 1. Hard rules that zeroed this platform
   Object.entries(answersMap).forEach(([, optionId]) => {
-    if (HARD_RULES[optionId] && HARD_RULES[optionId].zero.includes(platformId)) {
-      factors.push(`⚠️ ${HARD_RULE_LABELS[optionId] ?? optionId}`);
+    if (hardRules[optionId] && hardRules[optionId].zero.includes(platformId)) {
+      factors.push(`⚠️ ${hardRules[optionId].label ?? optionId}`);
     }
   });
 
-  // 2. Top-scoring questions for this platform (highest contribution first; skip zero-score answers)
-  const contributions = [];
-  apa.questions.forEach(q => {
-    const optionId = answersMap[q.id];
-    if (!optionId) return;
-    const option = q.options.find(o => o.id === optionId);
-    if (!option) return;
-    const score = option.scores[platformId] ?? 0;
-    if (score > 0) {
-      contributions.push({ questionLabel: q.label, optionLabel: option.label, score });
-    }
-  });
-  contributions.sort((a, b) => b.score - a.score);
-  contributions.slice(0, 3 - factors.length).forEach(c => {
-    factors.push(`<em>${c.questionLabel}</em> ${c.optionLabel}`);
-  });
+  // 2. Top-scoring questions for this platform
+  getContributions(platformId, answersMap)
+    .slice(0, 3 - factors.length)
+    .forEach(c => {
+      factors.push(`<em>${c.questionLabel}</em> ${c.optionLabel}`);
+    });
 
   return factors.slice(0, 3);
 }
@@ -393,15 +393,15 @@ function handlePrev() {
 function getScoreReason(platformId, ranked, answersMap) {
   const rec = apa.recommendations[platformId];
   const rankEntry = ranked.find(r => r.id === platformId);
+  const hardRules = apa.scoring.hard_rules || {};
   if (!rankEntry || rankEntry.score === 0) {
     // Check for hard-rule disqualification
     const zeroed = getZeroedPlatforms(answersMap);
     if (zeroed[platformId]) {
-      const ruleKeys = Object.entries(answersMap)
-        .filter(([, optId]) => HARD_RULES[optId] && HARD_RULES[optId].zero.includes(platformId))
-        .map(([, optId]) => optId);
-      if (ruleKeys.length > 0 && HARD_RULE_LABELS[ruleKeys[0]]) {
-        return HARD_RULE_LABELS[ruleKeys[0]];
+      const ruleKey = Object.values(answersMap)
+        .find(optId => hardRules[optId] && hardRules[optId].zero.includes(platformId));
+      if (ruleKey && hardRules[ruleKey].label) {
+        return hardRules[ruleKey].label;
       }
     }
     if (platformId === 'm365_copilot' && !fastTrack) {
@@ -410,19 +410,9 @@ function getScoreReason(platformId, ranked, answersMap) {
     return rec ? rec.scoring_summary : 'Not applicable for this scenario.';
   }
   // Dynamic: find the top contributing question
-  const contributions = [];
-  apa.questions.forEach(q => {
-    const optionId = answersMap[q.id];
-    if (!optionId) return;
-    const option = q.options.find(o => o.id === optionId);
-    if (!option) return;
-    const score = option.scores[platformId] ?? 0;
-    if (score > 0) contributions.push({ qLabel: q.label, oLabel: option.label, score });
-  });
-  contributions.sort((a, b) => b.score - a.score);
-  if (contributions.length > 0) {
-    const top = contributions[0];
-    return `Top factor: ${top.qLabel} — ${top.oLabel}`;
+  const top = getContributions(platformId, answersMap)[0];
+  if (top) {
+    return `Top factor: ${top.questionLabel} — ${top.optionLabel}`;
   }
   return rec ? rec.scoring_summary : '';
 }

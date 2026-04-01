@@ -225,6 +225,13 @@ scoring:
   # They cap or zero out platforms regardless of cumulative scores.
   # Hard rules represent real platform limitations, not preferences.
   hard_rule_evaluation: pre_sum
+  hard_rules:
+    q4d:
+      zero: [agent_builder, m365_copilot]
+      label: "Complex agent orchestration — this is a hard requirement for Foundry"
+    q8b:
+      zero: [agent_builder, m365_copilot]
+      label: "External user audience — Agent Builder and M365 Copilot cannot publish externally"
 
   # Step 2 — Sum raw scores across all answered questions.
   raw_score_max: 15  # 5 questions × max score of 3
