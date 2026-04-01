@@ -4,6 +4,27 @@ All notable changes to the Agent Platform Advisor are documented here.
 
 ## [Unreleased] — apa-v2 branch
 
+### Added — Apr 1
+- **Decision Card** — shareable summary card appears below the recommendation with platform name, score, key factors, and a "Share link" button that copies a URL encoding the user's answers. Recipients can visit the shared URL to see the recommendation directly (no wizard replay), or use `mode=wizard` to retake with pre-filled answers.
+- **Temporal change detection** — shared URLs include the original recommendation date and platform. On revisit, if the recommendation has changed (because `apa.yaml` was updated), a banner explains what shifted.
+- **Schema drift handling** — if `apa.yaml` adds or removes questions after a URL was generated, missing questions are scored as 0 and a note explains that criteria have been updated.
+- **Recommendation nav bar** — links at the top of the results page to Recommendation, Also Consider (conditional), and Score Breakdown. Smooth-scrolls to each section.
+- **Share anchor** — "📋 Share this recommendation" link below the primary card scrolls to the Decision Card.
+- **Persona-specific tips** — new `persona_tips` field in `apa.yaml` recommendations. When a professional developer gets Copilot Studio, a tip about building agents in YAML with the VS Code extension is shown.
+- **TODOS.md** — created with Playwright E2E, Clarity custom events, and dark mode items.
+
+### Changed — Apr 1
+- **Score Breakdown always visible** — moved out of the accordion toggle; bar animations trigger automatically on render.
+- **"Start Over" moved to bottom** — now appears below the Decision Card instead of mid-page.
+
+### Removed — Apr 1
+- **Maturity guidance section** — "Your platform choice will evolve" section removed entirely.
+- **PNG download** — html2canvas produced low-quality output with washed-out colors; removed in favor of the shareable URL.
+
+### Fixed — Apr 1
+- **q8c dead reference** — removed non-existent `q8c` option from `hard_rules` condition in apa.yaml.
+- **Platform chip label** — Decision Card now shows the human-readable platform name (e.g., "Copilot Studio") instead of the raw ID (`COPILOT_STUDIO`).
+
 ### Changed — Mar 31
 - **Question wording updates** — all 5 question labels, prompts, and several option labels updated to match apa.md wireframes:
   - q1: prompt reworded; option q1b renamed from "IT professional or Power Platform user" to "Low-code maker or IT professional"
