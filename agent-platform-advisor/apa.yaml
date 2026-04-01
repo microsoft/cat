@@ -51,9 +51,9 @@ questions:
       - id: q1c
         label: Professional developer — writes code and builds software
         scores:
-          agent_builder: 1
+          agent_builder: 0
           m365_copilot: 0
-          copilot_studio: 1
+          copilot_studio: 0
           foundry: 3
 
       - id: q1d
@@ -61,7 +61,7 @@ questions:
         scores:
           agent_builder: 0
           m365_copilot: 0
-          copilot_studio: 1
+          copilot_studio: 0
           foundry: 3
 
   - id: q8
@@ -95,10 +95,10 @@ questions:
       - id: q8d
         label: Not decided yet
         scores:
-          agent_builder: 0
-          m365_copilot: 0
-          copilot_studio: 0
-          foundry: 0
+          agent_builder: 2
+          m365_copilot: 2
+          copilot_studio: 2
+          foundry: 1
 
   - id: q2
     label: Where will users interact with this agent?
@@ -135,7 +135,7 @@ questions:
           agent_builder: 1
           m365_copilot: 1
           copilot_studio: 3
-          foundry: 3
+          foundry: 2
 
   - id: q4
     label: What should this agent do?
@@ -161,7 +161,7 @@ questions:
           agent_builder: 1
           m365_copilot: 2
           copilot_studio: 3
-          foundry: 2
+          foundry: 1
 
       - id: q4c
         label: Complete multi-step tasks — follow a process, check multiple systems, or take actions like submitting forms or updating records
