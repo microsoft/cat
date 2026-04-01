@@ -5,6 +5,9 @@ let fastTrack = false;
 let currentQuestionIndex = 0;
 let listenersReady = false;
 let recommendedPlatformId = null;
+let isURLLoaded = false; // true when loaded from shared URL params
+let originalPlatformId = null; // from &r= URL param for temporal comparison
+let originalDate = null; // from &d= URL param
 
 // === UTILITIES ===
 function showSection(id) {
@@ -222,7 +225,7 @@ function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge)
   const firstPartyHtml = (rec.first_party_agents || []).length > 0 ? `
     <details class="rec-accordion">
       <summary class="rec-accordion-trigger">
-        <span class="rec-section-title">Available 1st Party Copilot Agents</span>
+        <span class="rec-section-title">Available First-Party Copilot Agents</span>
         <span class="rec-accordion-count">${rec.first_party_agents.length}</span>
         <svg class="rec-accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
       </summary>
@@ -317,9 +320,29 @@ async function boot() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const text = await res.text();
     apa = jsyaml.load(text);
-    showSection('welcome-section');
-    history.replaceState({ section: 'welcome-section' }, '', '');
     setupListeners();
+
+    // Check for URL params (shared link)
+    const urlResult = parseURLParams();
+    if (urlResult) {
+      if (urlResult.mode === 'wizard') {
+        // Pre-fill wizard with answers from URL
+        currentQuestionIndex = 0;
+        renderQuestion();
+        showSection('assessment-section');
+        history.replaceState({ section: 'assessment-section', questionIndex: 0 }, '', '');
+      } else {
+        // mode=card (default): skip wizard, render card directly
+        isURLLoaded = true;
+        renderRecommendation();
+        showSection('recommendation-section');
+        // Don't push history state for URL-loaded cards (eng review decision 3A)
+        history.replaceState({ section: 'recommendation-section' }, '', '');
+      }
+    } else {
+      showSection('welcome-section');
+      history.replaceState({ section: 'welcome-section' }, '', '');
+    }
   } catch (err) {
     document.getElementById('error-message').textContent =
       `Could not load advisor data: ${err.message}`;
@@ -530,6 +553,7 @@ function renderRecommendation() {
     const mgEl = document.getElementById('rec-maturity-guidance');
     mgEl.innerHTML = buildMaturityGuidance('m365_copilot');
     mgEl.classList.remove('hidden');
+    renderDecisionCard();
     return;
   }
 
@@ -596,6 +620,7 @@ function renderRecommendation() {
   const mgEl = document.getElementById('rec-maturity-guidance');
   mgEl.innerHTML = buildMaturityGuidance(top.id);
   mgEl.classList.remove('hidden');
+  renderDecisionCard();
 }
 
 function restart() {
@@ -603,6 +628,13 @@ function restart() {
   fastTrack = false;
   currentQuestionIndex = 0;
   recommendedPlatformId = null;
+  isURLLoaded = false;
+  originalPlatformId = null;
+  originalDate = null;
+  // Clear URL params
+  if (window.location.search) {
+    history.replaceState(null, '', window.location.pathname);
+  }
   showSection('welcome-section');
   pushState('welcome-section');
 }
@@ -614,6 +646,326 @@ function startFullAssessment() {
   renderQuestion();
   showSection('assessment-section');
   pushState('assessment-section', 0);
+}
+
+// === URL PARAMETER PARSING ===
+// Returns { mode: 'card'|'wizard' } if valid params found, or null
+function parseURLParams() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.size === 0) return null;
+
+  const mode = params.get('mode') || 'card';
+  originalPlatformId = params.get('r') || null;
+  originalDate = params.get('d') || null;
+
+  // Fast-track handling
+  if (params.get('ft') === '1') {
+    fastTrack = true;
+    answers = {};
+    return { mode };
+  }
+
+  // Build answers from URL params
+  const questionIds = new Set(apa.questions.map(q => q.id));
+  const validOptionIds = new Set();
+  apa.questions.forEach(q => q.options.forEach(o => validOptionIds.add(o.id)));
+
+  let hasValidAnswer = false;
+  let hasDrift = false;
+
+  questionIds.forEach(qId => {
+    const value = params.get(qId);
+    if (value && validOptionIds.has(value)) {
+      answers[qId] = value;
+      hasValidAnswer = true;
+    } else if (value) {
+      // Unknown option — schema drift, ignore
+      hasDrift = true;
+    }
+  });
+
+  // Check for questions in YAML not present in URL
+  apa.questions.forEach(q => {
+    if (!answers[q.id]) hasDrift = true;
+  });
+
+  if (!hasValidAnswer) return null;
+
+  // Store drift flag for later display
+  window._decisionCardDrift = hasDrift;
+
+  fastTrack = false;
+  return { mode };
+}
+
+// === DECISION CARD ===
+function buildShareableURL() {
+  const base = window.location.origin + window.location.pathname;
+  const params = new URLSearchParams();
+
+  if (fastTrack) {
+    params.set('ft', '1');
+  } else {
+    apa.questions.forEach(q => {
+      if (answers[q.id]) params.set(q.id, answers[q.id]);
+    });
+  }
+
+  params.set('r', recommendedPlatformId || '');
+  params.set('d', formatDate(new Date()));
+  params.set('mode', 'card');
+
+  return `${base}?${params.toString()}`;
+}
+
+function formatDate(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}${m}${d}`;
+}
+
+function formatDateDisplay(yyyymmdd) {
+  if (!yyyymmdd || yyyymmdd.length !== 8) return '';
+  const y = yyyymmdd.substring(0, 4);
+  const m = parseInt(yyyymmdd.substring(4, 6), 10);
+  const d = parseInt(yyyymmdd.substring(6, 8), 10);
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${months[m - 1]} ${d}, ${y}`;
+}
+
+// Compute key factors using delta algorithm: (winning_platform_score − best_runner_up_score)
+function computeDecisionKeyFactors() {
+  if (fastTrack || !recommendedPlatformId) return [];
+  const ranked = rankPlatforms(answers);
+  const runnerId = ranked.length > 1 ? ranked[1].id : null;
+
+  const deltas = [];
+  apa.questions.forEach(q => {
+    const optionId = answers[q.id];
+    if (!optionId) return;
+    const option = q.options.find(o => o.id === optionId);
+    if (!option) return;
+
+    const winnerScore = option.scores[recommendedPlatformId] ?? 0;
+    const runnerScore = runnerId ? (option.scores[runnerId] ?? 0) : 0;
+    const delta = winnerScore - runnerScore;
+
+    deltas.push({
+      questionLabel: q.label,
+      optionLabel: option.label,
+      delta
+    });
+  });
+
+  deltas.sort((a, b) => b.delta - a.delta);
+  return deltas.slice(0, 3).filter(d => d.delta > 0);
+}
+
+function renderDecisionCard() {
+  const card = document.getElementById('decision-card');
+  const divider = document.getElementById('decision-card-divider');
+  if (!card || !recommendedPlatformId) return;
+
+  // Platform chip
+  const platformMeta = apa.meta.platforms.find(p => p.id === recommendedPlatformId);
+  const chipLabel = recommendedPlatformId.toUpperCase();
+  document.getElementById('decision-card-chip').textContent = chipLabel;
+
+  // Score
+  const scoreEl = document.getElementById('decision-card-score');
+  if (fastTrack) {
+    scoreEl.textContent = '';
+  } else {
+    const ranked = rankPlatforms(answers);
+    const entry = ranked.find(r => r.id === recommendedPlatformId);
+    if (entry) {
+      const maxScore = apa.scoring.raw_score_max || 15;
+      const thresholdClass = entry.label.startsWith('Strong') ? 'threshold-strong'
+        : entry.label.startsWith('Good') ? 'threshold-good' : 'threshold-possible';
+      scoreEl.innerHTML = `${entry.score}/${maxScore} <span class="threshold-label ${thresholdClass}">— ${entry.label}</span>`;
+    }
+  }
+
+  // Key factors
+  const factors = computeDecisionKeyFactors();
+  const factorsContainer = document.getElementById('decision-card-factors');
+  const factorsList = document.getElementById('decision-card-factors-list');
+  if (factors.length > 0) {
+    factorsList.innerHTML = factors.map(f =>
+      `<li>"${f.questionLabel}" → ${f.optionLabel}</li>`
+    ).join('');
+    factorsContainer.style.display = '';
+  } else {
+    factorsContainer.style.display = 'none';
+  }
+
+  // Recipient context (URL-loaded only)
+  const contextEl = document.getElementById('decision-card-context');
+  contextEl.style.display = isURLLoaded ? '' : 'none';
+
+  // Temporal change banner
+  const bannerEl = document.getElementById('decision-card-banner');
+  if (isURLLoaded && originalPlatformId && originalPlatformId !== recommendedPlatformId) {
+    const dateStr = originalDate ? formatDateDisplay(originalDate) : 'a previous visit';
+    bannerEl.innerHTML = `Your recommendation has changed since ${dateStr}. The platform landscape has been updated. <a href="javascript:void(0)" onclick="restart()">Retake assessment →</a>`;
+    bannerEl.style.display = '';
+  } else {
+    bannerEl.style.display = 'none';
+  }
+
+  // Schema drift note
+  const driftEl = document.getElementById('decision-card-drift');
+  if (window._decisionCardDrift) {
+    driftEl.textContent = 'ℹ Some evaluation criteria have been updated since this recommendation was generated.';
+    driftEl.style.display = '';
+  } else {
+    driftEl.style.display = 'none';
+  }
+
+  // Date
+  const dateEl = document.getElementById('decision-card-date');
+  const now = new Date();
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  dateEl.textContent = `Generated ${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+
+  // Re-evaluate link (URL-loaded only)
+  const reevalLink = document.getElementById('decision-card-reevaluate');
+  const linksSep = document.getElementById('decision-card-links-sep');
+  if (isURLLoaded) {
+    reevalLink.style.display = '';
+    linksSep.style.display = '';
+    reevalLink.onclick = () => { window.location.href = buildShareableURL(); };
+  } else {
+    reevalLink.style.display = 'none';
+    linksSep.style.display = 'none';
+  }
+
+  // Show card + divider
+  divider.style.display = '';
+  card.style.display = '';
+}
+
+// === SHARE & DOWNLOAD ===
+function copyShareLink() {
+  const url = buildShareableURL();
+  const btn = document.getElementById('decision-card-share');
+  const originalText = btn.textContent;
+
+  function showSuccess() {
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('btn-decision-copied');
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.classList.remove('btn-decision-copied');
+    }, 2000);
+  }
+
+  function showError() {
+    btn.textContent = 'Copy failed';
+    btn.classList.add('btn-decision-error');
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.classList.remove('btn-decision-error');
+    }, 2000);
+    // Show manual copy input below card
+    let fallback = document.getElementById('decision-card-fallback-url');
+    if (!fallback) {
+      fallback = document.createElement('input');
+      fallback.id = 'decision-card-fallback-url';
+      fallback.type = 'text';
+      fallback.readOnly = true;
+      fallback.style.cssText = 'width:100%;margin-top:8px;padding:8px;font-size:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-mono);';
+      document.getElementById('decision-card').appendChild(fallback);
+    }
+    fallback.value = url;
+    fallback.style.display = '';
+    fallback.select();
+  }
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(showSuccess, () => {
+      // Fallback: execCommand
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = url;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showSuccess();
+      } catch { showError(); }
+    });
+  } else {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showSuccess();
+    } catch { showError(); }
+  }
+}
+
+function loadHtml2Canvas() {
+  return new Promise((resolve, reject) => {
+    if (window.html2canvas) { resolve(window.html2canvas); return; }
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    script.onload = () => resolve(window.html2canvas);
+    script.onerror = () => reject(new Error('Failed to load html2canvas'));
+    document.head.appendChild(script);
+  });
+}
+
+async function downloadCardImage() {
+  const btn = document.getElementById('decision-card-download');
+  const originalText = btn.textContent;
+  btn.textContent = '⏳ Loading...';
+  btn.disabled = true;
+
+  try {
+    const h2c = await loadHtml2Canvas();
+    btn.textContent = '⏳ Preparing...';
+
+    const card = document.getElementById('decision-card');
+    // Fixed width for consistent PNG output (eng review decision 7B-1)
+    const origWidth = card.style.width;
+    card.style.width = '600px';
+
+    await document.fonts.ready;
+
+    const canvas = await h2c(card, {
+      scale: 2,
+      backgroundColor: '#FFFFFF',
+      useCORS: true,
+      logging: false,
+    });
+
+    card.style.width = origWidth;
+
+    const link = document.createElement('a');
+    link.download = `apa-recommendation-${recommendedPlatformId}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+
+    btn.textContent = originalText;
+    btn.disabled = false;
+  } catch (err) {
+    btn.textContent = 'Download unavailable';
+    btn.classList.add('btn-decision-error');
+    btn.disabled = false;
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.classList.remove('btn-decision-error');
+    }, 3000);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', boot);

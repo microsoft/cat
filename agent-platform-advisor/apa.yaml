@@ -69,7 +69,7 @@ questions:
     purpose: External-facing is a hard constraint that affects platform eligibility
     prompt: Will this agent be used by people within your organization, or by external users such as customers or partners?
     hard_rules:
-      - condition: option in [q8b, q8c]
+      - condition: option in [q8b]
         effect: >
           Set agent_builder = 0 and m365_copilot = 0.
           Agent Builder has no external publishing path.
@@ -183,7 +183,7 @@ questions:
   - id: q3
     label: What information does this agent need to access?
     purpose: Grounding requirements narrow the field fast
-    prompt: Where does the information this agent needs currently live? Pick an option closest to where the information lives today.
+    prompt: Where does the information this agent needs currently live? Pick the option closest to where the information lives today.
     options:
       - id: q3a
         label: Content in Microsoft 365 — like SharePoint, OneDrive, Teams, or Outlook
@@ -335,11 +335,11 @@ recommendations:
       Best when the built-in Microsoft 365 Copilot capabilities already meet most
       of what you need, with some customization.
     best_for:
-      - Extending Copilot within Teams, Outlook, SharePoint and other Microsoft 365 Apps
+      - Extending Copilot within Teams, Outlook, SharePoint, and other Microsoft 365 apps
       - Scenarios grounded in Microsoft 365 data and content
       - IT pros and makers comfortable with Microsoft 365 admin
     watch_out_for:
-      -	Available only within your organization — can't be shared externally 
+      - Available only within your organization — can't be shared externally
       - Limited customization compared to Copilot Studio
       - Not suited for complex multi-step workflows
     first_party_agents:
