@@ -9,8 +9,6 @@
 
 meta:
   version: "1.1"
-  scale_max: 3
-  questions_count: 5
   platforms:
     - id: agent_builder
       label: Agent Builder

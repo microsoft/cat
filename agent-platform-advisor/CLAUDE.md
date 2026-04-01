@@ -25,8 +25,4 @@ Key constraints from DESIGN.md:
 
 ## Key actions
 
-Always update CHANGELOG.md after making changes.any CSS/UI work)
-
-## Key actions
-
 Always update CHANGELOG.md after making changes.

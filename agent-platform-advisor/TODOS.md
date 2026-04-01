@@ -20,3 +20,10 @@
 **What:** When implementing the Decision Card, use CSS custom properties for colors/surfaces instead of hardcoded hex values. This makes dark mode migration trivial when APA dark mode ships.
 **Why:** Future-proofs the card. If built with hardcoded colors, dark mode will require touching every color declaration.
 **Depends on:** Decision Card feature ships first. Dark mode for APA is not yet planned.
+
+## Fix welcome screen platform grid stacking on mobile
+**Priority:** Low
+**Context:** Discovered during design review — the exploration screen stacks to single column at 768px, but the welcome screen's `.platform-grid` forces `1fr 1fr` at 768px and never stacks. This creates inconsistent responsive behavior.
+**What:** Add `@media (max-width: 480px)` rule to set `.platform-grid` to `1fr`. Four 200px-min cards in 2 columns at 375px width means each card is only ~170px wide — cramped.
+**Why:** Consistent responsive behavior across screens; better mobile readability.
+**Depends on:** Nothing — can be done independently.
