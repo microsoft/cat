@@ -592,9 +592,13 @@ body {
 }
 
 .exploration-card-link {
+  display: inline-flex;
+  align-items: center;
   font-size: 14px;
   color: var(--primary);
   text-decoration: none;
+  min-height: 44px;
+  padding: 12px 0;
 }
 
 .exploration-card-link:hover {
