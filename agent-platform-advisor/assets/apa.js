@@ -769,7 +769,7 @@ function renderDecisionCard() {
 
   // Platform chip
   const platformMeta = apa.meta.platforms.find(p => p.id === recommendedPlatformId);
-  const chipLabel = recommendedPlatformId.toUpperCase();
+  const chipLabel = platformMeta ? platformMeta.label : recommendedPlatformId;
   document.getElementById('decision-card-chip').textContent = chipLabel;
 
   // Score
