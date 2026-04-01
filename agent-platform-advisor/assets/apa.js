@@ -841,9 +841,11 @@ function renderDecisionCard() {
     linksSep.style.display = 'none';
   }
 
-  // Show card + divider
+  // Show card + divider + share anchor
   divider.style.display = '';
   card.style.display = '';
+  const shareAnchor = document.getElementById('rec-share-anchor');
+  if (shareAnchor) shareAnchor.style.display = '';
 }
 
 // === SHARE & DOWNLOAD ===
