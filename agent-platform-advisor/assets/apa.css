@@ -1217,60 +1217,6 @@ body {
 }
 
 /* ── Maturity guidance ── */
-.maturity-guidance {
-  margin-top: 32px;
-  padding: 24px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-.maturity-guidance h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--foreground);
-  margin: 0 0 8px 0;
-}
-.maturity-guidance > p {
-  font-size: 14px;
-  color: var(--muted-foreground);
-  margin: 0 0 20px 0;
-  line-height: 1.5;
-}
-.maturity-stages {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
-}
-.maturity-stage {
-  padding: 16px;
-  background: var(--muted);
-  border-radius: var(--radius);
-  border: 1px solid var(--border-subtle);
-}
-.maturity-stage.active {
-  border-color: var(--primary);
-  background: var(--primary-xlight);
-}
-.maturity-stage-label {
-  font-family: 'Geist Mono', monospace;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--primary);
-  margin-bottom: 8px;
-}
-.maturity-stage p {
-  font-size: 14px;
-  color: var(--foreground);
-  margin: 0 0 8px 0;
-  line-height: 1.4;
-}
-.maturity-stage-platforms {
-  font-family: 'Geist Mono', monospace;
-  font-size: 11px;
-  color: var(--muted-foreground);
-}
 
 /* Decision card share anchor (top of recommendation) */
 .rec-share-anchor {

@@ -176,28 +176,6 @@ function badgeClass(label) {
   return 'badge-not';
 }
 
-function buildMaturityGuidance(recommendedPlatformId) {
-  const mg = apa.maturity_guidance;
-  if (!mg) return '';
-  const platformLabels = Object.fromEntries(apa.meta.platforms.map(p => [p.id, p.label]));
-  const stagesHtml = mg.stages.map(stage => {
-    const isActive = stage.platforms.includes(recommendedPlatformId);
-    const platformNames = stage.platforms.map(id => platformLabels[id] || id).join(', ');
-    return `
-      <div class="maturity-stage${isActive ? ' active' : ''}">
-        <div class="maturity-stage-label">${stage.label}</div>
-        <p>${stage.description}</p>
-        <div class="maturity-stage-platforms">${platformNames}</div>
-      </div>`;
-  }).join('');
-
-  return `
-    <div class="maturity-guidance">
-      <h3>${mg.heading}</h3>
-      <p>${mg.description}</p>
-      <div class="maturity-stages">${stagesHtml}</div>
-    </div>`;
-}
 
 function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge) {
   const rec = apa.recommendations[platformId];
@@ -550,9 +528,6 @@ function renderRecommendation() {
     document.getElementById('rec-fasttrack-prompt').classList.remove('hidden');
     document.getElementById('rec-score-toggle').classList.add('hidden');
     document.getElementById('rec-score-comparison').classList.add('hidden');
-    const mgEl = document.getElementById('rec-maturity-guidance');
-    mgEl.innerHTML = buildMaturityGuidance('m365_copilot');
-    mgEl.classList.remove('hidden');
     renderDecisionCard();
     return;
   }
@@ -585,9 +560,6 @@ function renderRecommendation() {
     document.getElementById('rec-score-comparison').classList.add('hidden');
     document.getElementById('rec-score-toggle').classList.remove('hidden');
     document.getElementById('rec-score-toggle').querySelector('.score-toggle-chevron').textContent = '▾';
-    const mgEl = document.getElementById('rec-maturity-guidance');
-    mgEl.innerHTML = buildMaturityGuidance(top.id);
-    mgEl.classList.remove('hidden');
     return;
   }
 
@@ -617,9 +589,6 @@ function renderRecommendation() {
   document.getElementById('rec-score-toggle').classList.remove('hidden');
   document.getElementById('rec-score-toggle').querySelector('.score-toggle-chevron').textContent = '▾';
 
-  const mgEl = document.getElementById('rec-maturity-guidance');
-  mgEl.innerHTML = buildMaturityGuidance(top.id);
-  mgEl.classList.remove('hidden');
   renderDecisionCard();
 }
 

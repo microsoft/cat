@@ -427,24 +427,3 @@ recommendations:
       - Overkill for standard Microsoft 365-native or low-code scenarios
 
 ################################################################################
-# MATURITY GUIDANCE
-################################################################################
-
-maturity_guidance:
-  heading: Your platform choice will evolve
-  description: >
-    Most organizations follow a natural progression as they build confidence with AI agents.
-    The platform you start with today may not be the one you use at scale — and that's expected.
-  stages:
-    - label: Individual
-      description: Build agents for yourself to learn, experiment, and improve personal productivity
-      platforms: [agent_builder]
-    - label: Team
-      description: Share agents with your immediate team to solve common business challenges
-      platforms: [agent_builder, m365_copilot]
-    - label: Division / Organization
-      description: Deploy agents across departments with governance controls, evaluation, and integration requirements
-      platforms: [copilot_studio, foundry]
-    - label: External / B2C
-      description: Expose agents to customers, partners, or the public — with the right safety, evaluation, and operational readiness
-      platforms: [copilot_studio, foundry]
