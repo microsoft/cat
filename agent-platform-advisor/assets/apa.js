@@ -239,12 +239,8 @@ function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge)
         </div>
       </div>
       <p class="rec-summary">${rec.summary}</p>
-      ${platformId === 'copilot_studio' && answersMap.q1 === 'q1c'
-        ? `<div class="rec-dev-note">
-            <strong>🛠️ Developer tip:</strong> You can build Copilot Studio agents in YAML using the
-            <a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-overview" target="_blank" rel="noopener noreferrer">Copilot Studio extension for VS Code</a>
-            — no low-code canvas required.
-          </div>`
+      ${rec.persona_tips && rec.persona_tips[answersMap.q1]
+        ? `<div class="rec-dev-note">${rec.persona_tips[answersMap.q1]}</div>`
         : ''}
       ${resourcesHtml}
       ${factorsHtml}

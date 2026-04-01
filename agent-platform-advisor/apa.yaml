@@ -400,6 +400,11 @@ recommendations:
       - Long-running multi-agent orchestration is better served by Foundry
       - Model selection is limited to a curated list — no bring-your-own model
       - No per-user long-term memory or personalization
+    persona_tips:
+      q1c: >
+        🛠️ <strong>Developer tip:</strong> You can build Copilot Studio agents in YAML using the
+        <a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-overview" target="_blank" rel="noopener noreferrer">Copilot Studio extension for VS Code</a>
+        — no low-code canvas required.
 
   foundry:
     headline: Microsoft Foundry
