@@ -557,9 +557,11 @@ function renderRecommendation() {
     secondLabel.classList.add('hidden');
     document.getElementById('rec-second-card').innerHTML = '';
     document.getElementById('rec-score-comparison').innerHTML = buildScoreComparison(ranked, answers);
-    document.getElementById('rec-score-comparison').classList.add('hidden');
-    document.getElementById('rec-score-toggle').classList.remove('hidden');
-    document.getElementById('rec-score-toggle').querySelector('.score-toggle-chevron').textContent = '▾';
+    document.getElementById('rec-score-comparison').classList.remove('hidden');
+    document.getElementById('rec-score-toggle').classList.add('hidden');
+    requestAnimationFrame(() => {
+      document.getElementById('rec-score-comparison').querySelectorAll('.sc-bar-fill').forEach(bar => bar.classList.add('animate'));
+    });
     return;
   }
 
@@ -585,9 +587,11 @@ function renderRecommendation() {
     buildPlatformCard(second.id, ranked, answers, false, false);
 
   document.getElementById('rec-score-comparison').innerHTML = buildScoreComparison(ranked, answers);
-  document.getElementById('rec-score-comparison').classList.add('hidden');
-  document.getElementById('rec-score-toggle').classList.remove('hidden');
-  document.getElementById('rec-score-toggle').querySelector('.score-toggle-chevron').textContent = '▾';
+  document.getElementById('rec-score-comparison').classList.remove('hidden');
+  document.getElementById('rec-score-toggle').classList.add('hidden');
+  requestAnimationFrame(() => {
+    document.getElementById('rec-score-comparison').querySelectorAll('.sc-bar-fill').forEach(bar => bar.classList.add('animate'));
+  });
 
   renderDecisionCard();
 }
