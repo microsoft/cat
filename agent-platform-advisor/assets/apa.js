@@ -253,6 +253,33 @@ function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge)
     </div>`;
 }
 
+const DEFAULT_TITLE = 'Agent Platform Advisor — Microsoft CAT';
+
+// === SESSION STORAGE ===
+function saveAnswersToStorage() {
+  try { sessionStorage.setItem('apa-answers', JSON.stringify(answers)); } catch (e) { /* private browsing */ }
+}
+
+function clearAnswersFromStorage() {
+  try { sessionStorage.removeItem('apa-answers'); } catch (e) { /* private browsing */ }
+}
+
+function restoreAnswersFromStorage() {
+  try {
+    const stored = sessionStorage.getItem('apa-answers');
+    if (!stored) return null;
+    const parsed = JSON.parse(stored);
+    // Schema drift check: validate every key/value against current YAML
+    const validQuestionIds = new Set(apa.questions.map(q => q.id));
+    for (const [qId, optId] of Object.entries(parsed)) {
+      if (!validQuestionIds.has(qId)) { clearAnswersFromStorage(); return null; }
+      const question = apa.questions.find(q => q.id === qId);
+      if (!question.options.some(o => o.id === optId)) { clearAnswersFromStorage(); return null; }
+    }
+    return parsed;
+  } catch (e) { return null; }
+}
+
 // === BOOT ===
 async function boot() {
   showSection('loading-section');
@@ -261,9 +288,20 @@ async function boot() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const text = await res.text();
     apa = jsyaml.load(text);
+
+    // YAML schema validation
+    if (!apa.questions || !Array.isArray(apa.questions) || apa.questions.length === 0)
+      throw new Error('Missing or empty "questions" array');
+    if (!apa.scoring || !apa.scoring.recommendation_thresholds)
+      throw new Error('Missing "scoring.recommendation_thresholds"');
+    if (!apa.recommendations || typeof apa.recommendations !== 'object')
+      throw new Error('Missing "recommendations" object');
+    if (!apa.meta || !apa.meta.platforms)
+      throw new Error('Missing "meta.platforms"');
+
     setupListeners();
 
-    // Check for URL params (shared link)
+    // Check for URL params (shared link) — URL params always win over sessionStorage
     const urlResult = parseURLParams();
     if (urlResult) {
       if (urlResult.mode === 'wizard') {
@@ -281,8 +319,18 @@ async function boot() {
         history.replaceState({ section: 'recommendation-section' }, '', '');
       }
     } else {
-      showSection('welcome-section');
-      history.replaceState({ section: 'welcome-section' }, '', '');
+      // Try restoring from sessionStorage
+      const restored = restoreAnswersFromStorage();
+      if (restored && Object.keys(restored).length > 0) {
+        answers = restored;
+        currentQuestionIndex = Math.min(Object.keys(restored).length, apa.questions.length - 1);
+        renderQuestion();
+        showSection('assessment-section');
+        history.replaceState({ section: 'assessment-section', questionIndex: currentQuestionIndex }, '', '');
+      } else {
+        showSection('welcome-section');
+        history.replaceState({ section: 'welcome-section' }, '', '');
+      }
     }
   } catch (err) {
     document.getElementById('error-message').textContent =
@@ -347,6 +395,7 @@ function renderQuestion() {
       </div>`;
     const select = () => {
       answers[question.id] = opt.id;
+      saveAnswersToStorage();
       renderQuestion();
     };
     div.addEventListener('click', select);
@@ -480,6 +529,7 @@ function showRecNav(hasSecondary) {
 }
 
 function renderRecommendation() {
+  clearAnswersFromStorage();
   if (fastTrack) {
     recommendedPlatformId = 'm365_copilot';
     document.getElementById('rec-primary-card').innerHTML =
@@ -492,6 +542,7 @@ function renderRecommendation() {
     document.getElementById('rec-score-comparison').classList.add('hidden');
     // Hide nav for fast-track (no scores, no secondary)
     document.getElementById('rec-nav').style.display = 'none';
+    updateTabTitle();
     renderDecisionCard();
     return;
   }
@@ -528,6 +579,7 @@ function renderRecommendation() {
     });
     // Show nav without "Also Consider"
     showRecNav(false);
+    updateTabTitle();
     renderDecisionCard();
     return;
   }
@@ -562,7 +614,16 @@ function renderRecommendation() {
 
   // Show nav with "Also Consider"
   showRecNav(true);
+  updateTabTitle();
   renderDecisionCard();
+}
+
+function updateTabTitle() {
+  if (!recommendedPlatformId) return;
+  const platformMeta = (apa.meta.platforms || []).find(p => p.id === recommendedPlatformId);
+  if (platformMeta) {
+    document.title = `APA: ${platformMeta.label} recommended`;
+  }
 }
 
 function restart() {
@@ -573,6 +634,8 @@ function restart() {
   isURLLoaded = false;
   originalPlatformId = null;
   originalDate = null;
+  clearAnswersFromStorage();
+  document.title = DEFAULT_TITLE;
   // Clear URL params
   if (window.location.search) {
     history.replaceState(null, '', window.location.pathname);

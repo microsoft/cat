@@ -57,7 +57,10 @@
 body {
   font-family: var(--font-sans);
   line-height: 1.5;
-  background: linear-gradient(135deg, #F0F6FF 0%, #F5F5F5 60%, #FAF5FF 100%);
+  --gradient-start: #F0F6FF;
+  --gradient-mid: #F5F5F5;
+  --gradient-end: #FAF5FF;
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 60%, var(--gradient-end) 100%);
   background-attachment: fixed;
   color: var(--foreground);
   min-height: 100vh;
@@ -408,7 +411,7 @@ body {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--card);
 }
 
 .option-card:hover .option-radio-outer {
@@ -465,7 +468,7 @@ body {
 }
 
 .check-icon {
-  color: #107C10;
+  color: var(--success);
   font-size: 16px;
   margin-top: 2px;
   flex-shrink: 0;
