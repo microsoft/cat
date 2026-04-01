@@ -5,21 +5,34 @@ All notable changes to the Agent Platform Advisor are documented here.
 ## [Unreleased] — apa-v2 branch
 
 ### Added — Apr 1
+- **Guided Exploration** — third prescreen option "I'm exploring what's possible with agents" leads to a dedicated exploration screen showing all four platforms with "Best for" labels and scenario-focused summaries. Back navigation and CTA to start the assessment. New `exploration_best_for` and `exploration_summary` fields in apa.yaml.
+- **"Why not?" explainer** — when the top two platforms score within 2 points, a sentence inside the pair banner explains the decisive factor (e.g., "Copilot Studio edged out Foundry because..."). Uses `computeWhyNot()` delta algorithm.
+- **Dynamic browser tab title** — tab shows "APA: [Platform] recommended" after assessment, reverts to "Agent Platform Advisor — Microsoft CAT" on restart.
+- **sessionStorage persistence** — wizard answers survive page refresh. URL params take precedence. Schema drift detection silently discards stale data. Private browsing guard (try/catch).
+- **YAML schema validation** — validates questions, scoring, recommendations, and meta.platforms after load. Errors shown in existing error section.
+- **Clarity custom analytics** — 6 event tags: wizard_completed, fast_track, card_shared, card_url_loaded, temporal_change, platform.
 - **Decision Card** — shareable summary card appears below the recommendation with platform name, score, key factors, and a "Share link" button that copies a URL encoding the user's answers. Recipients can visit the shared URL to see the recommendation directly (no wizard replay), or use `mode=wizard` to retake with pre-filled answers.
 - **Temporal change detection** — shared URLs include the original recommendation date and platform. On revisit, if the recommendation has changed (because `apa.yaml` was updated), a banner explains what shifted.
 - **Schema drift handling** — if `apa.yaml` adds or removes questions after a URL was generated, missing questions are scored as 0 and a note explains that criteria have been updated.
 - **Recommendation nav bar** — links at the top of the results page to Recommendation, Also Consider (conditional), and Score Breakdown. Smooth-scrolls to each section.
 - **Share anchor** — "📋 Share this recommendation" link below the primary card scrolls to the Decision Card.
 - **Persona-specific tips** — new `persona_tips` field in `apa.yaml` recommendations. When a professional developer gets Copilot Studio, a tip about building agents in YAML with the VS Code extension is shown.
-- **TODOS.md** — created with Playwright E2E, Clarity custom events, and dark mode items.
+- **TODOS.md** — created with Playwright E2E, dark mode, and welcome grid mobile stacking items.
 
 ### Changed — Apr 1
 - **Score Breakdown always visible** — moved out of the accordion toggle; bar animations trigger automatically on render.
 - **"Start Over" moved to bottom** — now appears below the Decision Card instead of mid-page.
+- **Close-score threshold** — pair banner and "Why not?" threshold raised from 1 to 2 points.
+- **Hard rules moved to YAML** — `HARD_RULES` and `HARD_RULE_LABELS` moved from JS constants to `apa.yaml scoring.hard_rules`.
+- **DRY scoring helpers** — extracted shared `getContributions()` function, replacing duplicated iteration in `getKeyFactors()`, `getScoreReason()`, and `computeDecisionKeyFactors()`.
+- **Dark mode CSS prep** — body gradient extracted to `--gradient-start/mid/end` custom properties; hardcoded `#fff` and `#107C10` replaced with `var(--card)` and `var(--success)`.
+- **Page title** — changed from "Agent Platform Advisor" to "Agent Platform Advisor — Microsoft CAT".
 
 ### Removed — Apr 1
 - **Maturity guidance section** — "Your platform choice will evolve" section removed entirely.
 - **PNG download** — html2canvas produced low-quality output with washed-out colors; removed in favor of the shareable URL.
+- **Dead code cleanup** — removed ICON_PATHS (38 lines), getIcon(), 244 lines of dead v1 CSS (checklist, structure, component, agent-types selectors), duplicate .question-subtitle selector, stale `meta.scale_max` and `meta.questions_count` from YAML, and `index-old.html` (2,875 lines).
+- **CLAUDE.md duplicate** — removed duplicate "Key actions" section.
 
 ### Fixed — Apr 1
 - **q8c dead reference** — removed non-existent `q8c` option from `hard_rules` condition in apa.yaml.
