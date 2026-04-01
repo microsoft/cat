@@ -537,12 +537,14 @@ body {
 
 /* Guided Exploration */
 .exploration-back {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-size: 12px;
   color: var(--muted-foreground);
   text-decoration: none;
   margin-bottom: 24px;
-  padding: 4px 0;
+  padding: 8px 0;
+  min-height: 44px;
 }
 
 .exploration-back:hover {
