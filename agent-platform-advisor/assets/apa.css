@@ -48,6 +48,48 @@
   --font-mono: "Geist Mono", "Cascadia Code", "Consolas", monospace;
 }
 
+/* ── Dark mode ── */
+[data-theme="dark"] {
+  /* Canvas & Surfaces */
+  --background: #1A1A1A;
+  --foreground: #E0E0E0;
+  --card: #2A2A2A;
+  --card-foreground: #E0E0E0;
+  --popover: #2A2A2A;
+  --popover-foreground: #E0E0E0;
+
+  /* Brand — slightly desaturated for dark backgrounds */
+  --primary: #2899F5;
+  --primary-hover: #60B3F7;
+  --primary-foreground: #FFFFFF;
+  --primary-light: #1A3A5C;
+  --primary-xlight: #162D47;
+
+  /* Secondary / Muted */
+  --secondary: #162D47;
+  --secondary-hover: #1A3A5C;
+  --secondary-foreground: #E0E0E0;
+  --muted: #333333;
+  --muted-foreground: #A0A0A0;
+  --accent: #162D47;
+  --accent-foreground: #E0E0E0;
+
+  /* Semantic */
+  --destructive: #E74856;
+  --destructive-foreground: #FFFFFF;
+  --success: #4CAF50;
+  --success-bg: #1A3A1A;
+  --warning: #E5B800;
+  --warning-bg: #3A3200;
+
+  /* UI */
+  --border: #3D3D3D;
+  --border-subtle: #333333;
+  --input: #3D3D3D;
+  --ring: #2899F5;
+  --ring-focus: rgba(40, 153, 245, 0.25);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -64,7 +106,61 @@ body {
   background-attachment: fixed;
   color: var(--foreground);
   min-height: 100vh;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background 0.3s, color 0.3s;
+}
+
+[data-theme="dark"] body {
+  --gradient-start: #0F1B2D;
+  --gradient-mid: #1A1A1A;
+  --gradient-end: #1A1525;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background-color: var(--accent);
+  border-color: var(--primary);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Show moon in light mode, sun in dark mode */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* Dark mode shadow adjustments */
+[data-theme="dark"] .card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.30),
+    0 1px 2px rgba(0, 0, 0, 0.20);
+}
+
+[data-theme="dark"] .option-card:hover {
+  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .sc-panel,
+[data-theme="dark"] .decision-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.30),
+    0 1px 2px rgba(0, 0, 0, 0.20);
 }
 
 .container {

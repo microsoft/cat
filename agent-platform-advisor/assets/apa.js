@@ -1003,4 +1003,17 @@ function copyShareLink() {
   }
 }
 
+// === THEME TOGGLE ===
+function initThemeToggle() {
+  const toggle = document.getElementById('theme-toggle');
+  if (!toggle) return;
+  toggle.addEventListener('click', () => {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    try { localStorage.setItem('cat-theme', next); } catch (e) { /* private browsing */ }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', boot);
+document.addEventListener('DOMContentLoaded', initThemeToggle);
