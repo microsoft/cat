@@ -51,7 +51,7 @@ questions:
         scores:
           agent_builder: 0
           m365_copilot: 0
-          copilot_studio: 0
+          copilot_studio: 1
           foundry: 3
 
       - id: q1d
@@ -109,7 +109,7 @@ questions:
           agent_builder: 3
           m365_copilot: 3
           copilot_studio: 3
-          foundry: 0
+          foundry: 1
 
       - id: q2b
         label: In a custom app — a website or mobile app your team builds
@@ -151,7 +151,7 @@ questions:
           agent_builder: 3
           m365_copilot: 0
           copilot_studio: 3
-          foundry: 0
+          foundry: 1
 
       - id: q4b
         label: Have a back-and-forth conversation and remember context
@@ -229,9 +229,24 @@ scoring:
     q4d:
       zero: [agent_builder, m365_copilot]
       label: "Complex agent orchestration — this is a hard requirement for Foundry"
+    q4c:
+      zero: [agent_builder]
+      label: "Multi-step tasks — Agent Builder cannot follow processes or take actions across systems"
     q8b:
       zero: [agent_builder, m365_copilot]
       label: "External user audience — Agent Builder and M365 Copilot cannot publish externally"
+    q2b:
+      zero: [agent_builder]
+      label: "Custom app deployment — Agent Builder can only run inside Microsoft 365"
+    q2c:
+      zero: [agent_builder]
+      label: "Background execution — Agent Builder has no event-driven or autonomous capabilities"
+    q3b:
+      zero: [agent_builder]
+      label: "External business systems — Agent Builder can only access Microsoft 365 data"
+    q3c:
+      zero: [agent_builder]
+      label: "Advanced data sources — Agent Builder can only access Microsoft 365 data"
 
   # Step 2 — Sum raw scores across all answered questions.
   raw_score_max: 15  # 5 questions × max score of 3
@@ -248,7 +263,7 @@ scoring:
       description: This platform meets most of your requirements with minor tradeoffs.
     - min: 4
       max: 7
-      label: Possible fit — review tradeoffs
+      label: Partial fit
       description: This platform can address your scenario but may require workarounds.
     - min: 0
       max: 3
@@ -266,6 +281,48 @@ scoring:
         rationale: Microsoft 365 Copilot for end users, Copilot Studio for customization and extension.
       - platforms: [agent_builder, m365_copilot]
         rationale: Agent Builder for Microsoft 365-native agents, Microsoft 365 Copilot for broader extensibility.
+
+  # Cross-question contradiction notes — shown as contextual banners
+  # when the user's answer combination is logically contradictory.
+  cross_question_notes:
+    - when:
+        q2: q2c
+        q4: q4a
+      note: >
+        You selected a background, event-driven agent but also chose simple Q&A.
+        Background agents typically process events automatically rather than answering
+        user questions. Consider whether your agent is event-driven or conversational.
+    - when:
+        q8: q8b
+        q2: q2a
+      note: >
+        You selected external users but want the agent inside Microsoft 365 apps.
+        External users typically can't access your organization's Teams, SharePoint,
+        or Outlook. Your agent may need a custom web deployment to reach them.
+    - when:
+        q1: q1a
+        q4: q4d
+      note: >
+        Complex multi-agent orchestration typically requires professional development
+        skills. Consider partnering with your development team, or selecting a simpler
+        task type that matches your experience level.
+    - when:
+        q1: q1a
+        q3: q3c
+      note: >
+        Advanced data sources like data warehouses and AI search tools usually require
+        technical expertise to configure. Consider whether your IT or development team
+        will help set up data access for the agent.
+
+  # Winner-persona mismatch notes — shown when the recommended platform
+  # doesn't match the builder persona.
+  winner_persona_notes:
+    - winner: foundry
+      persona: q1a
+      note: >
+        Microsoft Foundry is the right platform for this scenario, but it requires
+        professional development skills and Azure expertise. Consider partnering with
+        your development team to build and maintain this agent.
 
 ################################################################################
 # RECOMMENDATION COPY

@@ -932,6 +932,23 @@ body {
   color: var(--accent-foreground);
   text-align: center;
 }
+
+/* ── Cross-question contradiction notes ── */
+.cross-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.cross-note {
+  background: var(--warning-bg);
+  border: 1px solid var(--warning);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--foreground);
+  line-height: 1.5;
+}
 .second-label {
   font-size: 12px;
   font-weight: 600;
@@ -1040,6 +1057,119 @@ body {
   line-height: 1.5;
 }
 
+/* ── Per-question fit grid ── */
+.sc-grid-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+.sc-grid-heading {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted-foreground);
+  margin-bottom: 12px;
+}
+.pq-grid {
+  width: 100%;
+  border-collapse: collapse;
+}
+.pq-grid th,
+.pq-grid td {
+  padding: 6px 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+.pq-label-header {
+  width: 100px;
+}
+.pq-platform-header {
+  width: auto;
+}
+.pq-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+.pq-label {
+  text-align: left;
+  font-size: 12px;
+  color: var(--muted-foreground);
+  font-weight: 500;
+  padding-right: 12px;
+  white-space: nowrap;
+}
+.pq-cell {
+  text-align: center;
+}
+.pq-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+}
+.pq-dot.pq-strong {
+  background: var(--primary);
+}
+.pq-dot.pq-moderate {
+  background: var(--primary);
+  opacity: 0.55;
+}
+.pq-dot.pq-weak {
+  background: var(--primary);
+  opacity: 0.25;
+}
+.pq-dot.pq-none {
+  background: var(--muted);
+  border: 1px solid var(--border);
+  width: 10px;
+  height: 10px;
+}
+.pq-dot.pq-zeroed {
+  background: none;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.pq-legend {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.pq-legend .pq-dot {
+  width: 8px;
+  height: 8px;
+  margin-right: 2px;
+}
+.pq-legend .pq-dot.pq-none {
+  width: 6px;
+  height: 6px;
+}
+.pq-legend .pq-dot.pq-zeroed {
+  width: auto;
+  height: auto;
+  font-size: 10px;
+  margin-right: 0;
+}
+
+/* ── Close-score callout ── */
+.sc-close-callout {
+  margin: 16px 0 0;
+  padding: 12px 16px;
+  background: var(--primary-xlight);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius);
+  font-size: 13px;
+  color: var(--foreground);
+  line-height: 1.5;
+}
+
 @media (max-width: 480px) {
   .sc-panel {
     padding: 16px;
@@ -1054,6 +1184,14 @@ body {
   }
   .sc-badge {
     font-size: 10px;
+  }
+  .pq-grid th,
+  .pq-grid td {
+    padding: 4px 6px;
+  }
+  .pq-legend {
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .exploration-cta .btn {
     width: 100%;

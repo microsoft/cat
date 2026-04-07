@@ -145,13 +145,10 @@ function rankPlatforms(answersMap) {
 // Returns up to 3 bullet strings summarising key scoring factors (or disqualifying rules) for the given platform
 function getKeyFactors(platformId, answersMap) {
   const factors = [];
-  const hardRules = apa.scoring.hard_rules || {};
 
-  // 1. Hard rules that zeroed this platform
-  Object.entries(answersMap).forEach(([, optionId]) => {
-    if (hardRules[optionId] && hardRules[optionId].zero.includes(platformId)) {
-      factors.push(`⚠️ ${hardRules[optionId].label ?? optionId}`);
-    }
+  // 1. All hard rules that zeroed this platform
+  getHardRuleLabels(platformId, answersMap).forEach(label => {
+    factors.push(`⚠️ ${label}`);
   });
 
   // 2. Top-scoring questions for this platform
@@ -164,6 +161,42 @@ function getKeyFactors(platformId, answersMap) {
   return factors.slice(0, 3);
 }
 
+// Returns contextual notes for contradictory answer combinations
+function getCrossQuestionNotes(answersMap, winnerId) {
+  const notes = [];
+  const crossNotes = apa.scoring.cross_question_notes || [];
+  crossNotes.forEach(rule => {
+    const match = Object.entries(rule.when).every(
+      ([qid, optionId]) => answersMap[qid] === optionId
+    );
+    if (match) notes.push(rule.note.trim());
+  });
+
+  const personaNotes = apa.scoring.winner_persona_notes || [];
+  personaNotes.forEach(rule => {
+    if (rule.winner === winnerId && answersMap.q1 === rule.persona) {
+      notes.push(rule.note.trim());
+    }
+  });
+
+  return notes;
+}
+
+function renderCrossNotes(answersMap, winnerId) {
+  const container = document.getElementById('rec-cross-notes');
+  if (!container) return;
+  const notes = getCrossQuestionNotes(answersMap, winnerId);
+  if (notes.length === 0) {
+    container.classList.add('hidden');
+    container.innerHTML = '';
+    return;
+  }
+  container.innerHTML = notes.map(n =>
+    `<div class="cross-note">⚠️ ${n}</div>`
+  ).join('');
+  container.classList.remove('hidden');
+}
+
 const PLATFORM_ICONS = {
   agent_builder:  '../images/copilot.png',
   m365_copilot:   '../images/m365-copilot-logo.png',
@@ -174,7 +207,7 @@ const PLATFORM_ICONS = {
 function badgeClass(label) {
   if (label.startsWith('Strong'))   return 'badge-strong';
   if (label.startsWith('Good'))     return 'badge-good';
-  if (label.startsWith('Possible')) return 'badge-possible';
+  if (label.startsWith('Partial'))  return 'badge-possible';
   return 'badge-not';
 }
 
@@ -469,42 +502,146 @@ function handlePrev() {
 }
 
 // === SCORE COMPARISON ===
+
+// Short labels for questions in the per-question grid
+const Q_SHORT_LABELS = {
+  q1: 'Builder',
+  q8: 'Audience',
+  q2: 'Deployment',
+  q4: 'Task type',
+  q3: 'Data access',
+};
+
+// Returns all hard-rule labels that zeroed a platform
+function getHardRuleLabels(platformId, answersMap) {
+  const labels = [];
+  const hardRules = apa.scoring.hard_rules || {};
+  Object.values(answersMap).forEach(optionId => {
+    if (hardRules[optionId] && hardRules[optionId].zero.includes(platformId)) {
+      labels.push(hardRules[optionId].label ?? optionId);
+    }
+  });
+  return labels;
+}
+
+// Returns per-question scores for a platform: [{qId, score, maxScore}]
+function getPerQuestionScores(platformId, answersMap) {
+  return apa.questions.map(q => {
+    const optionId = answersMap[q.id];
+    if (!optionId) return { qId: q.id, score: 0, max: 3 };
+    const option = q.options.find(o => o.id === optionId);
+    return { qId: q.id, score: option ? (option.scores[platformId] ?? 0) : 0, max: 3 };
+  });
+}
+
+// Returns a comparative reason for a platform's score
 function getScoreReason(platformId, ranked, answersMap) {
   const rec = apa.recommendations[platformId];
   const rankEntry = ranked.find(r => r.id === platformId);
-  const hardRules = apa.scoring.hard_rules || {};
-  if (!rankEntry || rankEntry.score === 0) {
-    // Check for hard-rule disqualification
-    const zeroed = getZeroedPlatforms(answersMap);
-    if (zeroed[platformId]) {
-      const ruleKey = Object.values(answersMap)
-        .find(optId => hardRules[optId] && hardRules[optId].zero.includes(platformId));
-      if (ruleKey && hardRules[ruleKey].label) {
-        return hardRules[ruleKey].label;
-      }
-    }
+  const zeroed = getZeroedPlatforms(answersMap);
+
+  if (zeroed[platformId]) {
+    const labels = getHardRuleLabels(platformId, answersMap);
+    if (labels.length > 0) return labels.map(l => `⚠️ ${l}`).join('<br>');
     if (platformId === 'm365_copilot' && !fastTrack) {
       return 'Only available via the Microsoft 365 Copilot path — excluded from custom agent assessment.';
     }
     return rec ? rec.scoring_summary : 'Not applicable for this scenario.';
   }
-  // Dynamic: find the top contributing question
-  const top = getContributions(platformId, answersMap)[0];
-  if (top) {
-    return `Top factor: ${top.questionLabel} — ${top.optionLabel}`;
+
+  if (!rankEntry) return rec ? rec.scoring_summary : '';
+
+  const score = rankEntry.score;
+  const winner = ranked[0];
+  const isWinner = winner && winner.id === platformId;
+  const contribs = getContributions(platformId, answersMap);
+  const perQ = getPerQuestionScores(platformId, answersMap);
+  const perfectCount = perQ.filter(q => q.score === 3).length;
+  const zeroCount = perQ.filter(q => q.score === 0).length;
+
+  if (isWinner) {
+    if (perfectCount === 5) return 'Perfect fit — scored highest on every dimension.';
+    if (perfectCount >= 4) return 'Strong match across nearly all dimensions.';
+    const tops = contribs.slice(0, 2).map(c => c.questionLabel.toLowerCase());
+    return `Strongest on ${tops.join(' and ')}.`;
   }
+
+  // Runner-up or lower: explain gap relative to winner
+  if (winner && score > 0) {
+    const gap = winner.score - score;
+    const weakQs = perQ
+      .filter(q => {
+        const winnerOpt = answersMap[q.qId];
+        if (!winnerOpt) return false;
+        const wq = apa.questions.find(x => x.id === q.qId);
+        const wOpt = wq?.options.find(o => o.id === winnerOpt);
+        const winnerScore = wOpt ? (wOpt.scores[winner.id] ?? 0) : 0;
+        return winnerScore - q.score >= 2;
+      })
+      .map(q => Q_SHORT_LABELS[q.qId] || q.qId);
+
+    if (gap <= 2 && weakQs.length > 0) {
+      return `Close — lost ground on ${weakQs.join(' and ').toLowerCase()}.`;
+    }
+    if (zeroCount >= 3) {
+      return rec ? rec.scoring_summary : 'Limited fit for this scenario.';
+    }
+    if (weakQs.length > 0) {
+      return `Weaker fit on ${weakQs.join(' and ').toLowerCase()}.`;
+    }
+    const tops = contribs.slice(0, 2).map(c => c.questionLabel.toLowerCase());
+    if (tops.length > 0) return `Best on ${tops.join(' and ')}, but outscored overall.`;
+  }
+
   return rec ? rec.scoring_summary : '';
 }
 
+// Builds a per-question dot grid for all platforms
+function buildPerQuestionGrid(answersMap) {
+  const platforms = apa.meta.platforms.filter(p => p.id !== 'm365_copilot');
+  const zeroed = getZeroedPlatforms(answersMap);
+
+  const headerCells = platforms.map(p => {
+    const icon = PLATFORM_ICONS[p.id] || '';
+    return `<th class="pq-platform-header"><img class="pq-icon" src="${icon}" alt="${p.label}" title="${p.label}"></th>`;
+  }).join('');
+
+  const rows = apa.questions.map(q => {
+    const optionId = answersMap[q.id];
+    if (!optionId) return '';
+    const option = q.options.find(o => o.id === optionId);
+    if (!option) return '';
+    const shortLabel = Q_SHORT_LABELS[q.id] || q.label;
+
+    const cells = platforms.map(p => {
+      if (zeroed[p.id]) return '<td class="pq-cell"><span class="pq-dot pq-zeroed" title="Disqualified">—</span></td>';
+      const score = option.scores[p.id] ?? 0;
+      const cls = score === 3 ? 'pq-strong' : score === 2 ? 'pq-moderate' : score === 1 ? 'pq-weak' : 'pq-none';
+      const title = score === 3 ? 'Strong fit' : score === 2 ? 'Moderate fit' : score === 1 ? 'Weak fit' : 'No fit';
+      return `<td class="pq-cell"><span class="pq-dot ${cls}" title="${title} (${score}/3)"></span></td>`;
+    }).join('');
+
+    return `<tr><td class="pq-label">${shortLabel}</td>${cells}</tr>`;
+  }).join('');
+
+  return `
+    <table class="pq-grid">
+      <thead><tr><th class="pq-label-header"></th>${headerCells}</tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
 function buildScoreComparison(ranked, answersMap) {
-  const maxScore = apa.scoring.raw_score_max || 24;
+  const maxScore = apa.scoring.raw_score_max || 15;
+  const zeroed = getZeroedPlatforms(answersMap);
+
   const rows = apa.meta.platforms
     .filter(p => p.id !== 'm365_copilot')
     .map(p => {
     const rankEntry = ranked.find(r => r.id === p.id);
     const score = rankEntry ? rankEntry.score : 0;
     const label = rankEntry ? rankEntry.label : 'Not recommended';
-    const pct = Math.round((score / maxScore) * 100);
+    const pct = zeroed[p.id] ? 0 : Math.round((score / maxScore) * 100);
     const icon = PLATFORM_ICONS[p.id] || '';
     const reason = getScoreReason(p.id, ranked, answersMap);
     const badge = `<span class="rec-badge sc-badge ${badgeClass(label)}">${label}</span>`;
@@ -526,10 +663,32 @@ function buildScoreComparison(ranked, answersMap) {
       </div>`;
   }).join('');
 
+  // Close-score callout
+  const top = ranked[0];
+  const second = ranked[1];
+  let closeCallout = '';
+  if (top && second && !zeroed[second.id] && (top.score - second.score) <= 2 && second.score > 0) {
+    const gap = top.score - second.score;
+    const gapText = gap === 0 ? 'Zero points separate' : `Only ${gap} point${gap === 1 ? '' : 's'} separate${gap === 1 ? 's' : ''}`;
+    closeCallout = `<p class="sc-close-callout">📊 ${gapText} the top two platforms — your choice may come down to team skills and existing tooling.</p>`;
+  }
+
   return `
     <div class="sc-panel">
       <div class="sc-heading">Score Breakdown</div>
       ${rows}
+      ${closeCallout}
+      <div class="sc-grid-section">
+        <div class="sc-grid-heading">Per-question fit</div>
+        ${buildPerQuestionGrid(answersMap)}
+        <div class="pq-legend">
+          <span class="pq-dot pq-strong"></span> Strong
+          <span class="pq-dot pq-moderate"></span> Moderate
+          <span class="pq-dot pq-weak"></span> Weak
+          <span class="pq-dot pq-none"></span> None
+          <span class="pq-dot pq-zeroed">—</span> Disqualified
+        </div>
+      </div>
     </div>`;
 }
 
@@ -574,6 +733,7 @@ function renderRecommendation() {
     document.getElementById('rec-nav').style.display = 'none';
     updateTabTitle();
     if (typeof clarity === 'function') clarity('set', 'platform', recommendedPlatformId);
+    renderCrossNotes(answers, recommendedPlatformId);
     renderDecisionCard();
     return;
   }
@@ -615,6 +775,7 @@ function renderRecommendation() {
       clarity('set', 'wizard_completed', 'true');
       if (recommendedPlatformId) clarity('set', 'platform', recommendedPlatformId);
     }
+    renderCrossNotes(answers, recommendedPlatformId);
     renderDecisionCard();
     return;
   }
@@ -670,6 +831,7 @@ function renderRecommendation() {
     clarity('set', 'wizard_completed', 'true');
     if (recommendedPlatformId) clarity('set', 'platform', recommendedPlatformId);
   }
+  renderCrossNotes(answers, recommendedPlatformId);
   renderDecisionCard();
 }
 
@@ -840,12 +1002,13 @@ function computeWhyNot(winner, runner, answersMap) {
     const rScore = option.scores[runner.id] ?? 0;
     const delta = wScore - rScore;
     if (!bestDelta || delta > bestDelta.delta) {
-      bestDelta = { questionLabel: q.label, optionLabel: option.label, delta };
+      bestDelta = { qId: q.id, questionLabel: q.label, optionLabel: option.label, delta };
     }
   });
 
   if (!bestDelta || bestDelta.delta <= 0) return null;
-  return `${winnerMeta.label} edged out ${runnerMeta.label} because ${bestDelta.questionLabel} — ${bestDelta.optionLabel}.`;
+  const dimension = Q_SHORT_LABELS[bestDelta.qId] || bestDelta.questionLabel;
+  return `${winnerMeta.label} edged out ${runnerMeta.label} on <strong>${dimension.toLowerCase()}</strong> — you selected "${bestDelta.optionLabel}".`;
 }
 
 function renderDecisionCard() {

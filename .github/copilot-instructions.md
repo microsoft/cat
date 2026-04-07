@@ -4,6 +4,8 @@
 
 This is the **Microsoft Copilot Acceleration Team (CAT) website**, hosted at `https://microsoft.github.io/cat` via GitHub Pages. It is a static site — no build system, no bundler, no package manager. All HTML, CSS, and JS are hand-authored and served directly.
 
+There are **no build, test, or lint commands**. No `package.json`, no CI pipeline. Edit files directly and verify in a browser.
+
 ## Architecture
 
 **Landing page** (`/index.html`): Single-page site using Fluent UI Web Components, `assets/css/fluent.css`, and inline JS. Sections are anchor-linked (`#tools`, `#programs`, `#guidance`, `#stories`). Supports dark/light theme via `data-theme` attribute on `<html>` and `localStorage` key `cat-theme`.
@@ -14,7 +16,7 @@ This is the **Microsoft Copilot Acceleration Team (CAT) website**, hosted at `ht
 - `/agent-platform-advisor/index.html` ← reads `apa.yaml` (scoring matrix, questions, recommendations)
 - `/programs/ai-webinar.html` ← reads `ai-webinar-sessions.yml` (session schedule)
 
-**Agent Platform Advisor** (`/agent-platform-advisor/`): The most complex sub-app — a multi-step scoring wizard. It has its own CSS (`assets/apa.css`), JS (`assets/apa.js`), and a dedicated design system documented in `DESIGN.md`. Always read `agent-platform-advisor/DESIGN.md` before making visual changes to this app.
+**Agent Platform Advisor** (`/agent-platform-advisor/`): The most complex sub-app — a multi-step scoring wizard with shareable URL-encoded results, sessionStorage persistence, and temporal change detection. It has its own CSS (`assets/apa.css`), JS (`assets/apa.js`), and a dedicated design system documented in `DESIGN.md`. Always read `agent-platform-advisor/DESIGN.md` before making visual changes to this app.
 
 **SparkTank** (`/sparktank/`): Facilitation/game page with its own CSS (`assets/css/strategix.css`) and JS (`assets/js/strategix.js`). Uses `html2canvas` and `jspdf` from CDN for export.
 
@@ -30,7 +32,7 @@ This is the **Microsoft Copilot Acceleration Team (CAT) website**, hosted at `ht
 - **AI Webinar sessions:** `programs/ai-webinar-sessions.yml` is the source of truth for webinar data. The page classifies sessions as upcoming/past using a hardcoded Pacific Time cutoff (`11:00:00-08:00`).
 - **Analytics:** Some pages include Microsoft Clarity tracking scripts.
 
-## Agent Platform Advisor Design System
+## Agent Platform Advisor
 
 The advisor app at `/agent-platform-advisor/` has a documented design system in `DESIGN.md` and coding conventions in `CLAUDE.md`. Key constraints:
 - Primary blue is `#0078D4` (not `#0090FF`)
@@ -39,3 +41,4 @@ The advisor app at `/agent-platform-advisor/` has a documented design system in 
 - Canvas background uses a 3-stop diagonal gradient
 - Score bar animations use `IntersectionObserver` with ease-out cubic timing (~1s)
 - `apa.yaml` is the source of truth for all content, questions, and scoring logic
+- **Always update `agent-platform-advisor/CHANGELOG.md` after making changes to the advisor**

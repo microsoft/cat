@@ -4,6 +4,21 @@ All notable changes to the Agent Platform Advisor are documented here.
 
 ## [Unreleased] — apa-v2 branch
 
+### Added — Apr 7
+- **Cross-question contradiction notes** — contextual warning banners on the results page when the user's answer combination is logically contradictory (e.g., background agent + simple Q&A, external users + M365 apps deployment, business user + complex orchestration). Driven by new `scoring.cross_question_notes` section in apa.yaml.
+- **Winner-persona mismatch notes** — when Foundry wins but the builder is a business user (q1a), a banner advises partnering with a development team. Driven by new `scoring.winner_persona_notes` section in apa.yaml.
+- **Per-question fit grid** — visual dot matrix in the Score Breakdown showing how each platform scored on each of the 5 questions (strong/moderate/weak/none/disqualified). Replaces the opaque single "Top factor" line with full transparency into per-question scoring.
+- **Comparative reason text** — Score Breakdown now shows context-aware explanations: winners get breadth summaries ("Strong match across nearly all dimensions"), runners-up get gap explanations ("Close — lost ground on data access"), and zeroed platforms show all applicable hard rules instead of just the first.
+- **Close-score callout** — when the top two platforms are within 2 points, a callout in the Score Breakdown notes that team skills and existing tooling may be the deciding factor.
+- **SCORING.md** — comprehensive scoring system reference covering the full matrix, pipeline, distribution analysis, and cross-question notes.
+
+### Changed — Apr 7
+- **5 new Agent Builder hard rules** — zeroes Agent Builder for q2b (custom app), q2c (background), q3b (external systems), q3c (advanced data), q4c (multi-step tasks). These are real platform limitations that previously let AB win in 8 impossible scenarios.
+- **Copilot Studio score for pro dev (q1c)** — 0 → 1. CS supports professional developers via YAML authoring and VS Code extension; a weak signal is more accurate than zero.
+- **Foundry score for M365 deployment (q2a)** — 0 → 1. Foundry agents can be surfaced in Teams via custom bot frameworks.
+- **Foundry score for simple Q&A (q4a)** — 0 → 1. Foundry can do Q&A via prompt flow; score of 1 acknowledges capability without encouraging overkill.
+- **All hard rules shown** — `getKeyFactors()` and `getScoreReason()` now show every applicable hard rule for a zeroed platform, not just the first one found.
+
 ### Added — Apr 1
 - **Guided Exploration** — third prescreen option "I'm exploring what's possible with agents" leads to a dedicated exploration screen showing all four platforms with "Best for" labels and scenario-focused summaries. Back navigation and CTA to start the assessment. New `exploration_best_for` and `exploration_summary` fields in apa.yaml.
 - **"Why not?" explainer** — when the top two platforms score within 2 points, a sentence inside the pair banner explains the decisive factor (e.g., "Copilot Studio edged out Foundry because..."). Uses `computeWhyNot()` delta algorithm.
