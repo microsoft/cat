@@ -293,10 +293,22 @@ function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge)
         : ''}
       ${resourcesHtml}
       ${factorsHtml}
-      <div class="rec-section-title">Best for</div>
-      <ul class="rec-list">${bestFor}</ul>
-      <div class="rec-section-title">Important Considerations</div>
-      <ul class="rec-list">${watchOut}</ul>
+      ${bestFor ? `<details class="rec-accordion">
+        <summary class="rec-accordion-trigger">
+          <span class="rec-section-title">Best For</span>
+          <span class="rec-accordion-count">${(rec.best_for || []).length}</span>
+          <svg class="rec-accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <ul class="rec-list">${bestFor}</ul>
+      </details>` : ''}
+      ${watchOut ? `<details class="rec-accordion">
+        <summary class="rec-accordion-trigger">
+          <span class="rec-section-title">Important Considerations</span>
+          <span class="rec-accordion-count">${(rec.watch_out_for || []).length}</span>
+          <svg class="rec-accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <ul class="rec-list">${watchOut}</ul>
+      </details>` : ''}
       ${firstPartyHtml}
       ${templatesHtml}
     </div>`;
@@ -392,6 +404,11 @@ async function boot() {
 function setupListeners() {
   if (listenersReady) return;
   listenersReady = true;
+  document.getElementById('logo-home-link').addEventListener('click', (e) => {
+    e.preventDefault();
+    showSection('welcome-section');
+    pushState('welcome-section');
+  });
   document.getElementById('start-btn').addEventListener('click', () => {
     showSection('prescreen-section');
     pushState('prescreen-section');

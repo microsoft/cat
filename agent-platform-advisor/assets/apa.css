@@ -204,6 +204,12 @@ body {
   font-size: 20px;
   font-weight: 600;
   color: var(--foreground);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logo-text:hover {
+  text-decoration: underline;
 }
 
 /* Button Styles */

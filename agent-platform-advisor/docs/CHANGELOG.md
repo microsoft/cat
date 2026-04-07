@@ -15,6 +15,8 @@ We have completely redesigned Agent Platform Advisor for the ground up, based on
 - Much, much more!
 
 ### Added
+- **Accordion for Best For & Considerations** — "Best For" and "Important Considerations" in recommendation cards are now collapsible accordions, matching the existing pattern used for first-party agents and templates. Each shows an item count badge.
+- **Logo link to Get Started** — the "Agent Platform Advisor" header text is now a link that navigates back to the Get Started (welcome) screen from any point in the flow.
 - **Persona-based tiebreakers** — when two platforms score equally, a `tiebreakers` section in `apa.yaml scoring.tie_handling` picks the better fit based on the user's answers (e.g., professional developer + equal score → Copilot Studio preferred over Agent Builder). Applied in `rankPlatforms()` before falling back to `valid_pairs`.
 - **FLOWCHART.md** — decision-tree flowchart documenting the full scoring pipeline from question answers through hard rules, raw score, tiebreakers, and final recommendation.
 - **Docs subfolder** — CHANGELOG.md, DESIGN.md, and SCORING.md moved to `docs/` to keep the project root clean.
