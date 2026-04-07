@@ -133,13 +133,27 @@ function rankPlatforms(answersMap) {
   const questions = apa.questions.filter(q => answersMap[q.id]); // only answered
   const final = sumRawScores(answersMap, questions, zeroed);
 
+  const tiebreakers = apa.scoring.tie_handling.tiebreakers || [];
+
   return apa.meta.platforms
     .map(p => ({
       id: p.id,
       score: Math.round(final[p.id]),
       label: getThresholdLabel(final[p.id], apa.scoring.recommendation_thresholds),
     }))
-    .sort((a, b) => b.score - a.score);
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      // On a tie, check if a persona-based tiebreaker applies
+      const rule = tiebreakers.find(t =>
+        t.platforms.includes(a.id) && t.platforms.includes(b.id) &&
+        Object.entries(t.when).every(([qId, optId]) => answersMap[qId] === optId)
+      );
+      if (rule) {
+        if (a.id === rule.prefer) return -1;
+        if (b.id === rule.prefer) return 1;
+      }
+      return 0;
+    });
 }
 
 // Returns up to 3 bullet strings summarising key scoring factors (or disqualifying rules) for the given platform
@@ -198,10 +212,10 @@ function renderCrossNotes(answersMap, winnerId) {
 }
 
 const PLATFORM_ICONS = {
-  agent_builder:  '../images/copilot.png',
-  m365_copilot:   '../images/m365-copilot-logo.png',
-  copilot_studio: '../images/copilot-studio.png',
-  foundry:        '../images/ai-foundry.png',
+  agent_builder:  'images/copilot.png',
+  m365_copilot:   'images/m365-copilot-logo.png',
+  copilot_studio: 'images/copilot-studio.png',
+  foundry:        'images/foundry.svg',
 };
 
 function badgeClass(label) {
@@ -562,7 +576,7 @@ function getScoreReason(platformId, ranked, answersMap) {
   if (isWinner) {
     if (perfectCount === 5) return 'Perfect fit — scored highest on every dimension.';
     if (perfectCount >= 4) return 'Strong match across nearly all dimensions.';
-    const tops = contribs.slice(0, 2).map(c => c.questionLabel.toLowerCase());
+    const tops = contribs.slice(0, 2).map(c => `<em>${c.questionLabel.replace(/\?$/, '')}</em>`);
     return `Strongest on ${tops.join(' and ')}.`;
   }
 
@@ -589,7 +603,7 @@ function getScoreReason(platformId, ranked, answersMap) {
     if (weakQs.length > 0) {
       return `Weaker fit on ${weakQs.join(' and ').toLowerCase()}.`;
     }
-    const tops = contribs.slice(0, 2).map(c => c.questionLabel.toLowerCase());
+    const tops = contribs.slice(0, 2).map(c => `<em>${c.questionLabel.replace(/\?$/, '')}</em>`);
     if (tops.length > 0) return `Best on ${tops.join(' and ')}, but outscored overall.`;
   }
 

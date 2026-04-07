@@ -34,7 +34,6 @@ questions:
         label: Business user or subject matter expert — no coding experience
         scores:
           agent_builder: 3
-          m365_copilot: 2
           copilot_studio: 1
           foundry: 0
 
@@ -42,7 +41,6 @@ questions:
         label: Low-code maker or IT professional — comfortable with drag-and-drop tools and configuration
         scores:
           agent_builder: 1
-          m365_copilot: 1
           copilot_studio: 3
           foundry: 0
 
@@ -50,15 +48,13 @@ questions:
         label: Professional developer — writes code and builds software
         scores:
           agent_builder: 0
-          m365_copilot: 0
-          copilot_studio: 1
+          copilot_studio: 2
           foundry: 3
 
       - id: q1d
         label: Data scientist or AI/ML engineer — works with AI models and data infrastructure
         scores:
           agent_builder: 0
-          m365_copilot: 0
           copilot_studio: 0
           foundry: 3
 
@@ -77,7 +73,6 @@ questions:
         label: Internal employees only — people inside our organization
         scores:
           agent_builder: 3
-          m365_copilot: 3
           copilot_studio: 3
           foundry: 1
 
@@ -85,7 +80,6 @@ questions:
         label: External users — customers, partners, or the public
         scores:
           agent_builder: 0
-          m365_copilot: 0
           copilot_studio: 3
           foundry: 3
         hard_rule_trigger: true
@@ -94,7 +88,6 @@ questions:
         label: Not decided yet
         scores:
           agent_builder: 2
-          m365_copilot: 2
           copilot_studio: 2
           foundry: 1
 
@@ -107,7 +100,6 @@ questions:
         label: Inside Microsoft 365 apps — Teams, Copilot, SharePoint, or Outlook
         scores:
           agent_builder: 3
-          m365_copilot: 3
           copilot_studio: 3
           foundry: 1
 
@@ -115,7 +107,6 @@ questions:
         label: In a custom app — a website or mobile app your team builds
         scores:
           agent_builder: 0
-          m365_copilot: 0
           copilot_studio: 3
           foundry: 2
 
@@ -123,7 +114,6 @@ questions:
         label: Running automatically in the background — triggered by events, not by a person chatting with it
         scores:
           agent_builder: 0
-          m365_copilot: 0
           copilot_studio: 2
           foundry: 3
 
@@ -131,7 +121,6 @@ questions:
         label: Multiple places, or not decided yet
         scores:
           agent_builder: 1
-          m365_copilot: 1
           copilot_studio: 3
           foundry: 2
 
@@ -149,7 +138,6 @@ questions:
         label: Answer questions in a single exchange — Q&A, lookups, or summaries
         scores:
           agent_builder: 3
-          m365_copilot: 0
           copilot_studio: 3
           foundry: 1
 
@@ -157,7 +145,6 @@ questions:
         label: Have a back-and-forth conversation and remember context
         scores:
           agent_builder: 2
-          m365_copilot: 0
           copilot_studio: 3
           foundry: 2
 
@@ -165,7 +152,6 @@ questions:
         label: Complete multi-step tasks — follow a process, check multiple systems, or take actions like submitting forms or updating records
         scores:
           agent_builder: 0
-          m365_copilot: 0
           copilot_studio: 3
           foundry: 3
 
@@ -173,7 +159,6 @@ questions:
         label: Manage complex workflows — coordinate multiple agents or handle long-running processes
         scores:
           agent_builder: 0
-          m365_copilot: 0
           copilot_studio: 1
           foundry: 3
         hard_rule_trigger: true
@@ -187,7 +172,6 @@ questions:
         label: Content in Microsoft 365 — like SharePoint, OneDrive, Teams, or Outlook
         scores:
           agent_builder: 3
-          m365_copilot: 3
           copilot_studio: 2
           foundry: 0
 
@@ -195,7 +179,6 @@ questions:
         label: Other business systems — like Salesforce, SAP, ServiceNow, or your own databases
         scores:
           agent_builder: 0
-          m365_copilot: 0
           copilot_studio: 3
           foundry: 2
 
@@ -203,7 +186,6 @@ questions:
         label: Advanced or private data sources — like data warehouses, large data storage, or AI search tools managed by your team
         scores:
           agent_builder: 0
-          m365_copilot: 0
           copilot_studio: 1
           foundry: 3
 
@@ -211,7 +193,6 @@ questions:
         label: A mix — some data in Microsoft 365, some in other systems
         scores:
           agent_builder: 0
-          m365_copilot: 1
           copilot_studio: 3
           foundry: 2
 
@@ -247,7 +228,6 @@ scoring:
     q3c:
       zero: [agent_builder]
       label: "Advanced data sources — Agent Builder can only access Microsoft 365 data"
-
   # Step 2 — Sum raw scores across all answered questions.
   raw_score_max: 15  # 5 questions × max score of 3
 
@@ -274,6 +254,17 @@ scoring:
   tie_handling:
     threshold_points: 2
     present_as: complementary_pair
+    # Persona-based tiebreakers — applied before valid_pairs when a specific
+    # answer makes one platform a better fit despite equal scores.
+    tiebreakers:
+      - when:
+          q1: q1c
+        platforms: [agent_builder, copilot_studio]
+        prefer: copilot_studio
+        rationale: >
+          When the builder is a professional developer and scores are equal,
+          Copilot Studio is the better fit — it supports code-first authoring
+          via the VS Code extension while Agent Builder is no-code only.
     valid_pairs:
       - platforms: [copilot_studio, foundry]
         rationale: Build in Copilot Studio, extend with custom code in Foundry.

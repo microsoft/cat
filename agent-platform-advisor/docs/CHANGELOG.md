@@ -5,6 +5,7 @@ All notable changes to the Agent Platform Advisor are documented here.
 ## [Unreleased] — apa-v2 branch
 
 ### Added — Apr 7
+- **Playwright E2E test infrastructure** — 25 tests across 5 spec files covering the critical user flows: wizard completion (4 tests), shared link loading (7 tests), temporal change detection (3 tests), fast-track path (6 tests), and share button (5 tests). Uses `serve` for static file hosting during tests. GitHub Actions CI workflow triggers on push/PR to `agent-platform-advisor/`.
 - **Cross-question contradiction notes** — contextual warning banners on the results page when the user's answer combination is logically contradictory (e.g., background agent + simple Q&A, external users + M365 apps deployment, business user + complex orchestration). Driven by new `scoring.cross_question_notes` section in apa.yaml.
 - **Winner-persona mismatch notes** — when Foundry wins but the builder is a business user (q1a), a banner advises partnering with a development team. Driven by new `scoring.winner_persona_notes` section in apa.yaml.
 - **Per-question fit grid** — visual dot matrix in the Score Breakdown showing how each platform scored on each of the 5 questions (strong/moderate/weak/none/disqualified). Replaces the opaque single "Top factor" line with full transparency into per-question scoring.
@@ -13,11 +14,14 @@ All notable changes to the Agent Platform Advisor are documented here.
 - **SCORING.md** — comprehensive scoring system reference covering the full matrix, pipeline, distribution analysis, and cross-question notes.
 
 ### Changed — Apr 7
-- **5 new Agent Builder hard rules** — zeroes Agent Builder for q2b (custom app), q2c (background), q3b (external systems), q3c (advanced data), q4c (multi-step tasks). These are real platform limitations that previously let AB win in 8 impossible scenarios.
+- **6 Agent Builder hard rules** — zeroes Agent Builder for q1c (professional developer), q2b (custom app), q2c (background), q3b (external systems), q3c (advanced data), q4c (multi-step tasks). Professional developers should be directed to Copilot Studio or Foundry, not a no-code tool.
 - **Copilot Studio score for pro dev (q1c)** — 0 → 1. CS supports professional developers via YAML authoring and VS Code extension; a weak signal is more accurate than zero.
 - **Foundry score for M365 deployment (q2a)** — 0 → 1. Foundry agents can be surfaced in Teams via custom bot frameworks.
 - **Foundry score for simple Q&A (q4a)** — 0 → 1. Foundry can do Q&A via prompt flow; score of 1 acknowledges capability without encouraging overkill.
 - **All hard rules shown** — `getKeyFactors()` and `getScoreReason()` now show every applicable hard rule for a zeroed platform, not just the first one found.
+
+### Fixed — Apr 7
+- **Platform grid mobile stacking** — `.platform-grid` on the welcome screen now stacks to single column at ≤480px, matching the exploration grid's responsive behavior. Previously forced 2 columns at all widths below 768px, causing cramped ~170px cards on phones.
 
 ### Added — Apr 2
 - **Dark mode** — theme toggle button in the header. Uses `data-theme="dark"` attribute and `cat-theme` localStorage key, consistent with the main CAT landing page. Respects `prefers-color-scheme` OS preference on first visit. Dark palette follows DESIGN.md strategy: canvas `#1A1A1A`, cards `#2A2A2A`, primary `#2899F5`, gradient `#0F1B2D → #1A1A1A → #1A1525`. Anti-FOUC script in `<head>` prevents flash of wrong theme.

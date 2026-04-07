@@ -1267,6 +1267,9 @@ body {
 }
 
 @media (max-width: 480px) {
+  .platform-grid {
+    grid-template-columns: 1fr;
+  }
   .sc-panel {
     padding: 16px;
   }
