@@ -156,10 +156,10 @@ questions:
       - id: q4b
         label: Have a back-and-forth conversation and remember context
         scores:
-          agent_builder: 1
-          m365_copilot: 2
+          agent_builder: 2
+          m365_copilot: 0
           copilot_studio: 3
-          foundry: 1
+          foundry: 2
 
       - id: q4c
         label: Complete multi-step tasks — follow a process, check multiple systems, or take actions like submitting forms or updating records

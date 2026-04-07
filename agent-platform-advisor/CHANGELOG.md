@@ -19,6 +19,9 @@ All notable changes to the Agent Platform Advisor are documented here.
 - **Foundry score for simple Q&A (q4a)** — 0 → 1. Foundry can do Q&A via prompt flow; score of 1 acknowledges capability without encouraging overkill.
 - **All hard rules shown** — `getKeyFactors()` and `getScoreReason()` now show every applicable hard rule for a zeroed platform, not just the first one found.
 
+### Added — Apr 2
+- **Dark mode** — theme toggle button in the header. Uses `data-theme="dark"` attribute and `cat-theme` localStorage key, consistent with the main CAT landing page. Respects `prefers-color-scheme` OS preference on first visit. Dark palette follows DESIGN.md strategy: canvas `#1A1A1A`, cards `#2A2A2A`, primary `#2899F5`, gradient `#0F1B2D → #1A1A1A → #1A1525`. Anti-FOUC script in `<head>` prevents flash of wrong theme.
+
 ### Added — Apr 1
 - **Guided Exploration** — third prescreen option "I'm exploring what's possible with agents" leads to a dedicated exploration screen showing all four platforms with "Best for" labels and scenario-focused summaries. Back navigation and CTA to start the assessment. New `exploration_best_for` and `exploration_summary` fields in apa.yaml.
 - **"Why not?" explainer** — when the top two platforms score within 2 points, a sentence inside the pair banner explains the decisive factor (e.g., "Copilot Studio edged out Foundry because..."). Uses `computeWhyNot()` delta algorithm.
