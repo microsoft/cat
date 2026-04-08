@@ -40,16 +40,14 @@ test.describe('Fast-Track Path', () => {
     await expect(page.locator('#rec-fasttrack-prompt')).toBeVisible();
   });
 
-  test('fast-track shows decision card', async ({ page }) => {
+  test('fast-track shows recommendation card', async ({ page }) => {
     await page.goto('/');
     await page.locator('#start-btn').click();
     await page.locator('#prescreen-yes').click();
 
-    // Decision card should appear
-    await expect(page.locator('#decision-card')).toBeVisible();
-
-    // Decision card chip should show Microsoft 365 Copilot
-    await expect(page.locator('#decision-card-chip')).toContainText('Microsoft 365 Copilot');
+    // Primary rec card should show Microsoft 365 Copilot
+    await expect(page.locator('#rec-primary-card .rec-card')).toBeVisible();
+    await expect(page.locator('#rec-primary-card')).toContainText('Microsoft 365 Copilot');
   });
 
   test('fast-track via URL params', async ({ page }) => {

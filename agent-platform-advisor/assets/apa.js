@@ -311,6 +311,11 @@ function buildPlatformCard(platformId, ranked, answersMap, isPrimary, showBadge)
       </details>` : ''}
       ${firstPartyHtml}
       ${templatesHtml}
+      ${isPrimary ? `<div class="rec-card-share">
+        <button id="decision-card-share" class="btn-decision btn-decision-primary" aria-label="Copy shareable link to clipboard" onclick="copyShareLink()">
+          📋 Share your results
+        </button>
+      </div>` : ''}
     </div>`;
 }
 
@@ -1044,41 +1049,7 @@ function computeWhyNot(winner, runner, answersMap) {
 
 function renderDecisionCard() {
   const card = document.getElementById('decision-card');
-  const divider = document.getElementById('decision-card-divider');
   if (!card || !recommendedPlatformId) return;
-
-  // Platform chip
-  const platformMeta = apa.meta.platforms.find(p => p.id === recommendedPlatformId);
-  const chipLabel = platformMeta ? platformMeta.label : recommendedPlatformId;
-  document.getElementById('decision-card-chip').textContent = chipLabel;
-
-  // Score
-  const scoreEl = document.getElementById('decision-card-score');
-  if (fastTrack) {
-    scoreEl.textContent = '';
-  } else {
-    const ranked = rankPlatforms(answers);
-    const entry = ranked.find(r => r.id === recommendedPlatformId);
-    if (entry) {
-      const maxScore = apa.scoring.raw_score_max || 15;
-      const thresholdClass = entry.label.startsWith('Strong') ? 'threshold-strong'
-        : entry.label.startsWith('Good') ? 'threshold-good' : 'threshold-possible';
-      scoreEl.innerHTML = `${entry.score}/${maxScore} <span class="threshold-label ${thresholdClass}">— ${entry.label}</span>`;
-    }
-  }
-
-  // Key factors
-  const factors = computeDecisionKeyFactors();
-  const factorsContainer = document.getElementById('decision-card-factors');
-  const factorsList = document.getElementById('decision-card-factors-list');
-  if (factors.length > 0) {
-    factorsList.innerHTML = factors.map(f =>
-      `<li>"${f.questionLabel}" → ${f.optionLabel}</li>`
-    ).join('');
-    factorsContainer.style.display = '';
-  } else {
-    factorsContainer.style.display = 'none';
-  }
 
   // Recipient context (URL-loaded only)
   const contextEl = document.getElementById('decision-card-context');
@@ -1104,29 +1075,11 @@ function renderDecisionCard() {
     driftEl.style.display = 'none';
   }
 
-  // Date
-  const dateEl = document.getElementById('decision-card-date');
-  const now = new Date();
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  dateEl.textContent = `Generated ${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
-
-  // Re-evaluate link (URL-loaded only)
-  const reevalLink = document.getElementById('decision-card-reevaluate');
-  const linksSep = document.getElementById('decision-card-links-sep');
-  if (isURLLoaded) {
-    reevalLink.style.display = '';
-    linksSep.style.display = '';
-    reevalLink.onclick = () => { window.location.href = buildShareableURL(); };
-  } else {
-    reevalLink.style.display = 'none';
-    linksSep.style.display = 'none';
-  }
-
-  // Show card + divider + share anchor
-  divider.style.display = '';
-  card.style.display = '';
-  const shareAnchor = document.getElementById('rec-share-anchor');
-  if (shareAnchor) shareAnchor.style.display = '';
+  // Only show card if there's visible content (URL-loaded scenarios)
+  const hasVisibleContent = contextEl.style.display !== 'none'
+    || bannerEl.style.display !== 'none'
+    || driftEl.style.display !== 'none';
+  card.style.display = hasVisibleContent ? '' : 'none';
 }
 
 // === SHARE & DOWNLOAD ===

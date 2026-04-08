@@ -61,13 +61,13 @@ test.describe('Share Button', () => {
     await expect(btn).toContainText('Copied');
 
     // Wait for revert (2s timeout in code + buffer)
-    await expect(btn).toContainText(originalText?.trim() ?? 'Share link', { timeout: 5000 });
+    await expect(btn).toContainText(originalText?.trim() ?? 'Share your results', { timeout: 5000 });
   });
 
   test('share link from URL-loaded results contains all answers', async ({ page }) => {
     const params = 'q1=q1c&q8=q8a&q2=q2d&q4=q4b&q3=q3b&r=copilot_studio&d=20260401&mode=card';
     await page.goto(`/?${params}`);
-    await expect(page.locator('#decision-card')).toBeVisible();
+    await expect(page.locator('#recommendation-section')).toBeVisible();
 
     // Evaluate buildShareableURL directly
     const shareUrl = await page.evaluate(() => {
@@ -81,16 +81,5 @@ test.describe('Share Button', () => {
     expect(shareUrl).toContain('q4=q4b');
     expect(shareUrl).toContain('q3=q3b');
     expect(shareUrl).toContain('mode=card');
-  });
-
-  test('decision card shows date', async ({ page }) => {
-    await completeWizard(page);
-
-    const dateEl = page.locator('#decision-card-date');
-    await expect(dateEl).toBeVisible();
-    await expect(dateEl).toContainText('Generated');
-    // Should contain current year
-    const year = new Date().getFullYear().toString();
-    await expect(dateEl).toContainText(year);
   });
 });

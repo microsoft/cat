@@ -14,8 +14,12 @@ We have completely redesigned Agent Platform Advisor for the ground up, based on
 - Dark mode
 - Much, much more!
 
-### Added
+### Changed
 - **Accordion for Best For & Considerations** — "Best For" and "Important Considerations" in recommendation cards are now collapsible accordions, matching the existing pattern used for first-party agents and templates. Each shows an item count badge.
+- **Prominent resources link** — the "Explore resources" link in recommendation cards is now styled as a filled button (primary blue background, white text) instead of a plain text link.
+- **Share button moved to rec card** — "Share your results" button is now inside the primary recommendation card. The separate "Share Your Results" card has been fully removed (platform chip, score, date, retake link, key factors). Only conditional URL-loaded elements remain (shared context, temporal change banner, schema drift note).
+
+### Added
 - **Logo link to Get Started** — the "Agent Platform Advisor" header text is now a link that navigates back to the Get Started (welcome) screen from any point in the flow.
 - **Persona-based tiebreakers** — when two platforms score equally, a `tiebreakers` section in `apa.yaml scoring.tie_handling` picks the better fit based on the user's answers (e.g., professional developer + equal score → Copilot Studio preferred over Agent Builder). Applied in `rankPlatforms()` before falling back to `valid_pairs`.
 - **FLOWCHART.md** — decision-tree flowchart documenting the full scoring pipeline from question answers through hard rules, raw score, tiebreakers, and final recommendation.

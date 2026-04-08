@@ -65,9 +65,6 @@ test.describe('Wizard Completion', () => {
     // Verify a platform card is rendered
     await expect(page.locator('#rec-primary-card .rec-card')).toBeVisible();
 
-    // Verify decision card appears
-    await expect(page.locator('#decision-card')).toBeVisible();
-
     // Verify score breakdown exists
     await expect(page.locator('#rec-score-comparison')).toBeVisible();
 

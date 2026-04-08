@@ -15,35 +15,15 @@ test.describe('Shared Link Loading', () => {
     await expect(page.locator('#assessment-section')).toBeHidden();
   });
 
-  test('displays decision card with shared context', async ({ page }) => {
+  test('displays shared context for URL-loaded results', async ({ page }) => {
     await page.goto(`/?${SHARED_PARAMS}`);
 
-    // Decision card should be visible
+    // Decision card metadata section should be visible
     await expect(page.locator('#decision-card')).toBeVisible();
 
     // "Take your own assessment" link should be visible (URL-loaded mode)
     await expect(page.locator('#decision-card-context')).toBeVisible();
     await expect(page.locator('#decision-card-context')).toContainText('Take your own assessment');
-
-    // Re-evaluate link should be visible
-    await expect(page.locator('#decision-card-reevaluate')).toBeVisible();
-  });
-
-  test('shows platform chip in decision card', async ({ page }) => {
-    await page.goto(`/?${SHARED_PARAMS}`);
-
-    await expect(page.locator('#decision-card-chip')).toBeVisible();
-    // Should show a platform name
-    await expect(page.locator('#decision-card-chip')).not.toBeEmpty();
-  });
-
-  test('shows score in decision card', async ({ page }) => {
-    await page.goto(`/?${SHARED_PARAMS}`);
-
-    const scoreEl = page.locator('#decision-card-score');
-    await expect(scoreEl).toBeVisible();
-    // Score should contain a number/15 format
-    await expect(scoreEl).toContainText('/15');
   });
 
   test('renders platform recommendation card', async ({ page }) => {
