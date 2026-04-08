@@ -25,10 +25,10 @@ Sets persona weight. Determines whether the builder has the skills for each plat
 |---|---|---|---|---|
 | Business user / SME — no coding | q1a | **3** | 1 | 0 |
 | Low-code maker / IT pro | q1b | 1 | **3** | 0 |
-| Professional developer | q1c | 0 | 1 | **3** |
+| Professional developer | q1c | 0 | 2 | **3** |
 | Data scientist / ML engineer | q1d | 0 | 0 | **3** |
 
-CS gets 1 for q1c because it supports pro developers via YAML authoring and VS Code extension.
+CS gets 2 for q1c because it supports pro developers via YAML authoring and VS Code extension.
 
 ### Q8 — Who will use this agent?
 
@@ -60,7 +60,7 @@ Single strongest discriminator between Copilot Studio and Foundry.
 | Option | ID | Agent Builder | CS | Foundry | Hard Rule |
 |---|---|---|---|---|---|
 | Simple Q&A / lookups | q4a | **3** | **3** | 1 | — |
-| Conversational (multi-turn) | q4b | 1 | **3** | 1 | — |
+| Conversational (multi-turn) | q4b | 2 | **3** | 2 | — |
 | Multi-step tasks | q4c | 0 | **3** | **3** | Zeros AB |
 | Complex orchestration | q4d | 0 | 1 | **3** | Zeros AB, M365 |
 
@@ -99,6 +99,16 @@ Additionally, M365 Copilot is always zeroed in the full assessment (hard-coded i
 
 For each platform not zeroed: sum the scores from all answered questions. Range: 0–15.
 
+### Step 2.5 — Persona preferences (soft overrides)
+
+Persona preferences force one platform above another in ranking regardless of scores. Unlike hard rules, all scores are preserved — the override only affects sort order. A rationale message is displayed as a key factor on the recommendation card.
+
+| Trigger | Prefer | Over | Rationale |
+|---|---|---|---|
+| q1d (data scientist / AI-ML) | Copilot Studio | Agent Builder | CS supports custom AI model integration, code-first development, and flexible orchestration that AB lacks |
+
+This means that when a data scientist selects answers where Agent Builder would otherwise outscore Copilot Studio, CS is still recommended — but AB's actual scores remain visible in the score breakdown.
+
 ### Step 3 — Threshold labels
 
 | Score | Label |
@@ -121,6 +131,13 @@ When the top two platforms score within **2 points**, they're presented as a com
 | Copilot Studio + Foundry | Build in CS, extend with custom code in Foundry |
 | M365 Copilot + Copilot Studio | M365 Copilot for end users, CS for customization |
 | Agent Builder + M365 Copilot | AB for M365-native agents, M365 for extensibility |
+
+**Persona-based tiebreakers** — when two platforms score equally and a specific persona answer is selected, one platform is preferred:
+
+| Trigger | Platforms | Prefer | Rationale |
+|---|---|---|---|
+| q1c (professional developer) | AB, CS | CS | CS supports code-first authoring via VS Code extension |
+| q1d (data scientist / AI-ML) | CS, Foundry | CS | CS provides a faster path to production agents |
 
 A "Why not?" explainer identifies the single question where the winner most outscored the runner-up.
 
@@ -149,26 +166,28 @@ Across all 768 possible answer combinations:
 | Foundry | 159 | 20.7% |
 | Agent Builder | 10 | 1.3% |
 
+**Note:** The distribution above reflects raw scoring only. With persona preferences applied, the two MLEng combos where Agent Builder would win are overridden to recommend Copilot Studio instead, reducing AB's effective wins to 8.
+
 **Ties:** 70 combos (9.1%) — 68 are CS/Foundry, 2 are AB/CS.
 
 ### When Agent Builder wins
 
 AB only wins in its narrow sweet spot: **business user or undecided persona, internal audience, M365 deployment, simple Q&A or conversation, M365 data**. All 10 winning combos share this profile.
 
-| Combo | AB | CS | F |
-|---|---|---|---|
-| BizUser + Internal + M365 + SimpleQA + M365Data | **15** | 12 | 3 |
-| BizUser + Internal + M365 + Converse + M365Data | **13** | 12 | 3 |
-| BizUser + Internal + Multiple + SimpleQA + M365Data | **13** | 12 | 4 |
-| BizUser + Undecided + M365 + SimpleQA + M365Data | **14** | 11 | 3 |
-| BizUser + Undecided + M365 + Converse + M365Data | **12** | 11 | 3 |
-| BizUser + Undecided + Multiple + SimpleQA + M365Data | **12** | 11 | 4 |
-| ProDev + Internal + M365 + SimpleQA + M365Data | **12** | 12 | 6 |
-| ProDev + Undecided + M365 + SimpleQA + M365Data | **11** | 11 | 6 |
-| MLEng + Internal + M365 + SimpleQA + M365Data | **12** | 11 | 6 |
-| MLEng + Undecided + M365 + SimpleQA + M365Data | **11** | 10 | 6 |
+| Combo | AB | CS | F | Override? |
+|---|---|---|---|---|
+| BizUser + Internal + M365 + SimpleQA + M365Data | **15** | 12 | 3 | — |
+| BizUser + Internal + M365 + Converse + M365Data | **13** | 12 | 3 | — |
+| BizUser + Internal + Multiple + SimpleQA + M365Data | **13** | 12 | 4 | — |
+| BizUser + Undecided + M365 + SimpleQA + M365Data | **14** | 11 | 3 | — |
+| BizUser + Undecided + M365 + Converse + M365Data | **12** | 11 | 3 | — |
+| BizUser + Undecided + Multiple + SimpleQA + M365Data | **12** | 11 | 4 | — |
+| ProDev + Internal + M365 + SimpleQA + M365Data | **12** | 12 | 6 | — |
+| ProDev + Undecided + M365 + SimpleQA + M365Data | **11** | 11 | 6 | — |
+| MLEng + Internal + M365 + SimpleQA + M365Data | **12** | 11 | 6 | CS via persona pref |
+| MLEng + Undecided + M365 + SimpleQA + M365Data | **11** | 10 | 6 | CS via persona pref |
 
-The last four (ProDev/MLEng) are technically correct — even a developer building a simple Q&A bot on SharePoint data should consider Agent Builder. The scenario is simple enough that full code platforms would be overkill.
+The ProDev rows are technically correct — even a developer building a simple Q&A bot on SharePoint data should consider Agent Builder. The MLEng rows are overridden by the persona preference: Copilot Studio is recommended instead, with the rationale shown on the card.
 
 ### When Foundry wins
 
