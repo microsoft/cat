@@ -135,7 +135,7 @@ function rankPlatforms(answersMap) {
 
   const tiebreakers = apa.scoring.tie_handling.tiebreakers || [];
 
-  return apa.meta.platforms
+  const ranked = apa.meta.platforms
     .map(p => ({
       id: p.id,
       score: Math.round(final[p.id]),
@@ -154,11 +154,39 @@ function rankPlatforms(answersMap) {
       }
       return 0;
     });
+
+  // Persona preferences: soft overrides that force ranking regardless of score
+  const prefs = apa.scoring.persona_preferences || [];
+  prefs.forEach(pref => {
+    const match = Object.entries(pref.when).every(
+      ([qId, optId]) => answersMap[qId] === optId
+    );
+    if (!match) return;
+    const preferIdx = ranked.findIndex(r => r.id === pref.prefer);
+    const overIdx = ranked.findIndex(r => r.id === pref.over);
+    if (preferIdx > overIdx && preferIdx >= 0 && overIdx >= 0) {
+      // Move the preferred platform just above the "over" platform
+      const [preferred] = ranked.splice(preferIdx, 1);
+      ranked.splice(overIdx, 0, preferred);
+    }
+  });
+
+  return ranked;
 }
 
 // Returns up to 3 bullet strings summarising key scoring factors (or disqualifying rules) for the given platform
 function getKeyFactors(platformId, answersMap) {
   const factors = [];
+
+  // 0. Persona preference override rationale (if this platform was boosted)
+  const prefs = apa.scoring.persona_preferences || [];
+  prefs.forEach(pref => {
+    if (pref.prefer !== platformId) return;
+    const match = Object.entries(pref.when).every(
+      ([qId, optId]) => answersMap[qId] === optId
+    );
+    if (match) factors.push(`💡 ${pref.rationale.trim()}`);
+  });
 
   // 1. All hard rules that zeroed this platform
   getHardRuleLabels(platformId, answersMap).forEach(label => {
@@ -704,8 +732,8 @@ function buildScoreComparison(ranked, answersMap) {
   const second = ranked[1];
   let closeCallout = '';
   if (top && second && !zeroed[second.id] && (top.score - second.score) <= 2 && second.score > 0) {
-    const gap = top.score - second.score;
-    const gapText = gap === 0 ? 'Zero points separate' : `Only ${gap} point${gap === 1 ? '' : 's'} separate${gap === 1 ? 's' : ''}`;
+    const gap = Math.abs(top.score - second.score);
+    const gapText = gap === 0 ? 'Zero points separate' : `Only ${gap} point${gap !== 1 ? 's' : ''} separate${gap === 1 ? 's' : ''}`;
     closeCallout = `<p class="sc-close-callout">📊 ${gapText} the top two platforms — your choice may come down to team skills and existing tooling.</p>`;
   }
 

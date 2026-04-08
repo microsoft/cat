@@ -231,6 +231,19 @@ scoring:
   # Step 2 — Sum raw scores across all answered questions.
   raw_score_max: 15  # 5 questions × max score of 3
 
+  # Step 2.5 — Persona preferences: soft overrides that force one platform
+  # above another when a specific persona is selected. Unlike hard rules,
+  # scores are preserved. A rationale message is shown to explain the override.
+  persona_preferences:
+    - when:
+        q1: q1d
+      prefer: copilot_studio
+      over: agent_builder
+      rationale: >
+        Copilot Studio is recommended over Agent Builder for data scientists and AI/ML engineers
+        because it supports custom AI model integration, code-first development via the VS Code
+        extension, and more flexible orchestration — capabilities that Agent Builder does not offer.
+
   # Step 3 — Map raw scores to recommendation strength.
   recommendation_thresholds:
     - min: 12
@@ -265,6 +278,14 @@ scoring:
           When the builder is a professional developer and scores are equal,
           Copilot Studio is the better fit — it supports code-first authoring
           via the VS Code extension while Agent Builder is no-code only.
+      - when:
+          q1: q1d
+        platforms: [copilot_studio, foundry]
+        prefer: copilot_studio
+        rationale: >
+          When the builder is a data scientist or AI/ML engineer and scores are equal,
+          Copilot Studio is preferred — it provides a faster path to production
+          agents while Foundry is reserved for deeper custom orchestration.
     valid_pairs:
       - platforms: [copilot_studio, foundry]
         rationale: Build in Copilot Studio, extend with custom code in Foundry.
