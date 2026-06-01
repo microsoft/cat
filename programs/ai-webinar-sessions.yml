@@ -386,3 +386,10 @@ sessions:
     title: "Real-World Agent Case Studies Through Storytelling"
     description: "Hear how Graebel is transforming their organization with Microsoft Copilot Studio, Dynamics, and Power Platform — real-world agentic solutions that solve business challenges and deliver measurable impact."
     register_link: "https://aka.ms/AiWebinars/CaseStudies6"
+
+  - date: "2026-06-23"
+    time: "8:30 PM PT (APAC)"
+    region: APAC
+    title: "Choosing the Right Agent Pattern: Orchestrated, Deterministic, or Hybrid Agents"
+    description: "Explore Copilot Studio's agent design patterns—orchestrated, deterministic, and hybrid. Learn when to use each, with practical frameworks and real examples to build flexible, reliable agents at scale."
+    register_link: "https://aka.ms/AIWebinars/APACAgentPatterns"
