@@ -345,9 +345,12 @@ sessions:
 
   - date: "2026-05-06"
     time: "9:00 AM PT"
-    title: "Real-World Agent Case Studies: How Organizations Are Using AI Agents"
+    title: "Real-World Case Studies: Signetic and AFNI"
     description: "Join us to see how Signetic uses Power Platform, Azure, and Copilot Studio to build reliable, enterprise-grade data-driven solutions. Hear from AFNI as they share their journey from complex automations to simpler, high-impact use cases that drive adoption and build user trust."
     register_link: "https://aka.ms/Aiwebinars/CaseStudies5" 
+    recording_link: "https://www.youtube.com/watch?v=r5N7ui7pYRk&list=PLi9EhCY4z99Wu84AzycG6BKpaeX2OQbNI&index=2"
+    presentation_link: "../resources/[EXTERNAL] CAT AI_Webinar - Master - Signetic and AFNI 05062026.pptx"
+    presentation_label: "Presentation (PPT)"
 
   - date: "2026-05-13"
     time: "9:00 AM PT"
