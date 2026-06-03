@@ -2002,6 +2002,50 @@ footer p {
 
 /* ===== RESOURCES PAGE STYLES ===== */
 
+.bottom-blocks-row {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    margin: 40px 0;
+    align-items: stretch;
+    width: 100%;
+}
+
+.bottom-blocks-row .resources-section {
+    margin: 0;
+    flex: 1;
+}
+
+.handout-section {
+    background: linear-gradient(135deg, var(--postit-green), var(--bg-secondary)) !important;
+    border-color: var(--success-color) !important;
+}
+
+.handout-section h2 {
+    color: var(--success-color) !important;
+}
+
+.handout-button {
+    background: linear-gradient(135deg, #107c41, #1a9e57) !important;
+    color: #fff !important;
+    border-color: #107c41 !important;
+    position: relative;
+    z-index: 1;
+    font-size: 16px !important;
+    padding: 16px 32px !important;
+    min-width: 200px;
+}
+
+.handout-button:hover {
+    background: linear-gradient(135deg, #0b5e30, #107c41) !important;
+}
+
+@media (max-width: 768px) {
+    .bottom-blocks-row {
+        flex-direction: column;
+    }
+}
+
 .resources-section {
     background: linear-gradient(135deg, var(--postit-blue), var(--bg-secondary));
     border: 2px solid var(--accent-color);
