@@ -399,6 +399,12 @@ sessions:
     description: "Microsoft 365 Copilot users often want to do more with agents but aren't sure where to start. Newly released Agent Builder templates — including Plan My Day and Status Update — offer the fastest path from licensed user to active agent. Part one of the Copilot Agents Templates series."
     register_link: "https://aka.ms/AIWebinars/copilotagenttemplates"
 
+  - date: "2026-06-17"
+    time: "8:00 AM PT"
+    title: "Build Beyond the Chatbot with Copilot Studio"
+    description: "Learn how to move from simple conversational experiences to more capable agents that can reason over knowledge, take action, and fit into governed business processes. This session will show how Copilot Studio helps makers and teams design, extend, and ship agents that solve more complex scenarios with the right controls in place."
+    register_link: "https://aka.ms/AIWebinars/buildbeyondthechatbot"
+
   - date: "2026-06-23"
     time: "8:30 PM PT (APAC)"
     region: APAC
