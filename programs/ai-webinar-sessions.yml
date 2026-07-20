@@ -393,6 +393,8 @@ sessions:
     description: "Hear how Graebel is transforming their organization with Microsoft Copilot Studio, Dynamics, and Power Platform — real-world agentic solutions that solve business challenges and deliver measurable impact."
     register_link: "https://aka.ms/AiWebinars/CaseStudies6"
     recording_link: "https://aka.ms/AiWebinars/CaseStudies6"
+    presentation_link: "../resources/[EXTERNAL] Real-World Agent Case Studies - Graebel clean.pptx"
+    presentation_label: "Presentation (PPT)"
 
   - date: "2026-06-10"
     time: "8:00 AM PT"
