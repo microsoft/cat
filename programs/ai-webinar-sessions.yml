@@ -421,3 +421,9 @@ sessions:
     title: "Real-World Agent Case Studies: How Organizations Are Using AI Agents"
     description: "Join this Real-World Customer Stories session to hear directly from customers and partners who are using AI and agentic solutions to transform how work gets done across their organizations. Almirall, a global biopharmaceutical company headquartered in Spain, will share its AI transformation journey, including how it scaled an AI-powered procurement agent, drove user adoption, and delivered measurable business value. LTM, a global technology consulting and digital solutions company, will discuss how AI agents are enhancing sales operations, sharing lessons learned, business impact, and real-world outcomes from its Sales Excellence ASK Agent initiative. If you're looking for practical examples of agentic AI delivering business results at scale, this session is for you."
     register_link: "https://aka.ms/Aiwebinars/CaseStudies7"
+- date: "2026-08-03"
+  time: "8:00 AM PT"
+  title: "Technical Deep Dive on Modern Agents and Workflows in Copilot Studio"
+  description: "Join this technical deep dive for architects and experienced agent builders who want to understand how to design, build, and evolve modern AI agents with Microsoft Copilot Studio. Explore the architecture, capabilities, and practical patterns behind modern agents and workflows, including how to scope agent experiences, orchestrate automation, and evolve solutions for practical business scenarios."
+  register_link: "https://aka.ms/AIWebinars/technicaldeepdiveonmodernagent"
+
