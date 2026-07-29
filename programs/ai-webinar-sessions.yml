@@ -402,6 +402,7 @@ sessions:
     title: "Closing the Copilot Agents Adoption Gap with templates — Putting your licenses to good use"
     description: "Microsoft 365 Copilot users often want to do more with agents but aren't sure where to start. Newly released Agent Builder templates — including Plan My Day and Status Update — offer the fastest path from licensed user to active agent. Part one of the Copilot Agents Templates series."
     register_link: "https://aka.ms/AIWebinars/copilotagenttemplates"
+    recording_link: "https://aka.ms/AIWebinars/copilotagenttemplates"
 
   - date: "2026-06-17"
     time: "8:00 AM PT"
@@ -426,4 +427,3 @@ sessions:
     title: "Technical Deep Dive on Modern Agents and Workflows in Copilot Studio"
     description: "Join this technical deep dive for architects and experienced agent builders who want to understand how to design, build, and evolve modern AI agents with Microsoft Copilot Studio. Explore the architecture, capabilities, and practical patterns behind modern agents and workflows, including how to scope agent experiences, orchestrate automation, and evolve solutions for practical business scenarios."
     register_link: "https://aka.ms/AIWebinars/technicaldeepdiveonmodernagent"
-
