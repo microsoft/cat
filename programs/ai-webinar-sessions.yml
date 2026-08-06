@@ -427,3 +427,6 @@ sessions:
     title: "Technical Deep Dive on Modern Agents and Workflows in Copilot Studio"
     description: "Join this technical deep dive for architects and experienced agent builders who want to understand how to design, build, and evolve modern AI agents with Microsoft Copilot Studio. Explore the architecture, capabilities, and practical patterns behind modern agents and workflows, including how to scope agent experiences, orchestrate automation, and evolve solutions for practical business scenarios."
     register_link: "https://aka.ms/AIWebinars/technicaldeepdiveonmodernagent"
+    recording_link: "https://aka.ms/AIWebinars/technicaldeepdiveonmodernagent"
+    presentation_link: "https://aka.ms/CopilotStudioDeepDiveDeck"
+    presentation_label: "Presentation (PPT)"
