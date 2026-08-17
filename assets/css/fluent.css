@@ -1009,6 +1009,15 @@ a:hover { text-decoration: underline; }
 .reveal-stagger.visible > *:nth-child(5) { transition-delay: .28s; }
 .reveal-stagger.visible > *:nth-child(6) { transition-delay: .35s; }
 
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════════════════════ */

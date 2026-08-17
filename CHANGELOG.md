@@ -11,6 +11,7 @@ All notable changes to the CAT website are documented here, organized by month.
 - Added consistent links back to the CAT home page from deep-linked experiences
 - Improved the AI webinar page heading structure and banner alternative text
 - Improved navigation focus, touch targets, and prominent image alternatives
+- Disabled homepage entrance transitions when reduced motion is requested
 
 ## May 2026
 
