@@ -638,6 +638,11 @@
                 }
 
 @media (max-width: 767px) {
+    #game-container,
+    #game-container * {
+        box-sizing: border-box;
+    }
+
     body {
         display: block;
         height: auto;
