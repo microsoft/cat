@@ -14,6 +14,27 @@
       min-height: 100vh;
     }
 
+    .site-link {
+      display: block;
+      width: fit-content;
+      max-width: 1100px;
+      margin: 24px auto 0;
+      padding: 0 64px;
+      color: #2b5ce6;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .site-link:hover {
+      text-decoration: underline;
+    }
+
+    .site-link:focus-visible {
+      outline: 3px solid #2b5ce6;
+      outline-offset: 4px;
+    }
+
     /* ── Hero ─────────────────────────────────────────────────────────── */
     .hero {
       padding: 56px 64px 48px;
@@ -63,6 +84,7 @@
     }
 
     @media (max-width: 760px) {
+      .site-link { margin-top: 20px; padding: 0 24px; }
       .hero { padding: 36px 24px 32px; }
       .primary-grid { grid-template-columns: 1fr; padding: 0 24px 36px; }
       .secondary-grid { padding: 0 24px 48px !important; }
@@ -207,6 +229,7 @@
   </style>
 </head>
 <body>
+  <a class="site-link" href="../index.html">Microsoft Copilot Acceleration Team</a>
 
   <!-- Hero -->
   <section class="hero">

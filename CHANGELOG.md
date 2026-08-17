@@ -8,6 +8,7 @@ All notable changes to the CAT website are documented here, organized by month.
 - Removed Power Up program links and resources
 - Expanded the README with site architecture, local preview, content update, and contribution guidance
 - Added a usable mobile layout for SparkTank gameplay
+- Added consistent links back to the CAT home page from deep-linked experiences
 
 ## May 2026
 
