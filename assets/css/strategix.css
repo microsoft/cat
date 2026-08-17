@@ -636,3 +636,137 @@
                 .modal-footer:hover {
                     background: #0056b3;
                 }
+
+@media (max-width: 767px) {
+    body {
+        display: block;
+        height: auto;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    #game-container {
+        flex-direction: column;
+        min-height: 100vh;
+        padding: 16px;
+        gap: 16px;
+    }
+
+    #card-generator {
+        width: 100%;
+        padding-left: 0;
+        align-items: stretch;
+    }
+
+    #logo-container {
+        height: auto;
+    }
+
+    #logo-container img {
+        width: min(200px, 70vw);
+    }
+
+    #card-list {
+        display: flex;
+        justify-content: center;
+        padding-left: 0;
+    }
+
+    #timer-container {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 8px 16px;
+        width: 100%;
+        margin: 0;
+        padding: 12px 0;
+        text-align: left;
+    }
+
+    #timer-container p,
+    #timer-container span,
+    #card-counter p,
+    #card-counter span {
+        position: static;
+        float: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #card-counter {
+        display: contents;
+    }
+
+    #instructions-zone {
+        position: static;
+        width: 100%;
+    }
+
+    #instructions p,
+    #instructions li {
+        font-size: 14px;
+        line-height: 1.45;
+    }
+
+    #game-board {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    #draw-card-centred {
+        position: sticky;
+        top: 12px;
+        left: auto;
+        grid-column: 1;
+        width: 100%;
+        height: 52px;
+        border-radius: 6px;
+        transform: none;
+    }
+
+    #draw-card-centred:hover,
+    #draw-card-centred:active {
+        transform: none;
+    }
+
+    .zone,
+    .playbook-category {
+        min-height: auto;
+        overflow: visible;
+    }
+
+    .nested-zone {
+        min-height: 140px;
+    }
+
+    #playbook-section,
+    #finalization-section {
+        height: auto;
+        padding: 0;
+    }
+
+    #playbook-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        width: 100%;
+    }
+
+    .playbook-category {
+        height: auto;
+        min-height: 260px;
+    }
+
+    #finalization-section {
+        flex-direction: column;
+    }
+
+    #finalization-left,
+    #finalization-right {
+        padding: 12px;
+    }
+
+    .modal-content {
+        width: calc(100% - 24px);
+    }
+}
