@@ -10,6 +10,7 @@ All notable changes to the CAT website are documented here, organized by month.
 - Added a usable mobile layout for SparkTank gameplay
 - Added consistent links back to the CAT home page from deep-linked experiences
 - Improved the AI webinar page heading structure and banner alternative text
+- Improved navigation focus, touch targets, and prominent image alternatives
 
 ## May 2026
 

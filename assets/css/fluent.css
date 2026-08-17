@@ -275,7 +275,9 @@ a:hover { text-decoration: underline; }
   font-weight: 500;
   color: rgba(255,255,255,.78);
   text-decoration: none;
-  padding: 4px 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   position: relative;
   transition: color .15s;
 }
@@ -293,12 +295,19 @@ a:hover { text-decoration: underline; }
 .nav--scrolled .nav-links a:hover { color: var(--brand); }
 .nav-links a:hover::after { transform: scaleX(1); }
 
+.nav a:focus-visible,
+.nav button:focus-visible,
+.nav-mobile a:focus-visible {
+  outline: 3px solid #60AEFF;
+  outline-offset: 3px;
+}
+
 /* Theme toggle */
 .theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px; height: 32px;
+  width: 44px; height: 44px;
   background: rgba(255,255,255,.1);
   border: 1px solid rgba(255,255,255,.2);
   border-radius: var(--radius-pill);
@@ -329,10 +338,12 @@ a:hover { text-decoration: underline; }
 
 .nav-hamburger {
   display: none;
+  width: 44px;
+  height: 44px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: var(--space-1);
+  padding: 0;
   color: rgba(255,255,255,.85);
   border-radius: var(--radius-sm);
   transition: color .3s, background .15s;
