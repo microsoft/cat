@@ -2,6 +2,12 @@
 
 All notable changes to the CAT website are documented here, organized by month.
 
+## August 2026
+
+### CAT Website
+- Removed Power Up program links and resources
+- Expanded the README with site architecture, local preview, content update, and contribution guidance
+
 ## May 2026
 
 ### Agent Excellence Workshop
