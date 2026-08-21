@@ -430,3 +430,8 @@ sessions:
     recording_link: "https://aka.ms/AIWebinars/technicaldeepdiveonmodernagent"
     presentation_link: "https://aka.ms/CopilotStudioDeepDiveDeck"
     presentation_label: "Presentation (PPT)"
+  - date: "2026-08-26"
+    time: "8:00 AM PT"
+    title: "Real-World Agent Case Studies: How Organizations Are Using AI Agents"
+    description: "Join this Real-World Customer Stories session to hear directly from customers and partners who are using AI and agentic solutions to transform how work gets done across their organizations. During this AI Webinar, mobilezone, a leading Swiss telecommunications retailer and service provider, will share how it is building an internal agentic AI capability with Microsoft Copilot Studio to streamline retail operations and automate business processes. Expanding on the success highlighted in the Microsoft customer story, mobilezone will demonstrate how it moved from AI experimentation to practical, business-focused solutions that deliver measurable productivity gains. If you're looking for practical examples of agentic AI delivering business results at scale, this session is for you."
+    register_link: "https://aka.ms/AiWebinars/CaseStudies8"
