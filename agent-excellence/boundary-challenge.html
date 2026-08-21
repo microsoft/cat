@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Boundary Challenge - Agent Excellence Workshop</title>
+    <link rel="icon" type="image/svg+xml" href="images/microsoft.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Kickstarter Branding Header -->
+    <div class="kickstarter-header">
+        <nav class="kickstarter-nav">
+            <div class="kickstarter-logo-section">
+                <a href="index.html">
+                    <img src="images/KickstarterLogo.svg" alt="Microsoft Kickstarter" class="kickstarter-logo">
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="back-button-container">
+                    <a href="index.html" class="back-button">
+                        ← Back to Workshop
+                    </a>
+                </div>
+                <div class="theme-toggle-container">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <span class="theme-icon" id="themeIcon">🌙</span>
+                    </button>
+                </div>
+            </div>
+            <h1>🎯 Agent Boundary Challenge</h1>
+            <p class="subtitle">Test your agent's boundary conditions with these wild cards!</p>
+        </header>
+
+        <div class="instruction-card">
+            <h2>📝 How it works:</h2>
+            <ol>
+                <li>Write clear instructions for your agent</li>
+                <li>Refresh this page to get a random challenge</li>
+                <li>Check if your instructions handle the scenario properly</li>
+                <li>Refine your boundaries and try again!</li>
+            </ol>
+        </div>
+
+        <div class="wildcard-container">
+            <div class="postit-note" id="wildcardNote">
+                <div class="wildcard-content">
+                    <div class="wildcard-header">🎯 Wild Card Challenge</div>
+                    <div class="wildcard-text" id="wildcardText">
+                        Loading...
+                    </div>
+                </div>
+                <div class="postit-shadow"></div>
+            </div>
+        </div>
+
+        <div class="refresh-hint">
+            <p>💡 Refresh the page, click the note, or press spacebar for a new challenge!</p>
+        </div>
+
+        <footer>
+            <p>Agent Excellence - Agent Instruction Design</p>
+        </footer>
+    </div>
+
+    <script src="js/timer.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

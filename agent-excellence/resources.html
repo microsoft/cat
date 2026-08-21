@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Resources - Agent Excellence Workshop</title>
+    <link rel="icon" type="image/svg+xml" href="images/microsoft.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Kickstarter Branding Header -->
+    <div class="kickstarter-header">
+        <nav class="kickstarter-nav">
+            <div class="kickstarter-logo-section">
+                <a href="index.html">
+                    <img src="images/KickstarterLogo.svg" alt="Microsoft Kickstarter" class="kickstarter-logo">
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="back-button-container">
+                    <a href="index.html" class="back-button">
+                        ← Back to Workshop
+                    </a>
+                </div>
+                <div class="theme-toggle-container">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <span class="theme-icon" id="themeIcon">🌙</span>
+                    </button>
+                </div>
+            </div>
+            <h1>📚 Agent Excellence Workshop Resources</h1>
+            <p class="subtitle">Essential links and resources from the CAT Kickstarter workshop</p>
+        </header>
+
+        <!-- Quick Copy Section -->
+        <div class="instruction-card">
+            <h2>🚀 Quick Copy Links</h2>
+            <p>All resources from the Agent Excellence Kickstarter workshop. Select and copy any section below to share with your team:</p>
+            <button id="copyAllBtn" class="copy-button">📋 Copy All Resources</button>
+        </div>
+
+        <!-- Resources organized by category -->
+        <div class="resources-container">
+            
+            <!-- Agent Instructions & Foundations -->
+            <div class="resource-section">
+                <h2>📝 Agent Instructions & Foundations</h2>
+                <div class="copyable-section" id="foundations-section">
+                    <div class="resource-item">
+                        <h3>Agent Platform Advisor</h3>
+                        <a href="https://microsoft.github.io/AgentPlatformAdvisor/" target="_blank">https://microsoft.github.io/AgentPlatformAdvisor/</a>
+                        <p>Interactive assessment to help participants choose the right Microsoft agent platform for their use case</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Agent Instructions Best Practices</h3>
+                        <a href="https://aka.ms/AgentInstructions" target="_blank">https://aka.ms/AgentInstructions</a>
+                        <p>Comprehensive guide for writing clear, effective agent instructions</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Copilot Studio Instructions Guide</h3>
+                        <a href="https://aka.ms/CopilotStudioInstructions" target="_blank">https://aka.ms/CopilotStudioInstructions</a>
+                        <p>Platform-specific guidance for implementing agent instructions in Copilot Studio</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Copilot Studio Guidance</h3>
+                        <a href="https://aka.ms/copilotstudioguidance" target="_blank">https://aka.ms/copilotstudioguidance</a>
+                        <p>Best practices, implementation and architecture guidance for planning, building, and managing agents</p>
+                    </div>
+                </div>
+                <button class="copy-section-btn" data-target="foundations-section">📋 Copy Foundation Resources</button>
+            </div>
+
+            <!-- Knowledge Design -->
+            <div class="resource-section">
+                <h2>🧠 Knowledge Design</h2>
+                <div class="copyable-section" id="knowledge-section">
+                    <div class="resource-item">
+                        <h3>Agent Builder Knowledge Guide</h3>
+                        <a href="https://aka.ms/AgentBuilderKnowledge" target="_blank">https://aka.ms/AgentBuilderKnowledge</a>
+                        <p>Comprehensive guide for designing and implementing agent knowledge systems</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Copilot Studio Knowledge Sources</h3>
+                        <a href="https://aka.ms/copilotstudioknowledge" target="_blank">https://aka.ms/copilotstudioknowledge</a>
+                        <p>Platform-specific guidance for configuring and managing knowledge sources</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Copilot Studio RAG Patterns</h3>
+                        <a href="https://aka.ms/CopilotStudioRAG" target="_blank">https://aka.ms/CopilotStudioRAG</a>
+                        <p>Best practices for Retrieval-Augmented Generation in Copilot Studio</p>
+                    </div>
+                </div>
+                <button class="copy-section-btn" data-target="knowledge-section">📋 Copy Knowledge Resources</button>
+            </div>
+
+            <!-- Agent Evaluation -->
+            <div class="resource-section">
+                <h2>🧪 Agent Evaluation</h2>
+                <div class="copyable-section" id="evaluation-section">
+                    <div class="resource-item">
+                        <h3>Copilot Studio Agent Evaluation</h3>
+                        <a href="https://aka.ms/AgentEvaluation" target="_blank">https://aka.ms/AgentEvaluation</a>
+                        <p>Complete guide to systematic agent evaluation and testing</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Agent Evaluation Webinar</h3>
+                        <a href="https://aka.ms/AIWebinars/agentEval" target="_blank">https://aka.ms/AIWebinars/agentEval</a>
+                        <p>Expert-led webinar on evaluation strategies and best practices</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Four-Stage Evaluation Framework</h3>
+                        <a href="https://aka.ms/AgentEvaluationFramework" target="_blank">https://aka.ms/AgentEvaluationFramework</a>
+                        <p>Build an iterative evaluation framework: Core → Baseline → Expand → Operationalize</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Evaluation-Driven Triage</h3>
+                        <a href="https://aka.ms/AgentEvaluationTriage" target="_blank">https://aka.ms/AgentEvaluationTriage</a>
+                        <p>Systematic approach to triage and remediation based on evaluation results</p>
+                    </div>
+                </div>
+                <button class="copy-section-btn" data-target="evaluation-section">📋 Copy Evaluation Resources</button>
+            </div>
+
+            <!-- Tools & Integrations -->
+            <div class="resource-section">
+                <h2>🔧 Tools & Integrations</h2>
+                <div class="copyable-section" id="tools-section">
+                    <div class="resource-item">
+                        <h3>Copilot Studio Tools Guide</h3>
+                        <a href="https://aka.ms/CopilotStudioTools" target="_blank">https://aka.ms/CopilotStudioTools</a>
+                        <p>Comprehensive guide to available tools and connectors in Copilot Studio</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Integration Strategies</h3>
+                        <a href="https://aka.ms/CopilotStudioIntegrationStrategies" target="_blank">https://aka.ms/CopilotStudioIntegrationStrategies</a>
+                        <p>Best practices for integrating agents with external systems and services</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Orchestrate Agent Behavior</h3>
+                        <a href="https://aka.ms/CopilotStudioOrchestrate" target="_blank">https://aka.ms/CopilotStudioOrchestrate</a>
+                        <p>Guide to generative orchestration for complex agent workflows</p>
+                    </div>
+                </div>
+                <button class="copy-section-btn" data-target="tools-section">📋 Copy Tools & Integration Resources</button>
+            </div>
+
+            <!-- Generative Orchestration -->
+            <div class="resource-section">
+                <h2>🎯 Generative Orchestration</h2>
+                <div class="copyable-section" id="orchestration-section">
+                    <div class="resource-item">
+                        <h3>Deep Dive: Generative Orchestration (Part 1)</h3>
+                        <a href="https://aka.ms/mcs/orchestration" target="_blank">https://aka.ms/mcs/orchestration</a>
+                        <p>In-depth video guide to generative orchestration concepts and implementation</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Deep Dive: Generative Orchestration (Part 2)</h3>
+                        <a href="https://aka.ms/mcs/orchestration2" target="_blank">https://aka.ms/mcs/orchestration2</a>
+                        <p>Advanced patterns and best practices for orchestrating agent behavior</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Orchestration FAQ</h3>
+                        <a href="https://aka.ms/CopilostStudioOrchestrationFAQ" target="_blank">https://aka.ms/CopilostStudioOrchestrationFAQ</a>
+                        <p>Frequently asked questions about using generative orchestration</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Apply Orchestration Capabilities</h3>
+                        <a href="https://aka.ms/CopilostStudioOrchestrationGuidance" target="_blank">https://aka.ms/CopilostStudioOrchestrationGuidance</a>
+                        <p>Practical guidance for applying generative orchestration in your agents</p>
+                    </div>
+                </div>
+                <button class="copy-section-btn" data-target="orchestration-section">📋 Copy Orchestration Resources</button>
+            </div>
+
+            <!-- Training & Learning -->
+            <div class="resource-section">
+                <h2>🎓 Training & Learning</h2>
+                <div class="copyable-section" id="training-section">
+                    <div class="resource-item">
+                        <h3>Learn for Power Platform and Copilot Studio</h3>
+                        <a href="https://aka.ms/copilotstudiolearn" target="_blank">https://aka.ms/copilotstudiolearn</a>
+                        <p>Structured learning paths covering fundamentals to advanced features</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Copilot Studio in a Day</h3>
+                        <a href="https://aka.ms/copilotstudioinaday" target="_blank">https://aka.ms/copilotstudioinaday</a>
+                        <p>Intensive hands-on workshop for quickly gaining practical skills</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Copilot Studio Architecture Bootcamp</h3>
+                        <a href="https://aka.ms/CopilotStudioBootcamp" target="_blank">https://aka.ms/CopilotStudioBootcamp</a>
+                        <p>3-day intensive training for architects and technical consultants</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Power CAT AI Webinars</h3>
+                        <a href="https://aka.ms/PowerCAT/AIWebinars" target="_blank">https://aka.ms/PowerCAT/AIWebinars</a>
+                        <p>Engage with Microsoft experts and customers on agent adoption</p>
+                    </div>
+                    <div class="resource-item">
+                        <h3>Microsoft 365 Copilot Adoption</h3>
+                        <a href="https://adoption.microsoft.com/copilot" target="_blank">https://adoption.microsoft.com/copilot</a>
+                        <p>Central hub for planning, launching, and scaling Copilot adoption</p>
+                    </div>
+                </div>
+                <button class="copy-section-btn" data-target="training-section">📋 Copy Training Resources</button>
+            </div>
+
+        </div>
+
+        <!-- Workshop Specific Links -->
+        <div class="workshop-links">
+            <h2>🎯 Workshop Activities</h2>
+            <div class="workshop-grid">
+                <a href="boundary-challenge.html" class="workshop-link">
+                    <span class="workshop-icon">🎯</span>
+                    <span class="workshop-title">Boundary Challenge</span>
+                </a>
+                <a href="knowledge-design.html" class="workshop-link">
+                    <span class="workshop-icon">🧠</span>
+                    <span class="workshop-title">Knowledge Design</span>
+                </a>
+                <a href="agent-integrations.html" class="workshop-link">
+                    <span class="workshop-icon">🔧</span>
+                    <span class="workshop-title">Agent Integrations</span>
+                </a>
+                <a href="operating-model.html" class="workshop-link">
+                    <span class="workshop-icon">📊</span>
+                    <span class="workshop-title">Operating Model</span>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p>Agent Excellence - CAT Kickstarter Workshop Resources</p>
+            <p class="footer-subtitle">Created by the Microsoft Copilot Acceleration Team</p>
+        </footer>
+    </div>
+
+    <script src="js/landing.js"></script>
+    <script>
+        // Copy functionality for easy sharing
+        document.querySelectorAll('.copy-section-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetId = this.dataset.target;
+                const targetSection = document.getElementById(targetId);
+                const text = extractTextFromSection(targetSection);
+                copyToClipboard(text, this);
+            });
+        });
+
+        document.getElementById('copyAllBtn').addEventListener('click', function() {
+            const allSections = document.querySelectorAll('.copyable-section');
+            let allText = "# Agent Excellence Workshop Resources\n\n";
+            
+            allSections.forEach(section => {
+                const sectionTitle = section.parentElement.querySelector('h2').textContent;
+                allText += `## ${sectionTitle}\n\n`;
+                allText += extractTextFromSection(section) + "\n\n";
+            });
+            
+            copyToClipboard(allText, this);
+        });
+
+        function extractTextFromSection(section) {
+            let text = '';
+            const items = section.querySelectorAll('.resource-item');
+            
+            items.forEach(item => {
+                const title = item.querySelector('h3').textContent;
+                const link = item.querySelector('a').href;
+                const description = item.querySelector('p').textContent;
+                
+                text += `**${title}**\n${link}\n${description}\n\n`;
+            });
+            
+            return text;
+        }
+
+        function copyToClipboard(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                button.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

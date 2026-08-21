@@ -70,7 +70,8 @@
     </header>
 
     <main class="main-container">
-      <img src="../images/CAT AI Webinar Banner FY26.png" class="responsive" />
+      <h1 class="visually-hidden">Microsoft CAT AI Webinars</h1>
+      <img src="../images/CAT AI Webinar Banner FY26.png" class="responsive" alt="Microsoft CAT AI Webinars interactive virtual series" />
 
       <section class="about-section">
         <div class="hero-details">
@@ -190,7 +191,7 @@
           sessionData.sort((a, b) => a.cutoffDate - b.cutoffDate);
 
           const upcoming = sessionData.filter(s => s.cutoffDate > now);
-          const past = sessionData.filter(s => s.cutoffDate <= now); // oldest first
+          const past = sessionData.filter(s => s.cutoffDate <= now && s.region !== 'APAC'); // oldest first
 
           // --- Next Session card ---
           const nextSessionLink = document.getElementById('next-session-link');
@@ -244,7 +245,7 @@
               {
                 name: 'Technical Deep Dives',
                 color: '#2E7D32',
-                matches: s => /Deep Dive|Autonomous Agents|Generative Orchestration|Multi-Agent|Orchestrative.*Deterministic|Computer Use/i.test(s.title)
+                matches: s => /Deep Dive|Autonomous Agents|Generative Orchestration|Multi-Agent|Orchestrated.*Deterministic|Deterministic.*Hybrid|Choosing the Right Agent Pattern|Computer Use/i.test(s.title)
               },
               {
                 name: 'Azure & Advanced Integration',
@@ -259,7 +260,7 @@
               {
                 name: 'Strategy & Adoption',
                 color: '#D32F2F',
-                matches: s => /Agents Meet Opportunity|Adoption/i.test(s.title)
+                matches: s => /Agents Meet Opportunity|Adoption|Business Value.*AI Agents|ROI.*Impact/i.test(s.title)
               },
               {
                 name: 'Tools & Operations',
@@ -367,12 +368,14 @@
         let buttons = '';
         if (session.recording_link) {
           buttons += `<a href="${session.recording_link}" style="color: #0C55B8; white-space: nowrap;" target="_blank" rel="noopener noreferrer">Recording</a>`;
-        } else {
-          buttons += `<span style="color: #999; white-space: nowrap;">Recording Coming Soon</span>`;
         }
         if (session.presentation_link) {
           const label = escapeHtml(session.presentation_label || 'Presentation');
-          buttons += ` &nbsp;|&nbsp; <a href="${session.presentation_link}" style="color: #0C55B8; white-space: nowrap;" target="_blank" rel="noopener noreferrer">${label}</a>`;
+          if (buttons) buttons += ` &nbsp;|&nbsp; `;
+          buttons += `<a href="${session.presentation_link}" style="color: #0C55B8; white-space: nowrap;" target="_blank" rel="noopener noreferrer">${label}</a>`;
+        } else {
+          if (buttons) buttons += ` &nbsp;|&nbsp; `;
+          buttons += `<span style="color: #999; white-space: nowrap;">Slides &amp; Recording coming soon</span>`;
         }
         row.innerHTML = `
           <span style="flex: 1; font-weight: 500;">${escapeHtml(session.title)}</span>
