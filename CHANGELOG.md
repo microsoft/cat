@@ -2,6 +2,11 @@
 
 All notable changes to the CAT website are documented here, organized by month.
 
+## October 2026
+
+### CAT Website
+- Added links to the Copilot Studio Technical Guide, Microsoft Copilot Agents Labs, and Copilot Studio Samples
+
 ## August 2026
 
 ### CAT Website
