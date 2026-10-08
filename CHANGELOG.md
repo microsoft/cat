@@ -5,6 +5,7 @@ All notable changes to the CAT website are documented here, organized by month.
 ## October 2026
 
 ### CAT Website
+- Updated the AI webinar page to preserve available past recordings and presentations without advertising new sessions
 - Added links to the Copilot Studio Technical Guide, Microsoft Copilot Agents Labs, and Copilot Studio Samples
 - Clarified that the Copilot Studio Technical Guide covers the GitHub Copilot coding agent harness
 - Added a PPCC26 event section featuring CAT sessions and a schedule placeholder for a future calendar view
