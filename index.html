@@ -48,6 +48,7 @@
 
       <div class="nav-right">
         <ul class="nav-links">
+          <li><a href="#events">Events</a></li>
           <li><a href="#tools">Resources &amp; Tools</a></li>
           <li><a href="#programs">Programs</a></li>
           <li><a href="#guidance">Guidance</a></li>
@@ -84,6 +85,7 @@
   </nav>
 
   <div class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
+    <a href="#events"    onclick="closeMobileNav()">Events</a>
     <a href="#tools"     onclick="closeMobileNav()">Resources &amp; Tools</a>
     <a href="#programs"  onclick="closeMobileNav()">Programs</a>
     <a href="#guidance"  onclick="closeMobileNav()">Guidance</a>
@@ -323,6 +325,118 @@
           </a>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       EVENTS
+  ═══════════════════════════════════════ -->
+  <section id="events" class="section" aria-labelledby="events-heading">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-eyebrow">Upcoming event</span>
+        <h2 class="section-title" id="events-heading">Meet CAT at PPCC26</h2>
+        <p class="section-desc">Join members of the Copilot Acceleration Team at the Power Platform Community Conference for a full-day workshop and sessions on building, operating, and governing the agentic enterprise.</p>
+      </header>
+
+      <div class="event-schedule-note reveal" role="status">
+        <div>
+          <strong>Dates and times for the conference sessions are coming soon.</strong>
+          <span>When the full schedule is published, you will be able to browse the sessions in a calendar by date and time.</span>
+        </div>
+        <a href="https://powerplatformconf.com/sessions" target="_blank" rel="noopener" class="btn btn-brand">Browse all PPCC26 sessions</a>
+      </div>
+
+      <div class="event-grid reveal-stagger">
+        <a href="https://powerplatformconf.com/workshops/Deep-dive-into-the-new-Copilot-Studio%3A-engineering-enterprise-agents-and-workflows" target="_blank" rel="noopener" class="event-card event-card--workshop">
+          <span class="event-card-label">PPCC26 full-day workshop</span>
+          <h3>Deep Dive Into the New Copilot Studio: Engineering Enterprise Agents and Workflows</h3>
+          <time class="event-card-date" datetime="2026-10-25T09:00">October 25 · 9:00 AM–4:00 PM</time>
+          <p class="event-card-desc">Go beyond the platform tour to engineer enterprise agents, long-horizon orchestration, reusable skills, autopilots, MCP apps, and reliable human-in-the-loop workflows.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Bobby Chang, Doug Bellingeri, Henry Jammes, Remi Dyon, Roel Schenk</p>
+          <span class="event-card-link">View workshop details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Beyond-the-Basics%3A-the-GitHub-Copilot-Harness-and-Workflows-in-Copilot-Studio" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Beyond the Basics: the GitHub Copilot Harness and Workflows in Copilot Studio</h3>
+          <p class="event-card-desc">A technical deep dive into the harness's reasoning loop, reusable skills, tool orchestration, memory, workflows, and migration from the standard harness.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Alicja Gilderdale, Giorgio Ughini, Roel Schenk</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Building-your-agentic-enterprise-with-agents%2C-workflows-and-autopilots-in-the-new-Copilot-Studio" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Building your agentic enterprise with agents, workflows and autopilots in the new Copilot Studio</h3>
+          <p class="event-card-desc">A candid roundtable on autonomous agents, agentic workflows, computer use, and turning real business processes over to the new Copilot Studio.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Doug Bellingeri, Giorgio Ughini, Rahul Ranjit Kannathusseril, Roel Schenk</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Lost-in-the-Agent-Jungle%3A-What-to-Use-When%3F" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Lost in the Agent Jungle: What to Use When?</h3>
+          <p class="event-card-desc">Clarify when to use Copilot Studio, Microsoft 365 Copilot, Cowork, Work IQ, and Agent 365—and how to communicate those choices across your organization.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Bobby Chang, Karima Kanji-Tajdin, Remi Dyon, Roel Schenk</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Recommended-Architectural-Patterns-%26-Common-Pitfalls-for-MCS-Retrieval-Agents" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Recommended Architectural Patterns &amp; Common Pitfalls for MCS Retrieval Agents</h3>
+          <p class="event-card-desc">Compare retrieval patterns for structured and unstructured data using RAG, SharePoint, Dataverse, connectors, MCP, and modern orchestration.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Betty Le, Doug Bellingeri, Karima Kanji-Tajdin, Remi Dyon</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Exec-Panel%3A-The-Token-Meter-Is-Running%2C-What-It-Takes-to-Get-Max-ROI-from-AI-Agents" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Exec Panel: The Token Meter Is Running, What It Takes to Get Max ROI from AI Agents</h3>
+          <p class="event-card-desc">Customer executives share what it takes to prepare data, manage consumption-based costs, and prove durable value from production AI agents.</p>
+          <p class="event-card-speakers"><strong>Speaker:</strong> Srini Raghavan, with customer executives</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Extending-Copilot-Cowork-with-Custom-Plugins-and-Workflows-with-Real-world-Customer-Use-Cases" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Extending Copilot Cowork with Custom Plugins and Workflows with Real-world Customer Use Cases</h3>
+          <p class="event-card-desc">Learn how plugins, tools, skills, workflows, and external integrations can turn Copilot Cowork into a customizable engineering companion.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Alicja Gilderdale, Giorgio Ughini</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/From-AI-Adoption-to-AI-Confidence%3A-Evaluation-and-Analytics-for-Agents%2C-Flows-and-Apps" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>From AI Adoption to AI Confidence: Evaluation and Analytics for Agents, Flows and Apps</h3>
+          <p class="event-card-desc">Use evaluation, analytics, A/B testing, and production monitoring to improve quality throughout the complete AI asset lifecycle.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Efrat Gilboa, Ilana Kantorov, Karima Kanji-Tajdin</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Agents-in-the-Wild%3A-Emerging-Design-Patterns-for-the-Agentic-Enterprise" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Agents in the Wild: Emerging Design Patterns for the Agentic Enterprise</h3>
+          <p class="event-card-desc">Explore emerging architecture patterns, tradeoffs, and lessons from more than 1,000 enterprise agent engagements and real customer deployments.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Clint Williams, Dan Stevenson</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Operationalizing-Agents-at-Scale%3A-The-Agentic-COE-Playbook" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Operationalizing Agents at Scale: The Agentic COE Playbook</h3>
+          <p class="event-card-desc">A practical playbook for the structures, roles, guardrails, and operating rhythms needed to scale agents across the enterprise.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Aamer Kaleem, Saurabh Pant</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Agentic-Governance%3A-Secure%2C-Govern%2C-and-Operate-Your-Power-Platform-at-Scale" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Agentic Governance: Secure, Govern, and Operate Your Power Platform at Scale</h3>
+          <p class="event-card-desc">Build reporting, inventory, automated controls, and agentic governance on the Power Platform API as the CoE Starter Kit retires.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Gregg Barker, Lane Swenka, Reza Dorrani, Sanket Vasa</p>
+          <span class="event-card-link">View session details</span>
+        </a>
       </div>
     </div>
   </section>

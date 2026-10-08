@@ -7,6 +7,9 @@ All notable changes to the CAT website are documented here, organized by month.
 ### CAT Website
 - Added links to the Copilot Studio Technical Guide, Microsoft Copilot Agents Labs, and Copilot Studio Samples
 - Clarified that the Copilot Studio Technical Guide covers the GitHub Copilot coding agent harness
+- Added a PPCC26 event section featuring CAT sessions and a schedule placeholder for a future calendar view
+- Added speakers and concise descriptions to the PPCC26 session cards
+- Added the PPCC26 full-day Copilot Studio workshop with its schedule, speakers, and description
 
 ## August 2026
 
