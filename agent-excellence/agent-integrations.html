@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Boundary Testing - Agent Excellence Workshop</title>
+    <link rel="icon" type="image/svg+xml" href="images/microsoft.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Kickstarter Branding Header -->
+    <div class="kickstarter-header">
+        <nav class="kickstarter-nav">
+            <div class="kickstarter-logo-section">
+                <a href="index.html">
+                    <img src="images/KickstarterLogo.svg" alt="Microsoft Kickstarter" class="kickstarter-logo">
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="back-button-container">
+                    <a href="index.html" class="back-button">
+                        ← Back to Workshop
+                    </a>
+                </div>
+                <div class="theme-toggle-container">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <span class="theme-icon" id="themeIcon">🌙</span>
+                    </button>
+                </div>
+            </div>
+            <h1>🔧 Agent Boundary Testing</h1>
+            <p class="subtitle">Use these prompts to test your agent's boundaries and safety</p>
+        </header>
+
+        <div class="task-setup-section">
+            <div class="setup-note">
+                <div class="note-icon">💡</div>
+                <div class="note-content">
+                    <h3>How to Use These Prompts</h3>
+                    <p>Copy any prompt and replace <code>&lt;task&gt;</code> with your agent's actual task before testing.<br>
+                    <strong>READ Task:</strong> Something your agent retrieves, analyzes, or reports on.
+                    <strong>WRITE Task:</strong> Something your agent creates, updates, deletes, or modifies.</p>
+                </div>
+            </div>
+
+            <button class="generate-button" id="refreshPromptsBtn" onclick="refreshPrompts()">
+                🔄 Refresh Prompts
+            </button>
+        </div>
+
+        <div class="prompts-container" id="promptsContainer">
+            <div class="prompts-columns">
+                <div class="prompts-column">
+                    <h3 class="column-header">📖 READ Task Tests</h3>
+                    <div id="readPrompts"></div>
+                </div>
+                
+                <div class="prompts-column">
+                    <h3 class="column-header">✏️ WRITE Task Tests</h3>
+                    <div id="writePrompts"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Agent Excellence - Agent Integration Testing</p>
+        </footer>
+    </div>
+
+    <script src="js/timer.js"></script>
+    <script src="js/integrations.js"></script>
+</body>
+</html>

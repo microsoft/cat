@@ -16,8 +16,10 @@
   <!-- Prevent flash of wrong theme -->
   <script>
     (function () {
-      var t = localStorage.getItem('cat-theme') ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var saved = localStorage.getItem('cat-theme');
+      var t = ['light', 'dark', 'cat'].includes(saved)
+        ? saved
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
@@ -52,15 +54,20 @@
           <li><a href="#programs">Programs</a></li>
           <li><a href="#guidance">Guidance</a></li>
           <li><a href="#stories">Stories</a></li>
+          <li><a href="#events">Events</a></li>
         </ul>
 
-        <!-- Dark mode toggle -->
-        <button class="theme-toggle" id="theme-toggle" aria-label="Switch color theme">
-          <!-- Moon: shown in light mode, click to go dark -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme">
+          <!-- Moon: shown in light mode -->
           <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
-          <!-- Sun: shown in dark mode, click to go light -->
+          <!-- Cat: shown in dark mode -->
+          <svg class="icon-cat" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 8 4 3l5 3a10 10 0 0 1 6 0l5-3-1 5a8 8 0 1 1-14 0Z"/>
+            <path d="M9 13h.01M15 13h.01M10 16c1.2 1 2.8 1 4 0"/>
+          </svg>
+          <!-- Sun: shown in cat mode -->
           <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="5"/>
             <line x1="12" y1="1"  x2="12" y2="3"/>
@@ -88,6 +95,7 @@
     <a href="#programs"  onclick="closeMobileNav()">Programs</a>
     <a href="#guidance"  onclick="closeMobileNav()">Guidance</a>
     <a href="#stories"   onclick="closeMobileNav()">Stories</a>
+    <a href="#events"    onclick="closeMobileNav()">Events</a>
   </div>
 
   <!-- ═══════════════════════════════════════
@@ -100,11 +108,11 @@
         <h1 class="hero-title" id="hero-heading">
           Microsoft 
          Copilot<br>
-          <span class="hero-accent">Acceleration Team</span>
+          <span class="hero-accent" data-default-text="Acceleration Team" data-cat-text="Accele-purr-ation Team">Acceleration Team</span>
         </h1>
+        <p class="cat-mode-badge" aria-hidden="true">CAT mode unlocked. Pawsibilities enabled.</p>
         <p class="hero-subtitle">
-          We are the Copilot Acceleration Team (CAT), part of the Copilot
-          Studio engineering team at Microsoft. Our mission is to accelerate the adoption and success of Microsoft 365 Copilot and Copilot Studio.
+          We are the Copilot Acceleration Team (CAT), part of the Copilot engineering team at Microsoft. Our mission is to accelerate the adoption and success of Microsoft 365 Copilot and Copilot Studio.
           <br/><br/>
           We empower organizations to achieve agentic transformation at scale with resources, tools, programs, and guidance developed from real-world customer experience.
         </p>
@@ -143,14 +151,14 @@
     <div class="container">
       <header class="section-header reveal">
         <span class="section-eyebrow">Resources &amp; Tools</span>
-        <h2 class="section-title" id="tools-heading">Build better, faster</h2>
+        <h2 class="section-title" id="tools-heading" data-default-text="Build better, faster" data-cat-text="Build better, faster, fur real">Build better, faster</h2>
         <p class="section-desc">Accelerate and enable successful adoption with resources and tools developed and curated by CAT, based on real-world customer experience.</p>
       </header>
 
       <div class="bento-grid reveal">
         <a href="https://aka.ms/copilotstudiokit" target="_blank" rel="noopener" class="bento-featured">
           <div class="bento-content">
-            <h3 class="bento-featured-title">Copilot Studio Kit</h3>
+            <h3 class="bento-featured-title">Copilot Agent Kit</h3>
             <p class="bento-featured-desc">Develop and test custom agents, validate AI-generated content with large language models, optimize prompts, and track aggregated key performance indicators.</p>
             <span class="btn btn-white">Learn more</span>
           </div>
@@ -175,11 +183,12 @@
 
       <div class="card-grid reveal-stagger" style="margin-top: var(--space-6)">
 
-        <a href="https://aka.ms/CopilotStudio/Resources" target="_blank" rel="noopener" class="card">
-          <div class="card-title">Copilot Studio Resources</div>
-          <p class="card-desc">Resources to help you on your Copilot Studio journey, curated by CAT and updated regularly.</p>
+        <a href="https://aka.ms/agentresources" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Agent Resources</div>
+          <p class="card-desc">Resources to help you on your journey to agentic transformation through effectively building, deploying, and managing agents with Microsoft tools and platforms.</p>
           <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
         </a>
+
 
         <a href="https://microsoft.github.io/mcscatblog/" target="_blank" rel="noopener" class="card">
           <div class="card-title">The Custom Engine Blog</div>
@@ -193,6 +202,12 @@
           <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
         </a>
 
+        <a href="https://microsoft.github.io/CopilotStudioSamples/" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Copilot Studio Samples</div>
+          <p class="card-desc">Explore sample agents, components, and solutions that demonstrate what you can build with Microsoft Copilot Studio.</p>
+          <div class="card-cta"><span class="btn btn-outline">Explore samples</span></div>
+        </a>
+
       </div>
     </div>
   </section>
@@ -204,17 +219,11 @@
     <div class="container">
       <header class="section-header reveal">
         <span class="section-eyebrow">Programs</span>
-        <h2 class="section-title" id="programs-heading">Grow your skills</h2>
+        <h2 class="section-title" id="programs-heading" data-default-text="Grow your skills" data-cat-text="Sharpen your claws">Grow your skills</h2>
         <p class="section-desc">Gain skills and knowledge to successfully adopt and deploy impactful solutions using Power Platform and Copilot Studio with programs from CAT and our partner teams.</p>
       </header>
 
       <div class="card-grid-4 reveal-stagger">
-
-        <a href="https://aka.ms/powerup" target="_blank" rel="noopener" class="card">
-          <div class="card-title">Power Up</div>
-          <p class="card-desc">Training for individuals and enterprise organizations to develop talent in low-code and AI with a comprehensive curriculum.</p>
-          <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
-        </a>
 
         <a href="https://aka.ms/agiad" target="_blank" rel="noopener" class="card">
           <div class="card-title">Agent In A Day</div>
@@ -240,12 +249,11 @@
           <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
         </a>
 
-        <a href="https://aka.ms/KickstarterEvent" target="_blank" rel="noopener" class="card">
-          <div class="card-title">Kickstarter</div>
-          <p class="card-desc">Facilitated workshops to guide the foundations of your low-code and AI transformation journeys.</p>
-          <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
+        <a href="https://microsoft.github.io/mcs-labs/" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Microsoft Copilot Agents Labs</div>
+          <p class="card-desc">Build practical Copilot Studio skills through hands-on labs for creating and extending Microsoft Copilot agents.</p>
+          <div class="card-cta"><span class="btn btn-outline">Explore labs</span></div>
         </a>
-
       </div>
     </div>
   </section>
@@ -257,8 +265,8 @@
     <div class="container" style="position:relative;z-index:1">
       <header class="section-header reveal">
         <span class="section-eyebrow">Guidance</span>
-        <h2 class="section-title" id="guidance-heading">Implement with confidence</h2>
-        <p class="section-desc">Ensure successful implementation of your Power Platform and Copilot Studio workloads with comprehensive guidance and best practices.</p>
+        <h2 class="section-title" id="guidance-heading" data-default-text="Adopt and implement with confidence" data-cat-text="Lead the pack and land on your feet">Adopt and implement with confidence</h2>
+        <p class="section-desc">Drive successful adoption and implementation of agentic AI, Power Platform, and Copilot Studio with comprehensive guidance and proven practices.</p>
       </header>
 
       <div class="card-grid-4 reveal-stagger">
@@ -281,6 +289,18 @@
           <div class="card-cta"><span class="btn btn-dark-outline">Learn more</span></div>
         </a>
 
+        <a href="https://learn.microsoft.com/en-us/agents/adopt-overview" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Adopt Agentic AI at Scale</div>
+          <p class="card-desc">Build an organization-wide strategy for adopting agentic AI responsibly, from preparing your people and processes to measuring value at scale.</p>
+          <div class="card-cta"><span class="btn btn-dark-outline">Explore adoption guidance</span></div>
+        </a>
+
+        <a href="https://microsoft.github.io/new-copilot-studio-tech-guide/" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Copilot Studio Technical Guide for the GitHub Copilot Harness</div>
+          <p class="card-desc">Explore technical guidance for designing, building, deploying, and managing solutions with the GitHub Copilot harness for Copilot Studio.</p>
+          <div class="card-cta"><span class="btn btn-dark-outline">Read the guide</span></div>
+        </a>
+
       </div>
     </div>
   </section>
@@ -292,7 +312,7 @@
     <div class="container">
       <header class="section-header reveal">
         <span class="section-eyebrow">Customer Stories</span>
-        <h2 class="section-title" id="stories-heading">Real-world impact</h2>
+        <h2 class="section-title" id="stories-heading" data-default-text="Real-world impact" data-cat-text="Pawsitive real-world impact">Real-world impact</h2>
         <p class="section-desc">Compelling customer stories highlight the diverse and creative ways agents transform organizations.</p>
       </header>
 
@@ -318,6 +338,118 @@
           </a>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       EVENTS
+  ═══════════════════════════════════════ -->
+  <section id="events" class="section" aria-labelledby="events-heading">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-eyebrow">Upcoming event</span>
+        <h2 class="section-title" id="events-heading" data-default-text="Meet CAT at PPCC26" data-cat-text="Meet the CAT pack at PPCC26">Meet CAT at PPCC26</h2>
+        <p class="section-desc">Join members of the Copilot Acceleration Team at the Power Platform Community Conference for a full-day workshop and sessions on building, operating, and governing the agentic enterprise.</p>
+      </header>
+
+      <div class="event-schedule-note reveal" role="status">
+        <div>
+          <strong>Dates and times for the conference sessions are coming soon.</strong>
+          <span>When the full schedule is published, you will be able to browse the sessions in a calendar by date and time.</span>
+        </div>
+        <a href="https://powerplatformconf.com/sessions" target="_blank" rel="noopener" class="btn btn-brand">Browse all PPCC26 sessions</a>
+      </div>
+
+      <div class="event-grid reveal-stagger">
+        <a href="https://powerplatformconf.com/workshops/Deep-dive-into-the-new-Copilot-Studio%3A-engineering-enterprise-agents-and-workflows" target="_blank" rel="noopener" class="event-card event-card--workshop">
+          <span class="event-card-label">PPCC26 full-day workshop</span>
+          <h3>Deep Dive Into the New Copilot Studio: Engineering Enterprise Agents and Workflows</h3>
+          <time class="event-card-date" datetime="2026-10-25T09:00">October 25 · 9:00 AM–4:00 PM</time>
+          <p class="event-card-desc">Go beyond the platform tour to engineer enterprise agents, long-horizon orchestration, reusable skills, autopilots, MCP apps, and reliable human-in-the-loop workflows.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Bobby Chang, Doug Bellingeri, Henry Jammes, Remi Dyon, Roel Schenk</p>
+          <span class="event-card-link">View workshop details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Beyond-the-Basics%3A-the-GitHub-Copilot-Harness-and-Workflows-in-Copilot-Studio" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Beyond the Basics: the GitHub Copilot Harness and Workflows in Copilot Studio</h3>
+          <p class="event-card-desc">A technical deep dive into the harness's reasoning loop, reusable skills, tool orchestration, memory, workflows, and migration from the standard harness.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Alicja Gilderdale, Giorgio Ughini, Roel Schenk</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Building-your-agentic-enterprise-with-agents%2C-workflows-and-autopilots-in-the-new-Copilot-Studio" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Building your agentic enterprise with agents, workflows and autopilots in the new Copilot Studio</h3>
+          <p class="event-card-desc">A candid roundtable on autonomous agents, agentic workflows, computer use, and turning real business processes over to the new Copilot Studio.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Doug Bellingeri, Giorgio Ughini, Rahul Ranjit Kannathusseril, Roel Schenk</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Lost-in-the-Agent-Jungle%3A-What-to-Use-When%3F" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Lost in the Agent Jungle: What to Use When?</h3>
+          <p class="event-card-desc">Clarify when to use Copilot Studio, Microsoft 365 Copilot, Cowork, Work IQ, and Agent 365—and how to communicate those choices across your organization.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Bobby Chang, Karima Kanji-Tajdin, Remi Dyon, Roel Schenk</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Recommended-Architectural-Patterns-%26-Common-Pitfalls-for-MCS-Retrieval-Agents" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Recommended Architectural Patterns &amp; Common Pitfalls for MCS Retrieval Agents</h3>
+          <p class="event-card-desc">Compare retrieval patterns for structured and unstructured data using RAG, SharePoint, Dataverse, connectors, MCP, and modern orchestration.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Betty Le, Doug Bellingeri, Karima Kanji-Tajdin, Remi Dyon</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Exec-Panel%3A-The-Token-Meter-Is-Running%2C-What-It-Takes-to-Get-Max-ROI-from-AI-Agents" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Exec Panel: The Token Meter Is Running, What It Takes to Get Max ROI from AI Agents</h3>
+          <p class="event-card-desc">Customer executives share what it takes to prepare data, manage consumption-based costs, and prove durable value from production AI agents.</p>
+          <p class="event-card-speakers"><strong>Speaker:</strong> Srini Raghavan, with customer executives</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Extending-Copilot-Cowork-with-Custom-Plugins-and-Workflows-with-Real-world-Customer-Use-Cases" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Extending Copilot Cowork with Custom Plugins and Workflows with Real-world Customer Use Cases</h3>
+          <p class="event-card-desc">Learn how plugins, tools, skills, workflows, and external integrations can turn Copilot Cowork into a customizable engineering companion.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Alicja Gilderdale, Giorgio Ughini</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/From-AI-Adoption-to-AI-Confidence%3A-Evaluation-and-Analytics-for-Agents%2C-Flows-and-Apps" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>From AI Adoption to AI Confidence: Evaluation and Analytics for Agents, Flows and Apps</h3>
+          <p class="event-card-desc">Use evaluation, analytics, A/B testing, and production monitoring to improve quality throughout the complete AI asset lifecycle.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Efrat Gilboa, Ilana Kantorov, Karima Kanji-Tajdin</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Agents-in-the-Wild%3A-Emerging-Design-Patterns-for-the-Agentic-Enterprise" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Agents in the Wild: Emerging Design Patterns for the Agentic Enterprise</h3>
+          <p class="event-card-desc">Explore emerging architecture patterns, tradeoffs, and lessons from more than 1,000 enterprise agent engagements and real customer deployments.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Clint Williams, Dan Stevenson</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Operationalizing-Agents-at-Scale%3A-The-Agentic-COE-Playbook" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Operationalizing Agents at Scale: The Agentic COE Playbook</h3>
+          <p class="event-card-desc">A practical playbook for the structures, roles, guardrails, and operating rhythms needed to scale agents across the enterprise.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Aamer Kaleem, Saurabh Pant</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Agentic-Governance%3A-Secure%2C-Govern%2C-and-Operate-Your-Power-Platform-at-Scale" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Agentic Governance: Secure, Govern, and Operate Your Power Platform at Scale</h3>
+          <p class="event-card-desc">Build reporting, inventory, automated controls, and agentic governance on the Power Platform API as the CoE Starter Kit retires.</p>
+          <p class="event-card-speakers"><strong>Speakers:</strong> Gregg Barker, Lane Swenka, Reza Dorrani, Sanket Vasa</p>
+          <span class="event-card-link">View session details</span>
+        </a>
       </div>
     </div>
   </section>
@@ -363,13 +495,34 @@
     });
 
     // ── Theme toggle ─────────────────────────────────────────────
+    const themes = ['light', 'dark', 'cat'];
+    const themeLabels = {
+      light: 'Switch to dark theme',
+      dark: 'Switch to cat theme',
+      cat: 'Switch to light theme'
+    };
+
+    const updateThemeLabel = () => {
+      const current = html.getAttribute('data-theme');
+      toggle.setAttribute('aria-label', themeLabels[current]);
+      document.querySelectorAll('[data-cat-text]').forEach(element => {
+        element.textContent = current === 'cat'
+          ? element.dataset.catText
+          : element.dataset.defaultText;
+      });
+    };
+
+    updateThemeLabel();
+
     toggle.addEventListener('click', () => {
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      const current = html.getAttribute('data-theme');
+      const next = themes[(themes.indexOf(current) + 1) % themes.length];
 
       // Smooth transition
       document.body.classList.add('theme-transitioning');
       html.setAttribute('data-theme', next);
       localStorage.setItem('cat-theme', next);
+      updateThemeLabel();
       setTimeout(() => document.body.classList.remove('theme-transitioning'), 280);
     });
 

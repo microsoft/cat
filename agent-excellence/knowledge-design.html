@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Sources - Agent Excellence Workshop</title>
+    <link rel="icon" type="image/svg+xml" href="images/microsoft.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Kickstarter Branding Header -->
+    <div class="kickstarter-header">
+        <nav class="kickstarter-nav">
+            <div class="kickstarter-logo-section">
+                <a href="index.html">
+                    <img src="images/KickstarterLogo.svg" alt="Microsoft Kickstarter" class="kickstarter-logo">
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="back-button-container">
+                    <a href="index.html" class="back-button">
+                        ← Back to Workshop
+                    </a>
+                </div>
+                <div class="theme-toggle-container">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <span class="theme-icon" id="themeIcon">🌙</span>
+                    </button>
+                </div>
+            </div>
+            <h1>🧠 Knowledge Sources</h1>
+            <p class="subtitle">Download the sample knowledge sources to use with your agent</p>
+        </header>
+
+        <!-- Download Knowledge Sources -->
+        <div class="knowledge-sources">
+            <h2>📂 Knowledge Sources</h2>
+            <p>Download these Contoso sample files and upload them as knowledge sources in your agent:</p>
+            <div class="download-grid">
+                <a href="knowledge-sources/Contoso_HR_Policies.docx" download class="download-item">
+                    <span class="download-icon">📋</span>
+                    <span class="download-text">HR Policies</span>
+                    <span class="download-subtext">Contoso_HR_Policies.docx</span>
+                </a>
+                <a href="knowledge-sources/Contoso_Benefits_Policy.docx" download class="download-item">
+                    <span class="download-icon">🏥</span>
+                    <span class="download-text">Benefits Policy</span>
+                    <span class="download-subtext">Contoso_Benefits_Policy.docx</span>
+                </a>
+                <a href="knowledge-sources/Contoso_HR_FAQ.docx" download class="download-item">
+                    <span class="download-icon">❓</span>
+                    <span class="download-text">HR FAQ</span>
+                    <span class="download-subtext">Contoso_HR_FAQ.docx</span>
+                </a>
+                <a href="knowledge-sources/Contoso_IT_FAQ.docx" download class="download-item">
+                    <span class="download-icon">💻</span>
+                    <span class="download-text">IT FAQ</span>
+                    <span class="download-subtext">Contoso_IT_FAQ.docx</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Download Skill -->
+        <div class="knowledge-sources" style="margin-top: 30px;">
+            <h2>⭐ Agent Skill</h2>
+            <p>Download the skill file and rename it to skill.md Use it as a starting point for building your agent's instructions and capabilities:</p>
+            <div class="download-grid">
+                <a href="knowledge-sources/SKILL.txt" download="SKILL.md" class="download-item">
+                    <span class="download-icon">📝</span>
+                    <span class="download-text">Agent Skill</span>
+                    <span class="download-subtext">SKILL.md</span>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p>Knowledge Sources - Agent Excellence Workshop</p>
+            <p class="footer-subtitle">Created by the Microsoft Copilot Acceleration Team</p>
+        </footer>
+    </div>
+
+    <script src="js/landing.js"></script>
+</body>
+</html>
