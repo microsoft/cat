@@ -10,6 +10,8 @@ All notable changes to the CAT website are documented here, organized by month.
 - Added a PPCC26 event section featuring CAT sessions and a schedule placeholder for a future calendar view
 - Added speakers and concise descriptions to the PPCC26 session cards
 - Added the PPCC26 full-day Copilot Studio workshop with its schedule, speakers, and description
+- Added a playful cat-inspired theme with paw-print details, cat puns, and theme-specific styling alongside the existing light and dark themes
+- Expanded the Guidance section to cover adoption and added Microsoft Learn guidance for adopting agentic AI at scale
 
 ## August 2026
 

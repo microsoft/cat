@@ -16,8 +16,10 @@
   <!-- Prevent flash of wrong theme -->
   <script>
     (function () {
-      var t = localStorage.getItem('cat-theme') ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var saved = localStorage.getItem('cat-theme');
+      var t = ['light', 'dark', 'cat'].includes(saved)
+        ? saved
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
@@ -48,20 +50,24 @@
 
       <div class="nav-right">
         <ul class="nav-links">
-          <li><a href="#events">Events</a></li>
           <li><a href="#tools">Resources &amp; Tools</a></li>
           <li><a href="#programs">Programs</a></li>
           <li><a href="#guidance">Guidance</a></li>
           <li><a href="#stories">Stories</a></li>
+          <li><a href="#events">Events</a></li>
         </ul>
 
-        <!-- Dark mode toggle -->
-        <button class="theme-toggle" id="theme-toggle" aria-label="Switch color theme">
-          <!-- Moon: shown in light mode, click to go dark -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme">
+          <!-- Moon: shown in light mode -->
           <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
-          <!-- Sun: shown in dark mode, click to go light -->
+          <!-- Cat: shown in dark mode -->
+          <svg class="icon-cat" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 8 4 3l5 3a10 10 0 0 1 6 0l5-3-1 5a8 8 0 1 1-14 0Z"/>
+            <path d="M9 13h.01M15 13h.01M10 16c1.2 1 2.8 1 4 0"/>
+          </svg>
+          <!-- Sun: shown in cat mode -->
           <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="5"/>
             <line x1="12" y1="1"  x2="12" y2="3"/>
@@ -85,11 +91,11 @@
   </nav>
 
   <div class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
-    <a href="#events"    onclick="closeMobileNav()">Events</a>
     <a href="#tools"     onclick="closeMobileNav()">Resources &amp; Tools</a>
     <a href="#programs"  onclick="closeMobileNav()">Programs</a>
     <a href="#guidance"  onclick="closeMobileNav()">Guidance</a>
     <a href="#stories"   onclick="closeMobileNav()">Stories</a>
+    <a href="#events"    onclick="closeMobileNav()">Events</a>
   </div>
 
   <!-- ═══════════════════════════════════════
@@ -102,8 +108,9 @@
         <h1 class="hero-title" id="hero-heading">
           Microsoft 
          Copilot<br>
-          <span class="hero-accent">Acceleration Team</span>
+          <span class="hero-accent" data-default-text="Acceleration Team" data-cat-text="Accele-purr-ation Team">Acceleration Team</span>
         </h1>
+        <p class="cat-mode-badge" aria-hidden="true">CAT mode unlocked. Pawsibilities enabled.</p>
         <p class="hero-subtitle">
           We are the Copilot Acceleration Team (CAT), part of the Copilot engineering team at Microsoft. Our mission is to accelerate the adoption and success of Microsoft 365 Copilot and Copilot Studio.
           <br/><br/>
@@ -144,7 +151,7 @@
     <div class="container">
       <header class="section-header reveal">
         <span class="section-eyebrow">Resources &amp; Tools</span>
-        <h2 class="section-title" id="tools-heading">Build better, faster</h2>
+        <h2 class="section-title" id="tools-heading" data-default-text="Build better, faster" data-cat-text="Build better, faster, fur real">Build better, faster</h2>
         <p class="section-desc">Accelerate and enable successful adoption with resources and tools developed and curated by CAT, based on real-world customer experience.</p>
       </header>
 
@@ -212,7 +219,7 @@
     <div class="container">
       <header class="section-header reveal">
         <span class="section-eyebrow">Programs</span>
-        <h2 class="section-title" id="programs-heading">Grow your skills</h2>
+        <h2 class="section-title" id="programs-heading" data-default-text="Grow your skills" data-cat-text="Sharpen your claws">Grow your skills</h2>
         <p class="section-desc">Gain skills and knowledge to successfully adopt and deploy impactful solutions using Power Platform and Copilot Studio with programs from CAT and our partner teams.</p>
       </header>
 
@@ -258,8 +265,8 @@
     <div class="container" style="position:relative;z-index:1">
       <header class="section-header reveal">
         <span class="section-eyebrow">Guidance</span>
-        <h2 class="section-title" id="guidance-heading">Implement with confidence</h2>
-        <p class="section-desc">Ensure successful implementation of your Power Platform and Copilot Studio workloads with comprehensive guidance and best practices.</p>
+        <h2 class="section-title" id="guidance-heading" data-default-text="Adopt and implement with confidence" data-cat-text="Lead the pack and land on your feet">Adopt and implement with confidence</h2>
+        <p class="section-desc">Drive successful adoption and implementation of agentic AI, Power Platform, and Copilot Studio with comprehensive guidance and proven practices.</p>
       </header>
 
       <div class="card-grid-4 reveal-stagger">
@@ -282,6 +289,12 @@
           <div class="card-cta"><span class="btn btn-dark-outline">Learn more</span></div>
         </a>
 
+        <a href="https://learn.microsoft.com/en-us/agents/adopt-overview" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Adopt Agentic AI at Scale</div>
+          <p class="card-desc">Build an organization-wide strategy for adopting agentic AI responsibly, from preparing your people and processes to measuring value at scale.</p>
+          <div class="card-cta"><span class="btn btn-dark-outline">Explore adoption guidance</span></div>
+        </a>
+
         <a href="https://microsoft.github.io/new-copilot-studio-tech-guide/" target="_blank" rel="noopener" class="card">
           <div class="card-title">Copilot Studio Technical Guide for the GitHub Copilot Harness</div>
           <p class="card-desc">Explore technical guidance for designing, building, deploying, and managing solutions with the GitHub Copilot harness for Copilot Studio.</p>
@@ -299,7 +312,7 @@
     <div class="container">
       <header class="section-header reveal">
         <span class="section-eyebrow">Customer Stories</span>
-        <h2 class="section-title" id="stories-heading">Real-world impact</h2>
+        <h2 class="section-title" id="stories-heading" data-default-text="Real-world impact" data-cat-text="Pawsitive real-world impact">Real-world impact</h2>
         <p class="section-desc">Compelling customer stories highlight the diverse and creative ways agents transform organizations.</p>
       </header>
 
@@ -336,7 +349,7 @@
     <div class="container">
       <header class="section-header reveal">
         <span class="section-eyebrow">Upcoming event</span>
-        <h2 class="section-title" id="events-heading">Meet CAT at PPCC26</h2>
+        <h2 class="section-title" id="events-heading" data-default-text="Meet CAT at PPCC26" data-cat-text="Meet the CAT pack at PPCC26">Meet CAT at PPCC26</h2>
         <p class="section-desc">Join members of the Copilot Acceleration Team at the Power Platform Community Conference for a full-day workshop and sessions on building, operating, and governing the agentic enterprise.</p>
       </header>
 
@@ -482,13 +495,34 @@
     });
 
     // ── Theme toggle ─────────────────────────────────────────────
+    const themes = ['light', 'dark', 'cat'];
+    const themeLabels = {
+      light: 'Switch to dark theme',
+      dark: 'Switch to cat theme',
+      cat: 'Switch to light theme'
+    };
+
+    const updateThemeLabel = () => {
+      const current = html.getAttribute('data-theme');
+      toggle.setAttribute('aria-label', themeLabels[current]);
+      document.querySelectorAll('[data-cat-text]').forEach(element => {
+        element.textContent = current === 'cat'
+          ? element.dataset.catText
+          : element.dataset.defaultText;
+      });
+    };
+
+    updateThemeLabel();
+
     toggle.addEventListener('click', () => {
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      const current = html.getAttribute('data-theme');
+      const next = themes[(themes.indexOf(current) + 1) % themes.length];
 
       // Smooth transition
       document.body.classList.add('theme-transitioning');
       html.setAttribute('data-theme', next);
       localStorage.setItem('cat-theme', next);
+      updateThemeLabel();
       setTimeout(() => document.body.classList.remove('theme-transitioning'), 280);
     });
 

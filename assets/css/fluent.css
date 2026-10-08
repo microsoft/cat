@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════
    FLUENT 2 — THEME TOKENS
    All components reference semantic variables only.
-   Light values live on :root; dark values override on [data-theme="dark"].
+   Light values live on :root; dark and cat values override by data-theme.
 ═══════════════════════════════════════════════════════════════ */
 
 /* ── Shared structural tokens (never change with theme) ──────── */
@@ -152,6 +152,63 @@
 
   --input-bg:         #1C2430;
   --input-border:     #2A3A4C;
+}
+
+/* ── CAT THEME ───────────────────────────────────────────────── */
+[data-theme="cat"] {
+  color-scheme: light;
+
+  --bg-canvas:        #FFF7EC;
+  --bg-surface:       #F9E7D0;
+  --bg-raised:        #FFFDF9;
+  --bg-overlay:       #F4D5B2;
+
+  --fg-1:             #35251F;
+  --fg-2:             #594139;
+  --fg-3:             #765D53;
+  --fg-4:             #9A7E72;
+  --fg-on-brand:      #FFFFFF;
+  --fg-on-dark:       rgba(255,255,255,.94);
+
+  --border-subtle:    #EBD8C4;
+  --border-default:   #D9BFA5;
+  --border-strong:    #B88F70;
+
+  --brand:            #D35424;
+  --brand-hover:      #B5431B;
+  --brand-pressed:    #853116;
+  --brand-subtle:     #FADAC4;
+  --brand-text:       #A83C17;
+
+  --accent-from:      #F07A35;
+  --accent-to:        #97508F;
+
+  --shadow-xs: 0 1px 2px rgba(83,52,35,.08);
+  --shadow-sm: 0 2px 5px rgba(83,52,35,.12);
+  --shadow-md: 0 5px 14px rgba(83,52,35,.13);
+  --shadow-lg: 0 12px 30px rgba(83,52,35,.15);
+  --shadow-xl: 0 22px 52px rgba(83,52,35,.18);
+
+  --card-bg:          #FFFDF9;
+  --card-bg-hover:    #FFF4E8;
+  --card-border:      #EBD8C4;
+  --card-border-hover:#C9895D;
+
+  --nav-glass-bg:     rgba(255,249,242,.9);
+  --nav-glass-border: rgba(83,52,35,.12);
+
+  --input-bg:         #FFFDF9;
+  --input-border:     #D9BFA5;
+
+  --dark-section-bg:        #35251F;
+  --dark-section-gradient:  linear-gradient(155deg, #4A3028 0%, #2F2424 100%);
+  --dark-card-bg:           rgba(255,249,242,.07);
+  --dark-card-bg-hover:     rgba(255,249,242,.13);
+  --dark-card-border:       rgba(255,222,190,.14);
+  --dark-card-border-hover: rgba(255,222,190,.28);
+  --dark-fg-1:              #FFF9F2;
+  --dark-fg-2:              rgba(255,249,242,.7);
+  --dark-eyebrow:           #FFB37C;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -332,10 +389,21 @@ a:hover { text-decoration: underline; }
 }
 
 /* Icon visibility */
-.icon-sun  { display: none; }
+.icon-sun,
+.icon-cat  { display: none; }
 .icon-moon { display: block; }
-[data-theme="dark"] .icon-sun  { display: block; }
+[data-theme="dark"] .icon-cat  { display: block; }
 [data-theme="dark"] .icon-moon { display: none; }
+[data-theme="cat"] .icon-sun   { display: block; }
+[data-theme="cat"] .icon-moon  { display: none; }
+
+[data-theme="cat"] .theme-toggle {
+  border-radius: 45% 45% 50% 50%;
+  background: #FADAC4;
+  border-color: #D35424;
+  color: #853116;
+  transform: rotate(-4deg);
+}
 
 .nav-hamburger {
   display: none;
@@ -495,6 +563,71 @@ a:hover { text-decoration: underline; }
   background-image: radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
   background-size: 30px 30px;
   pointer-events: none;
+}
+
+[data-theme="cat"] .hero {
+  background: #35251F;
+}
+[data-theme="cat"] .hero::before {
+  background:
+    radial-gradient(ellipse at 12% 30%, rgba(232,116,50,.24) 0%, transparent 42%),
+    radial-gradient(ellipse at 86% 70%, rgba(159,95,155,.22) 0%, transparent 45%);
+}
+[data-theme="cat"] .hero-accent {
+  background: linear-gradient(110deg, #FFB37C 0%, #F58B57 48%, #D7A5D2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.cat-mode-badge {
+  display: none;
+}
+[data-theme="cat"] .cat-mode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+  padding: 7px 12px;
+  color: #FFE8D1;
+  background: rgba(240,122,53,.18);
+  border: 1px solid rgba(255,179,124,.32);
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: .4px;
+}
+[data-theme="cat"] .cat-mode-badge::before {
+  content: '🐾';
+}
+
+[data-theme="cat"] .section:not(.section-dark) {
+  background-image:
+    radial-gradient(circle at 18px 18px, rgba(211,84,36,.06) 0 3px, transparent 3.5px),
+    radial-gradient(circle at 28px 14px, rgba(211,84,36,.045) 0 2px, transparent 2.5px);
+  background-size: 64px 64px;
+}
+[data-theme="cat"] .section-title::before {
+  content: '🐾';
+  display: inline-block;
+  margin-right: var(--space-3);
+  font-size: .72em;
+  transform: rotate(-12deg);
+}
+[data-theme="cat"] .card,
+[data-theme="cat"] .event-card,
+[data-theme="cat"] .story-featured {
+  border-radius: 22px 22px 16px 16px;
+}
+[data-theme="cat"] .card:hover,
+[data-theme="cat"] .event-card:hover,
+[data-theme="cat"] .story-featured:hover {
+  transform: translateY(-3px) rotate(-.3deg);
+}
+[data-theme="cat"] .btn {
+  border-radius: var(--radius-pill);
+}
+[data-theme="cat"] .section-eyebrow {
+  letter-spacing: 2.2px;
 }
 
 .hero-inner {
@@ -796,6 +929,17 @@ a:hover { text-decoration: underline; }
   transition: box-shadow .2s ease, transform .2s ease;
   min-height: 280px;
 }
+[data-theme="cat"] .bento-featured {
+  background: linear-gradient(135deg, #6E3525 0%, #A8431D 50%, #744570 100%);
+}
+[data-theme="cat"] .bento-featured::before {
+  background:
+    radial-gradient(circle at 55% 55%, rgba(255,255,255,.16) 0 12px, transparent 13px),
+    radial-gradient(circle at 35% 25%, rgba(255,255,255,.13) 0 5px, transparent 6px),
+    radial-gradient(circle at 52% 15%, rgba(255,255,255,.13) 0 5px, transparent 6px),
+    radial-gradient(circle at 70% 27%, rgba(255,255,255,.13) 0 5px, transparent 6px);
+  transform: rotate(18deg);
+}
 .bento-featured::before {
   content: '';
   position: absolute;
@@ -1074,6 +1218,9 @@ a:hover { text-decoration: underline; }
   background: #060F1E;
   border-top: 1px solid rgba(255,255,255,.06);
   padding: var(--space-8) 0;
+}
+[data-theme="cat"] .footer {
+  background: #35251F;
 }
 .footer-inner {
   display: flex;
