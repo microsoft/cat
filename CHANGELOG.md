@@ -6,6 +6,7 @@ All notable changes to the CAT website are documented here, organized by month.
 
 ### CAT Website
 - Added links to the Copilot Studio Technical Guide, Microsoft Copilot Agents Labs, and Copilot Studio Samples
+- Clarified that the Copilot Studio Technical Guide covers the GitHub Copilot coding agent harness
 
 ## August 2026
 
