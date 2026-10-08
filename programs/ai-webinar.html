@@ -124,6 +124,8 @@
       <h2 class="section-title" style="margin-top: 4rem;"><span class="play-icon"></span>Past Sessions</h2>
       <p class="about-text" style="margin-bottom: 1.5rem;">
         Watch the recordings and download the presentations of previous sessions.
+        You can also
+        <a href="https://aka.ms/AiWebinarsplaylist?" target="_blank" rel="noopener noreferrer">view all recordings in the AI Webinars YouTube playlist</a>.
       </p>
       <div id="past-sessions-container">
         <!-- Populated by JavaScript -->
@@ -164,7 +166,11 @@
           // Sort all sessions chronologically
           sessionData.sort((a, b) => a.cutoffDate - b.cutoffDate);
 
-          const past = sessionData.filter(s => s.cutoffDate <= now && s.region !== 'APAC'); // oldest first
+          const past = sessionData.filter(
+            s => s.cutoffDate <= now &&
+              s.region !== 'APAC' &&
+              (s.recording_link || s.presentation_link)
+          ); // oldest first
 
           // --- Past Sessions ---
           const pastContainer = document.getElementById('past-sessions-container');
@@ -295,9 +301,6 @@
           const label = escapeHtml(session.presentation_label || 'Presentation');
           if (buttons) buttons += ` &nbsp;|&nbsp; `;
           buttons += `<a href="${session.presentation_link}" style="color: #0C55B8; white-space: nowrap;" target="_blank" rel="noopener noreferrer">${label}</a>`;
-        } else {
-          if (buttons) buttons += ` &nbsp;|&nbsp; `;
-          buttons += `<span style="color: #999; white-space: nowrap;">Slides &amp; Recording coming soon</span>`;
         }
         row.innerHTML = `
           <span style="flex: 1; font-weight: 500;">${escapeHtml(session.title)}</span>
