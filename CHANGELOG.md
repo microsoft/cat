@@ -5,6 +5,8 @@ All notable changes to the CAT website are documented here, organized by month.
 ## October 2026
 
 ### CAT Website
+- Added a day-by-day PPCC26 calendar and session-card view with speakers and confirmed dates, times, and rooms from the October 15 conference schedule
+- Labeled all PPCC26 times in Las Vegas time (PDT) and kept two sessions absent from the published PDF explicitly marked as awaiting schedule confirmation
 - Updated the AI webinar page to preserve available past recordings and presentations without advertising new sessions
 - Added links to the Copilot Studio Technical Guide, Microsoft Copilot Agents Labs, and Copilot Studio Samples
 - Clarified that the Copilot Studio Technical Guide covers the GitHub Copilot coding agent harness

@@ -874,6 +874,103 @@ a:hover { text-decoration: underline; }
   font-size: var(--font-size-sm);
   font-weight: 600;
 }
+.event-card-room {
+  color: var(--fg-2);
+  font-size: var(--font-size-sm);
+}
+.event-view-controls,
+.event-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+#events [hidden] { display: none; }
+.event-view-controls button,
+.event-days button {
+  min-height: 44px;
+  cursor: pointer;
+}
+.event-view-controls [aria-pressed="true"],
+.event-days [aria-pressed="true"] {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--fg-on-brand);
+}
+.event-calendar-hint,
+.event-pending p {
+  color: var(--fg-3);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-4);
+}
+.event-calendar-heading {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--space-4);
+}
+.event-calendar-scroll {
+  overflow-x: auto;
+  padding: var(--space-1);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+}
+.event-time-grid {
+  display: grid;
+  padding: var(--space-3) var(--space-2);
+}
+.event-time-label {
+  grid-column: 1;
+  color: var(--fg-3);
+  font-size: var(--font-size-xs);
+  padding-top: var(--space-1);
+}
+.event-time-line {
+  grid-column: 2 / -1;
+  border-top: 1px solid var(--border-default);
+}
+.event-calendar-session {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  gap: var(--space-1);
+  overflow-y: auto;
+  margin: var(--space-1);
+  padding: var(--space-3);
+  border: 1px solid var(--brand);
+  border-left-width: 4px;
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  color: var(--fg-1);
+  text-decoration: none;
+}
+.event-calendar-session:hover {
+  background: var(--card-bg-hover);
+  color: var(--fg-1);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+}
+.event-calendar-session h4 {
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+}
+.event-pending {
+  margin-top: var(--space-6);
+  padding: var(--space-5);
+  background: var(--brand-subtle);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+}
+.event-pending h3 {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--space-2);
+}
+.event-pending ul {
+  padding-left: var(--space-5);
+}
+.event-pending li + li {
+  margin-top: var(--space-2);
+}
 .event-card-desc {
   color: var(--fg-3);
   font-size: var(--font-size-sm);
