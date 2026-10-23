@@ -36,6 +36,8 @@
     days.get(date).push({ card, start, end, startMinute: minutes(start), endMinute: minutes(end) });
   });
 
+  pending.closest('.event-pending').hidden = pending.childElementCount === 0;
+
   [...days.entries()].sort(([a], [b]) => a.localeCompare(b)).forEach(([date, sessions], index) => {
     sessions.sort((a, b) => a.startMinute - b.startMinute);
     const label = dayFormat.format(new Date(sessions[0].start));

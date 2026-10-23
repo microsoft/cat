@@ -5,6 +5,9 @@ All notable changes to the CAT website are documented here, organized by month.
 ## October 2026
 
 ### CAT Website
+- Confirmed the two pending PPCC26 roundtable slots from live conference listings and updated the schedule PDF link to October 20
+- Replaced the stale AI Confidence listing with Hannah Garmise and Karima Kanji-Tajdin's Max Trust, Min Cost session, including its confirmed time and room
+- Hid the calendar's pending-schedule section when all sessions have confirmed slots
 - Added a day-by-day PPCC26 calendar and session-card view with speakers and confirmed dates, times, and rooms from the October 15 conference schedule
 - Labeled all PPCC26 times in Las Vegas time (PDT) and kept two sessions absent from the published PDF explicitly marked as awaiting schedule confirmation
 - Updated the AI webinar page to preserve available past recordings and presentations without advertising new sessions
