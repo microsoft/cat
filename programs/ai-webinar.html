@@ -70,77 +70,53 @@
     </header>
 
     <main class="main-container">
-      <img src="../images/CAT AI Webinar Banner FY26.png" class="responsive" />
+      <h1 class="visually-hidden">Microsoft CAT AI Webinars</h1>
+      <img src="../images/CAT AI Webinar Banner FY26.png" class="responsive" alt="Microsoft CAT AI Webinars interactive virtual series" />
 
-      <section class="about-section">
-        <div class="hero-details">
-          <div class="detail-item">
-            <span class="detail-icon">📅</span>
-            <span>Most Wednesdays</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-icon">🕒</span>
-            <span>9 AM PT / 12 PM ET / 5 PM GMT</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-icon">⏱️</span>
-            <span>60-90 minute sessions</span>
-          </div>
-        </div>
-      </section>
-
-      <div class="sessions-container" style="margin-top: 2rem; grid-template-columns: repeat(2, 1fr);">
+      <div class="sessions-container" style="margin-top: 2rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
         <div class="session-card" style="aspect-ratio: auto; background-color: white;">
           <div class="session-content">
             <h2 class="section-title" style="margin-top: 0;">About the Webinar Series</h2>
             <p class="about-text">
-              Microsoft CAT AI Webinars are a series of interactive virtual
-              sessions designed to help your organization adopt Microsoft Copilot
-              and agents.
+              The Microsoft CAT AI Webinar series featured interactive virtual
+              sessions designed to help organizations adopt Microsoft Copilot and
+              agents.
             </p>
             <p class="about-text">
-              In these sessions you'll engage with Microsoft experts and other
-              customers to gain the knowledge and skills needed to successfully
-              adopt and thrive with agents in your organization.
+              The series brought together Microsoft experts and customers to share
+              practical knowledge and skills for succeeding with agents.
             </p>
           </div>
         </div>
-        <div class="session-card" style="aspect-ratio: auto; background-color: #f0f8ff;" id="next-session-card">
+        <div class="session-card" style="aspect-ratio: auto; background-color: #f0f8ff;">
           <div class="session-content">
             <div class="session-date">
-              <span class="session-date-icon">📅</span>
-              <span>Next Session</span>
+              <span>Webinar series update</span>
             </div>
-            <h3 class="session-title" style="font-size: 1.8rem;" id="next-session-title">
-              Loading...
-            </h3>
-            <p id="next-session-description"></p>
-            <a href="#" class="register-btn" style="background-color: white; color: #1A3985; border: 2px solid #1A3985; display: none;" id="next-session-link" target="_blank" rel="noopener noreferrer"
-              >Register Now</a
-            >
+            <h2 class="session-title" style="font-size: 1.8rem;">
+              Explore past sessions
+            </h2>
+            <p>
+              New webinar sessions are not currently being scheduled. Recordings
+              and presentations from past sessions remain available below.
+            </p>
           </div>
         </div>
-      </div>
-
-      <h2 class="section-title" style="margin-top: 4rem;">Upcoming Sessions</h2>
-      <div class="sessions-container" id="upcoming-sessions-container">
-        <!-- Populated by JavaScript -->
       </div>
 
       <div style="margin-top: 4rem;">
-        <h2 class="section-title">What to Expect</h2>
+        <h2 class="section-title">What the Series Covered</h2>
         <ul class="expect-list">
           <li class="expect-item">
-            Gain the strategic expertise your organizations needs to succeed with
+            Strategic expertise organizations need to succeed with
             Microsoft Copilot.
           </li>
           <li class="expect-item">
-            Explore the possibilities of Microsoft Copilot,
-            advancements with autonomous agents, and more.
+            The possibilities of Microsoft Copilot, advancements with autonomous
+            agents, and more.
           </li>
           <li class="expect-item">
-            Engage in interactive exercises that allow you to
-            learn from others.
+            Interactive exercises and lessons shared by other organizations.
           </li>
         </ul>
       </div>
@@ -148,6 +124,8 @@
       <h2 class="section-title" style="margin-top: 4rem;"><span class="play-icon"></span>Past Sessions</h2>
       <p class="about-text" style="margin-bottom: 1.5rem;">
         Watch the recordings and download the presentations of previous sessions.
+        You can also
+        <a href="https://aka.ms/aiwebinars/playlist" target="_blank" rel="noopener noreferrer">view all recordings in the AI Webinars YouTube playlist</a>.
       </p>
       <div id="past-sessions-container">
         <!-- Populated by JavaScript -->
@@ -179,45 +157,20 @@
           // Parse dates and classify each session
           const sessionData = sessions.map(session => {
             const [year, month, day] = session.date.split('-').map(Number);
-            const displayDate = new Date(year, month - 1, day);
             // Session expires 2 hours after the 9 AM PT start = 11 AM PT
             const cutoffStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T11:00:00-08:00`;
             const cutoffDate = new Date(cutoffStr);
-            return { ...session, displayDate, cutoffDate };
+            return { ...session, cutoffDate };
           });
 
           // Sort all sessions chronologically
           sessionData.sort((a, b) => a.cutoffDate - b.cutoffDate);
 
-          const upcoming = sessionData.filter(s => s.cutoffDate > now);
-          const past = sessionData.filter(s => s.cutoffDate <= now); // oldest first
-
-          // --- Next Session card ---
-          const nextSessionLink = document.getElementById('next-session-link');
-          if (upcoming.length > 0) {
-            const next = upcoming[0];
-            document.getElementById('next-session-title').textContent = next.title;
-            const formattedDate = next.displayDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
-            document.getElementById('next-session-description').innerHTML =
-              `${escapeHtml(formattedDate)} &bull; ${escapeHtml(next.time || '9AM PT')}<br><br>${escapeHtml(next.description)}`;
-            nextSessionLink.href = next.register_link || '#';
-            nextSessionLink.style.display = '';
-          } else {
-            document.getElementById('next-session-title').textContent = 'No Upcoming Sessions';
-            document.getElementById('next-session-description').textContent = 'Check back soon for new session announcements!';
-            nextSessionLink.style.display = 'none';
-          }
-
-          // --- Upcoming Sessions (skip the first, already shown in Next Session card) ---
-          const upcomingContainer = document.getElementById('upcoming-sessions-container');
-          const upcomingToShow = upcoming.slice(1);
-          if (upcomingToShow.length === 0) {
-            upcomingContainer.innerHTML = '<p style="grid-column: 1 / -1; color: #666; padding: 0.5rem 0;">No additional upcoming sessions at this time. Check back soon!</p>';
-          } else {
-            upcomingToShow.forEach(session => {
-              upcomingContainer.appendChild(createUpcomingCard(session));
-            });
-          }
+          const past = sessionData.filter(
+            s => s.cutoffDate <= now &&
+              s.region !== 'APAC' &&
+              (s.recording_link || s.presentation_link)
+          ); // oldest first
 
           // --- Past Sessions ---
           const pastContainer = document.getElementById('past-sessions-container');
@@ -244,7 +197,7 @@
               {
                 name: 'Technical Deep Dives',
                 color: '#2E7D32',
-                matches: s => /Deep Dive|Autonomous Agents|Generative Orchestration|Multi-Agent|Orchestrative.*Deterministic|Computer Use/i.test(s.title)
+                matches: s => /Deep Dive|Autonomous Agents|Generative Orchestration|Multi-Agent|Orchestrated.*Deterministic|Deterministic.*Hybrid|Choosing the Right Agent Pattern|Computer Use/i.test(s.title)
               },
               {
                 name: 'Azure & Advanced Integration',
@@ -259,7 +212,7 @@
               {
                 name: 'Strategy & Adoption',
                 color: '#D32F2F',
-                matches: s => /Agents Meet Opportunity|Adoption/i.test(s.title)
+                matches: s => /Agents Meet Opportunity|Adoption|Business Value.*AI Agents|ROI.*Impact/i.test(s.title)
               },
               {
                 name: 'Tools & Operations',
@@ -325,17 +278,10 @@
 
         } catch (error) {
           console.error('Failed to load sessions:', error);
-          document.getElementById('next-session-title').textContent = 'Unable to load sessions';
-          document.getElementById('next-session-description').textContent = 'Please try refreshing the page.';
+          document.getElementById('past-sessions-container').innerHTML =
+            '<p style="color: #666; padding: 0.5rem 0;">Unable to load past sessions. Please try refreshing the page.</p>';
         }
       });
-
-      function formatSessionDate(dateStr) {
-        const [year, month, day] = dateStr.split('-').map(Number);
-        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        return `${monthNames[month - 1]} ${day}`;
-      }
 
       function escapeHtml(str) {
         if (!str) return '';
@@ -344,35 +290,17 @@
         return div.innerHTML;
       }
 
-      function createUpcomingCard(session) {
-        const card = document.createElement('div');
-        card.className = 'session-card';
-        const dateDisplay = formatSessionDate(session.date) + (session.time ? ' \u2022 ' + session.time : '');
-        const registerBtn = session.register_link
-          ? `<a href="${session.register_link}" class="register-btn" style="background-color: #0C55B8;" target="_blank" rel="noopener noreferrer">Register Now</a>`
-          : '';
-        card.innerHTML = `
-          <div class="session-content">
-            <div class="session-date"><span>${escapeHtml(dateDisplay)}</span></div>
-            <h3 class="session-title">${escapeHtml(session.title)}</h3>
-            <p>${escapeHtml(session.description)}</p>
-            ${registerBtn}
-          </div>`;
-        return card;
-      }
-
       function createPastRow(session) {
         const row = document.createElement('div');
         row.style.cssText = 'display: flex; align-items: center; gap: 1.5rem; padding: 0.85rem 0; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap;';
         let buttons = '';
         if (session.recording_link) {
           buttons += `<a href="${session.recording_link}" style="color: #0C55B8; white-space: nowrap;" target="_blank" rel="noopener noreferrer">Recording</a>`;
-        } else {
-          buttons += `<span style="color: #999; white-space: nowrap;">Recording Coming Soon</span>`;
         }
         if (session.presentation_link) {
           const label = escapeHtml(session.presentation_label || 'Presentation');
-          buttons += ` &nbsp;|&nbsp; <a href="${session.presentation_link}" style="color: #0C55B8; white-space: nowrap;" target="_blank" rel="noopener noreferrer">${label}</a>`;
+          if (buttons) buttons += ` &nbsp;|&nbsp; `;
+          buttons += `<a href="${session.presentation_link}" style="color: #0C55B8; white-space: nowrap;" target="_blank" rel="noopener noreferrer">${label}</a>`;
         }
         row.innerHTML = `
           <span style="flex: 1; font-weight: 500;">${escapeHtml(session.title)}</span>

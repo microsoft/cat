@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Excellence Workshop - CAT Kickstarter</title>
+    <link rel="icon" type="image/svg+xml" href="images/microsoft.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Kickstarter Branding Header -->
+    <div class="kickstarter-header">
+        <nav class="kickstarter-nav">
+            <div class="kickstarter-logo-section">
+                <a href="../index.html" aria-label="Back to the Copilot Acceleration Team home page">
+                    <img src="images/KickstarterLogo.svg" alt="Microsoft Kickstarter" class="kickstarter-logo">
+                </a>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- Kickstarter Banner -->
+    <div class="kickstarter-banner-container">
+        <img src="images/Kickstarter_Banner_CS.jpg" alt="Kickstarter Banner" class="kickstarter-banner">
+        <div class="banner-overlay"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="theme-toggle-container">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <span class="theme-icon" id="themeIcon">🌙</span>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-section">
+                <h1>🚀 Agent Excellence Workshop</h1>
+                <p class="hero-subtitle">Master the art of building exceptional AI agents with Microsoft's agent platform ecosystem</p>
+            </div>
+        </header>
+
+        <div class="activities-grid">
+            <!-- Activity 1: Agent Instructions -->
+            <div class="activity-card">
+                <div class="activity-header">
+                    <div class="activity-number">01</div>
+                    <div class="activity-icon">✍️</div>
+                </div>
+                <h3>Agent Instructions</h3>
+                <p>Test your agent instructions with wild card scenarios. Ensure your instructions are clear, scoped, and handle edge cases correctly.</p>
+                <div class="activity-features">
+                    <span class="feature-tag">Instructions</span>
+                    <span class="feature-tag">50+ Scenarios</span>
+                    <span class="feature-tag">Interactive</span>
+                </div>
+                <a href="boundary-challenge.html" class="activity-button secondary">
+                    Start Activity
+                    <span class="button-icon">→</span>
+                </a>
+            </div>
+
+            <!-- Activity 2: Knowledge Sources -->
+            <div class="activity-card">
+                <div class="activity-header">
+                    <div class="activity-number">02</div>
+                    <div class="activity-icon">🧠</div>
+                </div>
+                <h3>Knowledge Sources</h3>
+                <p>Download the Contoso sample files and the agent skill file. Upload the knowledge sources to your agent and use the skill as a starting point for your agent's capabilities.</p>
+                <div class="activity-features">
+                    <span class="feature-tag">Knowledge Design</span>
+                    <span class="feature-tag">Sample Files</span>
+                    <span class="feature-tag">Agent Skill</span>
+                </div>
+                <a href="knowledge-design.html" class="activity-button secondary">
+                    Download Files
+                    <span class="button-icon">→</span>
+                </a>
+            </div>
+
+            <!-- Activity 3: Integration Prompts -->
+            <div class="activity-card">
+                <div class="activity-header">
+                    <div class="activity-number">03</div>
+                    <div class="activity-icon">🔧</div>
+                </div>
+                <h3>Integration Prompts</h3>
+                <p>Generate personalized test prompts to validate your agent's boundary conditions. Test scope, safety, and decision-making edge cases.</p>
+                <div class="activity-features">
+                    <span class="feature-tag">Boundary Testing</span>
+                    <span class="feature-tag">Safety Validation</span>
+                    <span class="feature-tag">Prompt Generator</span>
+                </div>
+                <a href="agent-integrations.html" class="activity-button secondary">
+                    Start Activity
+                    <span class="button-icon">→</span>
+                </a>
+            </div>
+
+            <!-- Activity 4: Operating Model Design -->
+            <div class="activity-card">
+                <div class="activity-header">
+                    <div class="activity-number">04</div>
+                    <div class="activity-icon">🎯</div>
+                </div>
+                <h3>Operating Model Design</h3>
+                <p>Design your agent's operational monitoring and incident response through interactive tabletop exercises. Build resilient agent operations.</p>
+                <div class="activity-features">
+                    <span class="feature-tag">Operational Excellence</span>
+                    <span class="feature-tag">Incident Response</span>
+                    <span class="feature-tag">Interactive</span>
+                </div>
+                <a href="operating-model.html" class="activity-button secondary">
+                    Start Activity
+                    <span class="button-icon">→</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Resources Section -->
+        <div class="bottom-blocks-row">
+                        <div class="resources-section handout-section">
+                <h2>📄 Participant Handout</h2>
+                <p>Download the workshop handout with key concepts, exercises, and reference materials</p>
+                <a href="handout/ParticipantHandout_AgentExcellence.pdf" download class="activity-button handout-button">
+                    Download Handout
+                    <span class="button-icon">⬇️</span>
+                </a>
+            </div>
+            <div class="resources-section">
+                <h2>📚 Additional Resources</h2>
+                <p>Access comprehensive links, documentation, and tools from this workshop</p>
+                <a href="resources.html" class="activity-button primary resources-button">
+                    View All Resources
+                    <span class="button-icon">📋</span>
+                </a>
+            </div>
+            <div class="resources-section feedback-section">
+                <h2>💬 Share Your Feedback</h2>
+                <p>Help us improve the Agent Excellence Workshop by sharing your experience and suggestions</p>
+                <a href="https://aka.ms/AgentExcellence/Feedback" target="_blank" rel="noopener noreferrer" class="activity-button primary">
+                    Give Feedback
+                    <span class="button-icon">📝</span>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p>Agent Excellence - CAT Kickstarter Workshop</p>
+            <p class="footer-subtitle">Created by the Microsoft Copilot Acceleration Team</p>
+        </footer>
+    </div>
+
+    <script src="js/landing.js"></script>
+</body>
+</html>

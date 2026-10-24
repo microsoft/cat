@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Success on Repeat | CAPE at PPCC26</title>
+  <meta name="description" content="Field-tested resources for agentic transformation, shaped by CAPE engagements with Microsoft's strategic customers and partners. Explore tools, playbooks, patterns, and PPCC26 sessions.">
+  <link rel="icon" href="../images/favicon.png">
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get('scoutTheme');
+      const theme = ['light', 'dark'].includes(param)
+        ? param
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #fafafa;
+      --cp-bg-elevated: #fafafa;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #edf3fa;
+      --cp-border: #dfe4ec;
+      --cp-border-strong: #7a91ae;
+      --cp-text: #242424;
+      --cp-text-muted: #4d6078;
+      --cp-text-soft: #586c84;
+      --cp-accent: #0078d4;
+      --cp-accent-secondary: #087e9d;
+      --cp-accent-hover: #00549a;
+      --cp-accent-soft: rgba(0, 103, 184, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-banner-blue: #0067b8;
+      --cp-banner-purple: #7436cb;
+      --cp-banner-pink: #ab2882;
+      --cp-banner-orange: #b84b00;
+      --cp-banner-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(0, 174, 224, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #080f20;
+      --cp-bg-elevated: #0c172b;
+      --cp-surface: #111f35;
+      --cp-surface-soft: #172940;
+      --cp-border: #293e59;
+      --cp-border-strong: #6984a5;
+      --cp-text: #edf4ff;
+      --cp-text-muted: #a9bdd5;
+      --cp-text-soft: #b9cce2;
+      --cp-accent: #62d4ed;
+      --cp-accent-secondary: #8ab4ff;
+      --cp-accent-hover: #8ee5f6;
+      --cp-accent-soft: rgba(98, 212, 237, 0.12);
+      --cp-accent-fg: #080f20;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(8, 15, 32, 0.88);
+      --cp-panel: rgba(17, 31, 53, 0.72);
+      --cp-panel-strong: rgba(17, 31, 53, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(98, 212, 237, 0.16);
+    }
+  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="CAPE, Success on Repeat home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span class="brand-name">Success on Repeat<span>CAPE &middot; Microsoft</span></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#resources">Resources</a>
+        <a href="#sessions">PPCC sessions</a>
+        <button id="theme-toggle" type="button" aria-label="Switch theme">Dark theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container" id="top" aria-labelledby="hero-title">
+      <div class="hero-heading">
+        <p class="eyebrow">CAPE at PPCC26</p>
+        <h1 id="hero-title">Success on<br><span>Repeat.</span></h1>
+      </div>
+      <div class="hero-detail">
+        <p class="hero-intro">Every CAPE engagement with Microsoft's strategic customers and partners teaches us something about agentic transformation. When an approach works for more than one customer, we package it into a playbook, kit, or pattern that others can reuse.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#resources">Browse reusable assets <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+      <div class="sharing-banner">
+        <div>
+          <p class="banner-label">Built by CAPE. Shared with you.</p>
+          <p class="banner-title">Learn in the field. Package what works. Make it repeatable.</p>
+          <p class="banner-description">Explore the resources below, then join us at PPCC26 for the lessons behind them.</p>
+        </div>
+        <a class="button banner-button" href="#sessions">See us at PPCC26 <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+
+    <section class="resources-section" id="resources" aria-labelledby="resources-title">
+      <div class="container">
+        <h2 id="resources-title" class="visually-hidden">Resources</h2>
+        <p id="load-status" role="status">Loading resources and the conference week&hellip;</p>
+        <div id="load-error" class="load-error" role="alert" hidden>
+          <h3>We couldn't load the resources and schedule.</h3>
+          <p id="error-detail"></p>
+          <button class="button" id="retry" type="button">Try again</button>
+          <a href="../index.html#tools">Browse the main resource page</a>
+        </div>
+        <noscript><p>This page needs JavaScript to display the latest resources and sessions. <a href="../index.html">Browse the main resource page instead.</a></p></noscript>
+        <div class="resource-groups" id="resource-grid"></div>
+      </div>
+    </section>
+
+    <section class="sessions-section container" id="sessions" aria-labelledby="sessions-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Learn with us in Las Vegas</p>
+          <h2 id="sessions-title">Your PPCC26 week, at a glance.</h2>
+        </div>
+        <p>One workshop. Real-world lessons. Conversations that move your agentic transformation forward.</p>
+      </div>
+      <div id="schedule-content" hidden>
+        <div class="schedule-meta">
+          <p><strong>October 25&ndash;29, 2026</strong><br>Workshop on Sunday; conference sessions Tuesday&ndash;Thursday. All times are Las Vegas local time (PDT, UTC&minus;7).</p>
+          <a id="schedule-link" class="text-link" target="_blank" rel="noopener">Full conference schedule (PDF) <span aria-hidden="true">&nearr;</span></a>
+        </div>
+        <p class="schedule-note">Based on the October 20 schedule and live conference session listings; subject to change. Sessions at the same time are concurrent.</p>
+        <div class="week-grid" id="week-grid"></div>
+        <div id="pending-sessions" class="pending-sessions" hidden>
+          <h3>Schedule to be announced</h3>
+          <ul id="pending-list"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <p><strong>CAPE</strong> / Success on Repeat</p>
+    <p>Learned with customers. Packaged for you.</p>
+    <span>Microsoft &middot; PPCC26</span>
+  </footer>
+</body>
+</html>
