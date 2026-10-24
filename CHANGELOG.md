@@ -5,6 +5,12 @@ All notable changes to the CAT website are documented here, organized by month.
 ## October 2026
 
 ### CAT Website
+- Aligned PPCC resource groups with the main site's categories, added section subtitles and the Agentic Transformation Patterns Playbook, and excluded AI Webinars and Agent In A Day from the conference page
+- Removed Skills for Copilot Studio from the PPCC resource page while preserving its homepage listing
+- Refined the PPCC page to reflect the CAPE Patterns & Practices visual style, with a compact split hero, blue accents, a multicolor sharing banner, and clean resource groups
+- Grouped PPCC resources into tools and community examples, learning, guidance, and customer stories, and refreshed the page with a Copilot-inspired blue, cyan, and navy palette
+- Added a dedicated PPCC page with subtle CAPE "Success on Repeat" branding, purpose-labeled resource cards, and a responsive conference-week overview sourced from the homepage
+- Added the Copilot Studio Community Gallery and Agent Skills & Plugins Gallery alongside the existing samples and skills resources
 - Confirmed the two pending PPCC26 roundtable slots from live conference listings and updated the schedule PDF link to October 20
 - Replaced the stale AI Confidence listing with Hannah Garmise and Karima Kanji-Tajdin's Max Trust, Min Cost session, including its confirmed time and room
 - Hid the calendar's pending-schedule section when all sessions have confirmed slots

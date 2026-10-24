@@ -20,6 +20,7 @@ The site uses:
 | Path | Purpose |
 | --- | --- |
 | `index.html` | Main CAT landing page |
+| `ppcc/` | CAPE "Success on Repeat" conference resource page and compact PPCC26 week overview |
 | `assets/` | Shared CSS, JavaScript, fonts, and Sass source |
 | `images/` | Shared site images and social preview assets |
 | `programs/` | AI webinars, hackathons, bootcamps, and other program pages |
@@ -54,6 +55,8 @@ Use an HTTP server rather than opening HTML files directly. Browser security res
 ### Update the landing page
 
 Edit `index.html`. Reuse the existing components and semantic CSS tokens in `assets/css/fluent.css` instead of adding hard-coded colors or one-off styles.
+
+The dedicated `ppcc/` page loads the resource cards and conference sessions from `index.html`, so homepage content updates also appear there. It intentionally excludes Skills for Copilot Studio, AI Webinars, and Agent In A Day, and adds the Agentic Transformation Patterns Playbook under Guidance. These conference-specific selections are maintained in `ppcc/script.js`. Its local script adds purpose labels, section subtitles, and a compact week overview. Update `purposeLabels` when a new resource needs a more specific label than its section name. Preview this page through an HTTP server so it can fetch the homepage.
 
 ### Add or update an AI webinar
 
