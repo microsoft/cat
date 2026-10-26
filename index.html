@@ -16,8 +16,10 @@
   <!-- Prevent flash of wrong theme -->
   <script>
     (function () {
-      var t = localStorage.getItem('cat-theme') ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var saved = localStorage.getItem('cat-theme');
+      var t = ['light', 'dark', 'cat'].includes(saved)
+        ? saved
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
@@ -52,15 +54,20 @@
           <li><a href="#programs">Programs</a></li>
           <li><a href="#guidance">Guidance</a></li>
           <li><a href="#stories">Stories</a></li>
+          <li><a href="#events">Events</a></li>
         </ul>
 
-        <!-- Dark mode toggle -->
-        <button class="theme-toggle" id="theme-toggle" aria-label="Switch color theme">
-          <!-- Moon: shown in light mode, click to go dark -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme">
+          <!-- Moon: shown in light mode -->
           <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
-          <!-- Sun: shown in dark mode, click to go light -->
+          <!-- Cat: shown in dark mode -->
+          <svg class="icon-cat" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 8 4 3l5 3a10 10 0 0 1 6 0l5-3-1 5a8 8 0 1 1-14 0Z"/>
+            <path d="M9 13h.01M15 13h.01M10 16c1.2 1 2.8 1 4 0"/>
+          </svg>
+          <!-- Sun: shown in cat mode -->
           <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="5"/>
             <line x1="12" y1="1"  x2="12" y2="3"/>
@@ -88,6 +95,7 @@
     <a href="#programs"  onclick="closeMobileNav()">Programs</a>
     <a href="#guidance"  onclick="closeMobileNav()">Guidance</a>
     <a href="#stories"   onclick="closeMobileNav()">Stories</a>
+    <a href="#events"    onclick="closeMobileNav()">Events</a>
   </div>
 
   <!-- ═══════════════════════════════════════
@@ -100,11 +108,11 @@
         <h1 class="hero-title" id="hero-heading">
           Microsoft 
          Copilot<br>
-          <span class="hero-accent">Acceleration Team</span>
+          <span class="hero-accent" data-default-text="Acceleration Team" data-cat-text="Accele-purr-ation Team">Acceleration Team</span>
         </h1>
+        <p class="cat-mode-badge" aria-hidden="true">CAT mode unlocked. Pawsibilities enabled.</p>
         <p class="hero-subtitle">
-          We are the Copilot Acceleration Team (CAT), part of the Copilot
-          Studio engineering team at Microsoft. Our mission is to accelerate the adoption and success of Microsoft 365 Copilot and Copilot Studio.
+          We are the Copilot Acceleration Team (CAT), part of the Copilot engineering team at Microsoft. Our mission is to accelerate the adoption and success of Microsoft 365 Copilot and Copilot Studio.
           <br/><br/>
           We empower organizations to achieve agentic transformation at scale with resources, tools, programs, and guidance developed from real-world customer experience.
         </p>
@@ -143,14 +151,14 @@
     <div class="container">
       <header class="section-header reveal">
         <span class="section-eyebrow">Resources &amp; Tools</span>
-        <h2 class="section-title" id="tools-heading">Build better, faster</h2>
+        <h2 class="section-title" id="tools-heading" data-default-text="Build better, faster" data-cat-text="Build better, faster, fur real">Build better, faster</h2>
         <p class="section-desc">Accelerate and enable successful adoption with resources and tools developed and curated by CAT, based on real-world customer experience.</p>
       </header>
 
       <div class="bento-grid reveal">
         <a href="https://aka.ms/copilotstudiokit" target="_blank" rel="noopener" class="bento-featured">
           <div class="bento-content">
-            <h3 class="bento-featured-title">Copilot Studio Kit</h3>
+            <h3 class="bento-featured-title">Copilot Agent Kit</h3>
             <p class="bento-featured-desc">Develop and test custom agents, validate AI-generated content with large language models, optimize prompts, and track aggregated key performance indicators.</p>
             <span class="btn btn-white">Learn more</span>
           </div>
@@ -175,11 +183,12 @@
 
       <div class="card-grid reveal-stagger" style="margin-top: var(--space-6)">
 
-        <a href="https://aka.ms/CopilotStudio/Resources" target="_blank" rel="noopener" class="card">
-          <div class="card-title">Copilot Studio Resources</div>
-          <p class="card-desc">Resources to help you on your Copilot Studio journey, curated by CAT and updated regularly.</p>
+        <a href="https://aka.ms/agentresources" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Agent Resources</div>
+          <p class="card-desc">Resources to help you on your journey to agentic transformation through effectively building, deploying, and managing agents with Microsoft tools and platforms.</p>
           <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
         </a>
+
 
         <a href="https://microsoft.github.io/mcscatblog/" target="_blank" rel="noopener" class="card">
           <div class="card-title">The Custom Engine Blog</div>
@@ -193,6 +202,24 @@
           <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
         </a>
 
+        <a href="https://microsoft.github.io/CopilotStudioSamples/" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Copilot Studio Samples</div>
+          <p class="card-desc">Explore sample agents, components, and solutions that demonstrate what you can build with Microsoft Copilot Studio.</p>
+          <div class="card-cta"><span class="btn btn-outline">Explore samples</span></div>
+        </a>
+
+        <a href="https://aka.ms/MCSGallery" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Copilot Studio Community Gallery</div>
+          <p class="card-desc">Discover ideas for Copilot Studio agents and workflows from the community, learn from working examples, and submit your own.</p>
+          <div class="card-cta"><span class="btn btn-outline">Explore gallery</span></div>
+        </a>
+
+        <a href="https://aka.ms/catagentskills" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Agent Skills &amp; Plugins Gallery</div>
+          <p class="card-desc">Find skills, plugins, and automations contributed by the community. Download a submission and add it to Cowork, Copilot Studio, or Scout.</p>
+          <div class="card-cta"><span class="btn btn-outline">Explore gallery</span></div>
+        </a>
+
       </div>
     </div>
   </section>
@@ -204,17 +231,11 @@
     <div class="container">
       <header class="section-header reveal">
         <span class="section-eyebrow">Programs</span>
-        <h2 class="section-title" id="programs-heading">Grow your skills</h2>
+        <h2 class="section-title" id="programs-heading" data-default-text="Grow your skills" data-cat-text="Sharpen your claws">Grow your skills</h2>
         <p class="section-desc">Gain skills and knowledge to successfully adopt and deploy impactful solutions using Power Platform and Copilot Studio with programs from CAT and our partner teams.</p>
       </header>
 
       <div class="card-grid-4 reveal-stagger">
-
-        <a href="https://aka.ms/powerup" target="_blank" rel="noopener" class="card">
-          <div class="card-title">Power Up</div>
-          <p class="card-desc">Training for individuals and enterprise organizations to develop talent in low-code and AI with a comprehensive curriculum.</p>
-          <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
-        </a>
 
         <a href="https://aka.ms/agiad" target="_blank" rel="noopener" class="card">
           <div class="card-title">Agent In A Day</div>
@@ -240,12 +261,11 @@
           <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
         </a>
 
-        <a href="https://aka.ms/KickstarterEvent" target="_blank" rel="noopener" class="card">
-          <div class="card-title">Kickstarter</div>
-          <p class="card-desc">Facilitated workshops to guide the foundations of your low-code and AI transformation journeys.</p>
-          <div class="card-cta"><span class="btn btn-outline">Learn more</span></div>
+        <a href="https://microsoft.github.io/mcs-labs/" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Microsoft Copilot Agents Labs</div>
+          <p class="card-desc">Build practical Copilot Studio skills through hands-on labs for creating and extending Microsoft Copilot agents.</p>
+          <div class="card-cta"><span class="btn btn-outline">Explore labs</span></div>
         </a>
-
       </div>
     </div>
   </section>
@@ -257,8 +277,8 @@
     <div class="container" style="position:relative;z-index:1">
       <header class="section-header reveal">
         <span class="section-eyebrow">Guidance</span>
-        <h2 class="section-title" id="guidance-heading">Implement with confidence</h2>
-        <p class="section-desc">Ensure successful implementation of your Power Platform and Copilot Studio workloads with comprehensive guidance and best practices.</p>
+        <h2 class="section-title" id="guidance-heading" data-default-text="Adopt and implement with confidence" data-cat-text="Lead the pack and land on your feet">Adopt and implement with confidence</h2>
+        <p class="section-desc">Drive successful adoption and implementation of agentic AI, Power Platform, and Copilot Studio with comprehensive guidance and proven practices.</p>
       </header>
 
       <div class="card-grid-4 reveal-stagger">
@@ -281,6 +301,18 @@
           <div class="card-cta"><span class="btn btn-dark-outline">Learn more</span></div>
         </a>
 
+        <a href="https://learn.microsoft.com/en-us/agents/adopt-overview" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Adopt Agentic AI at Scale</div>
+          <p class="card-desc">Build an organization-wide strategy for adopting agentic AI responsibly, from preparing your people and processes to measuring value at scale.</p>
+          <div class="card-cta"><span class="btn btn-dark-outline">Explore adoption guidance</span></div>
+        </a>
+
+        <a href="https://microsoft.github.io/new-copilot-studio-tech-guide/" target="_blank" rel="noopener" class="card">
+          <div class="card-title">Copilot Studio Technical Guide for the GitHub Copilot Harness</div>
+          <p class="card-desc">Explore technical guidance for designing, building, deploying, and managing solutions with the GitHub Copilot harness for Copilot Studio.</p>
+          <div class="card-cta"><span class="btn btn-dark-outline">Read the guide</span></div>
+        </a>
+
       </div>
     </div>
   </section>
@@ -292,7 +324,7 @@
     <div class="container">
       <header class="section-header reveal">
         <span class="section-eyebrow">Customer Stories</span>
-        <h2 class="section-title" id="stories-heading">Real-world impact</h2>
+        <h2 class="section-title" id="stories-heading" data-default-text="Real-world impact" data-cat-text="Pawsitive real-world impact">Real-world impact</h2>
         <p class="section-desc">Compelling customer stories highlight the diverse and creative ways agents transform organizations.</p>
       </header>
 
@@ -323,6 +355,284 @@
   </section>
 
   <!-- ═══════════════════════════════════════
+       EVENTS
+  ═══════════════════════════════════════ -->
+  <section id="events" class="section" aria-labelledby="events-heading">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-eyebrow">Upcoming event</span>
+        <h2 class="section-title" id="events-heading" data-default-text="Meet CAT at PPCC26" data-cat-text="Meet the CAT pack at PPCC26">Meet CAT at PPCC26</h2>
+        <p class="section-desc">Join Microsoft experts at the Power Platform Community Conference for full-day workshops and sessions on building, operating, and governing the agentic enterprise.</p>
+      </header>
+
+      <div class="event-schedule-note reveal">
+        <div>
+          <strong>Plan your CAT sessions at PPCC26.</strong>
+          <span>All times are Las Vegas local time (PDT, UTC−7). Based on the October 20 schedule and live conference session listings; subject to change.</span>
+        </div>
+        <a href="https://devintxcontent.blob.core.windows.net/showcontent/Schedule/PPCC-Schedule-2026-10-20.pdf" target="_blank" rel="noopener" class="btn btn-brand">Full PPCC26 schedule (PDF)</a>
+      </div>
+
+      <div class="event-view-controls" id="event-view-controls" role="group" aria-label="Session view" hidden>
+        <button type="button" class="btn btn-outline" aria-pressed="true" aria-controls="event-calendar" data-event-view="calendar">Calendar view</button>
+        <button type="button" class="btn btn-outline" aria-pressed="false" aria-controls="event-cards" data-event-view="cards">Session cards</button>
+      </div>
+      <div id="event-calendar" hidden>
+        <div class="event-days" id="event-days" role="group" aria-label="Conference day"></div>
+        <p class="event-calendar-hint">Select a day to browse confirmed CAT sessions. Simultaneous sessions appear side by side.</p>
+        <div id="event-calendar-days"></div>
+        <div class="event-pending">
+          <h3>Schedule to be announced</h3>
+          <p>These sessions are awaiting schedule confirmation. Check the session details for updates.</p>
+          <ul id="event-pending-list"></ul>
+        </div>
+      </div>
+
+      <div class="event-grid reveal-stagger" id="event-cards">
+        <a href="https://powerplatformconf.com/workshops/Agent-365%3A-Securely-Managing-and-Governing-Agents-at-Scale" target="_blank" rel="noopener" class="event-card event-card--workshop">
+          <span class="event-card-label">PPCC26 full-day workshop</span>
+          <h3>Agent 365: Securely Managing and Governing Agents at Scale</h3>
+          <time class="event-card-date" datetime="2026-10-25T09:00:00-07:00" data-end="2026-10-25T16:00:00-07:00">Sunday, October 25 · 9:00 AM–4:00 PM PDT</time>
+          <span class="event-card-room">Premier 317</span>
+          <p class="event-card-desc">Explore how to securely manage and govern enterprise agents at scale with Agent 365.</p>
+          <p class="event-card-speakers">Rahul Ranjit Kannathusseril, Sravani Seethi</p>
+          <span class="event-card-link">View workshop details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/workshops/Build-Intelligent-Business-Processes-with-Apps%2C-Automations%2C-and-Agents" target="_blank" rel="noopener" class="event-card event-card--workshop">
+          <span class="event-card-label">PPCC26 full-day workshop</span>
+          <h3>Build Intelligent Business Processes with Apps, Automations, and Agents</h3>
+          <time class="event-card-date" datetime="2026-10-26T09:00:00-07:00" data-end="2026-10-26T16:00:00-07:00">Monday, October 26 · 9:00 AM–4:00 PM PDT</time>
+          <span class="event-card-room">Chairman's 368</span>
+          <p class="event-card-desc">Bring apps, automations, and agents together to build intelligent business processes.</p>
+          <p class="event-card-speakers">Jay Padimiti, Nikita Polyakov, Olivier Conort, Rasika Chaudhary</p>
+          <span class="event-card-link">View workshop details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Shadow-AI-Agents-in-the-Enterprise%3A-Managing-Risk-at-Scale" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Shadow AI Agents in the Enterprise: Managing Risk at Scale</h3>
+          <time class="event-card-date" datetime="2026-10-27T11:30:00-07:00" data-end="2026-10-27T12:30:00-07:00">Tuesday, October 27 · 11:30 AM–12:30 PM PDT</time>
+          <span class="event-card-room">Chairman's 368</span>
+          <p class="event-card-desc">Explore how organizations can manage the risks of shadow AI agents across the enterprise.</p>
+          <p class="event-card-speakers">Sravani Seethi</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/From-Black-Box-to-Glass-Box%3A-Observability-for-Your-AI-Assets" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>From Black Box to Glass Box: Observability for Your AI Assets</h3>
+          <time class="event-card-date" datetime="2026-10-27T16:00:00-07:00" data-end="2026-10-27T17:00:00-07:00">Tuesday, October 27 · 4:00–5:00 PM PDT</time>
+          <span class="event-card-room">Chairman's 370</span>
+          <p class="event-card-desc">Make AI assets more transparent with observability that helps teams understand how they behave.</p>
+          <p class="event-card-speakers">Chris Garty</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Power-Apps-%2B-Power-Automate%3A-Best-Practices-for-Building-Production-Ready-Solutions" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Power Apps + Power Automate: Best Practices for Building Production-Ready Solutions</h3>
+          <time class="event-card-date" datetime="2026-10-28T11:30:00-07:00" data-end="2026-10-28T12:30:00-07:00">Wednesday, October 28 · 11:30 AM–12:30 PM PDT</time>
+          <span class="event-card-room">Boulevard 163</span>
+          <p class="event-card-desc">Learn best practices for building production-ready solutions with Power Apps and Power Automate.</p>
+          <p class="event-card-speakers">Christopher Moncayo, Ilya Fainberg, Olivier Conort, Sonali Panda</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/From-Blank-Canvas-to-Business-Value%3A-Agent-Templates%2C-Skills%2C-and-Plugins" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>From Blank Canvas to Business Value: Agent Templates, Skills, and Plugins</h3>
+          <time class="event-card-date" datetime="2026-10-28T11:30:00-07:00" data-end="2026-10-28T12:30:00-07:00">Wednesday, October 28 · 11:30 AM–12:30 PM PDT</time>
+          <span class="event-card-room">Premier 310</span>
+          <p class="event-card-desc">Explore how agent templates, skills, and plugins can turn a blank canvas into business value.</p>
+          <p class="event-card-speakers">Chris Garty, Clint Williams, Dakota Shafer, Giorgio Ughini, Sravani Seethi</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Women-in-Power-Panel%3A-Owning-Your-Power%2C-Claiming-Your-Seat" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Women in Power Panel: Owning Your Power, Claiming Your Seat</h3>
+          <time class="event-card-date" datetime="2026-10-28T14:00:00-07:00" data-end="2026-10-28T15:00:00-07:00">Wednesday, October 28 · 2:00–3:00 PM PDT</time>
+          <span class="event-card-room">Boulevard 162</span>
+          <p class="event-card-desc">Join the Women in Power panel for a conversation about owning your power and claiming your seat.</p>
+          <p class="event-card-speakers">Sravani Seethi</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Build%2C-Secure%2C-and-Scale-Power-Apps-%26-Workflows-with-AI-Agents" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Build, Secure, and Scale Power Apps &amp; Workflows with AI Agents</h3>
+          <time class="event-card-date" datetime="2026-10-29T10:45:00-07:00" data-end="2026-10-29T11:45:00-07:00">Thursday, October 29 · 10:45–11:45 AM PDT</time>
+          <span class="event-card-room">Premier 310</span>
+          <p class="event-card-desc">Explore how to build, secure, and scale Power Apps and workflows with AI agents.</p>
+          <p class="event-card-speakers">Ravi Chada, Rui Santos, Yasin Mukadam</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Real-World-Stories%3A-Becoming-a-Frontier-Firm-with-Apps-and-Agents" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Real-World Stories: Becoming a Frontier Firm with Apps and Agents</h3>
+          <time class="event-card-date" datetime="2026-10-29T10:45:00-07:00" data-end="2026-10-29T11:45:00-07:00">Thursday, October 29 · 10:45–11:45 AM PDT</time>
+          <span class="event-card-room">Chairman's 370</span>
+          <p class="event-card-desc">Hear real-world stories about becoming a frontier firm through apps and agents.</p>
+          <p class="event-card-speakers">Henry Jammes, Lisa McKee, Phil Topness, Sally Shi, Sarah Goodwin</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/From-Shadow-AI-to-Tightly-Managed-Agentic-Tools%E2%80%8B" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>From Shadow AI to Tightly Managed Agentic Tools</h3>
+          <time class="event-card-date" datetime="2026-10-29T12:00:00-07:00" data-end="2026-10-29T13:00:00-07:00">Thursday, October 29 · 12:00–1:00 PM PDT</time>
+          <span class="event-card-room">Boulevard 162</span>
+          <p class="event-card-desc">Explore the shift from shadow AI to tightly managed agentic tools.</p>
+          <p class="event-card-speakers">Sravani Seethi</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Copilot-Credits-at-Scale%3A-Governing-Consumption%2C-Empowering-Everyone" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Copilot Credits at Scale: Governing Consumption, Empowering Everyone</h3>
+          <time class="event-card-date" datetime="2026-10-29T14:30:00-07:00" data-end="2026-10-29T15:30:00-07:00">Thursday, October 29 · 2:30–3:30 PM PDT</time>
+          <span class="event-card-room">Chairman's 368</span>
+          <p class="event-card-desc">Explore how to govern Copilot Credit consumption while empowering everyone to use AI at scale.</p>
+          <p class="event-card-speakers">Chris Garty, Doug Bellingeri, Elaine Ansell, Rahul Ranjit Kannathusseril, Stuart McCarthy</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Apps%2C-Agents%2C-or-Both%3F-Where-Should-Work-Happen-in-the-Agentic-Era%3F" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Apps, Agents, or Both? Where Should Work Happen in the Agentic Era?</h3>
+          <time class="event-card-date" datetime="2026-10-29T14:30:00-07:00" data-end="2026-10-29T15:30:00-07:00">Thursday, October 29 · 2:30–3:30 PM PDT</time>
+          <span class="event-card-room">Premier 317</span>
+          <p class="event-card-desc">Discuss where work should happen as apps and agents come together in the agentic era.</p>
+          <p class="event-card-speakers">Christopher Moncayo, Olivier Conort</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/workshops/Agentic-Coding%3A-Modernize-Legacy-Business-Processes-with-AI-on-Power-Platform-%26-Copilot-Studio" target="_blank" rel="noopener" class="event-card event-card--workshop">
+          <span class="event-card-label">PPCC26 full-day workshop</span>
+          <h3>Agentic Coding: Modernize Legacy Business Processes with AI on Power Platform &amp; Copilot Studio</h3>
+          <time class="event-card-date" datetime="2026-10-30T08:00:00-07:00" data-end="2026-10-30T15:00:00-07:00">Friday, October 30 · 8:00 AM–3:00 PM PDT</time>
+          <span class="event-card-room">Premier 317</span>
+          <p class="event-card-desc">Modernize legacy business processes with agentic coding on Power Platform and Copilot Studio.</p>
+          <p class="event-card-speakers">Ankita Chopra, Giorgio Ughini, Reza Dorrani, Yasin Mukadam</p>
+          <span class="event-card-link">View workshop details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/workshops/Deep-dive-into-the-new-Copilot-Studio%3A-engineering-enterprise-agents-and-workflows" target="_blank" rel="noopener" class="event-card event-card--workshop">
+          <span class="event-card-label">PPCC26 full-day workshop</span>
+          <h3>Deep Dive Into the New Copilot Studio: Engineering Enterprise Agents and Workflows</h3>
+          <time class="event-card-date" datetime="2026-10-25T09:00:00-07:00" data-end="2026-10-25T16:00:00-07:00">Sunday, October 25 · 9:00 AM–4:00 PM PDT</time>
+          <span class="event-card-room">Chairman's 368</span>
+          <p class="event-card-desc">Go beyond the platform tour to engineer enterprise agents, long-horizon orchestration, reusable skills, autopilots, MCP apps, and reliable human-in-the-loop workflows.</p>
+          <p class="event-card-speakers">Bobby Chang, Doug Bellingeri, Henry Jammes, Remi Dyon, Roel Schenk</p>
+          <span class="event-card-link">View workshop details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Beyond-the-Basics%3A-the-GitHub-Copilot-Harness-and-Workflows-in-Copilot-Studio" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Beyond the Basics: the GitHub Copilot Harness and Workflows in Copilot Studio</h3>
+          <time class="event-card-date" datetime="2026-10-27T16:00:00-07:00" data-end="2026-10-27T17:00:00-07:00">Tuesday, October 27 · 4:00–5:00 PM PDT</time>
+          <span class="event-card-room">Premier 316</span>
+          <p class="event-card-desc">A technical deep dive into the harness's reasoning loop, reusable skills, tool orchestration, memory, workflows, and migration from the standard harness.</p>
+          <p class="event-card-speakers">Alicja Gilderdale, Giorgio Ughini, Roel Schenk</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Building-your-agentic-enterprise-with-agents%2C-workflows-and-autopilots-in-the-new-Copilot-Studio" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Building your agentic enterprise with agents, workflows and autopilots in the new Copilot Studio</h3>
+          <time class="event-card-date" datetime="2026-10-29T12:00:00-07:00" data-end="2026-10-29T13:00:00-07:00">Thursday, October 29 · 12:00–1:00 PM PDT</time>
+          <span class="event-card-room">Room 351</span>
+          <p class="event-card-desc">A candid roundtable on autonomous agents, agentic workflows, computer use, and turning real business processes over to the new Copilot Studio.</p>
+          <p class="event-card-speakers">Doug Bellingeri, Giorgio Ughini, Rahul Ranjit Kannathusseril, Roel Schenk</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Lost-in-the-Agent-Jungle%3A-What-to-Use-When%3F" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Lost in the Agent Jungle: What to Use When?</h3>
+          <time class="event-card-date" datetime="2026-10-27T11:30:00-07:00" data-end="2026-10-27T12:30:00-07:00">Tuesday, October 27 · 11:30 AM–12:30 PM PDT</time>
+          <span class="event-card-room">Room 351</span>
+          <p class="event-card-desc">Clarify when to use Copilot Studio, Microsoft 365 Copilot, Cowork, Work IQ, and Agent 365—and how to communicate those choices across your organization.</p>
+          <p class="event-card-speakers">Bobby Chang, Karima Kanji-Tajdin, Remi Dyon, Roel Schenk</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Recommended-Architectural-Patterns-%26-Common-Pitfalls-for-MCS-Retrieval-Agents" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Recommended Architectural Patterns &amp; Common Pitfalls for MCS Retrieval Agents</h3>
+          <time class="event-card-date" datetime="2026-10-29T10:45:00-07:00" data-end="2026-10-29T11:45:00-07:00">Thursday, October 29 · 10:45–11:45 AM PDT</time>
+          <span class="event-card-room">Chairman's 368</span>
+          <p class="event-card-desc">Compare retrieval patterns for structured and unstructured data using RAG, SharePoint, Dataverse, connectors, MCP, and modern orchestration.</p>
+          <p class="event-card-speakers">Betty Le, Doug Bellingeri, Karima Kanji-Tajdin, Remi Dyon</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Exec-Panel%3A-The-Token-Meter-Is-Running%2C-What-It-Takes-to-Get-Max-ROI-from-AI-Agents" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Exec Panel: The Token Meter Is Running, What It Takes to Get Max ROI from AI Agents</h3>
+          <time class="event-card-date" datetime="2026-10-27T14:00:00-07:00" data-end="2026-10-27T15:00:00-07:00">Tuesday, October 27 · 2:00–3:00 PM PDT</time>
+          <span class="event-card-room">Premier 319</span>
+          <p class="event-card-desc">Customer executives share what it takes to prepare data, manage consumption-based costs, and prove durable value from production AI agents.</p>
+          <p class="event-card-speakers">Srini Raghavan, with customer executives</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Extending-Copilot-Cowork-with-Custom-Plugins-and-Workflows-with-Real-world-Customer-Use-Cases" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Extending Copilot Cowork with Custom Plugins and Workflows with Real-world Customer Use Cases</h3>
+          <time class="event-card-date" datetime="2026-10-29T14:30:00-07:00" data-end="2026-10-29T15:30:00-07:00">Thursday, October 29 · 2:30–3:30 PM PDT</time>
+          <span class="event-card-room">Premier 316</span>
+          <p class="event-card-desc">Learn how plugins, tools, skills, workflows, and external integrations can turn Copilot Cowork into a customizable engineering companion.</p>
+          <p class="event-card-speakers">Alicja Gilderdale, Giorgio Ughini</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Max-Trust%2C-Min-Cost%3A-Evaluation-Features-and-Practices-for-Production-Agents" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Max Trust, Min Cost: Evaluation Features and Practices for Production Agents</h3>
+          <time class="event-card-date" datetime="2026-10-27T14:00:00-07:00" data-end="2026-10-27T15:00:00-07:00">Tuesday, October 27 · 2:00–3:00 PM PDT</time>
+          <span class="event-card-room">Premier BR 316</span>
+          <p class="event-card-desc">Define readiness criteria, design meaningful evaluations, and apply low-cost production checks to earn trust before go-live and maintain it afterward, with live demos.</p>
+          <p class="event-card-speakers">Hannah Garmise, Karima Kanji-Tajdin</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Agents-in-the-Wild%3A-Emerging-Design-Patterns-for-the-Agentic-Enterprise" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Agents in the Wild: Emerging Design Patterns for the Agentic Enterprise</h3>
+          <time class="event-card-date" datetime="2026-10-29T10:45:00-07:00" data-end="2026-10-29T11:45:00-07:00">Thursday, October 29 · 10:45–11:45 AM PDT</time>
+          <span class="event-card-room">Premier 317</span>
+          <p class="event-card-desc">Explore emerging architecture patterns, tradeoffs, and lessons from more than 1,000 enterprise agent engagements and real customer deployments.</p>
+          <p class="event-card-speakers">Clint Williams, Dan Stevenson</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Operationalizing-Agents-at-Scale%3A-The-Agentic-COE-Playbook" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Operationalizing Agents at Scale: The Agentic COE Playbook</h3>
+          <time class="event-card-date" datetime="2026-10-28T11:30:00-07:00" data-end="2026-10-28T12:30:00-07:00">Wednesday, October 28 · 11:30 AM–12:30 PM PDT</time>
+          <span class="event-card-room">Premier 316</span>
+          <p class="event-card-desc">A practical playbook for the structures, roles, guardrails, and operating rhythms needed to scale agents across the enterprise.</p>
+          <p class="event-card-speakers">Aamer Kaleem, Saurabh Pant</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+
+        <a href="https://powerplatformconf.com/sessions/Agentic-Governance%3A-Secure%2C-Govern%2C-and-Operate-Your-Power-Platform-at-Scale" target="_blank" rel="noopener" class="event-card">
+          <span class="event-card-label">PPCC26 session</span>
+          <h3>Agentic Governance: Secure, Govern, and Operate Your Power Platform at Scale</h3>
+          <time class="event-card-date" datetime="2026-10-29T12:00:00-07:00" data-end="2026-10-29T13:00:00-07:00">Thursday, October 29 · 12:00–1:00 PM PDT</time>
+          <span class="event-card-room">Premier 316</span>
+          <p class="event-card-desc">Build reporting, inventory, automated controls, and agentic governance on the Power Platform API as the CoE Starter Kit retires.</p>
+          <p class="event-card-speakers">Gregg Barker, Lane Swenka, Reza Dorrani, Sanket Vasa</p>
+          <span class="event-card-link">View session details</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
        FOOTER
   ═══════════════════════════════════════ -->
   <footer class="footer">
@@ -335,6 +645,7 @@
     </div>
   </footer>
 
+  <script src="assets/js/event-calendar.js"></script>
   <script>
     const html      = document.documentElement;
     const nav       = document.getElementById('nav');
@@ -363,13 +674,34 @@
     });
 
     // ── Theme toggle ─────────────────────────────────────────────
+    const themes = ['light', 'dark', 'cat'];
+    const themeLabels = {
+      light: 'Switch to dark theme',
+      dark: 'Switch to cat theme',
+      cat: 'Switch to light theme'
+    };
+
+    const updateThemeLabel = () => {
+      const current = html.getAttribute('data-theme');
+      toggle.setAttribute('aria-label', themeLabels[current]);
+      document.querySelectorAll('[data-cat-text]').forEach(element => {
+        element.textContent = current === 'cat'
+          ? element.dataset.catText
+          : element.dataset.defaultText;
+      });
+    };
+
+    updateThemeLabel();
+
     toggle.addEventListener('click', () => {
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      const current = html.getAttribute('data-theme');
+      const next = themes[(themes.indexOf(current) + 1) % themes.length];
 
       // Smooth transition
       document.body.classList.add('theme-transitioning');
       html.setAttribute('data-theme', next);
       localStorage.setItem('cat-theme', next);
+      updateThemeLabel();
       setTimeout(() => document.body.classList.remove('theme-transitioning'), 280);
     });
 

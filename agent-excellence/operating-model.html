@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operating Model Design - Agent Excellence Workshop</title>
+    <link rel="icon" type="image/svg+xml" href="images/microsoft.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Kickstarter Branding Header -->
+    <div class="kickstarter-header">
+        <nav class="kickstarter-nav">
+            <div class="kickstarter-logo-section">
+                <a href="index.html">
+                    <img src="images/KickstarterLogo.svg" alt="Microsoft Kickstarter" class="kickstarter-logo">
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="back-button-container">
+                    <a href="index.html" class="back-button">
+                        ← Back to Workshop
+                    </a>
+                </div>
+                <div class="theme-toggle-container">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <span class="theme-icon" id="themeIcon">🌙</span>
+                    </button>
+                </div>
+            </div>
+            <h1>🎯 Operating Model Design</h1>
+            <p class="subtitle">Design your agent's operational monitoring and incident response</p>
+        </header>
+
+        <!-- Phase Tracker -->
+        <div class="phase-tracker">
+            <div class="phase-item active" id="phase1">
+                <div class="phase-number">1</div>
+                <span>Create Your "Ops" Card</span>
+            </div>
+            <div class="phase-item" id="phase2">
+                <div class="phase-number">2</div>
+                <span>Tabletop Incident</span>
+            </div>
+            <div class="phase-item" id="phase3">
+                <div class="phase-number">3</div>
+                <span>Refine</span>
+            </div>
+        </div>
+
+        <!-- Phase 1: Create Your "Ops" Card -->
+        <div class="phase-content" id="phase1-content">
+            <div class="phase-header">
+                <h2>📋 Phase 1: Create Your "Ops" Card</h2>
+                <p>Define what success looks like and how you'll monitor it</p>
+            </div>
+
+            <div class="ops-card-grid">
+                <div class="ops-section">
+                    <h3>🌟 North Star Outcome</h3>
+                    <p>What is the ultimate goal your agent should achieve?</p>
+                    <textarea id="northStarOutcome" placeholder="e.g., Reduce customer support response time while maintaining high satisfaction scores"></textarea>
+                </div>
+
+                <div class="ops-section">
+                    <h3>🎯 Top 3 User Intents</h3>
+                    <p>What are the main things users ask your agent to do?</p>
+                    <div class="intent-inputs">
+                        <input type="text" id="intent1" placeholder="1. Most common user request">
+                        <input type="text" id="intent2" placeholder="2. Second most common request">
+                        <input type="text" id="intent3" placeholder="3. Third most common request">
+                    </div>
+                </div>
+
+                <div class="ops-section">
+                    <h3>📊 Signals</h3>
+                    <p>How will you know if things are working well?</p>
+                    <div class="signals-grid">
+                        <div class="signal-group">
+                            <h4>2x Quality Signals</h4>
+                            <input type="text" id="quality1" placeholder="e.g., Answer accuracy rate">
+                            <input type="text" id="quality2" placeholder="e.g., User satisfaction score">
+                        </div>
+                        <div class="signal-group">
+                            <h4>2x Health Signals</h4>
+                            <input type="text" id="health1" placeholder="e.g., Response time">
+                            <input type="text" id="health2" placeholder="e.g., System uptime">
+                        </div>
+                        <div class="signal-group">
+                            <h4>1x Risk/Compliance Signal</h4>
+                            <input type="text" id="risk1" placeholder="e.g., Policy violation rate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="phase-button" id="createOpsCardBtn" onclick="createOpsCard()" disabled>
+                Create Ops Card →
+            </button>
+        </div>
+
+        <!-- Phase 2: Tabletop Incident -->
+        <div class="phase-content hidden" id="phase2-content">
+            <div class="phase-header">
+                <h2>🚨 Phase 2: Tabletop Incident</h2>
+                <p>Test your monitoring design with realistic failure scenarios</p>
+            </div>
+
+
+
+            <div class="incident-section">
+                <div class="incident-cards">
+                    <h3>🎲 Draw 2-3 Failure Cards</h3>
+                    <div class="failure-cards" id="failureCards">
+                        <!-- Cards will be loaded here -->
+                    </div>
+                    <button onclick="drawFailureCards()" class="draw-cards-btn">Draw Random Cards</button>
+                </div>
+
+                <div class="incident-responses">
+                    <h3>🔍 For Each Card, Decide:</h3>
+                    <div id="incidentQuestions">
+                        <!-- Questions will be loaded here based on drawn cards -->
+                    </div>
+                </div>
+            </div>
+
+            <button class="phase-button" onclick="moveToPhase(3)">
+                Refine Your Model →
+            </button>
+        </div>
+
+        <!-- Phase 3: Refine -->
+        <div class="phase-content hidden" id="phase3-content">
+            <div class="phase-header">
+                <h2>⚡ Phase 3: Refine</h2>
+                <p>Update your operating model based on what you learned</p>
+            </div>
+
+            <div class="refinement-grid">
+                <div class="refine-card">
+                    <h3>📝 Instruction Change</h3>
+                    <p>What changes do you need to make to your agent instructions?</p>
+                    <textarea id="instructionChange" placeholder="e.g., Add clearer guidelines for handling ambiguous requests"></textarea>
+                </div>
+
+                <div class="refine-card">
+                    <h3>📈 Evaluation Update</h3>
+                    <p>What new metrics or evaluation criteria do you need?</p>
+                    <textarea id="evaluationUpdate" placeholder="e.g., Add monitoring for specific user satisfaction patterns"></textarea>
+                </div>
+
+                <div class="refine-card">
+                    <h3>📡 Telemetry Events to Emit</h3>
+                    <p>What events should your agent log for better monitoring?</p>
+                    <textarea id="telemetryEvents" placeholder="e.g., Log when agent can't find relevant information, track escalation patterns"></textarea>
+                </div>
+            </div>
+
+            <div class="final-summary" id="finalSummary">
+                <!-- Summary will be generated here -->
+            </div>
+
+            <div class="final-actions">
+                <button class="phase-button print-btn" onclick="printOperatingModel()">
+                    🖨️ Print Operating Model
+                </button>
+                <button class="phase-button" onclick="completeOperatingModel()">
+                    Complete Design ✅
+                </button>
+            </div>
+        </div>
+
+        <footer>
+            <p>Agent Excellence - Operating Model Design</p>
+        </footer>
+    </div>
+
+    <script src="js/timer.js"></script>
+    <script src="js/operating-model.js"></script>
+</body>
+</html>
