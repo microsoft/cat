@@ -139,7 +139,7 @@ h2 { margin: 0; font-size: clamp(28px, 3vw, 40px); line-height: 1.2; letter-spac
 .schedule-meta p { margin: 0; font-size: 14px; color: var(--cp-text-muted); }
 .schedule-meta strong { color: var(--cp-text); font-size: 16px; }
 .schedule-note { margin: 16px 0 28px; color: var(--cp-text-soft); font-size: 13px; }
-.week-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.week-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
 .day-column { min-width: 0; }
 .day-heading { margin: 0 0 20px; padding: 16px 0; border-bottom: 2px solid var(--cp-border-strong); }
 .day-heading span { display: block; color: var(--cp-text-muted); font-size: 13px; font-weight: 400; }
@@ -167,6 +167,9 @@ h2 { margin: 0; font-size: clamp(28px, 3vw, 40px); line-height: 1.2; letter-spac
 .load-error a { display: inline-block; margin: 12px; }
 .site-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; align-items: center; padding-block: 28px; border-top: 1px solid var(--cp-border); color: var(--cp-text-muted); font-size: 13px; }
 .site-footer p { margin: 0; }
+@media (min-width: 1600px) {
+  .week-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
 @media (max-width: 1100px) {
   .hero { gap: 36px; }
   .sharing-banner { align-items: start; flex-direction: column; gap: 20px; }

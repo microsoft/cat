@@ -5,6 +5,8 @@ All notable changes to the CAT website are documented here, organized by month.
 ## October 2026
 
 ### CAT Website
+- Added 13 additional CAPE sessions and workshops to both PPCC calendars, retained the supplied CAPE speaker lists, verified official session links and times, and used the current Premier 317 room for "Apps, Agents, or Both?"
+- Extended the PPCC week overview through Friday, October 30, with responsive columns covering all six event days
 - Aligned PPCC resource groups with the main site's categories, added section subtitles and the Agentic Transformation Patterns Playbook, and excluded AI Webinars and Agent In A Day from the conference page
 - Removed Skills for Copilot Studio from the PPCC resource page while preserving its homepage listing
 - Refined the PPCC page to reflect the CAPE Patterns & Practices visual style, with a compact split hero, blue accents, a multicolor sharing banner, and clean resource groups
